@@ -1,7 +1,7 @@
-
+ 
 C:\Users\jsciz\Documents\Programming - Local\syphon>npm install styled-components @material-ui/core react-redux mongodb mongoose fluent-json-schema jsonwebtoken axios 
 + fluent-json-schema@3.0.0
-+ react-redux@7.2.4
++ react-redux@7.2.4 
 + jsonwebtoken@8.5.1
 + axios@0.21.1
 + mongodb@3.6.6
