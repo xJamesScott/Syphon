@@ -1,8 +1,30 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
+  const createTest = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/api/test', {
+        method: 'POST',
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ data: "Yoooo!" })
+      })
+      router.post("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,6 +33,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <button>TEST DB</button>
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>

@@ -1,0 +1,17 @@
+
+C:\Users\jsciz\Documents\Programming - Local\syphon>npm install styled-components @material-ui/core react-redux mongodb mongoose fluent-json-schema jsonwebtoken axios 
++ fluent-json-schema@3.0.0
++ react-redux@7.2.4
++ jsonwebtoken@8.5.1
++ axios@0.21.1
++ mongodb@3.6.6
++ styled-components@5.3.0
++ mongoose@5.12.9
++ @material-ui/core@4.11.4
+added 116 packages from 188 contributors and audited 385 packages in 21.3s
+
+51 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
