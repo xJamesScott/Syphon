@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function Home() {
   const router = useRouter();
@@ -25,6 +26,24 @@ export default function Home() {
   useEffect(() => {
   }, [])
 
+  const useCounter = () => {
+    const count = useSelector((state) => state.count)
+    const dispatch = useDispatch()
+    const increment = () =>
+      dispatch({
+        type: 'INCREMENT',
+      })
+    const decrement = () =>
+      dispatch({
+        type: 'DECREMENT',
+      })
+    const reset = () =>
+      dispatch({
+        type: 'RESET',
+      })
+    return { count, increment, decrement, reset }
+  }
+  const { count, increment, decrement, reset } = useCounter()
   return (
     <div className={styles.container}>
       <Head>
@@ -33,7 +52,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <button>TEST DB</button>
+      <button onClick={increment} >TEST DB</button>
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
