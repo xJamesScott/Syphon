@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { ReactReduxContext, Provider } from 'react-redux';
-import { useStore } from '../store'
+import { useStore } from '../store/store'
 
 const connection = {};
 
