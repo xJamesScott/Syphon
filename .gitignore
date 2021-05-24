@@ -11,7 +11,7 @@
 # next.js
 /.next/
 /out/
- 
+route.rest 
 # production
 /build
 
@@ -36,5 +36,7 @@ node_modules
 .env
 error.txt
 .gitignore
+route.rest
+route.rest
 route.rest
 route.rest
