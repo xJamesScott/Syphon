@@ -138,6 +138,7 @@ async function routes(app) {
   const getExistingAccount = (serverToken, email, forVerified) => {
     return new Promise(async (resolve, reject) => {
       try {
+        // Returns array Auth0 users
         const otherAccounts = await Auth0.getAccountsWithSameEmail(
           serverToken,
           email,
@@ -149,6 +150,7 @@ async function routes(app) {
         const noAccount = !otherAccounts.some((account) =>
           account.identities.some((id) => id.provider === "auth0"),
         );
+        // Loops through array of Auth0 users
         for (const account of otherAccounts) {
           const { mongo_id } = account.app_metadata ? account.app_metadata : {};
           if (mongo_id) {
@@ -218,6 +220,7 @@ async function routes(app) {
         }
         return { email, emailVerified, token, user };
       } catch (err) {
+        // Error handling
         if (err.statusCode === 403) {
           const { noAccount, provider } = await getExistingAccount(
             req.token,

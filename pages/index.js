@@ -48,7 +48,7 @@ export default function Home() {
   }
 
   const testAPI = async () => {
-    await axios.get("/api/auth", (""))
+    await axios.post("/api/auth?call=signup", {})
     // alert("yoo!")
   }
 

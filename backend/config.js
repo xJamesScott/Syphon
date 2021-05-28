@@ -6,45 +6,47 @@ const S = require("fluent-schema");
 
 const configData = envSchema({
   data: process.env,
+  // data: `.env.local`,
   schema: S.object()
     .prop("AIRTABLE_API_KEY", S.string())
     .prop("AIRTABLE_BASE_ID", S.string())
     .prop("APP_DOMAIN", S.string().default("localhost"))
     .prop("AUTH_APP_URL", S.string())
-    .prop("AUTH_CLIENT_ID", S.string().required())
+    .prop("AUTH_CLIENT_ID", S.string())//.required())
     .prop("AUTH_COOKIE_MAX_AGE_SECONDS", S.number().default(86400))
-    .prop("AUTH_DOMAIN", S.string().required())
-    .prop("AUTH_SECRET_KEY", S.string().required())
-    .prop("AUTH_STATE", S.string().required())
-    // .prop("AWS_ACCESS_KEY_ID", S.string().default("dummy_access_key"))
-    // .prop("AWS_ENDPOINT_URL", S.string().default("http://localstack:4566"))
-    // .prop("AWS_REGION", S.string().default("us-east-1"))
-    // .prop(
-    //   "AWS_SECRET_ACCESS_KEY",
-    //   S.string().default("dummy_secret_access_key"),
-    // )
-    // .prop(
-    //   "CDN_BASE_URL",
-    //   S.string().default("http://localhost:4566/fp-dev-cdn"),
-    // )
-    // .prop("COMMIT_HASH", S.string())
-    // .prop("GOOGLE_MAPS_API_KEY", S.string())
-    // .prop("LOGGER_HOST", S.string())
-    // .prop("LOGGER_LEVEL", S.string().default("info"))
-    // .prop("LOGGER_PORT", S.number().default(1234))
-    // .prop("MONGO_URI", S.string().required())
-    // .prop("NODE_ENV", S.string().required())
-    // .prop("PORT", S.number().default(8000).required())
-    // .prop("QUERY_LIMIT_MAX", S.integer().default(20).required())
-    // .prop("REDIS_HOST", S.string().default("localhost").required())
-    // .prop("REDIS_PORT", S.number().default(6379).required())
-    // .prop("S3_CDN_BUCKET", S.string().default("fp-dev-cdn"))
-    // .prop("SENTRY_DSN", S.string())
-    // .prop("SENDGRID_API_KEY", S.string())
-    // .prop("SENDGRID_CONTACTS_LIST_ID", S.string())
-    // .prop("VERIFF_BASE_URL", S.string().default("https://api.veriff.me/"))
-    // .prop("VERIFF_PUBLIC_KEY", S.string())
-    // .prop("VERIFF_PRIVATE_KEY", S.string()),
+    .prop("AUTH_DOMAIN", S.string())//.required())
+    .prop("AUTH_SECRET_KEY", S.string())//.required())
+    .prop("AUTH_STATE", S.string())//.required())
+
+  // .prop("AWS_ACCESS_KEY_ID", S.string().default("dummy_access_key"))
+  // .prop("AWS_ENDPOINT_URL", S.string().default("http://localstack:4566"))
+  // .prop("AWS_REGION", S.string().default("us-east-1"))
+  // .prop(
+  //   "AWS_SECRET_ACCESS_KEY",
+  //   S.string().default("dummy_secret_access_key"),
+  // )
+  // .prop(
+  //   "CDN_BASE_URL",
+  //   S.string().default("http://localhost:4566/fp-dev-cdn"),
+  // )
+  // .prop("COMMIT_HASH", S.string())
+  // .prop("GOOGLE_MAPS_API_KEY", S.string())
+  // .prop("LOGGER_HOST", S.string())
+  // .prop("LOGGER_LEVEL", S.string().default("info"))
+  // .prop("LOGGER_PORT", S.number().default(1234))
+  // .prop("MONGO_URI", S.string().required())
+  // .prop("NODE_ENV", S.string().required())
+  // .prop("PORT", S.number().default(8000).required())
+  // .prop("QUERY_LIMIT_MAX", S.integer().default(20).required())
+  // .prop("REDIS_HOST", S.string().default("localhost").required())
+  // .prop("REDIS_PORT", S.number().default(6379).required())
+  // .prop("S3_CDN_BUCKET", S.string().default("fp-dev-cdn"))
+  // .prop("SENTRY_DSN", S.string())
+  // .prop("SENDGRID_API_KEY", S.string())
+  // .prop("SENDGRID_CONTACTS_LIST_ID", S.string())
+  // .prop("VERIFF_BASE_URL", S.string().default("https://api.veriff.me/"))
+  // .prop("VERIFF_PUBLIC_KEY", S.string())
+  // .prop("VERIFF_PRIVATE_KEY", S.string()),
 });
 
 const config = {

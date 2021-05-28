@@ -1,7 +1,7 @@
 const axios = require("axios");
 const httpErrors = require("http-errors");
 const qs = require("querystring");
-const { config } = require("../../config"); // env-schema
+const { config } = require("../../../backend/config"); // env-schema
 
 const {
   auth: { domain: AUTH_DOMAIN },
@@ -34,7 +34,7 @@ const wrapError = (err) => {
 const buildOauthUrl = (connection, redirectTo) => {
   const qParams = qs.stringify({
     // TODO - AUTH0 UPDATE PARAMS
-    
+
     audience: `${AUTH_DOMAIN}/api/v2/`,
     client_id: config.auth.clientId,
     connection,
@@ -64,16 +64,18 @@ const authenticate = async (grantType, payload = {}) => {
 };
 
 const createUser = async (token, payload) => {
-  try {
-    const res = await axios.post(
-      `${AUTH_DOMAIN}/api/v2/users`,
-      payload,
-      getAuthHeaders(token),
-    );
-    return res.data;
-  } catch (err) {
-    return wrapError(err);
-  }
+  console.log(AUTH_DOMAIN)
+  // try {
+  //   const res = await axios.post(
+  //     `${AUTH_DOMAIN}/api/v2/users`,
+  //     `${AUTH_DOMAIN}/api/v2/users`,
+  //     payload,
+  //     getAuthHeaders(token),
+  //   );
+  //   return res.data;
+  // } catch (err) {
+  //   return wrapError(err);
+  // }
 };
 
 const getUser = async (token) => {
