@@ -1,11 +1,17 @@
 
 
-export default async function login(req, res) {
-    const mode = req.mode
+export default async function auth(req, res) {
+    try
+    { console.log("Tessst!")
+} catch (error) {
+    console.log("ERROR DOG!")
+}
 
-    try {
-        // await 
-    } catch (error) {
-        console.error(error)
-    }
+    // switch (req.type) {
+    //     case "test":
+    //         console.log("Tessst!")
+    //     default:
+    //         res.status(405).end() //Method Not Allowed
+    //         break
+    // }
 }
