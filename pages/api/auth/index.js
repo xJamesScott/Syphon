@@ -15,7 +15,7 @@
 // const { SCOPES } = require("../constants");
 // const User = app.mongo.model("IndividualUser");
 // import test4 from "./test4"
-import { test4 } from "./test4"
+import { users, authenticate } from "./AuthCalls"
 export default async function auth(req, res) {
 
 
@@ -30,7 +30,7 @@ export default async function auth(req, res) {
     // switch (call) {
     //     case "sick":
     try {
-        test4()
+        users()
     } catch (error) {
         console.log("ERROR DOG!")
     }
