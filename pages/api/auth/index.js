@@ -30,7 +30,10 @@ export default async function auth(req, res) {
     // switch (call) {
     //     case "sick":
     try {
-        users()
+        // const token = await authenticate("client_credentials")
+        // console.log({"token": token})
+        // users(token)
+        authenticate("client_credentials")
     } catch (error) {
         console.log("ERROR DOG!")
     }
