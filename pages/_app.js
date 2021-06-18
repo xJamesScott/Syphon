@@ -6,11 +6,11 @@ import Banner from '../components/Banner'
 
 function App({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState)
-  console.log({ "pageProps!!": pageProps })
+  const { hideNav } = pageProps
 
   return (
     <Provider store={store}>
-      <Banner />
+      {!hideNav && <Banner />}
       <Component {...pageProps} />
     </Provider>
   )

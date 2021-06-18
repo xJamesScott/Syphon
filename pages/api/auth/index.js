@@ -17,9 +17,10 @@
 // import test4 from "./test4"
 import { users, authenticate } from "./AuthCalls"
 export default async function auth(req, res) {
+    const { body: { password, username } } = req
+    // console.log({ "req": req })
 
-
-
+    // console.log({ "username": username })
 
 
     // const Auth0 = require("./Auth0");
@@ -29,14 +30,30 @@ export default async function auth(req, res) {
 
     // switch (call) {
     //     case "sick":
+
+
+
+    // TEST AUTHENTICATE CALL
+
+
+    console.log({ "username - AuthCall!": username })
     try {
         // const token = await authenticate("client_credentials")
         // console.log({"token": token})
         // users(token)
-        authenticate("client_credentials")
+        // authenticate("client_credentials")
+        authenticate("password", {
+            password,
+            username: username,
+            scope: "openid"
+        })
     } catch (error) {
         console.log("ERROR DOG!")
+        console.log({ "ERROR!": error })
     }
+
+
+
     //     case "signup":
     //         // async (req) => {
     //         // const { body, token } = req;

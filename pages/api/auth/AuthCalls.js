@@ -45,6 +45,7 @@ export const authenticate = async (grantType, payload) => {
 
   // }
 
+  // ----
   const body = {
     // TODO - AUTH0 UPDATE PARAMS
     audience: `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/`,
@@ -61,5 +62,29 @@ export const authenticate = async (grantType, payload) => {
     // console.log({ "error": res })
     return err;
   }
+
+
+  // ---
+
+
   // console.log("RAN!!")
+
+  // const body = {
+  //   // TODO - AUTH0 UPDATE PARAMS
+  //   audience: `https://jamscott.us.auth0.com/api/v2/`,
+  //   client_id: "***REMOVED***",
+  //   client_secret: "***REMOVED***ET",
+  //   grant_type: "password",
+  //   ...payload,
+  // };
+  // try {
+  //   const res = await axios.post(`https://jamscott.us.auth0.com/oauth/token`, body);
+  //   console.log(res.data.access_token)
+  //   console.log({ "ERROR BRO!!!": err, "USERNAME!!": body.username })
+  //   return res.data.access_token;
+  // } catch (err) {
+  //   // console.log({ "error": res })
+  //   console.log({ "ERROR BRO!!!": err, "USERNAME!!": body.username })
+  //   // return err;
+  // }
 }

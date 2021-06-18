@@ -2,7 +2,7 @@ import NextAuth from "next-auth"
 import Providers from "next-auth/providers"
 import { serialize, CookieSerializeOptions } from 'cookie'
 // const log = () => { console.log("yoooo1111") }
-console.log(process.env.YO)
+// console.log(process.env.YO)
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default NextAuth({

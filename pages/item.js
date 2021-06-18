@@ -8,7 +8,7 @@ export default function item() {
     return (
         <div>
             <h2>Product</h2>
-            <h4>$<span className="product-price">{200}</span></h4>
+            <h4>$<span className="price">{200}</span></h4>
             {   // if authentication
                 //  Axios POST
                 // Dispatch action
@@ -18,4 +18,10 @@ export default function item() {
             <button>ADD TO CART</button>
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+    return {
+        props: {  }, // will be passed to the page component as props
+    }
 }

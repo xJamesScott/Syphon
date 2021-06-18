@@ -14,6 +14,7 @@ function Banner(isAuthenticated) {
         <BannerWrapper>
             <a href="/cart"><Cart >Cart</Cart></a>
         </BannerWrapper>
+        
     )
 }
 
