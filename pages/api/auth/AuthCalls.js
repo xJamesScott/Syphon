@@ -24,6 +24,25 @@ export const users = async (token) => {
   // console.log("RAN!!")
 }
 
+export const createUser = async (payload) => {
+  const token = authenticate("client_credentials")
+  try {
+    const res = await axios.post(
+      `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      },
+      payload
+    );
+    return res.data;
+  } catch (err) {
+    return err
+  }
+}
+
+
 export const authenticate = async (grantType, payload) => {
   // console.log({ "path": `${process.env.AUTH_DOMAIN}/api/v2/users` })
   // console.log({ "auth!": process.env.AUTHORIZATION })

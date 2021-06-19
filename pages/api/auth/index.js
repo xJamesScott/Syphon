@@ -15,44 +15,44 @@
 // const { SCOPES } = require("../constants");
 // const User = app.mongo.model("IndividualUser");
 // import test4 from "./test4"
-import { users, authenticate } from "./AuthCalls"
+
+import { users, authenticate, createUser } from "./AuthCalls"
+
 export default async function auth(req, res) {
-    const { body: { password, username } } = req
-    // console.log({ "req": req })
+    const { body: { password, email } } = req
+    const { query: { call } } = req
 
-    // console.log({ "username": username })
+    switch (call) {
+        case "login":
+            // return {
+            try {
+                authenticate("password", {
+                    password,
+                    username: email,
+                    scope: "openid"
+                })
+            } catch (err) {
+                console.log({ "error!": err })
+                return err
+            }
+        // };
 
+        case "signup":
+            const payload = {
+                connection: "Username-Password-Authentication",
+                email,
+                password,
+                verify_email: true,
+            };
+            try {
+                createUser(payload)
+                console.log(`Successfully created email: ${email}`)
+            } catch (err) {
+                console.log(err)
+                return err
+            }
 
-    // const Auth0 = require("./Auth0");
-    // const test = "bro"
-
-    // const { query: { call } } = req
-
-    // switch (call) {
-    //     case "sick":
-
-
-
-    // TEST AUTHENTICATE CALL
-
-
-    console.log({ "username - AuthCall!": username })
-    try {
-        // const token = await authenticate("client_credentials")
-        // console.log({"token": token})
-        // users(token)
-        // authenticate("client_credentials")
-        authenticate("password", {
-            password,
-            username: username,
-            scope: "openid"
-        })
-    } catch (error) {
-        console.log("ERROR DOG!")
-        console.log({ "ERROR!": error })
     }
-
-
 
     //     case "signup":
     //         // async (req) => {
