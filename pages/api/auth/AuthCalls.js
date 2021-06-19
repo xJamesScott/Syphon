@@ -21,23 +21,25 @@ export const users = async (token) => {
     console.log({ "err": err })
     return err
   }
-  // console.log("RAN!!")
 }
 
 export const createUser = async (payload) => {
-  const token = authenticate("client_credentials")
+  const token = await authenticate("client_credentials")
   try {
     const res = await axios.post(
       `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users`,
+      payload,
       {
         headers: {
           Authorization: `Bearer ${token}`
         }
-      },
-      payload
+
+      }
     );
+    console.log("success!")
     return res.data;
   } catch (err) {
+    console.log({ "err!": err })
     return err
   }
 }
@@ -75,7 +77,6 @@ export const authenticate = async (grantType, payload) => {
   };
   try {
     const res = await axios.post(`${process.env.AUTH0_ISSUER_BASE_URL}/oauth/token`, body);
-    console.log(res.data.access_token)
     return res.data.access_token;
   } catch (err) {
     // console.log({ "error": res })

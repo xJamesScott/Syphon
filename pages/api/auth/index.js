@@ -17,8 +17,10 @@
 // import test4 from "./test4"
 
 import { users, authenticate, createUser } from "./AuthCalls"
+import { useRouter } from 'next/router';
 
 export default async function auth(req, res) {
+    const router = useRouter();
     const { body: { password, email } } = req
     const { query: { call } } = req
 
@@ -26,13 +28,18 @@ export default async function auth(req, res) {
         case "login":
             // return {
             try {
-                authenticate("password", {
+                const response = await authenticate("password", {
                     password,
                     username: email,
-                    scope: "openid"
+                    scope: "openid",
+                    redirect_uri: "https://localhost:3001/"
                 })
+                console.log({ "response!": response })
+                router.push("/")
+                return response
             } catch (err) {
                 console.log({ "error!": err })
+                router.push("/")
                 return err
             }
         // };
@@ -45,14 +52,20 @@ export default async function auth(req, res) {
                 verify_email: true,
             };
             try {
-                createUser(payload)
+                const response = await createUser(payload)
                 console.log(`Successfully created email: ${email}`)
+                console.log({ "signup response!": response })
+                return response
             } catch (err) {
-                console.log(err)
+
+                console.log({ "error!": err })
                 return err
             }
 
+        default:
+            return
     }
+
 
     //     case "signup":
     //         // async (req) => {
@@ -137,4 +150,7 @@ export default async function auth(req, res) {
     //     //     //   throw app.httpErrors.internalServerError();
     //     console.log("ERRORRR!!!")
     // }
+    
+
 }
+

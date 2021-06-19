@@ -7,28 +7,39 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from "react-hook-form";
 import styled from 'styled-components';
 import axios from 'axios';
-
+import { useQuery } from '../utils/hooks';
 
 const Input = styled.input`
 
 `;
 const login = () => {
+    const router = useRouter();
+    const code = router.query.code
     const ref = useRef();
+
+    useEffect(() => {
+        if (code) {
+            console.log({ "code!": code })
+        }
+    }, [code])
+
     const { register, handleSubmit
     } = useForm({
         mode: "change"
     });
+    
     const onSubmit = async (formData) => {
         console.log({
             email: formData.email,
             password: formData.password
         })
+
         try {
             await axios.post("/api/auth?call=login", {
-                username: formData.email,
+                email: formData.email,
                 password: formData.password
             })
-
+            return
         } catch (error) {
             console.log({ "error!": error })
             return error

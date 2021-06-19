@@ -21,7 +21,7 @@ const signup = () => {
     const onSubmit = async (formData) => {
         try {
             await axios.post("/api/auth?call=signup", {
-                username: formData.email,
+                email: formData.email,
                 password: formData.password
             })
 
@@ -40,7 +40,6 @@ const signup = () => {
                     {...register('email',
                         {
                             required: { value: true, message: "Required Field" },
-                            maxLength: 2
                         })}
                 />
                 {errors.email && errors.email.message}
