@@ -16,92 +16,88 @@
 // const User = app.mongo.model("IndividualUser");
 // import test4 from "./test4"
 
-import { users, authenticate, createUser } from "./AuthCalls"
+import { users, authenticate, createUser, getAccountsWithSameEmail } from "./AuthCalls"
 import { useRouter } from 'next/router';
 import axios from "axios";
 
 export default async function auth(req, res) {
-    const { body: { password, email, grantType } } = req
-    // const { query: { call } } = req
+    const { body: { password, email, grantType, redirect },
+        query: { call }
+    } = req
 
-    // switch (call) {
-    // case "login":
-    // return {
-    // await fetch('https://jsonplaceholder.typicode.com/todos/1')
-    // res.redirect("/")
-    // res.writeHead(307, { Location: '/' })
+    switch (call) {
+        case "login":
+            try {
+                const response = await authenticate("password", {
+                    password,
+                    username: email,
+                    scope: "openid",
+                    redirect_uri: process.env.AUTH_DOMAIN
+                })
+                // res.status(200)
+                // console.log({ "res!": res })
+                console.log({ "response!": response })
+                return res.send({
+                    redirect: redirect ? redirect : "",
+                    data: { response }
+                });
 
-    // await fetch('https://jsonplaceholder.typicode.com/todos/1')
-    //     .then(response => response.json())
-    //     .then(data => console.log(data));
-    // return res || req
+                // AUTHENTICATE DIRECT CALL
 
-    try {
-        // const response = await authenticate("password", {
-        //     password,
-        //     username: email,
-        //     scope: "openid",
-        //     redirect_uri: "https://localhost:3001/"
-        // })
-        // return res.status(200)
+                // await fetch('https://jsonplaceholder.typicode.com/todos/1',
+                //     { method: 'GET' })
+                // // return todos
+                // // console.log() res.status(200).json({ message: "yo!" })
+                // // return "success"
+                // // return "sucess"
+            } catch (err) {
+                console.log({ "err!!!": err })
 
-        // AUTHENTICATE DIRECT CALL
+                if (err.response.status == 429) {
+                    return res.status(500).send("Whoops! Too many login attempts, please wait a while before attempting again");
+                }
+                const token = await authenticate("client_credentials");
+                const accountExist = await getAccountsWithSameEmail(token, email);
+                if (!accountExist) {
+                    return res.status(500).send("Email not found: please click 'SignUp'")
+                }
 
-        await fetch('https://jsonplaceholder.typicode.com/todos/1',
-            { method: 'GET' })
-        // return todos
-        // console.log() res.status(200).json({ message: "yo!" })
-        // return "success"
-        // return "sucess"
-    } catch (err) {
-        // console.log({ "error!": err })
-        // res.redirect(400, "/")
-        console.log(err)
-        console.log({ "status!": err.response.status })
-        // return "error!"
+                return res.status(500).send("Login failed: Invalid email or password");
+            }
+
+        case "signup":
+            const payload = {
+                connection: "Username-Password-Authentication",
+                email,
+                password,
+                verify_email: true,
+            };
+            try {
+                const response = await createUser(payload)
+                return res.send(response)
+            } catch (err) {
+                console.log({ "error!": err })
+                res.send(err)
+            }
+
+        case "forgot-password":
+            try {
+                const responseMessage = await Auth0.sendChangePasswordEmail(
+                    token,
+                    email,
+                );
+                return res.send({
+                    handler: {
+                        redirect: redirect ? redirect : ""
+                    },
+                    data: { responseMessage }
+                })
+            } catch (err) {
+                console.log(err)
+                res.send(err)
+            }
+
+        default:
+            return
     }
-    console.log({ "res status": res.statusCode })
-    res.redirect(200, "https://www.google.com")
-    // res.writeHead(200, { Location: "https://www.google.com" })
-    // res.end()
-    // fetch("/api/redirect")
-    return "sucess"
-
-    // return res.status(200).json({ message: "yo!" })
-    // };
-
-    // case "signup":
-    //     const payload = {
-    //         connection: "Username-Password-Authentication",
-    //         email,
-    //         password,
-    //         verify_email: true,
-    //     };
-    //     try {
-    //         const response = await createUser(payload)
-    //         console.log(`Successfully created email: ${email}`)
-    //         console.log({ "signup response!": response })
-    //         return response
-    //     } catch (err) {
-
-    //         console.log({ "error!": err })
-    //         return err
-    //     }
-
-    // default:
-    //     return
-    // }
-
-
 }
-
-
-
-// export async function getServerSideProps(context) {
-//     return {
-//         redirect: {
-//             permanent: false,
-//             destination: "/"
-//         }
-//     }
-// }

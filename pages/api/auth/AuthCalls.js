@@ -79,7 +79,8 @@ export const authenticate = async (grantType, payload) => {
     const res = await axios.post(`${process.env.AUTH0_ISSUER_BASE_URL}/oauth/token`, body);
     return res.data.access_token;
   } catch (err) {
-    return err;
+    console.log({ "AuthCall Error!": err })
+    throw err
   }
 
 
@@ -107,3 +108,42 @@ export const authenticate = async (grantType, payload) => {
   //   // return err;
   // }
 }
+
+export const sendChangePasswordEmail = async (token, email) => {
+  const client_id = process.env.AUTH_CLIENT_ID;
+  const connection = "Username-Password-Authentication";
+  const payload = {
+    client_id,
+    email,
+    connection,
+  };
+  try {
+    const res = await axios.post(
+      `${process.env.AUTH0_ISSUER_BASE_URL}/dbconnections/change_password`,
+      payload
+    );
+    return res.data;
+  } catch (err) {
+    return (err);
+  }
+};
+
+export const getAccountsWithSameEmail = async (token, email, forVerified) => {
+  try {
+    const res = await axios.get(`${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users`, {
+      params: {
+        q: `email:"${email}`,
+        search_engine: "v3",
+      },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log(`Account(s) retrieved: ${res}`)
+    return true
+    // return res.data;
+  } catch (err) {
+    console.log(`Error retrieving account(s): ${err}`)
+    return false;
+  }
+};
