@@ -79,7 +79,6 @@ export const authenticate = async (grantType, payload) => {
     const res = await axios.post(`${process.env.AUTH0_ISSUER_BASE_URL}/oauth/token`, body);
     return res.data.access_token;
   } catch (err) {
-    // console.log({ "error": res })
     return err;
   }
 

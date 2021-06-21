@@ -1,5 +1,8 @@
-const _isEmail = require("validator/lib/isEmail");
+import axios from "axios";
+import { useRouter } from 'next/router';
 
+const _isEmail = require("validator/lib/isEmail");
+const router = useRouter()
 
 const getCookieToken = (req) => req.cookies.token;
 
@@ -24,6 +27,8 @@ const isValidPassword = (password) => {
 
   return passwordChecks.filter((isValid) => isValid).length >= 3;
 };
+
+
 
 
 module.exports = {
