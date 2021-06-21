@@ -28,9 +28,6 @@ const isValidPassword = (password) => {
   return passwordChecks.filter((isValid) => isValid).length >= 3;
 };
 
-
-
-
 module.exports = {
   isValidEmail,
   isValidPassword,

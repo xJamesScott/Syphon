@@ -7,24 +7,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from "react-hook-form";
 import styled from 'styled-components';
 import axios from 'axios';
-import { useQuery, useFetcher } from '../utils/hooks';
-import useSWR from 'swr';
+import {
+    useQuery,
+} from '../utils/hooks';
 
 const Input = styled.input`
 
 `;
 const login = () => {
     const router = useRouter();
+    const query = useQuery();
     const code = router.query.code;
     const ref = useRef();
-    const fetcher = useFetcher();
-    // const query = useQuery()
+    const [redirectTo, setRedirect] = useState(false);
 
     useEffect(() => {
-        if (code) {
-            console.log({ "code!": code })
+        if (redirectTo) {
+            router.push("/")
         }
-    }, [code])
+
+    }, [redirectTo])
 
     const { register, handleSubmit
     } = useForm({
@@ -32,44 +34,38 @@ const login = () => {
     });
 
     const onSubmit = async (formData) => {
+
+        // **ACTUAL API CALL**
+
+        // try {
         // console.log({
         //     email: formData.email,
         //     password: formData.password
         // })
         // const res = await fetch("/api/auth?call=login",
         //     {
-        //         method: "GET",
-        //         // mode: "no-cors",
-        //     })
-        //     // .then(response => response.json())
-        //     .then(data => console.log(data));
-        // console.log(res)
-        // fetch("/api/redirect",
-        //     // {
-        //     //     mode: "no-cors"
-        //     // }
-        // )
-        //     // .then(response => response.json())
-        //     .then(data => console.log(data))
-        // return res
-
-        await axios.get("/api/redirect")
-        await axios.get("/api/redirect")
-            .then(data => console.log(data))
-
-        // try {
-        //     const res = await axios.post("/api/auth?call=login", {
-        //     // const res = await fetch("/api/auth?call=login", {
-        //         // const res = await axios.post("https://jsonplaceholder.typicode.com/todos/1n", {
-        //         email: formData.email,
-        //         password: formData.password
-        //     })
-        //     console.log(res)
-        //     return res
-        // } catch (error) {
-        //     console.log({ "error!": error })
-        //     return error
+        //     email: formData.email,
+        //     password: formData.password
+        // }))
+        // } catch (err) {
+        //     console.log(err)
         // }
+
+
+        // **PLACE HOLDER API CALL**
+
+        try {
+            const res = await axios.get("/api/redirect")
+            const {
+                data: { data,
+                    handler: { redirect }
+                } } = res
+            if (redirect) {
+                setRedirect(redirect)
+            }
+        } catch (err) {
+            console.log(err)
+        }
     };
 
     return (
@@ -100,20 +96,10 @@ const login = () => {
     )
 }
 
-// export async function getServerSideProps(context) {
-//     return {
-//         redirect: {
-//             permanent: false,
-//             destination: "/"
-//         }
-//     }
-// }
-
-// export const getServerSideProps = () => {
-//     return {
-//         props: {},
-//     }
-// }
-
+export const getServerSideProps = () => {
+    return {
+        props: {},
+    }
+}
 
 export default login
