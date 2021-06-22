@@ -7,10 +7,13 @@ import { StyledLink } from '../../components/StyledLink';
 import {
     useQuery
 } from '../../utils/hooks';
+import {
+    Form, Input,
+    Submit, FormError,
+    AuthError
+} from '../../components/AuthForm'
 
-const Input = styled.input`
 
-`;
 const login = ({ hideNav, domain }) => {
     const router = useRouter();
     const query = useQuery();
@@ -29,7 +32,8 @@ const login = ({ hideNav, domain }) => {
 
     const { register, handleSubmit
     } = useForm({
-        mode: "change"
+        mode: "onSubmit",
+        reValidateMode: "onSubmit"
     });
 
     const onSubmit = async (formData) => {
@@ -41,7 +45,7 @@ const login = ({ hideNav, domain }) => {
                 {
                     email: formData.email,
                     password: formData.password,
-                    redirect: document.referrer || "" // replace with redux state
+                    redirect: referrer
                 });
             console.log({ "res!!!": res })
 
@@ -87,9 +91,10 @@ const login = ({ hideNav, domain }) => {
         <div>
 
             <button onClick={onSubmit}>SUBMIT TEST</button>
-            Auth Error: {authError}
-            <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} >
-                <input
+
+            <Form autoComplete="off" onSubmit={handleSubmit(onSubmit)} >
+                <AuthError>{authError && authError}</AuthError>
+                <Input
                     autoComplete="off"
                     type="email"
                     name="email"
@@ -97,7 +102,7 @@ const login = ({ hideNav, domain }) => {
                     {...register("email")}
                 />
 
-                <input
+                <Input
                     autoComplete="off"
                     {...register("password")}
                     type="password"
@@ -106,12 +111,13 @@ const login = ({ hideNav, domain }) => {
                     id="password"
                 />
 
-                <input
-                    type="submit"
-                    value="submit"
+                <Submit
+                    value="SUBMIT"
                 />
+
                 <StyledLink href="/auth/forgot-password">Forgot Password</StyledLink>
-            </form>
+                <StyledLink href="/auth/signup">Sign Up</StyledLink>
+            </Form>
         </div>
     )
 }

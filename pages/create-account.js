@@ -40,7 +40,6 @@ const login = ({ hideNav, domain }) => {
             const res = await axios.post("/api/users?call=create",
                 {
                     email: formData.email,
-                    password: formData.password,
                     redirect: document.referrer || "" // replace with redux state
                 });
             console.log({ "res!!!": res })

@@ -147,3 +147,27 @@ export const getAccountsWithSameEmail = async (token, email, forVerified) => {
     return false;
   }
 };
+
+export const passwordless = async (email, redirect) => {
+  try {
+    const token = await authenticate("client_credentials");
+    const users = await users(token, {
+      email: email
+    });
+    const body = {
+      client_id: process.env.AUTH_CLIENT_ID,
+      client_secret: process.env.AUTH0_CLIENT_SECRET,
+      connection: "email",
+      email: email,
+      send: link,
+      authParams: {
+        redirect_uri: redirect
+      }
+    }
+    await axios.post(`${process.env.AUTH0_ISSUER_BASE_URL}/passwordless/start`, body)
+    return true
+  } catch (err) {
+    console.log({ "Passwordless Auth Error! ": err })
+    return err
+  }
+}

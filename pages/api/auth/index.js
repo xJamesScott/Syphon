@@ -73,28 +73,28 @@ export default async function auth(req, res) {
                 connection: "Username-Password-Authentication",
                 email,
                 password,
-                verify_email: true,
+                verify_email: false,
             };
             try {
                 const response = await createUser(payload)
-                
+                const user = await new User(response.email).save();
                 return res.send(response)
             } catch (err) {
                 console.log({ "error!": err })
                 res.send(err)
             }
 
-        case "forgot-password":
+        case "change-password":
             try {
-                const responseMessage = await sendChangePasswordEmail(
-                    token,
+                const responseMessage = await passwordless(
                     email,
+                    redirect
                 );
                 return res.send({
                     handler: {
                         redirect: redirect ? redirect : ""
                     },
-                    data: { responseMessage }
+                    data: { success: responseMessage }
                 })
             } catch (err) {
                 console.log(err)
