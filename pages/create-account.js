@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from "react-hook-form";
 import styled from 'styled-components';
-import { StyledLink } from '../../components/StyledLink';
+import { StyledLink } from '../components/StyledLink';
 import {
     useQuery
-} from '../../utils/hooks';
+} from '../utils/hooks';
 
 const Input = styled.input`
 
@@ -37,7 +37,7 @@ const login = ({ hideNav, domain }) => {
         // **PRODUCTION API CALL**
 
         try {
-            const res = await axios.post("/api/auth?call=login",
+            const res = await axios.post("/api/users?call=create",
                 {
                     email: formData.email,
                     password: formData.password,

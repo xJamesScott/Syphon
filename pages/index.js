@@ -49,7 +49,6 @@ export default function Home() {
 
   const testAPI = async () => {
     await axios.post("/api/auth?call=signup", {})
-    // alert("yoo!")
   }
 
   const { count, increment, decrement, reset } = useCounter()
