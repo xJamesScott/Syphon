@@ -122,7 +122,8 @@ export default function Home() {
 export async function getServerSideProps() {
   return {
     props: {
-      hideNav: false
+      hideNav: false,
+      isLoginRequired: true
     }
   }
 }

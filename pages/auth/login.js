@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useForm } from "react-hook-form";
 import styled from 'styled-components';
 import { StyledLink } from '../../components/StyledLink';
+import { useSelector, useDispatch } from 'react-redux';
 import {
     useQuery
 } from '../../utils/hooks';
@@ -16,9 +17,7 @@ import {
 
 const login = ({ hideNav, domain }) => {
     const router = useRouter();
-    const query = useQuery();
-    const code = router.query.code;
-    const ref = useRef();
+    const dispatch = useDispatch();
     const [redirectTo, setRedirect] = useState(false);
     const [referrer, setReferrer] = useState(false);
     const [authError, setAuthError] = useState(false);
@@ -41,6 +40,7 @@ const login = ({ hideNav, domain }) => {
         // **PRODUCTION API CALL**
 
         try {
+            dispatch 
             const res = await axios.post("/api/auth?call=login",
                 {
                     email: formData.email,
