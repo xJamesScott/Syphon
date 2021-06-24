@@ -15,19 +15,23 @@ import {
 } from '../../components/AuthForm'
 
 
-const login = ({ hideNav, domain }) => {
+const login = ({ test2, test3, test4 }) => {
     const router = useRouter();
     const dispatch = useDispatch();
     const [redirectTo, setRedirect] = useState(false);
     const [referrer, setReferrer] = useState(false);
     const [authError, setAuthError] = useState(false);
 
-    useEffect(() => {
-        setReferrer(document.referrer)
-        if (redirectTo) {
-            router.push("/")
-        }
-    }, [redirectTo])
+
+    const test = useSelector((state) => state)
+    console.log({ "wrapper state!": test })
+
+    // useEffect(() => {
+    //     setReferrer(document.referrer)
+    //     if (redirectTo) {
+    //         router.push("/")
+    //     }
+    // }, [redirectTo])
 
     const { register, handleSubmit
     } = useForm({
@@ -40,7 +44,7 @@ const login = ({ hideNav, domain }) => {
         // **PRODUCTION API CALL**
 
         try {
-            dispatch 
+            dispatch
             const res = await axios.post("/api/auth?call=login",
                 {
                     email: formData.email,
@@ -122,11 +126,11 @@ const login = ({ hideNav, domain }) => {
     )
 }
 
-export const getServerSideProps = () => {
+export async function getServerSideProps() {
     return {
         props: {
-            hideNav: true,
-        },
+            hideNav: false,
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { createWrapper } from 'next-redux-wrapper'
 
 let store
 
@@ -46,6 +47,13 @@ function initStore(preloadedState = initialState) {
     composeWithDevTools(applyMiddleware())
   )
 }
+// const initStore2 = (preloadedState = initialState) => {
+//   return createStore(
+//     reducer,
+//     preloadedState,
+//     composeWithDevTools(applyMiddleware())
+//   )
+// }
 
 export const initializeStore = (preloadedState) => {
   let _store = store ?? initStore(preloadedState)
@@ -73,3 +81,5 @@ export function useStore(initialState) {
   const store = useMemo(() => initializeStore(initialState), [initialState])
   return store
 }
+
+export const wrapper = createWrapper(initializeStore)

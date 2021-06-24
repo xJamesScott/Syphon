@@ -8,7 +8,8 @@ import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-export default function Home() {
+export default function Home(test2, test3, test4) {
+  console.log({ "test3!!!": test4 })
   const router = useRouter();
   const createTest = async () => {
     try {
@@ -31,6 +32,8 @@ export default function Home() {
 
   const useCounter = () => {
     const count = useSelector((state) => state.count)
+    const test = useSelector((state) => state)
+    console.log({ "test state!": test })
     const dispatch = useDispatch()
     const increment = () =>
       dispatch({
