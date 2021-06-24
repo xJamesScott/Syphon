@@ -1,5 +1,11 @@
-// if isAuthenticated show
-// if !isAuthenticated redirect to login
+// if isAuthenticated fill form in with info
+// if !isAuthenticated default values
+
+// if from is valid, allow continue & pay
+// // validation condtions?
+
+// TODO - MAKE 'SUMMARY' STICKY ON SIDE WHILE SCROLLING
+
 
 const cart = () => {
     return (
@@ -8,5 +14,7 @@ const cart = () => {
         </div>
     )
 }
+
+
 
 export default cart

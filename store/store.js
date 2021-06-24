@@ -1,7 +1,8 @@
-import { useMemo } from 'react'
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { createWrapper } from 'next-redux-wrapper'
+import { useMemo } from 'react';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createWrapper } from 'next-redux-wrapper';
+import cart from './cart';
 
 let store
 
@@ -12,7 +13,7 @@ const initialState = {
   test: "yoooo!!!!"
 }
 
-const reducer = (state = initialState, action) => {
+const nums = (state = initialState, action) => {
   switch (action.type) {
     case 'TICK':
       return {
@@ -39,6 +40,11 @@ const reducer = (state = initialState, action) => {
       return state
   }
 }
+
+const reducer = combineReducers({
+  nums,
+  cart,
+})
 
 function initStore(preloadedState = initialState) {
   return createStore(

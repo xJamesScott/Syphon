@@ -8,13 +8,11 @@ const BannerWrapper = styled.div`
 const Cart = styled.button`
 `;
 
-
 function Banner(isAuthenticated) {
     return (
         <BannerWrapper>
             <a href="/cart"><Cart >Cart</Cart></a>
         </BannerWrapper>
-        
     )
 }
 
