@@ -28,6 +28,16 @@ const isValidPassword = (password) => {
   return passwordChecks.filter((isValid) => isValid).length >= 3;
 };
 
+export const generateUUID = ({ range }) => {
+  const chars =
+    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let result = "";
+  // eslint-disable-next-line no-plusplus
+  for (let i = range; i > 0; --i)
+    result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+};
+
 module.exports = {
   isValidEmail,
   isValidPassword,

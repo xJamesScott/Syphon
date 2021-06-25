@@ -58,8 +58,6 @@ export default function Home(test2, test3, test4) {
     dispatch(cartActions.setCartCurrent({ price: "too much!" }))
   }
 
-
-
   const testAPI = async () => {
     await axios.post("/api/auth?call=signup", {})
   }

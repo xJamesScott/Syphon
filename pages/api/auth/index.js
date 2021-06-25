@@ -16,34 +16,52 @@
 // const User = app.mongo.model("IndividualUser");
 // import test4 from "./test4"
 
-import { users, authenticate, createUser, getAccountsWithSameEmail } from "./AuthCalls"
+// import { users, authenticate, createUser, getAccountsWithSameEmail } from "./AuthCalls"
 import { useRouter } from 'next/router';
 import axios from "axios";
 import dbConnect from '../../utils/dbConnect';
+import User from '../../models/User'
 
-export default async function auth(req, res) {
-    const { body: { password, email, grantType, redirect },
-        query: { call }
+export default async function cart(req, res) {
+    const { body: { email },
+        query: { call, redirect }
     } = req
+
+    // const userData = {
+    //     ...req.body,
+    //     _id: req.userId,
+    //     authId: req.user.sub,
+    //     email,
+    //   };
+    const data = {
+        email: email
+    }
 
     await dbConnect()
 
     switch (call) {
-        case "login":
+        case "create":
             try {
-                const response = await authenticate("password", {
-                    password,
-                    username: email,
-                    scope: "openid",
-                    redirect_uri: process.env.AUTH_DOMAIN
-                })
+                // const response = await authenticate("password", {
+                //     password,
+                //     username: email,
+                //     scope: "openid",
+                //     redirect_uri: process.env.AUTH_DOMAIN
+                // })
+                const user = await new User(data).save();
                 // res.status(200)
                 // console.log({ "res!": res })
-                console.log({ "response!": response })
-                return res.send({
-                    redirect: redirect ? redirect : "",
-                    // data: { email  }
-                });
+                // console.log({ "response!": response })
+                // return res.send({
+                //     redirect: redirect ? redirect : "",
+                //     // data: { email  }
+                // });
+
+                // return {
+                //     ...user.toObject()
+                // }
+
+                return res.send("success!")
 
                 // AUTHENTICATE DIRECT CALL
 
@@ -54,52 +72,22 @@ export default async function auth(req, res) {
                 // // return "success"
                 // // return "sucess"
             } catch (err) {
-                console.log({ "err!!!": err.response.headers })
+                console.log({ "err!!!": err })
 
-                if (err.response.status == 429) {
-                    return res.status(500).send("Whoops! Too many login attempts, please wait a while before attempting again");
-                }
-                const token = await authenticate("client_credentials");
-                const accountExist = await getAccountsWithSameEmail(token, email);
-                if (!accountExist) {
-                    return res.status(500).send("Email not found: please click 'SignUp'")
-                }
+                // if (err.response.status == 429) {
+                //     return res.status(500).send("Whoops! Too many login attempts, please wait a while before attempting again");
+                // }
+                // const token = await authenticate("client_credentials");
+                // const accountExist = await getAccountsWithSameEmail(token, email);
+                // if (!accountExist) {
+                //     return res.status(500).send("Email not found: please click 'SignUp'")
+                // }
 
-                return res.status(500).send("Login failed: Invalid email or password");
+                return res.status(400).send({ "err!!!!": err });
             }
 
-        case "signup":
-            const payload = {
-                connection: "Username-Password-Authentication",
-                email,
-                password,
-                verify_email: false,
-            };
-            try {
-                const response = await createUser(payload)
-                const user = await new User(response.email).save();
-                return res.send(response)
-            } catch (err) {
-                console.log({ "error!": err })
-                res.send(err)
-            }
 
-        case "change-password":
-            try {
-                const responseMessage = await passwordless(
-                    email,
-                    redirect
-                );
-                return res.send({
-                    handler: {
-                        redirect: redirect ? redirect : ""
-                    },
-                    data: { success: responseMessage }
-                })
-            } catch (err) {
-                console.log(err)
-                res.send(err)
-            }
+
 
         default:
             return
