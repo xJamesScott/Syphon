@@ -1,32 +1,22 @@
-// Item title
-// Add to cart button (Name, Price, Quantity)
-// Quantity buttons (+ / -)
-import Banner from "../../components/banner";
+import Banner from "../../components/Banner";
 import { useState, useEffect } from 'react';
 import { cartActions } from '../../store/cart'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 export default function item() {
     const dispatch = useDispatch();
-
     const [quantity, setQuantity] = useState(1);
     const itemData = {
         name: "Test Items",
-        productId: "testitem3",
-        // description: "This is description",
+        productId: "testitem8",
         price: 100,
         quantity: quantity
     };
 
     const addItem = async () => {
-        console.log("dispatch cart action!")
-        dispatch(cartActions.setCartCurrent(itemData))
+        dispatch(cartActions.setCartCurrent({ [itemData.productId]: itemData }))
     };
-
-
-
-
 
     return (
         <div>
