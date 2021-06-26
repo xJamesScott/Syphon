@@ -11,7 +11,10 @@ const Cart = styled.button`
 function Banner(isAuthenticated) {
     return (
         <BannerWrapper>
-            <a href="/cart"><Cart >Cart</Cart></a>
+            <div className="section-margin">
+                <a href="/cart"><Cart >Cart</Cart></a>
+            </div>
+
         </BannerWrapper>
     )
 }

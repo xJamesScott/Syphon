@@ -7,10 +7,7 @@ const initialState = {
     _id: null,
     isLoading: false,
     error: null,
-    // items: [{}] // CHANGE TO OBJECT $productId:{data here}
-    items: {} // CHANGE TO OBJECT $productId:{data here}
-
-
+    items: {}
 }
 
 const cartReducer = (state = initialState, action) => {
