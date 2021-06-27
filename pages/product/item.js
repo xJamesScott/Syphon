@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { cartActions } from '../../store/cart'
 import { useDispatch } from 'react-redux';
 
+// TODO - ITERATE THROUGH ITEMS FOR 'YOU MAY ALSO LIKE' SECTION, 
+    // REMOVE CURRENT PAGE ITEM FROM RESULT - USE COMPONENT
+
 
 export default function item() {
     const dispatch = useDispatch();

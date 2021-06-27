@@ -12,7 +12,11 @@ import {
     CheckoutSubmit,
     CheckoutFormError,
     CheckoutInputLabel,
-    CheckoutSectionTitle
+    CheckoutSectionTitle,
+    PaymentButton,
+    PaymentIcon,
+    CardInfo,
+    InputWrapper
 } from '../components/CheckoutForm';
 import { FormSelect } from '../components/FormStyles'
 import { useForm } from 'react-hook-form';
@@ -23,11 +27,12 @@ import {
     CheckoutSummary,
     CheckoutProdIMG,
     ProductTitle,
-    SummaryTotals
+    SummaryTotals,
+    TotalWrapper,
+    Cost,
+    ProductWrapper,
+    PayButton
 } from '../components/CheckoutSummary';
-// import placeholderIMG from '../public/favicon.ico'
-
-import Image from 'next/image';
 
 const someVal = "null"
 
@@ -40,47 +45,16 @@ const checkout = () => {
     });
 
     const testObj = {
-        item1: { price: 4 },
-        item2: { price: 20 },
-        item3: { price: 10 }
+        item1: { price: 4, quantity: 4 },
+        item2: { price: 20, quantity: 1 },
+        item3: { price: 100, quantity: 1 }
     }
-
-    // console.log({ testObj: Object.entries(testObj) })
 
     const testObj2 = Object.entries(testObj)
-    const total = () => {
-        // for (let i = 0; i < testObj2.length; i++) {
 
-        //     console.log({ "testObj!": testObj2[i][1].price++ })
-        // }
-
-        // console.log({ "testObj!": "fin!" })
-        // for (const [productId, item] of Object.entries(testObj)) {
-        //     console.log({ "testObj!": item.price++ })
-        // }
-        testObj2.reduce((sum, b) => {
-            // if (!a[b]) {
-            //     a[b] = 0
-            // }
-
-            // console.log({ "testObj! A": a })
-            // console.log({ "testObj! B": b })
-            console.log({ "testObj! add": sum + b[1].price })
-
-            // console.log({ "testObj! A": a[1].price })
-            // console.log({ "testObj! B": b[1].price })
-
-            // console.log({ "testObj! A": a[1].price, b: + b[1].price })
-            // console.log({ "testObj! B": b[1].price++ })
-            // console.log({ "testObj! add": a[1] + b[1] })
-        }, 0)
-
-    }
-
-    total()
-
-
-
+    const subtotal = testObj2.reduce((sum, item) => {
+        return sum += item[1].price * item[1].quantity
+    }, 0)
 
     return (
         <div className="section-margin">
@@ -218,6 +192,64 @@ const checkout = () => {
                     {countries.map((location) => { return <option>{location}</option> })}
                 </FormSelect>
 
+                <div className="section-wrapper">
+                    <PaymentButton onClick={null} for="gpay">
+                        <CheckoutInput type="radio" id="gpay" name="payment" value="gpay" />
+                        <PaymentIcon
+                            src="/media/placeholderIMG.png"
+                            height={50}
+                            width={50}
+                        />
+                    </PaymentButton>
+                    <PaymentButton onClick={null} for="applepay">
+                        <CheckoutInput type="radio" id="applepay" name="payment" value="applepay" />
+                        <PaymentIcon
+                            src="/media/placeholderIMG.png"
+                            height={50}
+                            width={50}
+                        />
+                    </PaymentButton>
+                    <PaymentButton onClick={null} for="credit">
+                        <CheckoutInput type="radio" id="credit" name="payment" value="credit" />
+                        <CheckoutInputLabel for="credit"> Credit or Debit </CheckoutInputLabel>
+                        <PaymentIcon
+                            src="/media/placeholderIMG.png"
+                            height={50}
+                            width={50}
+                        />
+                    </PaymentButton>
+
+                    {/* if Credit selected, show card inputs below*/}
+
+                    <CardInfo>
+
+                        <InputWrapper>
+                            <CheckoutInputLabel for="number"> Card Number </CheckoutInputLabel>
+                            <CheckoutInput
+                                id="number"
+                                name="number"
+                            />
+                        </InputWrapper>
+                        <InputWrapper>
+                            <CheckoutInputLabel for="expiration"> Expiration </CheckoutInputLabel>
+                            <CheckoutInput
+                                id="expiration"
+                                name="expiration"
+                            />
+                        </InputWrapper>
+                        <InputWrapper>
+                            <CheckoutInputLabel for="number"> Security Code </CheckoutInputLabel>
+                            <CheckoutInput
+                                id="security-code"
+                                name="security-code"
+                            />
+                        </InputWrapper>
+                    </CardInfo>
+                </div>
+
+
+
+
                 <div>
                     <h4>SUMMARY</h4>
                     <CheckoutSummary>
@@ -230,7 +262,13 @@ const checkout = () => {
                         {() => {
                             for (const [productId, item] of Object.entries(countries)) {
                                 return (
-                                    <>
+                                    <ProductWrapper>
+                                        <CheckoutProdIMG src="/media/placeholderIMG.png"
+                                            width={400}
+                                            height={400}
+                                            style={{ border: "1px solid black" }}
+                                            fill="magenta"
+                                        />
                                         <h3>
                                             {item.name}
                                         </h3>
@@ -238,27 +276,19 @@ const checkout = () => {
                                             {`$ ${item.price}`}
                                         </h4>
                                         <p>
-                                            {item.quantity}
+                                            {`x${item.quantity}`}
                                         </p>
-                                    </>
+                                    </ProductWrapper>
                                 )
                             }
                         }}
-                        <SummaryTotals>SUB TOTAL</SummaryTotals>
-                        <h3>
-                            {/* {() => {
-                            for (const [productId, item] of Object.entries(countries)) {
-                                return (
-                                    item.price
-                                )
-                            }
 
-                            for (let i = 0; i < Object.entries(countries).length)
-                        }} */}
-                        </h3>
-                        <SummaryTotals>SHIPPING</SummaryTotals>
-                        <SummaryTotals>SALES TAX</SummaryTotals>
-                        <SummaryTotals>GRAND TOTAL</SummaryTotals>
+                        <TotalWrapper>
+                            <SummaryTotals>TOTAL</SummaryTotals>
+                            <Cost>{`$ ${subtotal}`}</Cost>
+                        </TotalWrapper>
+
+                        <PayButton>CONTINUE & PAY</PayButton>
 
                     </CheckoutSummary>
                 </div>
@@ -267,7 +297,5 @@ const checkout = () => {
         </div >
     )
 }
-
-
 
 export default checkout
