@@ -26,7 +26,7 @@ export default function Home(test2, test3, test4) {
     } catch (error) {
       console.log(error);
     }
-  }
+  } 
 
   useEffect(() => {
   }, [])
