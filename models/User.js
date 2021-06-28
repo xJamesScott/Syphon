@@ -16,7 +16,8 @@ const User = mongoose.Schema({
     city: String,
     country: String,
     emailVerified: Boolean,
+},
     schemaOptions
-})
+)
 
 export default mongoose.models.User || mongoose.model('User', User)

@@ -13,11 +13,9 @@ function WrappedApp({ Component, pageProps }) {
       <GlobalStyle />
       {
         !hideNav &&
-        <>
-          <Banner />
-          <Component {...pageProps} />
-        </>
+        <Banner />
       }
+      <Component {...pageProps} />
     </Provider>
   )
 };
