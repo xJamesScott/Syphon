@@ -21,6 +21,7 @@ import { useRouter } from 'next/router';
 import axios from "axios";
 import dbConnect from '../../utils/dbConnect';
 import User from '../../models/User'
+import Item from '../../models/Item';
 
 export default async function users(req, res) {
     const { body: { email },
@@ -39,6 +40,10 @@ export default async function users(req, res) {
 
     await dbConnect()
 
+    // const createItem = await new Item({ name: "testssss" }).save();
+
+    // createItem()
+
     switch (call) {
         case "create":
             try {
@@ -48,7 +53,10 @@ export default async function users(req, res) {
                 //     scope: "openid",
                 //     redirect_uri: process.env.AUTH_DOMAIN
                 // })
+
+
                 const user = await new User(data).save();
+
                 // res.status(200)
                 // console.log({ "res!": res })
                 // console.log({ "response!": response })
@@ -72,7 +80,7 @@ export default async function users(req, res) {
                 // // return "success"
                 // // return "sucess"
             } catch (err) {
-                console.log({ "err!!!": err })
+                console.log({ "err!": err })
 
                 // if (err.response.status == 429) {
                 //     return res.status(500).send("Whoops! Too many login attempts, please wait a while before attempting again");
@@ -83,13 +91,10 @@ export default async function users(req, res) {
                 //     return res.status(500).send("Email not found: please click 'SignUp'")
                 // }
 
-                return res.status(400).send({ "err!!!!": err });
+                return res.status(400).send({ "err!": err });
             }
 
-
-
-
-        default:
+            default:
             return
     }
 }

@@ -11,7 +11,7 @@ import {
 const Input = styled.input`
 
 `;
-const login = ({ hideNav, domain }) => {
+const createAccount = ({ hideNav, domain }) => {
     const router = useRouter();
     const query = useQuery();
     const code = router.query.code;
@@ -20,12 +20,12 @@ const login = ({ hideNav, domain }) => {
     const [referrer, setReferrer] = useState(false);
     const [authError, setAuthError] = useState(false);
 
-    useEffect(() => {
-        setReferrer(document.referrer)
-        if (redirectTo) {
-            router.push("/")
-        }
-    }, [redirectTo])
+    // useEffect(() => {
+    //     setReferrer(document.referrer)
+    //     if (redirectTo) {
+    //         router.push("/")
+    //     }
+    // }, [redirectTo])
 
     const { register, handleSubmit
     } = useForm({
@@ -123,4 +123,4 @@ export const getServerSideProps = () => {
     }
 }
 
-export default login
+export default createAccount
