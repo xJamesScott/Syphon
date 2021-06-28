@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import {Button} from './Buttons'
+import { Button } from './Buttons'
 
 
 export const CheckoutSummary = styled.div`
@@ -39,7 +39,7 @@ export const SummaryTotals = styled.h5`
 
 `;
 
-export const Cost = styled.div`
+export const Cost = styled.h3`
 
 `;
 
