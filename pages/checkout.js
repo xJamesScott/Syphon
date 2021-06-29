@@ -6,6 +6,7 @@
 
 // TODO - MAKE 'SUMMARY' STICKY ON SIDE WHILE SCROLLING
 
+import { useState } from 'react';
 import {
     CheckoutForm,
     CheckoutInput,
@@ -33,28 +34,53 @@ import {
     ProductWrapper,
     PayButton
 } from '../components/CheckoutSummary';
+import ThankYouModal, { BG } from '../components/ThankYouModal';
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+} from "@chakra-ui/react"
 
-const someVal = "null"
+const someVal = "null" // TODO - REPLACE AND REMOVE PLACEHOLDER
 
-const checkout = () => {
 
+const chargeObj = { // TODO - REMOVE PLACEHOLDER
+    amount: 100,
+    currency: "USD",
+    receipt_email: "jscizzle22@gmail.com"
+}
+
+const checkout = ({ }) => {
+    // console.log{}
     const { register, handleSubmit, formState: { errors }
     } = useForm({
         mode: "onSubmit",
         reValidateMode: "onSubmit"
     });
 
-    const testObj = {
+    const [showTYModal, setTYModal] = useState(false);
+
+    const onSubmit = async () => {
+
+    }
+
+    const testObj = { // TODO - REMOVE PLACEHOLDER
         item1: { price: 4, quantity: 4 },
         item2: { price: 20, quantity: 1 },
         item3: { price: 100, quantity: 1 }
     }
 
-    const testObj2 = Object.entries(testObj)
+    const testObj2 = Object.entries(testObj) // TODO - REMOVE PLACEHOLDER
 
     const subtotal = testObj2.reduce((sum, item) => {
-        return sum += item[1].price * item[1].quantity
+        return sum += item[1].price * item[1].quantity // TODO - REMOVE PLACEHOLDER
     }, 0)
+
+    // TODO - if isAuthenticated fetch user info and pass to checkout
 
     return (
         <div className="section-margin">
@@ -123,7 +149,7 @@ const checkout = () => {
 
                 <h4>BILLING DETAILS</h4>
 
-                {/* Add Google Maps Address Validation / Search */}
+                {/* TODO - Add Google Maps Address Validation / Search */}
 
                 <CheckoutInputLabel for="address"> Address </CheckoutInputLabel>
                 {<CheckoutFormError>{errors.address && errors.address.message}</CheckoutFormError>}
@@ -193,6 +219,9 @@ const checkout = () => {
                 </FormSelect>
 
                 <div className="section-wrapper">
+                    {/* 
+                    {TODO - INTEGRATE GOOGLE PAY}
+
                     <PaymentButton onClick={null} for="gpay">
                         <CheckoutInput type="radio" id="gpay" name="payment" value="gpay" />
                         <PaymentIcon
@@ -201,6 +230,9 @@ const checkout = () => {
                             width={50}
                         />
                     </PaymentButton>
+
+                   // TODO - INTEGRATE APPLE PAY
+
                     <PaymentButton onClick={null} for="applepay">
                         <CheckoutInput type="radio" id="applepay" name="payment" value="applepay" />
                         <PaymentIcon
@@ -208,7 +240,8 @@ const checkout = () => {
                             height={50}
                             width={50}
                         />
-                    </PaymentButton>
+                    </PaymentButton> */}
+
                     <PaymentButton onClick={null} for="credit">
                         <CheckoutInput type="radio" id="credit" name="payment" value="credit" />
                         <CheckoutInputLabel for="credit"> Credit or Debit </CheckoutInputLabel>
@@ -246,9 +279,6 @@ const checkout = () => {
                         </InputWrapper>
                     </CardInfo>
                 </div>
-
-
-
 
                 <div>
                     <h4>SUMMARY</h4>
@@ -288,12 +318,31 @@ const checkout = () => {
                             <Cost>{`$ ${subtotal}`}</Cost>
                         </TotalWrapper>
 
-                        <PayButton>CONTINUE & PAY</PayButton>
+                        <PayButton
+                            onClick={handleSubmit()}
+                        >CONTINUE & PAY</PayButton>
 
                     </CheckoutSummary>
                 </div>
-
             </CheckoutForm >
+
+
+            <Button
+                onClick={() => setTYModal(true)}
+
+            >SHOW MODAL</Button>
+
+            {
+                showTYModal &&
+                <>
+                    <ThankYouModal
+                        // items={items}
+                        setModal={(e) => setTYModal(e)} // TODO - REMOVE; FOR TESTING ONLY
+                    />
+
+                </>
+
+            }
         </div >
     )
 }
