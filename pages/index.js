@@ -8,9 +8,33 @@ import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { cartActions } from '../store/cart'
+import Cookie from 'js-cookie';
 
 export default function Home(test2, test3, test4) {
   console.log({ "test3!!!": test4 })
+  const cookie2 = Cookie.getJSON("test2")
+
+  Cookie.set("testMulti", {
+    bro: "yo",
+    bro: "yo"
+  })
+
+  console.log({ "testMulti": Cookie.getJSON("testMulti") })
+
+  // Cookie.set("testitem3", {
+  //   cart: {
+  //     name: "Test Items",
+  //     productId: "testitem5",
+  //     price: 100,
+  //     quantity: 2
+  //   },
+  // })
+  // Cookie.set("test2", "Yoooooo!!!!!!!")
+  // Cookie.set("yo!!!", "broooo!")
+  // Cookie.set("test2", JSON.stringify({ cart: { product: "works!!!!" } }))
+  // console.log({ "cookie!": Cookie.get("yo!!!") })
+  // console.log({ "testitem3!": Cookie.getJSON("testitem3") })
+  // console.log
   const router = useRouter();
   const createTest = async () => {
     try {
@@ -26,7 +50,7 @@ export default function Home(test2, test3, test4) {
     } catch (error) {
       console.log(error);
     }
-  } 
+  }
 
   useEffect(() => {
   }, [])

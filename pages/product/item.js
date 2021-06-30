@@ -12,7 +12,7 @@ export default function item() {
     const [quantity, setQuantity] = useState(1);
     const itemData = {
         name: "Test Items",
-        productId: "testitem8",
+        productId: "testitem6",
         price: 100,
         quantity: quantity
     };

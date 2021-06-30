@@ -1,12 +1,13 @@
 import { users, authenticate, createUser, getAccountsWithSameEmail } from "./AuthCalls"
 import dbConnect from '../../../utils/dbConnect';
-import User from '../../models/User'
+import Cart from '../../models/Cart'
 import axios from "axios";
+
 
 //
 
 export default async function cart(req, res) {
-    const { body: { name, email, grantType, redirect },
+    const { body: { name, productId, price, quantity },
         query: { call }
     } = req
 
@@ -15,7 +16,7 @@ export default async function cart(req, res) {
     switch (call) {
         case "get-cart":
             try {
-                const response = await User.get("password", { })
+                const response = await User.get("password", {})
                 console.log({ "response!": response })
                 return res.send({
                     redirect: redirect ? redirect : "",
@@ -36,10 +37,10 @@ export default async function cart(req, res) {
 
         case "update-cart":
             const payload = {
-                connection: "Username-Password-Authentication",
-                email,
-                password,
-                verify_email: false,
+                name,
+                productId,
+                price,
+                quantity
             };
             try {
                 const response = await createUser(payload)

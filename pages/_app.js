@@ -2,10 +2,16 @@ import { Provider } from 'react-redux';
 import Banner from '../components/Banner';
 import { useStore } from '../store/store';
 import '../styles/globals.css';
-import GlobalStyle from '../components/GlobalStyle'
+import GlobalStyle from '../components/GlobalStyle';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Loader } from '../components/Loader';
 
 function WrappedApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
+  const persistor = persistStore(store, {}, function () {
+    persistor.persist()
+  });
   const { hideNav, isLoginRequired } = pageProps;
 
   return (

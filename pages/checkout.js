@@ -34,16 +34,10 @@ import {
     ProductWrapper,
     PayButton
 } from '../components/CheckoutSummary';
-import ThankYouModal, { BG } from '../components/ThankYouModal';
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-} from "@chakra-ui/react"
+import ThankYouModal from '../components/ThankYouModal';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { selectCart } from '../store/cart';
 
 const someVal = "null" // TODO - REPLACE AND REMOVE PLACEHOLDER
 
@@ -55,18 +49,22 @@ const chargeObj = { // TODO - REMOVE PLACEHOLDER
 }
 
 const checkout = ({ }) => {
-    // console.log{}
+    const [showTYModal, setTYModal] = useState(false);
+    const cart = useSelector(selectCart);
+    console.log({ "cart!": cart })
+    // const cartItems = Object.entries(cart.items)
+    const cartItems = Object.entries(cart)
+    console.log({ "cartItems!": cartItems })
+
     const { register, handleSubmit, formState: { errors }
     } = useForm({
         mode: "onSubmit",
         reValidateMode: "onSubmit"
     });
 
-    const [showTYModal, setTYModal] = useState(false);
-
     const onSubmit = async () => {
 
-    }
+    };
 
     const testObj = { // TODO - REMOVE PLACEHOLDER
         item1: { price: 4, quantity: 4 },
@@ -290,7 +288,7 @@ const checkout = ({ }) => {
                             fill="magenta"
                         />
                         {() => {
-                            for (const [productId, item] of Object.entries(countries)) {
+                            for (const [productId, item] of Object.entries(countries)) { // iterates through unique items
                                 return (
                                     <ProductWrapper>
                                         <CheckoutProdIMG src="/media/placeholderIMG.png"
@@ -325,7 +323,6 @@ const checkout = ({ }) => {
                     </CheckoutSummary>
                 </div>
             </CheckoutForm >
-
 
             <Button
                 onClick={() => setTYModal(true)}

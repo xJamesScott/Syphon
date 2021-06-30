@@ -2,6 +2,9 @@ import { useMemo } from 'react';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createWrapper } from 'next-redux-wrapper';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+// import crosstabSync from 'redux-persist-crosstab';
 import cart from './cart';
 
 let store
@@ -46,11 +49,23 @@ const reducer = combineReducers({
   cart,
 })
 
+// const persistConfig = {
+//   key: 'primary',
+//   storage,
+//   whitelist: [reducer]
+// }
+
+// const persistedReducer = persistReducer(persistConfig, reducer)
+// crosstabSync(persistedReducer)
+
 function initStore(preloadedState = initialState) {
   return createStore(
     reducer,
+    // persistedReducer,
     preloadedState,
     composeWithDevTools(applyMiddleware())
+    // composeWithDevTools()
+    // applyMiddleware()
   )
 }
 // const initStore2 = (preloadedState = initialState) => {

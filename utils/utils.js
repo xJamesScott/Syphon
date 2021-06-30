@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useRouter } from 'next/router';
+import cookie from "cookie";
 
-const _isEmail = require("validator/lib/isEmail");
-const router = useRouter()
+// const router = useRouter()
 
 const getCookieToken = (req) => req.cookies.token;
 
@@ -38,7 +38,12 @@ export const generateUUID = ({ range }) => {
   return result;
 };
 
+export function parseCookies() {
+  return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
+}
+
 module.exports = {
   isValidEmail,
   isValidPassword,
+  generateUUID
 };
