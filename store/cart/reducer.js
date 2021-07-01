@@ -7,7 +7,16 @@ const initialState = {
     _id: null,
     isLoading: false,
     error: null,
-    items: Cookie.getJSON("testitem3")?.cart
+    items: () => {
+        let newObj = {}
+        const currentCart = Cookie.getJSON("cart")
+        for (const item of currentCart) {
+            if (item) {
+                Object.assign(newObj, item)
+            }
+        }
+        return newObj
+    }
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -33,10 +42,23 @@ const cartReducer = (state = initialState, action) => {
             const { payload } = action;
             const genId = generateUUID({ range: 10 })
 
+            const currentCart = Cookie.getJSON("cart")
+            const newCart = (data) => {
+                console.log({ "cart": data })
+                if (Array.isArray(data)) {
+                    data.push(payload.data)
+                    return data
+                } else {
+                    return []
+                }
+            }
+            Cookie.set('cart', newCart(currentCart))
+
+
             const itemTest1 = {
                 id: genId,
                 name: 'Test Items',
-                productId: 'testitem6',
+                productId: 'testitem4',
                 price: 100,
                 quantity: 2
             }
@@ -98,11 +120,16 @@ const cartReducer = (state = initialState, action) => {
 
             const filteredCart = Object.entries(addVal)
 
+            console.log({ "filteredCart": filteredCart })
+
             const mergeCart = (data) => {
                 const res = {};
+                console.log({ "mergeCart data": data })
+
                 // data.forEach(cart => {
                 for (let [key, val] of data) {
-                    console.log({ "val": val.quantity }, val)
+                    console.log({ "data val": val })
+                    console.log({ "data key": key })
                     if (val.price) {
                         console.log("nooooo!")
                     }
@@ -116,6 +143,52 @@ const cartReducer = (state = initialState, action) => {
                 // })
                 return res
             }
+
+
+            for (let i of currentCart) {
+                console.log("test yo!")
+            }
+
+
+            const mergeCart2 = (data) => {
+                let res = {};
+                // for (let i of data) {
+                // console.log({ "mergeCart2 data2": data })
+                // console.log({ "data2 length": data.length })
+                // data.forEach(cart => {
+
+                data.forEach(combined => {
+                    for (let [key, val] of Object.entries(combined)) {
+                        console.log({ "data2 data": Object.entries(combined) })
+                        console.log({ "data2 val": val })
+                        console.log({ "data2 key": key })
+                        // if (val.price) {
+                        //     console.log("nooooo!")
+                        // }
+                        // if (res[key] && !val.price) {
+                        if (res[key]) {
+                            res[key] += val
+                        } else {
+                            res[key] = val;
+                        }
+                    }
+                });
+                return res
+            }
+
+
+            mergeCart2(currentCart)
+
+            console.log({ "mergeCart object entries": (currentCart) })
+
+            const combinedCart2 = mergeCart2(currentCart);
+
+            // console.log({ currentCart: currentCart })
+
+            console.log({ "data cart": filteredCart })
+            console.log({ "data cart2": currentCart })
+
+            console.log({ "redux combinedCart2": combinedCart2 })
 
             const combinedCart = mergeCart(filteredCart)
 

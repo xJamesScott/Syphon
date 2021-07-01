@@ -11,6 +11,29 @@ import { cartActions } from '../store/cart'
 import Cookie from 'js-cookie';
 
 export default function Home(test2, test3, test4) {
+
+
+  const arr = [
+    { a1: { productId: "a1", name: "prod1", type: "aaa", price: 20 } },
+    { a2: { productId: "a2", name: "prod1", type: "bbb", price: 20 } },
+    { a3: { productId: "a3", name: "prod1a", type: "bbb", price: 20 } },
+    { a4: { productId: "a4", name: "prod1b", type: "ccc", price: 20 } },
+  ]
+
+  const combine = arr.reduce((combined, arr) => {
+    for (const [itemId, item] of Object.entries(arr)) {
+      if (!combined[itemId]) {
+        combined[itemId] = {};
+      }
+      combined[itemId] += item
+    }
+    return combined;
+  }, {});
+
+  
+
+  console.log({ combine: (combine) })
+
   console.log({ "test3!!!": test4 })
   const cookie2 = Cookie.getJSON("test2")
 
@@ -20,6 +43,7 @@ export default function Home(test2, test3, test4) {
   })
 
   console.log({ "testMulti": Cookie.getJSON("testMulti") })
+
 
   // Cookie.set("testitem3", {
   //   cart: {

@@ -2,17 +2,30 @@ import Banner from "../../components/Banner";
 import { useState, useEffect } from 'react';
 import { cartActions } from '../../store/cart'
 import { useDispatch } from 'react-redux';
+import Cookie from 'js-cookie';
 
 // TODO - ITERATE THROUGH ITEMS FOR 'YOU MAY ALSO LIKE' SECTION, 
-    // REMOVE CURRENT PAGE ITEM FROM RESULT - USE COMPONENT
+// REMOVE CURRENT PAGE ITEM FROM RESULT - USE COMPONENT
 
 
 export default function item() {
+    // **TESTING
+    console.log({ "cart": Cookie.getJSON(["cart"]) })
+    const isArray = [
+
+    ]
+
+    let bro = []
+    if (Array.isArray(bro)) {
+        console.log("arrrraaaaay!")
+    }
+    // **TESTING
+
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
     const itemData = {
         name: "Test Items",
-        productId: "testitem6",
+        productId: "testitem4",
         price: 100,
         quantity: quantity
     };
