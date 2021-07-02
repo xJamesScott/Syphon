@@ -4,10 +4,16 @@ const schemaOptions = {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 };
 
+const PRODUCT_TYPE = ["earphones", "headphones", "speakers"]
+
 const Cart = mongoose.Schema({
-    name: String,
     productId: String,
+    name: String,
     price: Number,
+    productType: {
+        enum: PRODUCT_TYPE,
+        type: String
+    },
     quantity: Number
 },
     schemaOptions

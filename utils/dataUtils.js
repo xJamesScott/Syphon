@@ -1,3 +1,9 @@
+// EDIT CART ACTIONS
+    // EDIT QUANTITY
+    // DELETE 1 ITEM
+    // DELETE ALL ITEMS
+//
+
 const testData = [
     { productId: "a1", name: "prod1", type: "aaa", price: 20 },
     { productId: "a1", name: "prod1", type: "aaa", price: 20 },
@@ -7,7 +13,6 @@ const testData = [
 ]
 
 let groupedBy = (array, key) => { // groups array of objects by key
-    // console.log({ "groupedBy array": array })
     return array.reduce((result, obj) => {
         (result[obj[key]] = result[obj[key]] || []).push(obj);
         return result;
@@ -43,23 +48,21 @@ const splitGroups = (data, groupBy) => {
 
 console.log({ splitGroups: splitGroups(testData, "name") })
 
-const combine2 = (valObj) => { // combines group and sums values
-    let result = {};
-    valObj.map((prods, i) => {
-        const resultObj = result;
-        console.log("Yo2")
-        prods.forEach((products, j) => {
+// const combine2 = (valObj) => { // combines group and sums values
+//     let result = {};
+//     valObj.map((prods, i) => {
+//         const resultObj = result;
+//         prods.forEach((products, j) => {
 
-            const prodObj = Object.entries(products)
+//             const prodObj = Object.entries(products)
 
-            for (let [key, value] of prodObj) {
-                console.log({ products2: products.productId })
-            }
-        });
+//             for (let [key, value] of prodObj) {
+//             }
+//         });
 
-    })
-    return result;
-};
+//     })
+//     return result;
+// };
 
 // const groupAndCount = (data, groupBy) => combine(Object.values(groupedBy(data, groupBy))[0])  // only handles first index (one group)
 const groupAndCount2 = (data, groupBy) => combine2(Object.values(groupedBy(data, groupBy)))  // should handle all groups

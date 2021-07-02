@@ -14,6 +14,8 @@ const Order = mongoose.Schema({
     city: String,
     State: String,
     zip: Number,
+    email: String,
+    phone: String,
     customer: Object
 },
     schemaOptions
