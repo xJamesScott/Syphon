@@ -7,16 +7,17 @@ const initialState = {
     _id: null,
     isLoading: false,
     error: null,
-    items: () => {
-        let newObj = {}
-        const currentCart = Cookie.getJSON("cart")
-        for (const item of currentCart) {
-            if (item) {
-                Object.assign(newObj, item)
-            }
-        }
-        return newObj
-    }
+    // items: () => {
+    //     let newObj = {}
+    //     const currentCart = Cookie.getJSON("cart")
+    //     for (const item of currentCart) {
+    //         if (item) {
+    //             Object.assign(newObj, item)
+    //         }
+    //     }
+    //     return newObj
+    // }
+    items: ""
 }
 
 const cartReducer = (state = initialState, action) => {

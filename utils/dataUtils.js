@@ -1,10 +1,10 @@
 // EDIT CART ACTIONS
-    // EDIT QUANTITY
-    // DELETE 1 ITEM
-    // DELETE ALL ITEMS
+// EDIT QUANTITY
+// DELETE 1 ITEM
+// DELETE ALL ITEMS
 //
 
-const testData = [
+export const testData = [
     { productId: "a1", name: "prod1", type: "aaa", price: 20 },
     { productId: "a1", name: "prod1", type: "aaa", price: 20 },
     { productId: "a1", name: "prod1", type: "aaa", price: 20 },
@@ -12,19 +12,30 @@ const testData = [
     { productId: "a2", name: "prod2", type: "aaa", price: 20 },
 ]
 
-let groupedBy = (array, key) => { // groups array of objects by key
+export const deleteItems = (cart, removeId) => cart.filter((curr) => { // for given productId, deletes all indices from cart cookie
+    return curr.productId !== removeId
+})
+
+export const pushToCart = (cart, product) => cart.push(product) // adds cart changes to cart cookie (quantity edits)
+
+export const directCart = (cart, product, removeId) => { // for givied productId, deletes all then adds new index for product
+    deleteItems(cart, removeId);
+    pushToCart(product); // product is an object
+}
+
+const groupedBy = (array, key) => { // creates cart object of product groups from cart cookie array
     return array.reduce((result, obj) => {
         (result[obj[key]] = result[obj[key]] || []).push(obj);
+        console.log({result: result})
         return result;
     }, {});
 };
 
-
-const combine = (valObj, i) => { // combines group and sums values
-    const prod = valObj[i].productId;
+const combine = (valObj, i) => { // combines item groups and sums values into object
+    const prod = valObj[i]?.productId;
     const result = { [prod]: {} };
 
-    valObj.forEach(products => {
+    valObj.forEach(products => { // loops through object. create new object. productId is key. ojbect is value (sum of indices)
         const prodObj = Object.entries(products)
         for (let [key, value] of prodObj) {
             if (result[prod][key] && Number.isFinite(value)) {
@@ -34,42 +45,13 @@ const combine = (valObj, i) => { // combines group and sums values
             }
         }
     });
-    console.log({ result: result })
     return result;
 };
 
-const splitGroups = (data, groupBy) => {
+export const splitGroups = (cart, groupBy) => { // converts cart array in to object
     let res = {}
-    Object.values(groupedBy(data, groupBy)).forEach((result, i) => {
+    Object.values(groupedBy(cart, groupBy)).forEach((result, i) => {
         Object.assign(res, combine(result, i))
     })
     return res
 }
-
-console.log({ splitGroups: splitGroups(testData, "name") })
-
-// const combine2 = (valObj) => { // combines group and sums values
-//     let result = {};
-//     valObj.map((prods, i) => {
-//         const resultObj = result;
-//         prods.forEach((products, j) => {
-
-//             const prodObj = Object.entries(products)
-
-//             for (let [key, value] of prodObj) {
-//             }
-//         });
-
-//     })
-//     return result;
-// };
-
-// const groupAndCount = (data, groupBy) => combine(Object.values(groupedBy(data, groupBy))[0])  // only handles first index (one group)
-const groupAndCount2 = (data, groupBy) => combine2(Object.values(groupedBy(data, groupBy)))  // should handle all groups
-
-const runGroup2 = groupAndCount2(testData, "name")
-
-
-console.log({ runGroup2: runGroup2 }) // RUN THIS TO EXECUTE ALL CALLBACKS
-
-

@@ -9,9 +9,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { cartActions } from '../store/cart'
 import Cookie from 'js-cookie';
+import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
 
 export default function Home(test2, test3, test4) {
 
+  console.log({ splitGroups: splitGroups(testData, "name") })
 
   const arr = [
     { a1: { productId: "a1", name: "prod1", type: "aaa", price: 20 } },
@@ -30,7 +32,7 @@ export default function Home(test2, test3, test4) {
     return combined;
   }, {});
 
-  
+
 
   console.log({ combine: (combine) })
 
@@ -131,6 +133,15 @@ export default function Home(test2, test3, test4) {
           <code className={styles.code}>pages/index.js</code>
         </p>
         <button onClick={testAPI}>test</button>
+        {/* {deleteItems(testData, "a1").map((res, i) => {
+          return (
+            <div>
+              {JSON.stringify(res)}
+            </div>)
+        })} */}
+
+        {/* <button onClick={deleteItems(testData, "a1")}>DELETE</button> */}
+
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>
