@@ -2,9 +2,6 @@
 import axios from 'axios'
 
 export const users = async (token) => {
-  // console.log({ "path": `${process.env.AUTH_DOMAIN}/api/v2/users` })
-  // console.log({ "auth!": process.env.AUTHORIZATION })
-
   try {
     const res = await axios.get(`${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users`,
       {
@@ -14,7 +11,6 @@ export const users = async (token) => {
       }
 
     );
-    console.log({ "DATA!!!!!": res.data })
     return res.data;
   } catch (err) {
     // return wrapError(err);
@@ -36,7 +32,6 @@ export const createUser = async (payload) => {
 
       }
     );
-    console.log("success!")
     return res.data;
   } catch (err) {
     console.log({ "err!": err })
@@ -46,8 +41,6 @@ export const createUser = async (payload) => {
 
 
 export const authenticate = async (grantType, payload) => {
-  // console.log({ "path": `${process.env.AUTH_DOMAIN}/api/v2/users` })
-  // console.log({ "auth!": process.env.AUTHORIZATION })
   // try {
   //   const res = await axios.get(`${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users`,
   //     {

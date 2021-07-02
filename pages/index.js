@@ -13,8 +13,6 @@ import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
 
 export default function Home(test2, test3, test4) {
 
-  console.log({ splitGroups: splitGroups(testData, "name") })
-
   const arr = [
     { a1: { productId: "a1", name: "prod1", type: "aaa", price: 20 } },
     { a2: { productId: "a2", name: "prod1", type: "bbb", price: 20 } },
@@ -32,20 +30,12 @@ export default function Home(test2, test3, test4) {
     return combined;
   }, {});
 
-
-
-  console.log({ combine: (combine) })
-
-  console.log({ "test3!!!": test4 })
   const cookie2 = Cookie.getJSON("test2")
 
   Cookie.set("testMulti", {
     bro: "yo",
     bro: "yo"
   })
-
-  console.log({ "testMulti": Cookie.getJSON("testMulti") })
-
 
   // Cookie.set("testitem3", {
   //   cart: {
@@ -74,7 +64,6 @@ export default function Home(test2, test3, test4) {
       })
       router.post("/");
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -86,7 +75,6 @@ export default function Home(test2, test3, test4) {
   const useCounter = () => {
     const count = useSelector((state) => state.count)
     const test = useSelector((state) => state)
-    console.log({ "test state!": test })
 
     const increment = () =>
       dispatch({
@@ -104,7 +92,6 @@ export default function Home(test2, test3, test4) {
   }
 
   const addItem = async () => {
-    console.log("dispatch cart action!")
     dispatch(cartActions.setCartCurrent({ price: "too much!" }))
   }
 

@@ -10,14 +10,12 @@ import Cookie from 'js-cookie';
 
 export default function item() {
     // **TESTING
-    console.log({ "cart": Cookie.getJSON(["cart"]) })
     const isArray = [
 
     ]
 
     let bro = []
     if (Array.isArray(bro)) {
-        console.log("arrrraaaaay!")
     }
     // **TESTING
 

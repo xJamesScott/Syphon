@@ -42,7 +42,6 @@ const createAccount = ({ hideNav, domain }) => {
                     email: formData.email,
                     redirect: document.referrer || "" // replace with redux state
                 });
-            console.log({ "res!!!": res })
 
             // DISPATCH ACTION TO SET AUTH
 
@@ -56,9 +55,7 @@ const createAccount = ({ hideNav, domain }) => {
             // if (redirect) {
             //     setRedirect(redirect)
             // }
-            console.log({ "res!!!": res })
         } catch (err) {
-            console.log({ "err!!!": err })
             setAuthError(err.response.data)
         }
         // };

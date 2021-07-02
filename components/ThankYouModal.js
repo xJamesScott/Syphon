@@ -40,7 +40,6 @@ export default function ThankYouModal({
     items,
     setModal // TODO - REMOVE; FOR TESTING ONLY
 }) {
-    console.log({ setModal: setModal })
     return (
         <>
             <BG >

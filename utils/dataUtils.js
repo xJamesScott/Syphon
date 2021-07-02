@@ -26,16 +26,15 @@ export const directCart = (cart, product, removeId) => { // for givied productId
 const groupedBy = (array, key) => { // creates cart object of product groups from cart cookie array
     return array.reduce((result, obj) => {
         (result[obj[key]] = result[obj[key]] || []).push(obj);
-        console.log({result: result})
         return result;
     }, {});
 };
 
-const combine = (valObj, i) => { // combines item groups and sums values into object
+const combine = (valObj, i) => { // combines product groups and sums values into object
     const prod = valObj[i]?.productId;
     const result = { [prod]: {} };
 
-    valObj.forEach(products => { // loops through object. create new object. productId is key. ojbect is value (sum of indices)
+    valObj.forEach(products => { // loops through product objects. create new object. productId is key. ojbect is value (sum of indices)
         const prodObj = Object.entries(products)
         for (let [key, value] of prodObj) {
             if (result[prod][key] && Number.isFinite(value)) {

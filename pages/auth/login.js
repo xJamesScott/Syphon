@@ -24,7 +24,6 @@ const login = ({ test2, test3, test4 }) => {
 
 
     const test = useSelector((state) => state)
-    console.log({ "wrapper state!": test })
 
     // useEffect(() => {
     //     setReferrer(document.referrer)
@@ -51,7 +50,6 @@ const login = ({ test2, test3, test4 }) => {
                     password: formData.password,
                     redirect: referrer
                 });
-            console.log({ "res!!!": res })
 
             // DISPATCH ACTION TO SET AUTH
 
@@ -65,9 +63,7 @@ const login = ({ test2, test3, test4 }) => {
             // if (redirect) {
             //     setRedirect(redirect)
             // }
-            console.log({ "res!!!": res })
         } catch (err) {
-            console.log({ "err!!!": err })
             setAuthError(err.response.data)
         }
         // };

@@ -51,10 +51,8 @@ const chargeObj = { // TODO - REMOVE PLACEHOLDER
 const checkout = ({ }) => {
     const [showTYModal, setTYModal] = useState(false);
     const cart = useSelector(selectCart);
-    console.log({ "cart!": cart })
     // const cartItems = Object.entries(cart.items)
     const cartItems = Object.entries(cart)
-    console.log({ "cartItems!": cartItems })
 
     const { register, handleSubmit, formState: { errors }
     } = useForm({

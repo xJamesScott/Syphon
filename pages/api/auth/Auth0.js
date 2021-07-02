@@ -57,7 +57,6 @@ const authenticate = async (grantType, payload = {}) => {
   };
   try {
     const res = await axios.post(`${AUTH_DOMAIN}/oauth/token`, body);
-    console.log({ "res": res })
     return res.data.access_token;
   } catch (err) {
     return wrapError(err);
@@ -65,7 +64,6 @@ const authenticate = async (grantType, payload = {}) => {
 };
 
 const createUser = async (token, payload) => {
-  console.log(AUTH_DOMAIN)
   // try {
   //   const res = await axios.post(
   //     `${AUTH_DOMAIN}/api/v2/users`,
