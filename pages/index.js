@@ -12,6 +12,19 @@ import Cookie from 'js-cookie';
 import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
 
 export default function Home(test2, test3, test4) {
+  // useEffect(() => {
+  //   const cartCookie = Cookie.getJSON("cart");
+  //   const groupedCart =  splitGroups(cartCookie, "productId");
+
+  //   console.log({ "cart cookie!": cartCookie });
+  //   // console.log({ "testData": testData });
+  //   console.log({ "groupedCart redux": groupedCart });
+  // }, [])
+
+
+  // const cartCookie = Cookie.getJSON("cart")
+  // const groupedCart = splitGroups(cartCookie, "productId")
+  // console.log({groupedCart: groupedCart})
 
   const arr = [
     { a1: { productId: "a1", name: "prod1", type: "aaa", price: 20 } },

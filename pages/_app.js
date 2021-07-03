@@ -6,6 +6,9 @@ import GlobalStyle from '../components/GlobalStyle';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Loader } from '../components/Loader';
+import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
+import Cookie from 'js-cookie';
+import { useEffect, useRef, useState } from 'react';
 
 function WrappedApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
@@ -21,7 +24,7 @@ function WrappedApp({ Component, pageProps }) {
         !hideNav &&
         <Banner />
       }
-      <Component {...pageProps} />
+      <Component {...pageProps} cart={"cart"} />
     </Provider>
   )
 };

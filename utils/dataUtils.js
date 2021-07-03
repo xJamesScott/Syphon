@@ -23,7 +23,7 @@ export const directCart = (cart, product, removeId) => { // for givied productId
     pushToCart(product); // product is an object
 }
 
-const groupedBy = (array, key) => { // creates cart object of product groups from cart cookie array
+let groupedBy = (array, key) => { // creates cart object of product groups from cart cookie array
     return array.reduce((result, obj) => {
         (result[obj[key]] = result[obj[key]] || []).push(obj);
         return result;

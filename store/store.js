@@ -6,6 +6,9 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 // import crosstabSync from 'redux-persist-crosstab';
 import cart from './cart';
+import Cookie from 'js-cookie';
+import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
+
 
 let store
 
@@ -13,10 +16,12 @@ const initialState = {
   lastUpdate: 0,
   light: false,
   count: 0,
-  test: "yoooo!!!!"
+  test: "yoooo!!!!",
+  testCart:""
 }
 
 const nums = (state = initialState, action) => {
+  
   switch (action.type) {
     case 'TICK':
       return {
