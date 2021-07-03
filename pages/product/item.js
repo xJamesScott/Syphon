@@ -23,14 +23,17 @@ export default function item() {
     const [quantity, setQuantity] = useState(1);
     const itemData = {
         name: "Test Items",
-        productId: "testitem4",
+        productId: "testitem7",
+        type: "headphones",
         price: 100,
         quantity: quantity
     };
 
     const addItem = async () => {
-        dispatch(cartActions.setCartCurrent({ [itemData.productId]: itemData }))
+        dispatch(cartActions.setCartCurrent(itemData))
     };
+
+    console.log({ "cookie cart": Cookie.getJSON("cart") })
 
     return (
         <div>

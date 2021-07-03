@@ -49,7 +49,9 @@ const combine = (valObj, i) => { // combines product groups and sums values into
 
 export const splitGroups = (cart, groupBy) => { // converts cart array in to object
     let res = {}
-    Object.values(groupedBy(cart, groupBy)).forEach((result, i) => {
+    let cartCookie;
+    cart ? cartCookie = cart : cartCookie = []
+    Object.values(groupedBy(cartCookie, groupBy)).forEach((result, i) => {
         Object.assign(res, combine(result, i))
     })
     return res

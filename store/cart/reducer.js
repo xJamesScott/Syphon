@@ -1,25 +1,17 @@
+// TODO: 
+
 import { CART_ACTIONS } from "./actions";
 import Cookie from 'js-cookie';
 import { generateUUID } from '../../utils/utils';
 import { splitGroups, deleteItems, testData } from '../../utils/dataUtils'
-import { useEffect, useRef, useState } from 'react';
-
-// Cookie.set("cart", testData)
 
 const cartCookie = Cookie.getJSON("cart");
-const groupedCart = () => {
-    if (typeof window !== "undefined") {
-        splitGroups(cartCookie, "productId");
-    } else {
-        {}
-    }
-}
 
 const initialState = {
     _id: null,
     isLoading: false,
     error: null,
-    items: groupedCart() // TODO: value not sticking - may need need to pass in from client side or dispatch action in _app
+    items: typeof window !== "undefined" ? splitGroups(cartCookie, "productId") : {}
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -44,7 +36,7 @@ const cartReducer = (state = initialState, action) => {
         case CART_ACTIONS.SET_CART_CURRENT: {
             const { payload } = action;
             // const genId = generateUUID({ range: 10 })
-            const currentCart = Cookie.getJSON("cart")
+            const cartCookie = Cookie.getJSON("cart")
             const newCart = (data) => {
                 if (Array.isArray(data)) {
                     data.push(payload.data)
@@ -53,11 +45,13 @@ const cartReducer = (state = initialState, action) => {
                     return []
                 }
             }
-            Cookie.set('cart', newCart(currentCart))
+            Cookie.set('cart', newCart(cartCookie))
+
 
             return {
                 ...state,
-                isLoading: payload.isLoading
+                isLoading: payload.isLoading,
+                items: splitGroups(cartCookie, "productId")
             }
             // return {
             //     ...state,
