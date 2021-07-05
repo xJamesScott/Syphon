@@ -50,20 +50,6 @@ export default function Home(test2, test3, test4) {
     bro: "yo"
   })
 
-  // Cookie.set("testitem3", {
-  //   cart: {
-  //     name: "Test Items",
-  //     productId: "testitem5",
-  //     price: 100,
-  //     quantity: 2
-  //   },
-  // })
-  // Cookie.set("test2", "Yoooooo!!!!!!!")
-  // Cookie.set("yo!!!", "broooo!")
-  // Cookie.set("test2", JSON.stringify({ cart: { product: "works!!!!" } }))
-  // console.log({ "cookie!": Cookie.get("yo!!!") })
-  // console.log({ "testitem3!": Cookie.getJSON("testitem3") })
-  // console.log
   const router = useRouter();
   const createTest = async () => {
     try {
