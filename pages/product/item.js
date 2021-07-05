@@ -28,9 +28,29 @@ export default function item() {
         price: 100,
         quantity: quantity
     };
+    const itemData2 = {
+        name: "Test Items",
+        productId: "testitem8",
+        type: "headphones",
+        price: 100,
+        quantity: quantity
+    };
+    const itemData3 = {
+        name: "Test Items",
+        productId: "testitem9",
+        type: "headphones",
+        price: 100,
+        quantity: quantity
+    };
 
     const addItem = async () => {
         dispatch(cartActions.setCartCurrent(itemData))
+    };
+    const addItem2 = async () => {
+        dispatch(cartActions.setCartCurrent(itemData2))
+    };
+    const addItem3 = async () => {
+        dispatch(cartActions.setCartCurrent(itemData3))
     };
 
     console.log({ "cookie cart": Cookie.getJSON("cart") })
@@ -52,6 +72,8 @@ export default function item() {
             /> */}
             <button onClick={() => setQuantity(quantity + 1)}> + </button>
             <button onClick={addItem}>ADD TO CART</button>
+            <button onClick={addItem2}>ADD TO CART</button>
+            <button onClick={addItem3}>ADD TO CART</button>
         </div >
     )
 }

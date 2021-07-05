@@ -5,12 +5,11 @@
 
 
 export const CART_ACTIONS = {
-    // ADD_CART_ITEM: "ADD_CART_ITEM",
-    // REMOVE_CART_ITEM: "REMOVE_CART_ITEM",
     SET_CART_LOADING: "SET_CART_LOADING",
     SET_CART_FINISH_LOADING: "SET_CART_FINISH_LOADING",
     SET_CART_ERROR: "SET_CART_ERROR",
-    SET_CART_CURRENT: "SET_CART_CURRENT"
+    SET_CART_CURRENT: "SET_CART_CURRENT",
+    GET_CART_COOKIE: "GET_CART_COOKIE",
 };
 
 export const setCartLoading = ({ isLoading = true }) => ({
@@ -35,9 +34,18 @@ export const setCartCurrent = ({ isLoading = false, ...data }) => ({
     },
 });
 
+export const getCartCookie = ({ isLoading = false, ...data }) => ({
+    type: CART_ACTIONS.GET_CART_COOKIE,
+    payload: {
+        isLoading,
+        data
+    }
+})
+
 export const cartActions = {
     setCartLoading,
     setCartFinishLoading,
-    setCartCurrent
+    setCartCurrent,
+    getCartCookie
 }
 
