@@ -17,7 +17,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectCart, yo } from '../store/cart/actions';
 import { useForm, useFormState } from 'react-hook-form';
 import { directCartEdit } from '../utils/dataUtils';
-import { cartActions } from '../store/cart'
+import { cartActions } from '../store/cart';
+import Cookie from 'js-cookie';
+
 const CartWindow = styled.div`
     position: absolute;
     position: relative;
@@ -68,12 +70,36 @@ const IncrementQTY = styled.p`
 `;
 
 export default function Cart() {
-    const cart = useSelector((state) => state.cart.items);
-    const cartArray = Object.entries(cart)
+    const cartState = useSelector((state) => state.cart);
+    const {
+        isLoading,
+        items: cart
+    } = cartState
+
+    // console.log({ "isLoading": isLoading })
+    // console.log({ "Cart cart state": cart })
+    const testitem7 = Object.entries({
+        testitem7: {
+            name: "Test items",
+            productId: "testitem7",
+            type: "headphones",
+            price: 100,
+            quantity: 1
+        }
+    })
+
+
+    // const cartArrayObj = cart && Object.entries(cart)
+    const cartArrayObj = Object.entries(cart)
+    const [cartArray, setCartArray] = useState([]);
+
+    useEffect(() => {
+        setCartArray(cartArrayObj)
+    }, [isLoading, cart])
+
     const subtotal = cartArray.reduce((sum, item) => {
         return sum += item[1].price * item[1].quantity
     }, 0)
-
 
     const { register, handleSubmit, control, formState: { errors }
     } = useForm({
@@ -89,18 +115,21 @@ export default function Cart() {
 
     }
 
+
+    // console.log({ "prodVals": prodVals })
+
     const [quant, setQuant] = useState(prodVals);
 
-    console.log({ quant: quant })
-    const editQuantity = () => {
+    // console.log({ quant: quant })
+    // const editQuantity = () => {
 
-    }
+    // }
 
     const dispatch = useDispatch();
 
-    const ref = useRef({ bro: "bro" })
+    // const ref = useRef({ bro: "bro" })
 
-    console.log({ ref: ref })
+    // console.log({ ref: ref })
 
     const onSubmit = (data) => console.log(data);
 
@@ -110,17 +139,17 @@ export default function Cart() {
     });
 
     // console.log({ formData: formData })
-    console.log({ touchedFields: touchedFields }, touchedFields, dirtyFields)
+    // console.log({ touchedFields: touchedFields }, touchedFields, dirtyFields)
     // console.log({ "quant val": quant.test })
     // console.log({ "quant": quant })
 
     // console.log({ "object entries cart": cartArray })
 
-    const testItems = () => {
-        for (const [productId, item] of cartArray) { // iterates through unique items TODO: select cart from state
-            console.log("cart items")
-        }
-    }
+    // const testItems = () => {
+    //     for (const [productId, item] of cartArray) { // iterates through unique items TODO: select cart from state
+    //         console.log("cart items")
+    //     }
+    // }
 
 
     // return (
@@ -133,13 +162,16 @@ export default function Cart() {
     //     </form>
     // )
 
+    const setItemTest = Cookie.set("itemTest", 0)
 
     return (
-        <CartWindow>
-            {/* quant: {JSON.stringify(quant)} */}
-            quant: {quant?.testitem8?.qty}
-            <CartWrapper>
+        !isLoading && <CartWindow>
 
+            {/* state quantity: {cartArrayObj[0][1].quantity} */}
+            {/* quant: {JSON.stringify(quant)} */}
+            {/* quant: {quant?.testitem8?.qty} */}
+            <CartWrapper>
+                <button onClick={() => setItemTest}>SET COOKIE ITEM TEST</button>
                 <CartModalMargin
                     className="section-margin"
                 >
@@ -154,11 +186,14 @@ export default function Cart() {
                         </TitleLine>
 
                         {
+                            // !isLoading && 
                             cartArray.map((item, i) => {
-                                console.log({ "title item": item[1].productId });
+                                // console.log({ "title item": item[1].productId });
                                 // setQuant({ [item[1].productId]: { qty: item[1].quantity } })
                                 // setQuant({ [item[0]]: "yooo" });
-                                Object.assign(prodVals, { [item[1].productId]: { qty: item[1].quantity } })
+                                // Object.assign(prodVals, { [item[1].productId]: { qty: item[1].quantity } });
+                                // setQuant(prodVals);
+                                const current = item[1]
                                 return (
 
                                     < ProductWrapper >
@@ -180,22 +215,37 @@ export default function Cart() {
                                         <Quantity>
                                             <IncrementQTY
                                                 // onClick={() => setQuant({ [item[1].productId]: { qty: [item[1].quantity] + 1 } })}
+                                                // onClick={() => {
+                                                //     directCartEdit({
+                                                //         name: item[1].name,
+                                                //         productId: item[1].productId,
+                                                //         type: item[1].type,
+                                                //         price: item[1].price,
+                                                //         quantity: item[1].quantity - 1
+                                                //     }, item[1].productId
+                                                //     );
+                                                //     dispatch(cartActions.getCartCookie({}))
+                                                // }}
                                                 onClick={() => {
-                                                    directCartEdit({
-                                                        name: item[1].name,
-                                                        productId: item[1].productId,
-                                                        type: item[1].type,
-                                                        price: item[1].price,
-                                                        quantity: item[1].quantity - 1
-                                                    }, item[1].productId
-                                                    );
-                                                    dispatch(cartActions.getCartCookie({}))
+                                                    dispatch(cartActions.directCartEdit({
+                                                        product: {
+                                                            name: current.name,
+                                                            productId: current.productId,
+                                                            type: current.type,
+                                                            price: current.price,
+                                                            quantity: current.quantity
+                                                        }
+                                                    }
+                                                    ));
+                                                    dispatch(cartActions.setCartFinishLoading({}));
+
                                                 }}
                                             // onClick={(e) => console.log({ increment: e.target })}
                                             // on click send: name, prodId, qty, price
                                             >-</IncrementQTY>
-                                            <p>
-                                                {quant?.[item[1].productId].qty} X {item[1].quantity}
+                                            <p key={item[1].productId} id={item[1].productId}>
+                                                {/* {quant?.[item[1].productId]?.qty}  */}
+                                                X {item[1].quantity}
                                             </p>
                                             <input
                                                 // defaultValue={10}
@@ -252,10 +302,13 @@ export default function Cart() {
                                 // )
                             }
                         }} */}
-                        <TotalWrapper>
-                            <SummaryTotals>TOTAL</SummaryTotals>
-                            <Cost>{`$ ${subtotal}`}</Cost>
-                        </TotalWrapper>
+                        {
+                            !isLoading &&
+                            <TotalWrapper>
+                                <SummaryTotals>TOTAL</SummaryTotals>
+                                <Cost>{`$ ${subtotal}`}</Cost>
+                            </TotalWrapper>
+                        }
                         <PayButton
                             onClick={handleSubmit(onSubmit)}
                         >

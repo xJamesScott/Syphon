@@ -38,17 +38,20 @@ export const testData = [
 //     Cookie.set(cart);
 // } // adds cart changes to cart cookie (quantity edits)
 
-export const directCartEdit = (product, removeId) => { // for givied productId, deletes all then adds new index for product
+export const directCartEdit = (product, removeId) => { // for given productId, deletes all then adds new index for product
     const cart = cartCookie;
-
-    console.log("directCartEdit ran!");
-
+    console.log({ "product directCartEdit": product });
+    console.log({ "removeId directCartEdit": removeId });
     const newCart = cart.filter((curr) => {
         curr.productId !== removeId; // removes old product indices
     })
     newCart.push(product); // adds new product index
     Cookie.set("cart", newCart);
+
+    const updatedCart = Cookie.getJSON("cart")
     console.log({ "directCartEdit cart": newCart });
+    console.log({ "directCartEdit updatedcart": updatedCart });
+
     // dispatch(cartActions.getCartCookie({}))
     return
 }
@@ -84,7 +87,16 @@ const combine = (valObj, i) => { // combines product groups and sums values into
 export const splitGroups = (cart, groupBy) => { // converts cart cookie array in to object
     let res = {}
     let cartCookie;
-    cart ? cartCookie = cart : cartCookie = []
+
+    if (!cart) {
+        Cookie.set("cart", []);
+        Cookie.set("cart", cart);
+        // cartCookie = Cookie.getJSON("cart");
+    } else if (cart) {
+        cartCookie = cart
+    }
+
+    // cart ? cartCookie = cart : cartCookie = []
 
     Object.values(groupedBy(cartCookie, groupBy)).forEach((result, i) => {
         Object.assign(res, combine(result, i))

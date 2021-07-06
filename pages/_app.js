@@ -9,7 +9,7 @@ import { Loader } from '../components/Loader';
 import Cookie from 'js-cookie';
 import { useDispatch } from 'react-redux';
 
-function WrappedApp({ Component, pageProps}) {
+function WrappedApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
   // const persistor = persistStore(store, {}, function () {
   //   persistor.persist()
@@ -24,10 +24,10 @@ function WrappedApp({ Component, pageProps}) {
     <Provider store={store}>
       <GlobalStyle />
 
-      {
+      {/* {
         !hideNav &&
         <Banner />
-      }
+      } */}
       <Component {...pageProps} cart={"cart"} />
     </Provider>
   )

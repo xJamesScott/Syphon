@@ -2,7 +2,8 @@
 import { CART_ACTIONS } from "./actions";
 import Cookie from 'js-cookie';
 import { generateUUID } from '../../utils/utils';
-import { splitGroups, deleteItems, testData } from '../../utils/dataUtils'
+import { splitGroups, deleteItems, testData, directCartEdit } from '../../utils/dataUtils'
+
 
 const cartCookie = Cookie.getJSON("cart");
 
@@ -15,7 +16,8 @@ const initialState = {
     _id: null,
     isLoading: false,
     error: null,
-    items: {}
+    items: {},
+    testItem: parseInt(Cookie.get("testItem"))
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -31,6 +33,8 @@ const cartReducer = (state = initialState, action) => {
 
         case CART_ACTIONS.SET_CART_FINISH_LOADING: {
             const { payload } = action;
+
+
             return {
                 ...state,
                 isLoading: payload.isLoading
@@ -60,18 +64,35 @@ const cartReducer = (state = initialState, action) => {
                     return []
                 }
             }
-            Cookie.set('cart', newCart(cartCookie))
-
+            Cookie.set('cart', newCart(cartCookie));
+            const postEditCookie = Cookie.getJSON("cart"); // new cookie
 
             return {
                 ...state,
                 isLoading: payload.isLoading,
-                items: splitGroups(cartCookie, "productId")
+                items: splitGroups(postEditCookie, "productId")
             }
         }
 
         case CART_ACTIONS.DIRECT_CART_EDIT: {
-            return
+            const { payload: { product } } = action;
+            const { payload } = action;
+
+            directCartEdit({
+                name: product.name,
+                productId: product.productId,
+                type: product.type,
+                price: product.price,
+                quantity: product.quantity + 1
+            }, product.productId);
+
+            const cartCookie = Cookie.getJSON("cart") // new cookie
+
+            return {
+                ...state,
+                isLoading: true,
+                items: splitGroups(cartCookie, "productId")
+            }
         }
         default: return state;
     }

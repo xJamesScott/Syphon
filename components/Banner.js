@@ -4,6 +4,7 @@ import { cartActions } from '../store/cart'
 import Cart from './Cart';
 
 const CartWindow = styled.div`
+    /* position: relative; */
 `;
 const BannerWrapper = styled.div`
     background-color: black;
@@ -15,7 +16,13 @@ const CartButton = styled.button`
 
 function Banner(isAuthenticated) {
     const dispatch = useDispatch();
-    typeof window !== "undefined" && dispatch(cartActions.getCartCookie({}))
+    const getCart = () => {
+        dispatch(cartActions.getCartCookie({}))
+        dispatch(cartActions.setCartFinishLoading({}))
+
+    }
+    typeof window !== "undefined" && getCart()
+
     return (
         <CartWindow>
             <BannerWrapper>
