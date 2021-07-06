@@ -12,6 +12,8 @@ export const CheckoutProdIMG = styled(Image)`
 `;
 
 export const ProductWrapper = styled.p`
+    display: flex;
+    justify-content: space-between;
 
     h3 {
 
@@ -33,14 +35,18 @@ export const ProductWrapper = styled.p`
 
 
 export const TotalWrapper = styled.div`
+    display: flex;
 `;
 
 export const SummaryTotals = styled.h5`
-
+    cursor
 `;
 
 export const Cost = styled.h3`
 
+`;
+
+export const TextWrapper = styled.div`
 `;
 
 export const ProductTitle = styled.h4`

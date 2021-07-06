@@ -4,7 +4,7 @@ import styles from '../../styles/Home.module.css'
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import styled from 'styled-components';
 import axios from 'axios';
 import {
@@ -30,6 +30,8 @@ const signup = () => {
         mode: "onSubmit",
         reValidateMode: "onSubmit"
     });
+
+    
 
     const onSubmit = async (formData) => {
         try {

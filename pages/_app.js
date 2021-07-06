@@ -11,9 +11,9 @@ import { useDispatch } from 'react-redux';
 
 function WrappedApp({ Component, pageProps}) {
   const store = useStore(pageProps.initialReduxState);
-  const persistor = persistStore(store, {}, function () {
-    persistor.persist()
-  });
+  // const persistor = persistStore(store, {}, function () {
+  //   persistor.persist()
+  // });
 
 
   const { hideNav, isLoginRequired } = pageProps;

@@ -72,8 +72,6 @@ export default function item() {
             /> */}
             <button onClick={() => setQuantity(quantity + 1)}> + </button>
             <button onClick={addItem}>ADD TO CART</button>
-            <button onClick={addItem2}>ADD TO CART</button>
-            <button onClick={addItem3}>ADD TO CART</button>
         </div >
     )
 }

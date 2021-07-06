@@ -98,6 +98,8 @@ export default function Home(test2, test3, test4) {
     await axios.post("/api/auth?call=signup", {})
   }
 
+  
+
   const { count, increment, decrement, reset } = useCounter()
   return (
     <div className={styles.container}>

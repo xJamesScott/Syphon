@@ -44,7 +44,7 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                items: cart
+                items: splitGroups(cartCookie, "productId")
             }
         }
 
@@ -68,6 +68,10 @@ const cartReducer = (state = initialState, action) => {
                 isLoading: payload.isLoading,
                 items: splitGroups(cartCookie, "productId")
             }
+        }
+
+        case CART_ACTIONS.DIRECT_CART_EDIT: {
+            return
         }
         default: return state;
     }

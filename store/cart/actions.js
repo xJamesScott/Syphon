@@ -10,6 +10,7 @@ export const CART_ACTIONS = {
     SET_CART_ERROR: "SET_CART_ERROR",
     SET_CART_CURRENT: "SET_CART_CURRENT",
     GET_CART_COOKIE: "GET_CART_COOKIE",
+    DIRECT_CART_EDIT: "DIRECT_CART_EDIT",
 };
 
 export const setCartLoading = ({ isLoading = true }) => ({
@@ -42,10 +43,19 @@ export const getCartCookie = ({ isLoading = false, ...data }) => ({
     }
 })
 
+export const directCartEdit = ({ isLoading = true, ...data }) => ({
+    type: CART_ACTIONS.DIRECT_CART_EDIT,
+    payload: {
+        isLoading,
+        data
+    }
+})
+
 export const cartActions = {
     setCartLoading,
     setCartFinishLoading,
     setCartCurrent,
-    getCartCookie
+    getCartCookie,
+    directCartEdit
 }
 

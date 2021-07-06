@@ -4,6 +4,17 @@
 // DELETE ALL ITEMS
 //
 
+import Cookie from 'js-cookie';
+// import { cartActions } from '../store/cart'
+// import { useDispatch } from 'react-redux';
+
+// dispatch = useDispatch();
+const cartCookie = Cookie.getJSON("cart");
+
+console.log({ "testarr": Cookie.getJSON("cart") })
+
+// Cookie.getJSON("testarr").push("yo")
+
 export const testData = [
     { productId: "a1", name: "prod1", type: "aaa", price: 20 },
     { productId: "a1", name: "prod1", type: "aaa", price: 20 },
@@ -11,22 +22,42 @@ export const testData = [
     { productId: "a2", name: "prod2", type: "aaa", price: 20 },
 ]
 
-export const deleteItems = (cart, removeId) => cart.filter((curr) => { // for given productId, deletes all indices from cart cookie
-    return curr.productId !== removeId
-})
+// export const deleteItems = (cart, removeId, product) => cart.filter((curr) => { // for given productId, deletes all indices from cart cookie
+//     curr.productId !== removeId;
+//     cart.push(product);
+//     Cookie.set(cart)
 
-export const pushToCart = (cart, product) => cart.push(product) // adds cart changes to cart cookie (quantity edits)
 
-export const directCart = (cart, product, removeId) => { // for givied productId, deletes all then adds new index for product
-    deleteItems(cart, removeId);
-    pushToCart(product); // product is an object
+// })
+
+
+
+// export const pushToCart = (cart, product) => cart.push(product) // adds cart changes to cart cookie (quantity edits)
+// export const pushToCart = (cart, product) => {
+//     // cart.push(product)
+//     Cookie.set(cart);
+// } // adds cart changes to cart cookie (quantity edits)
+
+export const directCartEdit = (product, removeId) => { // for givied productId, deletes all then adds new index for product
+    const cart = cartCookie;
+
+    console.log("directCartEdit ran!");
+
+    const newCart = cart.filter((curr) => {
+        curr.productId !== removeId; // removes old product indices
+    })
+    newCart.push(product); // adds new product index
+    Cookie.set("cart", newCart);
+    console.log({ "directCartEdit cart": newCart });
+    // dispatch(cartActions.getCartCookie({}))
+    return
 }
 
 const groupedBy = (array, key) => { // creates cart object of product groups from cart cookie array
     return array.reduce((result, obj, i) => {
-       
+
         (result[obj[key]] = result[obj[key]] || []).push(obj);
-       
+
         return result;
     }, {});
 };
@@ -34,13 +65,13 @@ const groupedBy = (array, key) => { // creates cart object of product groups fro
 const combine = (valObj, i) => { // combines product groups and sums values into object
     const prod = valObj[0].productId;
     const result = { [prod]: {} };
-    
+
     valObj.forEach((products, j) => { // loops through product objects. create new object. productId is key. ojbect is value (sum of indices)
         const prodObj = Object.entries(products)
-    
+
         for (let [key, value] of prodObj) {
-    
-            if (result[prod][key] && Number.isFinite(value) && key == "quantity" ) { // accumulates total quantity
+
+            if (result[prod][key] && Number.isFinite(value) && key == "quantity") { // accumulates total quantity
                 result[prod]["quantity"] += value;
             } else {
                 result[prod][key] = value;

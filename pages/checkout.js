@@ -70,10 +70,10 @@ const checkout = ({ }) => {
         item3: { price: 100, quantity: 1 }
     }
 
-    const testObj2 = Object.entries(testObj) // TODO - REMOVE PLACEHOLDER
+    const testObj2 = Object.entries(testObj) // TODO - PLUGIN PROPER VARIABLES
 
     const subtotal = testObj2.reduce((sum, item) => {
-        return sum += item[1].price * item[1].quantity // TODO - REMOVE PLACEHOLDER
+        return sum += item[1].price * item[1].quantity // TODO - PLUGIN PROPER VARIABLES
     }, 0)
 
     // TODO - if isAuthenticated fetch user info and pass to checkout
@@ -286,7 +286,7 @@ const checkout = ({ }) => {
                             fill="magenta"
                         />
                         {() => {
-                            for (const [productId, item] of Object.entries(countries)) { // iterates through unique items
+                            for (const [productId, item] of Object.entries(countries)) { // iterates through unique items TODO: CHANGE 'countries' to cart (state)
                                 return (
                                     <ProductWrapper>
                                         <CheckoutProdIMG src="/media/placeholderIMG.png"
