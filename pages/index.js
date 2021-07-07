@@ -11,6 +11,8 @@ import { cartActions } from '../store/cart'
 import Cookie from 'js-cookie';
 import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
 
+
+
 export default function Home(test2, test3, test4) {
   // useEffect(() => {
   //   const cartCookie = Cookie.getJSON("cart");

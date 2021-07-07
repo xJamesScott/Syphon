@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { cartActions } from '../../store/cart'
 import { useDispatch } from 'react-redux';
 import Cookie from 'js-cookie';
+import { headphones } from '../../utils/testSyphonCart';
 
 // TODO - ITERATE THROUGH ITEMS FOR 'YOU MAY ALSO LIKE' SECTION, 
 // REMOVE CURRENT PAGE ITEM FROM RESULT - USE COMPONENT
@@ -10,6 +11,9 @@ import Cookie from 'js-cookie';
 
 export default function item() {
     // **TESTING
+
+    // console.log({ headphones: Object.values(headphones) })
+
     const isArray = [
 
     ]

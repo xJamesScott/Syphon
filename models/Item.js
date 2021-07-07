@@ -15,7 +15,14 @@ const Item = mongoose.Schema({
     productType: {
         enum: PRODUCT_TYPE,
         type: String
-    }
+    },
+    newProduct: Boolean,
+    features: String,
+    inTheBox: Object,
+    featureIMG: String,
+    supportIMG1: String,
+    suportIMG2: String,
+    thumbnailIMG: String
 },
     schemaOptions
 );

@@ -11,7 +11,7 @@ import Cookie from 'js-cookie';
 // dispatch = useDispatch();
 const cartCookie = Cookie.getJSON("cart");
 
-console.log({ "testarr": Cookie.getJSON("cart") })
+// console.log({ "testarr": Cookie.getJSON("cart") })
 
 // Cookie.getJSON("testarr").push("yo")
 
