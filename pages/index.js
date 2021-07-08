@@ -10,6 +10,7 @@ import axios from 'axios';
 import { cartActions } from '../store/cart'
 import Cookie from 'js-cookie';
 import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
+import { Spinner } from '@chakra-ui/react';
 
 
 
@@ -100,7 +101,7 @@ export default function Home(test2, test3, test4) {
     await axios.post("/api/auth?call=signup", {})
   }
 
-  
+
 
   const { count, increment, decrement, reset } = useCounter()
   return (
@@ -131,7 +132,7 @@ export default function Home(test2, test3, test4) {
         })} */}
 
         {/* <button onClick={deleteItems(testData, "a1")}>DELETE</button> */}
-
+        <Spinner size="m" />
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>

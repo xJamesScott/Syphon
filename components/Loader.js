@@ -7,11 +7,12 @@ export const LoaderContainer = styled.div`
 `;
 
 export const Loader = styled(Spinner)`
-    position: fixed;
+    /* position: fixed;
     right: 0;
     left: 0;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: auto; */
     /* min-height: 10em;
     width: 90%; */
+    /* width: 30%; */
 `;
