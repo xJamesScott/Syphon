@@ -39,7 +39,7 @@ export const TotalWrapper = styled.div`
 `;
 
 export const SummaryTotals = styled.h5`
-    cursor
+    cursor: pointer;
 `;
 
 export const Cost = styled.h3`

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 
 const FooterContainer = styled.div`
-
+    flex-direction: column;
 `;
 
 const FooterLogo = styled(Image)`
@@ -11,24 +11,25 @@ const FooterLogo = styled(Image)`
 `;
 
 const NavRow = styled.div`
-
+    display: flex;
 `;
 
 const NavLinks = styled.div`
-
+    display: flex;
 `;
 
 const DataRow = styled.div`
+    display: flex;
     p {
 
     }
 `;
 
 const SocialWrapper = styled.div`
-
+    display: flex;
 `;
 
-const SocailIcon = style(Image)`
+const SocailIcon = styled(Image)`
 
 `;
 
@@ -36,10 +37,12 @@ const CopyRightRow = styled.div`
 
 `;
 
-
 export default function Footer() {
+
+    const date = new Date()
+
     return (
-        <FooterContainer>
+        <FooterContainer className="section-margin">
             <NavRow>
                 <FooterLogo
                     src="/media/placeholderIMG.png" // get from server link
@@ -56,7 +59,7 @@ export default function Footer() {
 
             <DataRow>
                 <p>
-                    Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.
+                    Syphon is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.
                 </p>
                 <SocialWrapper>
                     <SocailIcon
@@ -82,7 +85,7 @@ export default function Footer() {
 
             <CopyRightRow>
                 <p>
-                    Copyright {new Date().getFullYear}. All Rights Reserved
+                    Copyright {date.getFullYear()}. All Rights Reserved
                 </p>
             </CopyRightRow>
         </FooterContainer>

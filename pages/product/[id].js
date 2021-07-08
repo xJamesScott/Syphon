@@ -24,7 +24,9 @@ import {
     BoxItem,
     IMGWrapper,
     ProductIMG,
+    IMGSmallContainer,
     ProductWrapper,
+    ProductGallery,
     ProductName,
     ProductThumbnail,
     ProductTypeWrapper,
@@ -80,7 +82,7 @@ export const getStaticProps = async (context) => {
 };
 const ProductInfo = ({ product }) => {
     // TODO: GET ACTIONS, REFACTOR WITH CODE FROM items.js page
-    
+
     const router = useRouter();
 
     if (typeof window === 'undefined') {
@@ -179,28 +181,34 @@ const ProductInfo = ({ product }) => {
 
             <ProductSection>
                 <IMGWrapper>
+                    <IMGSmallContainer>
+                        <ProductIMG
+                            className="prod-img-small"
+                            src="/media/placeholderIMG.png" // product.supportIMG1
+                            width={445}
+                            height={280}
+                        />
+                        <ProductIMG
+                            className="prod-img-small"
+                            src="/media/placeholderIMG.png" // product.supportIMG2
+                            width={445}
+                            height={280}
+                        />
+                    </IMGSmallContainer>
                     <ProductIMG
                         src="/media/placeholderIMG.png" // product.featureIMG
                         width={635}
                         height={592}
-                    />
-                    <ProductIMG
-                        src="/media/placeholderIMG.png" // product.supportIMG1
-                        width={445}
-                        height={280}
-                    />
-                    <ProductIMG
-                        src="/media/placeholderIMG.png" // product.supportIMG2
-                        width={445}
-                        height={280}
                     />
                 </IMGWrapper>
             </ProductSection>
 
             {/* SECTION - YOU MAY ALSO LIKE */}
 
-            <ProductSection>
-                <SubSectionTitle>
+            <ProductSection className="also-products">
+                <SubSectionTitle
+                    className="also-products"
+                >
                     YOU MAY ALSO LIKE
                 </SubSectionTitle>
                 <ProductGallery>
@@ -223,7 +231,7 @@ const ProductInfo = ({ product }) => {
 
                     }
 
-                    {/* HEADPHONES */}
+                    HEADPHONES
                     <ProductTypeWrapper>
                         <TypeIMG
                             src="/media/placeholderIMG.png" // get from server link
@@ -293,7 +301,7 @@ const ProductInfo = ({ product }) => {
                         AUDIO GEAR
                     </AboutTitle>
                     <Info>
-                        Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.
+                        Located at the heart of New York City, Syphon is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Syphon the best place to buy your portable audio equipment.
                     </Info>
                 </AboutText>
                 <AboutIMG
