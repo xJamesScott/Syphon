@@ -20,14 +20,21 @@ import {
     SubSectionWrapper,
     Info,
     InfoWrapper,
+    BoxItemCount,
+    BoxItem,
     IMGWrapper,
+    ProductIMG,
     ProductWrapper,
+    ProductName,
     ProductThumbnail,
+    ProductTypeWrapper,
     TypeIMGWrapper,
+    TypeIMG,
     TypeTitle,
     ShopWrapper,
     ShopText,
     ShopArrow,
+    AboutText,
     AboutTitle,
     AboutIMG
 } from '../../components/ProductPage';
@@ -72,6 +79,8 @@ export const getStaticProps = async (context) => {
     };
 };
 const ProductInfo = ({ product }) => {
+    // TODO: GET ACTIONS, REFACTOR WITH CODE FROM items.js page
+    
     const router = useRouter();
 
     if (typeof window === 'undefined') {
@@ -92,9 +101,10 @@ const ProductInfo = ({ product }) => {
         <ProductPage
             className="section-margin"
         >
+            {/* SECTION - MAIN */}
             <ProductSection>
                 <MainIMG
-                    src="/media/placeholderIMG.png" // product.featureIMG
+                    src="/media/placeholderIMG.png" // product.thumbnailIMG - (smaller version is used on other pages (diff component))
                     width={540}
                     height={560}
                 />
@@ -133,6 +143,164 @@ const ProductInfo = ({ product }) => {
                         </AddCart>
                     </CartRow>
                 </ProductInfoWrapper>
+            </ProductSection>
+
+            {/* SECTION - FEATURES */}
+            <ProductSection>
+                <SubSectionWrapper>
+                    <SubSectionTitle>
+                        FEATURES
+                    </SubSectionTitle>
+                    <Info>
+                        {/* product.features */}
+                    </Info>
+                </SubSectionWrapper>
+                <SubSectionWrapper>
+                    <SubSectionTitle>
+                        IN THE BOX
+                    </SubSectionTitle>
+                    <InfoWrapper>
+                        {
+                            // MAP OVER product.intTheBox object
+                            <>
+                                <BoxItemCount>
+                                    {/* each key or val for product.inTheBox (object) - box item count*/}x
+                                </BoxItemCount>
+                                <BoxItem>
+                                    {/* each key or val for product.inTheBox (object)  */}
+                                </BoxItem>
+                            </>
+                        }
+                    </InfoWrapper>
+                </SubSectionWrapper>
+            </ProductSection>
+
+            {/* IMAGES SECTION */}
+
+            <ProductSection>
+                <IMGWrapper>
+                    <ProductIMG
+                        src="/media/placeholderIMG.png" // product.featureIMG
+                        width={635}
+                        height={592}
+                    />
+                    <ProductIMG
+                        src="/media/placeholderIMG.png" // product.supportIMG1
+                        width={445}
+                        height={280}
+                    />
+                    <ProductIMG
+                        src="/media/placeholderIMG.png" // product.supportIMG2
+                        width={445}
+                        height={280}
+                    />
+                </IMGWrapper>
+            </ProductSection>
+
+            {/* SECTION - YOU MAY ALSO LIKE */}
+
+            <ProductSection>
+                <SubSectionTitle>
+                    YOU MAY ALSO LIKE
+                </SubSectionTitle>
+                <ProductGallery>
+
+                    {
+                        // MAP OVER ALL OF THE OTHER PRODUCTS AND RETURN FIRST 3
+                        <ProductWrapper>
+                            <ProductThumbnail
+                                src="/media/placeholderIMG.png" // product.thumbnailIMG
+                                width={350}
+                                height={318}
+                            />
+                            <ProductName>
+                                {/* product.name */}
+                            </ProductName>
+                            <AddCart>
+                                SEE PRODUCT
+                            </AddCart>
+                        </ProductWrapper>
+
+                    }
+
+                    {/* HEADPHONES */}
+                    <ProductTypeWrapper>
+                        <TypeIMG
+                            src="/media/placeholderIMG.png" // get from server link
+                            width={123}
+                            height={160}
+                        />
+                        <TypeTitle>
+                            HEADPHONES
+                        </TypeTitle>
+                        <ShopWrapper>
+                            <ShopText>
+                                SHOP
+                            </ShopText>
+                            <ShopArrow>
+                                {">"}
+                            </ShopArrow>
+                        </ShopWrapper>
+                    </ProductTypeWrapper>
+
+                    {/* SPEAKERS */}
+                    <ProductTypeWrapper>
+                        <TypeIMG
+                            src="/media/placeholderIMG.png" // get from server link
+                            width={123}
+                            height={160}
+                        />
+                        <TypeTitle>
+                            HEADPHONES
+                        </TypeTitle>
+                        <ShopWrapper>
+                            <ShopText>
+                                SHOP
+                            </ShopText>
+                            <ShopArrow>
+                                {">"}
+                            </ShopArrow>
+                        </ShopWrapper>
+                    </ProductTypeWrapper>
+
+                    {/* EARPHONES */}
+                    <ProductTypeWrapper>
+                        <TypeIMG
+                            src="/media/placeholderIMG.png" // get from server link
+                            width={123}
+                            height={160}
+                        />
+                        <TypeTitle>
+                            EARPHONES
+                        </TypeTitle>
+                        <ShopWrapper>
+                            <ShopText>
+                                SHOP
+                            </ShopText>
+                            <ShopArrow>
+                                {">"}
+                            </ShopArrow>
+                        </ShopWrapper>
+                    </ProductTypeWrapper>
+                </ProductGallery>
+            </ProductSection>
+
+            <ProductSection>
+                <AboutText>
+                    <AboutTitle>
+                        BRINGING YOU THE
+                        <div className="pop-word">BEST</div>
+                        AUDIO GEAR
+                    </AboutTitle>
+                    <Info>
+                        Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.
+                    </Info>
+                </AboutText>
+                <AboutIMG
+                    src="/media/placeholderIMG.png" // get from server link
+                    width={540}
+                    height={588}
+                />
             </ProductSection>
 
 

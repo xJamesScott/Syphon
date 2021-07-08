@@ -25,7 +25,6 @@ export const ProductTitle = styled.h2`
 
 `;
 
-
 export const ProductPrice = styled.div`
     // use style from cart
 `;
@@ -51,12 +50,12 @@ export const AddCart = styled.div` // button
     // use style from cart
 `;
 
-export const SubSectionTitle = styled.h3`
-    
-`;
-
 export const SubSectionWrapper = styled.div`
 
+`;
+
+export const SubSectionTitle = styled.h3`
+    
 `;
 
 export const Info = styled.p`
@@ -67,8 +66,20 @@ export const InfoWrapper = styled.div`
 
 `;
 
+export const BoxItemCount = styled.p`
+
+`;
+
+export const BoxItem = styled.p`
+
+`;
+
 export const IMGWrapper = styled.div`
     
+`;
+
+export const ProductIMG = styled(Image)`
+
 `;
 
 export const ProductGallery = styled.div`
@@ -83,7 +94,19 @@ export const ProductThumbnail = styled(Image)`
 
 `;
 
+export const Product = styled.h3`
+
+`;
+
+export const ProductTypeWrapper = styled.div`
+
+`;
+
 export const TypeIMGWrapper = styled.div`
+
+`;
+
+export const TypeIMG = styled(Image)`
 
 `;
 
@@ -103,8 +126,12 @@ export const ShopArrow = styled.div`
 
 `;
 
+export const AboutText = styled.div`
+
+`;
+
 export const AboutTitle = styled.h3`
-    &.pop-word { // for orange word "BEST"
+    &.pop-word { // used for orange word "BEST"
 
     }
 

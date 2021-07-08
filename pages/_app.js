@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Loader } from '../components/Loader';
 import Cookie from 'js-cookie';
 import { useDispatch } from 'react-redux';
+import Footer from '../components/Footer';
 
 function WrappedApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
@@ -26,10 +27,13 @@ function WrappedApp({ Component, pageProps }) {
 
       {/* {
         !hideNav &&
-        <Banner />
+        <Banner /> // nav bar
       } */}
+
       <Component {...pageProps} cart={"cart"} />
+      <Footer />
     </Provider>
+
   )
 };
 
