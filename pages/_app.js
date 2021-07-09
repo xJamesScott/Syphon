@@ -9,8 +9,22 @@ import { Loader } from '../components/Loader';
 import Cookie from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import Footer from '../components/Footer';
+import axios from 'axios';
+import { products } from '../public/productList';
 
 function WrappedApp({ Component, pageProps }) {
+  console.log(products)
+  const getProducts = async () => {
+    try {
+      console.log("axios request")
+      axios.post(`/api/products?call=create&pin=***REMOVED***`, products)
+    } catch (error) {
+      console.log("Error fetching products " + error)
+    }
+  }
+
+  getProducts();
+
   const store = useStore(pageProps.initialReduxState);
   // const persistor = persistStore(store, {}, function () {
   //   persistor.persist()
