@@ -104,7 +104,10 @@ export const ProductIMG = styled(Image)`
 `;
 
 export const ProductGallery = styled.div`
-
+    display: flex;
+    > * {
+        flex-basis: 35rem;
+    }
 `;
 
 export const ProductWrapper = styled.div`

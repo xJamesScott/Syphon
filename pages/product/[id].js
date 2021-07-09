@@ -231,7 +231,7 @@ const ProductInfo = ({ product }) => {
 
                     }
 
-                    HEADPHONES
+                    {/* HEADPHONES */}
                     <ProductTypeWrapper>
                         <TypeIMG
                             src="/media/placeholderIMG.png" // get from server link
@@ -259,7 +259,7 @@ const ProductInfo = ({ product }) => {
                             height={160}
                         />
                         <TypeTitle>
-                            HEADPHONES
+                            SPEAKERS
                         </TypeTitle>
                         <ShopWrapper>
                             <ShopText>
