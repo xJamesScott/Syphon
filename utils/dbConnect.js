@@ -37,11 +37,20 @@ if (!cached) {
 // CACHED CONNECTION
 
 async function dbConnect(scope) {
+
+  let mongoURI;
+
+  // if (scope == "global") {
+  mongoURI = process.env.MONGO_URI_GLOBAL;
+  // } else {
+  // mongoURI = process.env.MONGO_URI;
+  // };
+
   if (connection.isconnected) {
     return
   }
 
-  const db = await mongoose.connect(process.env.MONGO_URI_GLOBAL, {
+  const db = await mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -63,15 +72,9 @@ async function dbConnect(scope) {
       useCreateIndex: true,
     };
 
-    let mongoURI;
 
-    // if (scope == "global") {
-    mongoURI = process.env.MONGO_URI_GLOBAL;
-    // } else {
-    //   mongoURI = process.env.MONGO_URI;
-    // };
 
-    cached.promise = await mongoose.connect(process.env.MONGO_URI_GLOBAL, opts).then((mongoose) => {
+    cached.promise = await mongoose.connect(mongoURI, opts).then((mongoose) => {
       return mongoose
     });
   }

@@ -90,41 +90,41 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-    // try {
-    //     // const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productId&productId=${context.params.id}`);
+    try {
+        const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productId&productId=${context.params.id}`);
 
-    //     // if (!res.data.productId) { // on runs if fallback is set to true
-    //     //     return {
-    //     //         redirect: {
-    //     //             destination: process.env.AUTH_APP_URL,
-    //     //             permanent: false,
-    //     //         },
-    //     //     }
-    //     // };
-    //     // return {
-    //     //     props: { product: res.data }
-    //     // }
+        // if (!res.data.productId) { // on runs if fallback is set to true
+        //     return {
+        //         redirect: {
+        //             destination: process.env.AUTH_APP_URL,
+        //             permanent: false,
+        //         },
+        //     }
+        // };
+        return {
+            props: { product: res.data }
+        }
 
-    //     return {
-    //         props: {
-    //             product: {
-    //                 productId: "REGT200",
-    //                 name: "yo"
-    //             }
+        // return {
+        //     props: {
+        //         product: {
+        //             productId: "REGT200",
+        //             name: "yo"
+        //         }
+        //     }
+        // }
+    } catch (error) {
+        return error
+    };
+
+    // return {
+    //     props: {
+    //         product: {
+    //             productId: "REGT200",
+    //             name: "yo"
     //         }
     //     }
-    // } catch (error) {
-    //     return error
-    // };
-
-    return {
-        props: {
-            product: {
-                productId: "REGT200",
-                name: "yo"
-            }
-        }
-    }
+    // }
 };
 const ProductInfo = ({ product }) => {
     // TESTING
@@ -142,6 +142,8 @@ const ProductInfo = ({ product }) => {
 
     // console.log("yoooo!")
     const router = useRouter();
+
+    console.log(product)
 
     if (typeof window === 'undefined') {
         if (router.query.post?.startsWith('redir')) {
@@ -161,6 +163,8 @@ const ProductInfo = ({ product }) => {
         <ProductPage
             className="section-margin"
         >
+            description: {product.description}
+
             {/* SECTION - MAIN */}
             <ProductSection>
                 <MainIMG
@@ -305,6 +309,7 @@ const ProductInfo = ({ product }) => {
                             </ShopText>
                             <ShopArrow>
                                 {">"}
+                                {/* use icon-arrow-right.svg */}
                             </ShopArrow>
                         </ShopWrapper>
                     </ProductTypeWrapper>

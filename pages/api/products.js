@@ -1,5 +1,6 @@
 import dbConnect from '../../utils/dbConnect';
 import Item from '../../models/Item';
+import { products as prodList } from '../../utils/Products';
 
 export default async function products(req, res) {
 
@@ -12,22 +13,26 @@ export default async function products(req, res) {
     // dbConnect();
 
     switch (call) {
-        // case "test":
-        // try {
-        //         const testData = {
-        //             name: "testProduct!"
-        //         }
-        //         const item = await new Item(testData).save();
-        //         console.log(item)
-        //         return "Ran!"
-        //     } catch (err) {
-        //         console.log("Error creating products " + err);
-        //         return "res.status(500);"
-        //     }
+        case "test2":
+            try {
+                const testData2 = {
+                    name: "testProduct!",
+                    productId: "bro"
+
+                }
+                // const item = await new Item(testData2).save();
+                const createProducts = Item.insertMany(prodList);
+                console.log(prodList);
+                // return res.status(200);
+                return res.json(createProducts);
+            } catch (err) {
+                console.log("Error creating products " + err);
+                return res.status(500);
+            }
         case "all":
             try {
                 const item = await Item.find();
-                console.log({ "item!!!!!": item[0].productId })
+                // console.log({ "item!!!!!": item[0].productId })
                 return res.json(item);
             } catch (err) {
                 console.log("Error aggregating products " + err);
@@ -36,10 +41,10 @@ export default async function products(req, res) {
             }
         case "productId":
             try {
-                const item = await Item.findOne({ productId: productId });
+                const item = await Item.findOne({ productId: "REGT200" });
                 return res.json(item);
             } catch (err) {
-                console.log("Error aggregating products " + err);
+                console.log("Error aggregating products!: " + err);
                 return res.status(500);
             }
 
@@ -74,7 +79,7 @@ export default async function products(req, res) {
                 console.log("NOT AUTHORIZED! " + pin)
             };
         default:
-            return;
+            return res.status(200);
     }
 
 }

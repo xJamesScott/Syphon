@@ -18,7 +18,7 @@ const Item = mongoose.Schema({
     },
     newProduct: Boolean,
     features: String,
-    inTheBox: Object,
+    inTheBox: Array,
     featureIMG: String,
     supportIMG1: String,
     suportIMG2: String,
