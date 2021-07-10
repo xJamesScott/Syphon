@@ -43,46 +43,104 @@ import {
 
 
 export const getStaticPaths = async () => {
-    try {
-        const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=all`);
-        const paths = res.data.map((product) => {
-            return {
-                params: {
-                    id: product.productId
-                }
-            }
-        });
+    // TESING
+
+    // const res = [{
+    //     name: "yooo",
+    //     productId: "REGT200"
+    // }]
+
+    // return {
+    //     params: {
+    //         paths: [{ id: "REGT200" }],
+    //         fallback: false
+    //     }
+    // }
+
+
+    // TESING
+
+    // try {
+    //    
+
+    const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=all`);
+    const paths = res.data.map((product) => {
+        console.log({ "product!!!!": product })
         return {
-            paths,
-            fallback: false
+            params: {
+                id: product.productId
+            }
         }
-    } catch (error) {
-        return error
+
+        // return {
+        //     params: {
+        //         id: "REGT200"
+        //     }
+        // }
+    });
+    return {
+        paths,
+        fallback: false
     }
+    // } catch (error) {
+    //     return error
+    // }
+
+
 }
 
 export const getStaticProps = async (context) => {
-    try {
-        const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productId&productId=${context.params.id}`);
+    // try {
+    //     // const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productId&productId=${context.params.id}`);
 
-        if (!res.data.productId) { // on runs if fallback is set to true
-            return {
-                redirect: {
-                    destination: process.env.AUTH_APP_URL,
-                    permanent: false,
-                },
+    //     // if (!res.data.productId) { // on runs if fallback is set to true
+    //     //     return {
+    //     //         redirect: {
+    //     //             destination: process.env.AUTH_APP_URL,
+    //     //             permanent: false,
+    //     //         },
+    //     //     }
+    //     // };
+    //     // return {
+    //     //     props: { product: res.data }
+    //     // }
+
+    //     return {
+    //         props: {
+    //             product: {
+    //                 productId: "REGT200",
+    //                 name: "yo"
+    //             }
+    //         }
+    //     }
+    // } catch (error) {
+    //     return error
+    // };
+
+    return {
+        props: {
+            product: {
+                productId: "REGT200",
+                name: "yo"
             }
-        };
-        return {
-            props: { product: res.data }
         }
-    } catch (error) {
-        return error
-    };
+    }
 };
 const ProductInfo = ({ product }) => {
+    // TESTING
+
+    // return (
+    //     <div>
+    //         yo
+    //     </div>
+    // )
+
+
+    // TESTING
+
     // TODO: GET ACTIONS, REFACTOR WITH CODE FROM items.js page
 
+    // console.log("yoooo!")
     const router = useRouter();
 
     if (typeof window === 'undefined') {

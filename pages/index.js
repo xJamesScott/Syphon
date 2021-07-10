@@ -15,6 +15,19 @@ import { Spinner } from '@chakra-ui/react';
 
 
 export default function Home(test2, test3, test4) {
+  const postTest = async () => {
+    console.log("post test!")
+    try {
+      axios.post("/api/products?call=test");
+    } catch (error) {
+      console.log(error)
+    }
+
+
+  };
+
+  // postTest();
+
   // useEffect(() => {
   //   const cartCookie = Cookie.getJSON("cart");
   //   const groupedCart =  splitGroups(cartCookie, "productId");

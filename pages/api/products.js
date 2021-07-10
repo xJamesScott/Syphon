@@ -8,16 +8,31 @@ export default async function products(req, res) {
         query: { call, productId, create, pin }
     } = req
 
-    await dbConnect();
+    dbConnect("global");
+    // dbConnect();
 
     switch (call) {
+        // case "test":
+        // try {
+        //         const testData = {
+        //             name: "testProduct!"
+        //         }
+        //         const item = await new Item(testData).save();
+        //         console.log(item)
+        //         return "Ran!"
+        //     } catch (err) {
+        //         console.log("Error creating products " + err);
+        //         return "res.status(500);"
+        //     }
         case "all":
             try {
                 const item = await Item.find();
+                console.log({ "item!!!!!": item[0].productId })
                 return res.json(item);
             } catch (err) {
                 console.log("Error aggregating products " + err);
-                return res.status(500);
+                return "error@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                // return res.status(500);
             }
         case "productId":
             try {
@@ -42,7 +57,7 @@ export default async function products(req, res) {
 
                             if (!productExist) { // potentional error based on what's returned from productExist
                                 try {
-                                    const item = await Item.save(product);
+                                    const item = await new Item(product).save();
                                     return res.json(item);
                                 } catch (error) {
                                     console.log("Error aggregating products " + err);
