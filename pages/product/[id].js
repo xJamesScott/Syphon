@@ -65,7 +65,6 @@ export const getStaticPaths = async () => {
 
     const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=all`);
     const paths = res.data.map((product) => {
-        console.log({ "product!!!!": product })
         return {
             params: {
                 id: product.productId
@@ -140,10 +139,7 @@ const ProductInfo = ({ product }) => {
 
     // TODO: GET ACTIONS, REFACTOR WITH CODE FROM items.js page
 
-    // console.log("yoooo!")
     const router = useRouter();
-
-    console.log(product)
 
     if (typeof window === 'undefined') {
         if (router.query.post?.startsWith('redir')) {

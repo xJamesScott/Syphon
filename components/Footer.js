@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 
-const FooterContainer = styled.div`
+const FooterContainer = styled.footer`
     flex-direction: column;
 `;
 

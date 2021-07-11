@@ -18,7 +18,6 @@ import router, { useRouter } from 'next/router';
 export default (req, res) => {
     const { body: redirect } = req
     res.status(200);
-    console.log({ "req!": req })
     res.send({
         handler: { redirect: redirect },
         data: { name: 'John Doe' }

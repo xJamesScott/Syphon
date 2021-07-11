@@ -15,14 +15,8 @@ export default async function products(req, res) {
     switch (call) {
         case "test2":
             try {
-                const testData2 = {
-                    name: "testProduct!",
-                    productId: "bro"
-
-                }
                 // const item = await new Item(testData2).save();
                 const createProducts = Item.insertMany(prodList);
-                console.log(prodList);
                 // return res.status(200);
                 return res.json(createProducts);
             } catch (err) {
@@ -36,8 +30,8 @@ export default async function products(req, res) {
                 return res.json(item);
             } catch (err) {
                 console.log("Error aggregating products " + err);
-                return "error@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                // return res.status(500);
+                // return "error@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                return res.status(500);
             }
         case "productId":
             try {
@@ -50,7 +44,6 @@ export default async function products(req, res) {
 
         case "create":
             if (pin == "***REMOVED***") {
-                // console.log({ "api products": body })
                 body.map((product) => {
                     async () => {
                         try {
@@ -66,12 +59,12 @@ export default async function products(req, res) {
                                     return res.json(item);
                                 } catch (error) {
                                     console.log("Error aggregating products " + err);
-                                    // return res.status(500);
+                                    return res.status(500);
                                 }
                             };
                         } catch (err) {
                             console.log("Error finding products " + err);
-                            // return res.status(500);
+                            return res.status(500);
                         }
                     }
                 });

@@ -40,8 +40,8 @@ export const testData = [
 
 export const directCartEdit = (product, removeId) => { // for given productId, deletes all then adds new index for product
     const cart = cartCookie;
-    console.log({ "product directCartEdit": product });
-    console.log({ "removeId directCartEdit": removeId });
+    // console.log({ "product directCartEdit": product });
+    // console.log({ "removeId directCartEdit": removeId });
     const newCart = cart.filter((curr) => {
         curr.productId !== removeId; // removes old product indices
     })
@@ -49,8 +49,8 @@ export const directCartEdit = (product, removeId) => { // for given productId, d
     Cookie.set("cart", newCart);
 
     const updatedCart = Cookie.getJSON("cart")
-    console.log({ "directCartEdit cart": newCart });
-    console.log({ "directCartEdit updatedcart": updatedCart });
+    // console.log({ "directCartEdit cart": newCart });
+    // console.log({ "directCartEdit updatedcart": updatedCart });
 
     // dispatch(cartActions.getCartCookie({}))
     return
