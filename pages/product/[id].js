@@ -1,6 +1,6 @@
 // import { headphones } from '../utils/testSyphonCart';
 import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { Loader } from '../../components/Loader';
 import {
@@ -27,8 +27,10 @@ import {
     IMGSmallContainer,
     ProductWrapper,
     ProductGallery,
+    ProductsContainer,
     ProductName,
     ProductThumbnail,
+    ProductTypesContainer,
     ProductTypeWrapper,
     TypeIMGWrapper,
     TypeIMG,
@@ -67,7 +69,8 @@ export const getStaticPaths = async () => {
     const paths = res.data.map((product) => {
         return {
             params: {
-                id: product.productId
+                id: product.productId,
+                all: product
             }
         }
 
@@ -90,7 +93,18 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
     try {
+
+        // let prodData
+
+        // const features = await fetch(`/products/${context.params.id}/features.html`);
+        // const json2 = await features.json();
         const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productId&productId=${context.params.id}`);
+
+        // fetch('test.json')
+        //     .then(res => res.json())
+        //     .then(data => prodData = data);
+
+        // console.log({ features: json })
 
         // if (!res.data.productId) { // on runs if fallback is set to true
         //     return {
@@ -101,17 +115,12 @@ export const getStaticProps = async (context) => {
         //     }
         // };
         return {
-            props: { product: res.data }
-        }
+            props: {
+                product: res.data,
+                // all: context.params.all
 
-        // return {
-        //     props: {
-        //         product: {
-        //             productId: "REGT200",
-        //             name: "yo"
-        //         }
-        //     }
-        // }
+            }
+        }
     } catch (error) {
         return error
     };
@@ -126,10 +135,10 @@ export const getStaticProps = async (context) => {
     // }
 };
 
-const prodObj = {
-    "test": <div>yooooo</div>
-};
-const ProductInfo = ({ product, data }) => {
+// const prodObj = {
+//     "test": <div>yooooo</div>
+// };
+const ProductInfo = ({ product }) => {
     // TESTING
 
     // return (
@@ -138,12 +147,44 @@ const ProductInfo = ({ product, data }) => {
     //     </div>
     // )
 
+    // const [testData, setTestData] = useState(0);
 
+    // var prodTestData;
+
+
+
+    // const getHTML = useCallback(async () => {
+    //     try {
+    //         const res = await fetch('/test2.js');
+    //         const json = await res.json();
+    //         // console.log("json! " + json)
+    //         // setTestData(json);
+    //         return json;
+    //     } catch (error) {
+    //         console.log("ERROR! " + error)
+    //     }
+
+    // });
+
+    // getHTML()
+
+    // console.log({ testData: testData })
+
+
+
+    // fetch('/test2.js')
+    //     .then(res => res.text())
+    //     .then(data => prodTestData = data)
+    //     .then(data => setTestData(data))
+    //     .then(() => console.log("! " + prodTestData))
+    //     .catch(err => console.log(err));
+
+    // console.log({ prodTestData: prodTestData });
     // TESTING
 
     // TODO: GET ACTIONS, REFACTOR WITH CODE FROM items.js page
 
-
+    // console.log({ all: all })
 
     const router = useRouter();
 
@@ -155,6 +196,7 @@ const ProductInfo = ({ product, data }) => {
 
     if (typeof window !== 'undefined' && !window.initialHref) {
         window.initialHref = window.location.href
+
     };
 
     if (router.isFallback) return <Loader speed=".65s" thickness=".2rem" /> // only runs if fallback is set to true
@@ -162,14 +204,42 @@ const ProductInfo = ({ product, data }) => {
     // TODO: CONVERT NUMBERS TO COMMA FORMAT - (1234567.89).toLocaleString('en') 
 
     const [productCount, setProductCount] = useState(1);
+    const [alsoProducts, setAlsoProducts] = useState([]);
+
+    // let testText = "<div>yoooo</div>"
+
+    // console.log(product.test)
+
+
+
+
+    // return (
+    //     <div dangerouslySetInnerHTML={{ __html: product.features }}></div>
+    // )
+
+    const getProducts = async () => {
+        try {
+            const res = await axios.get(`/api/products?call=all&not=${product.productId}`);
+            setAlsoProducts(res.data);
+
+        } catch (error) {
+            return error
+        }
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, [])
+
+
+    console.log({ alsoProducts: alsoProducts })
+
 
 
     return (
         <ProductPage
             className="section-margin"
         >
-            description: {product.description}
-
             {/* SECTION - MAIN */}
             <ProductSection className="main-product">
                 <MainIMG
@@ -219,34 +289,45 @@ const ProductInfo = ({ product, data }) => {
             </ProductSection>
 
             {/* SECTION - FEATURES */}
-            <ProductSection>
-                <SubSectionWrapper>
+            <ProductSection
+                className="features"
+            >
+                <SubSectionWrapper className="features">
                     <SubSectionTitle>
                         FEATURES
                     </SubSectionTitle>
-                    <Info>
-                        {/* {product.features} */}
 
+                    <Info>
                         {/* UPDATE PRODUCT NAME */}
+                        <div
+                            dangerouslySetInnerHTML={{ __html: product.features }}
+                        // TODO: PROOFREAD
+                        >
+                        </div>
                     </Info>
                 </SubSectionWrapper>
                 <SubSectionWrapper>
                     <SubSectionTitle>
                         IN THE BOX
                     </SubSectionTitle>
-                    <InfoWrapper>
-                        {
-                            // MAP OVER product.intTheBox object
-                            <>
-                                <BoxItemCount>
-                                    {/* each key or val for product.inTheBox (object) - box item count*/}x
-                                </BoxItemCount>
-                                <BoxItem>
-                                    {/* each key or val for product.inTheBox (object)  */}
-                                </BoxItem>
-                            </>
-                        }
-                    </InfoWrapper>
+                    {
+                        // MAP OVER product.intTheBox object
+                        product.inTheBox.map(items => {
+                            return (
+                                <>
+                                    <InfoWrapper>
+                                        <BoxItemCount>
+                                            {Object.keys(items)}
+                                        </BoxItemCount>
+                                        <BoxItem>
+                                            {Object.values(items)}
+                                        </BoxItem>
+                                    </InfoWrapper>
+                                </>
+                            )
+                        })
+
+                    }
                 </SubSectionWrapper>
             </ProductSection>
 
@@ -285,85 +366,91 @@ const ProductInfo = ({ product, data }) => {
                     YOU MAY ALSO LIKE
                 </SubSectionTitle>
                 <ProductGallery>
+                    <ProductsContainer>
 
-                    {
-                        // MAP OVER ALL OF THE OTHER PRODUCTS AND RETURN FIRST 3
-                        <ProductWrapper>
-                            <ProductThumbnail
-                                src="/media/placeholderIMG.png" // product.thumbnailIMG
-                                width={350}
-                                height={318}
+                        {
+                            // MAP OVER ALL OF THE OTHER PRODUCTS AND RETURN FIRST 3
+                            alsoProducts.filter((item, i) => i < 3).map((item) => {
+                                return (
+                                    <ProductWrapper>
+                                        <ProductThumbnail
+                                            src="/media/placeholderIMG.png" // product.thumbnailIMG
+                                            width={350}
+                                            height={318}
+                                        />
+                                        <ProductName>
+                                            {item.name}
+                                        </ProductName>
+                                        <AddCart>
+                                            SEE PRODUCT
+                                        </AddCart>
+                                    </ProductWrapper>
+                                )
+                            })
+                        }
+                    </ProductsContainer>
+
+
+                    <ProductTypesContainer>
+                        {/* HEADPHONES */}
+                        <ProductTypeWrapper>
+                            <TypeIMG
+                                src="/media/placeholderIMG.png" // get from server link
+                                width={123}
+                                height={160}
                             />
-                            <ProductName>
-                                {/* product.name */}
-                            </ProductName>
-                            <AddCart>
-                                SEE PRODUCT
-                            </AddCart>
-                        </ProductWrapper>
-
-                    }
-
-                    {/* HEADPHONES */}
-                    <ProductTypeWrapper>
-                        <TypeIMG
-                            src="/media/placeholderIMG.png" // get from server link
-                            width={123}
-                            height={160}
-                        />
-                        <TypeTitle>
-                            HEADPHONES
-                        </TypeTitle>
-                        <ShopWrapper>
-                            <ShopText>
-                                SHOP
-                            </ShopText>
-                            <ShopArrow>
-                                {">"}
-                                {/* use icon-arrow-right.svg */}
-                            </ShopArrow>
-                        </ShopWrapper>
-                    </ProductTypeWrapper>
-
-                    {/* SPEAKERS */}
-                    <ProductTypeWrapper>
-                        <TypeIMG
-                            src="/media/placeholderIMG.png" // get from server link
-                            width={123}
-                            height={160}
-                        />
-                        <TypeTitle>
-                            SPEAKERS
-                        </TypeTitle>
-                        <ShopWrapper>
-                            <ShopText>
-                                SHOP
-                            </ShopText>
-                            <ShopArrow>
-                                {">"}
-                            </ShopArrow>
-                        </ShopWrapper>
-                    </ProductTypeWrapper>
-
-                    {/* EARPHONES */}
-                    <ProductTypeWrapper>
-                        <TypeIMG
-                            src="/media/placeholderIMG.png" // get from server link
-                            width={123}
-                            height={160}
-                        />
-                        <TypeTitle>
-                            EARPHONES
-                        </TypeTitle>
-                        <ShopWrapper>
-                            <ShopText>
-                                SHOP
-                            </ShopText>
-                            <ShopArrow>
-                                {">"}
-                            </ShopArrow>
-                        </ShopWrapper>
-                    </ProductTypeWrapper>
+                            <TypeTitle>
+                                HEADPHONES
+                            </TypeTitle>
+                            <ShopWrapper>
+                                <ShopText>
+                                    SHOP
+                                </ShopText>
+                                <ShopArrow>
+                                    {">"}
+                                    {/* use icon-arrow-right.svg */}
+                                </ShopArrow>
+                            </ShopWrapper>
+                        </ProductTypeWrapper>
+                        {/* SPEAKERS */}
+                        <ProductTypeWrapper>
+                            <TypeIMG
+                                src="/media/placeholderIMG.png" // get from server link
+                                width={123}
+                                height={160}
+                            />
+                            <TypeTitle>
+                                SPEAKERS
+                            </TypeTitle>
+                            <ShopWrapper>
+                                <ShopText>
+                                    SHOP
+                                </ShopText>
+                                <ShopArrow>
+                                    {">"}
+                                </ShopArrow>
+                            </ShopWrapper>
+                        </ProductTypeWrapper>
+                        {/* EARPHONES */}
+                        <ProductTypeWrapper>
+                            <TypeIMG
+                                src="/media/placeholderIMG.png" // get from server link
+                                width={123}
+                                height={160}
+                            />
+                            <TypeTitle>
+                                EARPHONES
+                            </TypeTitle>
+                            <ShopWrapper>
+                                <ShopText>
+                                    SHOP
+                                </ShopText>
+                                <ShopArrow>
+                                    {">"}
+                                </ShopArrow>
+                            </ShopWrapper>
+                        </ProductTypeWrapper>
+                    </ProductTypesContainer>
                 </ProductGallery>
             </ProductSection>
 

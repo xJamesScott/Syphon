@@ -16,6 +16,11 @@ export const ProductSection = styled.div`
         gap: 10%;
     }
 
+    &.features {
+        gap: 12%;
+        /* flex-wrap: wrap; */
+    }
+
     &.also-products {
         flex-direction: column;
     }
@@ -68,7 +73,9 @@ export const AddCart = styled.button` // button
 `;
 
 export const SubSectionWrapper = styled.div`
-
+    &.features {
+        flex: 1 auto;
+    }
 `;
 
 export const SubSectionTitle = styled.h3`
@@ -82,7 +89,8 @@ export const Info = styled.p`
 `;
 
 export const InfoWrapper = styled.div`
-
+    display: flex;
+    gap: 3%;
 `;
 
 export const BoxItemCount = styled.p`
@@ -112,9 +120,17 @@ export const ProductIMG = styled(Image)`
 
 export const ProductGallery = styled.div`
     display: flex;
+    flex-direction: column;
     > * {
         flex-basis: 35rem;
     }
+`;
+
+export const ProductsContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 `;
 
 export const ProductWrapper = styled.div`
@@ -128,6 +144,14 @@ export const ProductThumbnail = styled(Image)`
 export const ProductName = styled.h3`
 
 `;
+
+export const ProductTypesContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+`;
+
 
 export const ProductTypeWrapper = styled.div`
 
