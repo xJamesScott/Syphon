@@ -125,7 +125,11 @@ export const getStaticProps = async (context) => {
     //     }
     // }
 };
-const ProductInfo = ({ product }) => {
+
+const prodObj = {
+    "test": <div>yooooo</div>
+};
+const ProductInfo = ({ product, data }) => {
     // TESTING
 
     // return (
@@ -138,6 +142,8 @@ const ProductInfo = ({ product }) => {
     // TESTING
 
     // TODO: GET ACTIONS, REFACTOR WITH CODE FROM items.js page
+
+
 
     const router = useRouter();
 
@@ -155,6 +161,9 @@ const ProductInfo = ({ product }) => {
 
     // TODO: CONVERT NUMBERS TO COMMA FORMAT - (1234567.89).toLocaleString('en') 
 
+    const [productCount, setProductCount] = useState(1);
+
+
     return (
         <ProductPage
             className="section-margin"
@@ -162,38 +171,42 @@ const ProductInfo = ({ product }) => {
             description: {product.description}
 
             {/* SECTION - MAIN */}
-            <ProductSection>
+            <ProductSection className="main-product">
                 <MainIMG
                     src="/media/placeholderIMG.png" // product.thumbnailIMG - (smaller version is used on other pages (diff component))
                     width={540}
                     height={560}
                 />
-                <ProductInfoWrapper>
+                <ProductInfoWrapper >
                     {
-                        //  ONLY RENDER IF newProduct TRUE
+                        product.newProduct &&
                         <NewTag>
                             NEW PRODUCT
                         </NewTag>
                     }
 
                     <ProductTitle>
-                        {/* product.name */}
+                        {product.name}
                     </ProductTitle>
                     <Info>
-                        {/* product.description */}
+                        {product.description}
                     </Info>
                     <ProductPrice>
-                        $ {/* product.price.toLocaleString('en')  */}
+                        $ {product.price.toLocaleString('en')}
                     </ProductPrice>
                     <CartRow>
                         <QuantityWrapper>
-                            <Increment>
+                            <Increment
+                                onClick={productCount > 1 ? () => setProductCount(productCount - 1) : null}
+                            >
                                 -
                             </Increment>
                             <Quantity>
-                                {/* value is controlled by state via increment buttons */}
+                                {productCount}
                             </Quantity>
-                            <Increment>
+                            <Increment
+                                onClick={() => setProductCount(productCount + 1)}
+                            >
                                 +
                             </Increment>
                         </QuantityWrapper>
@@ -212,7 +225,9 @@ const ProductInfo = ({ product }) => {
                         FEATURES
                     </SubSectionTitle>
                     <Info>
-                        {/* product.features */}
+                        {/* {product.features} */}
+
+                        {/* UPDATE PRODUCT NAME */}
                     </Info>
                 </SubSectionWrapper>
                 <SubSectionWrapper>
@@ -371,7 +386,7 @@ const ProductInfo = ({ product }) => {
             </ProductSection>
 
 
-        </ProductPage>
+        </ProductPage >
     );
 };
 

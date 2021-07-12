@@ -22,7 +22,8 @@ const Item = mongoose.Schema({
     featureIMG: String,
     supportIMG1: String,
     suportIMG2: String,
-    thumbnailIMG: String
+    thumbnailIMG: String,
+    type: Map
 },
     schemaOptions
 );

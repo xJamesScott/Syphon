@@ -8,6 +8,13 @@ export const ProductPage = styled.div`
 
 export const ProductSection = styled.div`
     display: flex;
+    > * {
+        flex-basis: 100%;
+    }
+
+    &.main-product {
+        gap: 10%;
+    }
 
     &.also-products {
         flex-direction: column;
@@ -16,7 +23,7 @@ export const ProductSection = styled.div`
 `;
 
 export const MainIMG = styled(Image)`
-    
+   /* width: 800px; */
 `;
 
 export const ProductInfoWrapper = styled.div`
