@@ -322,7 +322,7 @@ const checkout = ({ }) => {
 
                         <TotalWrapper>
                             <SummaryTotals>TOTAL</SummaryTotals>
-                            <Cost>{`$ ${subtotal}`}</Cost>
+                            <Cost>{`$ ${parseFloat(subtotal).toFixed(2)}`}</Cost>
                         </TotalWrapper>
 
                         <PayButton

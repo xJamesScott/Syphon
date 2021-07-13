@@ -5,11 +5,16 @@ import { cartActions } from '../store/cart'
 import Cart from './Cart';
 
 const CartWindow = styled.div`
-    /* position: relative; */
+
 `;
 const BannerWrapper = styled.div`
     background-color: black;
     color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
 `;
 
 const CartButton = styled.button`

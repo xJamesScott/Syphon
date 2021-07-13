@@ -38,8 +38,7 @@ export const CartWrapper = styled.div`
     height: 100vh;
     width: 100vw;
     background-color: rgba(128, 128, 128, 0.49);  
-    position: absolute;
-
+    position: fixed;
 `;
 
 const CartModalMargin = styled.div`
@@ -170,12 +169,7 @@ export default function Cart({ visible }) {
         !isLoading && <CartWindow
             className={visible ? "visible" : ""}
         >
-
-            {/* state quantity: {cartArrayObj[0][1].quantity} */}
-            {/* quant: {JSON.stringify(quant)} */}
-            {/* quant: {quant?.testitem8?.qty} */}
             <CartWrapper>
-                <button onClick={() => setItemTest}>SET COOKIE ITEM TEST</button>
                 <CartModalMargin
                     className="section-margin"
                 >
@@ -200,7 +194,6 @@ export default function Cart({ visible }) {
                                         <CheckoutProdIMG src="/media/placeholderIMG.png"
                                             width={25}
                                             height={25}
-                                            // style={{ border: "1px solid black" }}
                                             fill="magenta"
                                         />
                                         <TextWrapper>
