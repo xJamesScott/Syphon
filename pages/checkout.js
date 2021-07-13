@@ -50,7 +50,18 @@ const chargeObj = { // TODO - REMOVE PLACEHOLDER
 
 const checkout = ({ }) => {
     const [showTYModal, setTYModal] = useState(false);
+
+
     const cart = useSelector(selectCart);
+
+
+    // const cart = () => {
+    //     if (typeof window != undefined) {
+    //         return useSelector(selectCart);
+    //     } else {
+    //         return
+    //     }
+    // }
     // const cartItems = Object.entries(cart.items)
     const cartItems = Object.entries(cart)
 

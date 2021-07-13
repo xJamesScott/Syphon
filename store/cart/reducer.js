@@ -54,7 +54,8 @@ const cartReducer = (state = initialState, action) => {
 
         case CART_ACTIONS.SET_CART_CURRENT: {
             const { payload } = action;
-            // const genId = generateUUID({ range: 10 })
+
+
             const cartCookie = Cookie.getJSON("cart")
             const newCart = (data) => {
                 if (Array.isArray(data)) {
@@ -65,8 +66,8 @@ const cartReducer = (state = initialState, action) => {
                 }
             }
             Cookie.set('cart', newCart(cartCookie));
-            const postEditCookie = Cookie.getJSON("cart"); // new cookie
 
+            const postEditCookie = Cookie.getJSON("cart"); // new cookie
             return {
                 ...state,
                 isLoading: payload.isLoading,
@@ -76,15 +77,27 @@ const cartReducer = (state = initialState, action) => {
 
         case CART_ACTIONS.DIRECT_CART_EDIT: {
             const { payload: { product } } = action;
-            const { payload } = action;
+            const { payload, inc: { inc } } = action;
 
-            directCartEdit({
-                name: product.name,
-                productId: product.productId,
-                type: product.type,
-                price: product.price,
-                quantity: product.quantity + 1
-            }, product.productId);
+            if (inc == "sub") {
+                directCartEdit({
+                    name: product.name,
+                    productId: product.productId,
+                    type: product.type,
+                    price: product.price,
+                    quantity: product.quantity - 1
+                }, product.productId);
+            }
+
+            if (inc == "add") {
+                directCartEdit({
+                    name: product.name,
+                    productId: product.productId,
+                    type: product.type,
+                    price: product.price,
+                    quantity: product.quantity + 1
+                }, product.productId);
+            }
 
             const cartCookie = Cookie.getJSON("cart") // new cookie
 

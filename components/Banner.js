@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../store/cart'
 import Cart from './Cart';
@@ -23,16 +24,25 @@ function Banner(isAuthenticated) {
     }
     typeof window !== "undefined" && getCart()
 
+    const [cartVisible, setCartVisible] = useState(true); // TODO: UNSET FROM TRUE, ONLY FOR TESTING
     return (
         <CartWindow>
             <BannerWrapper>
                 <div className="section-margin">
-                    <a href="/cart"><CartButton >Cart</CartButton></a>
+                    {/* <a href="/cart"> */}
+                    <CartButton
+                        onClick={() => setCartVisible(() => !cartVisible)}
+                    >
+                        Cart
+                    </CartButton>
+                    {/* </a> */}
                 </div>
             </BannerWrapper>
-
-            <Cart></Cart>
-        </CartWindow>
+            <Cart
+                // className="visible"
+                visible={cartVisible}
+            />
+        </CartWindow >
     )
 }
 

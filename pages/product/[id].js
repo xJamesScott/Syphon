@@ -1,7 +1,9 @@
-// import { headphones } from '../utils/testSyphonCart';
 import axios from 'axios';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { cartActions } from '../../store/cart'
+import { useDispatch } from 'react-redux';
+import Cookie from 'js-cookie';
 import { Loader } from '../../components/Loader';
 import {
     ProductPage,
@@ -43,28 +45,7 @@ import {
     AboutIMG
 } from '../../components/ProductPage';
 
-
 export const getStaticPaths = async () => {
-    // TESING
-
-    // const res = [{
-    //     name: "yooo",
-    //     productId: "REGT200"
-    // }]
-
-    // return {
-    //     params: {
-    //         paths: [{ id: "REGT200" }],
-    //         fallback: false
-    //     }
-    // }
-
-
-    // TESING
-
-    // try {
-    //    
-
     const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=all`);
     const paths = res.data.map((product) => {
         return {
@@ -73,121 +54,33 @@ export const getStaticPaths = async () => {
                 all: product
             }
         }
-
-        // return {
-        //     params: {
-        //         id: "REGT200"
-        //     }
-        // }
     });
     return {
         paths,
         fallback: false
     }
-    // } catch (error) {
-    //     return error
-    // }
-
-
 }
 
 export const getStaticProps = async (context) => {
     try {
-
-        // let prodData
-
-        // const features = await fetch(`/products/${context.params.id}/features.html`);
-        // const json2 = await features.json();
         const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productId&productId=${context.params.id}`);
 
-        // fetch('test.json')
-        //     .then(res => res.json())
-        //     .then(data => prodData = data);
-
-        // console.log({ features: json })
-
-        // if (!res.data.productId) { // on runs if fallback is set to true
-        //     return {
-        //         redirect: {
-        //             destination: process.env.AUTH_APP_URL,
-        //             permanent: false,
-        //         },
-        //     }
-        // };
         return {
             props: {
                 product: res.data,
-                // all: context.params.all
-
             }
         }
     } catch (error) {
         return error
     };
-
-    // return {
-    //     props: {
-    //         product: {
-    //             productId: "REGT200",
-    //             name: "yo"
-    //         }
-    //     }
-    // }
 };
 
-// const prodObj = {
-//     "test": <div>yooooo</div>
-// };
+
 const ProductInfo = ({ product }) => {
-    // TESTING
-
-    // return (
-    //     <div>
-    //         yo
-    //     </div>
-    // )
-
-    // const [testData, setTestData] = useState(0);
-
-    // var prodTestData;
-
-
-
-    // const getHTML = useCallback(async () => {
-    //     try {
-    //         const res = await fetch('/test2.js');
-    //         const json = await res.json();
-    //         // console.log("json! " + json)
-    //         // setTestData(json);
-    //         return json;
-    //     } catch (error) {
-    //         console.log("ERROR! " + error)
-    //     }
-
-    // });
-
-    // getHTML()
-
-    // console.log({ testData: testData })
-
-
-
-    // fetch('/test2.js')
-    //     .then(res => res.text())
-    //     .then(data => prodTestData = data)
-    //     .then(data => setTestData(data))
-    //     .then(() => console.log("! " + prodTestData))
-    //     .catch(err => console.log(err));
-
-    // console.log({ prodTestData: prodTestData });
-    // TESTING
 
     // TODO: GET ACTIONS, REFACTOR WITH CODE FROM items.js page
 
-    // console.log({ all: all })
-
     const router = useRouter();
-
     if (typeof window === 'undefined') {
         if (router.query.post?.startsWith('redir')) {
             throw new Error('render should not occur for redirect');
@@ -201,21 +94,8 @@ const ProductInfo = ({ product }) => {
 
     if (router.isFallback) return <Loader speed=".65s" thickness=".2rem" /> // only runs if fallback is set to true
 
-    // TODO: CONVERT NUMBERS TO COMMA FORMAT - (1234567.89).toLocaleString('en') 
-
     const [productCount, setProductCount] = useState(1);
     const [alsoProducts, setAlsoProducts] = useState([]);
-
-    // let testText = "<div>yoooo</div>"
-
-    // console.log(product.test)
-
-
-
-
-    // return (
-    //     <div dangerouslySetInnerHTML={{ __html: product.features }}></div>
-    // )
 
     const getProducts = async () => {
         try {
@@ -231,16 +111,27 @@ const ProductInfo = ({ product }) => {
         getProducts();
     }, [])
 
+    const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(1);
+    const currentProduct = {
+        name: product.name,
+        productId: product.productId,
+        type: product.productType,
+        price: product.price,
+        quantity: productCount
+    }
 
-    console.log({ alsoProducts: alsoProducts })
+    const addItem = async () => {
+        dispatch(cartActions.setCartCurrent(currentProduct))
+    };
 
-
-
+    console.log({ cartCookie: Cookie.getJSON("cart") })
     return (
         <ProductPage
             className="section-margin"
         >
             {/* SECTION - MAIN */}
+
             <ProductSection className="main-product">
                 <MainIMG
                     src="/media/placeholderIMG.png" // product.thumbnailIMG - (smaller version is used on other pages (diff component))
@@ -280,7 +171,9 @@ const ProductInfo = ({ product }) => {
                                 +
                             </Increment>
                         </QuantityWrapper>
-                        <AddCart>
+                        <AddCart
+                            onClick={addItem}
+                        >
                             {/* sends cart action via redux with quantity from useState */}
                             ADD TO CART
                         </AddCart>
@@ -289,6 +182,7 @@ const ProductInfo = ({ product }) => {
             </ProductSection>
 
             {/* SECTION - FEATURES */}
+
             <ProductSection
                 className="features"
             >
@@ -298,7 +192,6 @@ const ProductInfo = ({ product }) => {
                     </SubSectionTitle>
 
                     <Info>
-                        {/* UPDATE PRODUCT NAME */}
                         <div
                             dangerouslySetInnerHTML={{ __html: product.features }}
                         // TODO: PROOFREAD
@@ -311,7 +204,6 @@ const ProductInfo = ({ product }) => {
                         IN THE BOX
                     </SubSectionTitle>
                     {
-                        // MAP OVER product.intTheBox object
                         product.inTheBox.map(items => {
                             return (
                                 <>
@@ -367,9 +259,7 @@ const ProductInfo = ({ product }) => {
                 </SubSectionTitle>
                 <ProductGallery>
                     <ProductsContainer>
-
                         {
-                            // MAP OVER ALL OF THE OTHER PRODUCTS AND RETURN FIRST 3
                             alsoProducts.filter((item, i) => i < 3).map((item) => {
                                 return (
                                     <ProductWrapper>
@@ -389,7 +279,6 @@ const ProductInfo = ({ product }) => {
                             })
                         }
                     </ProductsContainer>
-
 
                     <ProductTypesContainer>
                         {/* HEADPHONES */}
@@ -428,6 +317,7 @@ const ProductInfo = ({ product }) => {
                                 </ShopText>
                                 <ShopArrow>
                                     {">"}
+                                    {/* TODO: use source from server */}
                                 </ShopArrow>
                             </ShopWrapper>
                         </ProductTypeWrapper>

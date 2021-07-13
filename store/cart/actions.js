@@ -43,12 +43,12 @@ export const getCartCookie = ({ isLoading = false, ...data }) => ({
     }
 })
 
-export const directCartEdit = ({ isLoading = true, product }) => ({
+export const directCartEdit = ({ isLoading = true, product, inc }) => ({
     type: CART_ACTIONS.DIRECT_CART_EDIT,
     payload: {
         isLoading,
-        product
-    }
+        product,
+    }, inc: { inc }
 })
 
 export const cartActions = {

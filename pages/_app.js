@@ -14,10 +14,10 @@ function WrappedApp({ Component, pageProps }) {
     <Provider store={store}>
       <GlobalStyle />
       {/* TODO: ADD HEADER use header tag ( favicon, meta, etc.) */}
-      {/* {
+      {
         !hideNav &&
         <Banner /> // nav bar
-      } */}
+      }
 
       <Component {...pageProps} cart={"cart"} />
       <Footer />
