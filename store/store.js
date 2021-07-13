@@ -13,15 +13,11 @@ import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
 let store
 
 const initialState = {
-  lastUpdate: 0,
-  light: false,
-  count: 0,
-  test: "yoooo!!!!",
-  testCart:""
+
 }
 
 const nums = (state = initialState, action) => {
-  
+
   switch (action.type) {
     case 'TICK':
       return {

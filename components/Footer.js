@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 const FooterContainer = styled.footer`
     flex-direction: column;
-    position: fixed;
-    bottom: 0;
+    /* position: absolute; */
+    /* bottom: 0; */
 `;
 
 const FooterLogo = styled(Image)`

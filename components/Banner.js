@@ -5,7 +5,7 @@ import { cartActions } from '../store/cart'
 import Cart from './Cart';
 
 const CartWindow = styled.div`
-
+    z-index: 10; 
 `;
 const BannerWrapper = styled.div`
     background-color: black;
@@ -14,7 +14,7 @@ const BannerWrapper = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 10;
 `;
 
 const CartButton = styled.button`
@@ -23,13 +23,14 @@ const CartButton = styled.button`
 function Banner(isAuthenticated) {
     const dispatch = useDispatch();
     const getCart = () => {
-        dispatch(cartActions.getCartCookie({}))
-        dispatch(cartActions.setCartFinishLoading({}))
+        dispatch(cartActions.getCartCookie({}));
+        dispatch(cartActions.setCartFinishLoading({}));
 
-    }
-    typeof window !== "undefined" && getCart()
+    };
+    typeof window !== "undefined" && getCart();
 
-    const [cartVisible, setCartVisible] = useState(true); // TODO: UNSET FROM TRUE, ONLY FOR TESTING
+    const [cartVisible, setCartVisible] = useState(false); // TODO: UNSET FROM TRUE, ONLY FOR TESTING
+
     return (
         <CartWindow>
             <BannerWrapper>
@@ -46,9 +47,10 @@ function Banner(isAuthenticated) {
             <Cart
                 // className="visible"
                 visible={cartVisible}
+                onClick={(e) => e.preventDefault}
             />
         </CartWindow >
     )
-}
+};
 
-export default Banner
+export default Banner;

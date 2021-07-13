@@ -3,7 +3,7 @@ export const products = [
 
         "name": "RocketEar GT",
         "productId": "REGT200",
-        "description": "The new {product.name} headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.",
+        "description": "The new RocketEar GT headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.",
         "price": 899.99,
         "productType": "headphones",
         "featureIMG": "/products/REGT200/desktop/feature-image.jpg",

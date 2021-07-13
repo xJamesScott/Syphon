@@ -84,7 +84,7 @@ export const SubSectionTitle = styled.h3`
     }
 `;
 
-export const Info = styled.p`
+export const Info = styled.div`
 
 `;
 

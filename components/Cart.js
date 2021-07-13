@@ -26,11 +26,14 @@ const CartWindow = styled.div`
     top: 0;
     left: 0;
     opacity: 0;
-    transition: all .25s ease;
+    transition: opacity .25s ease;
+    z-index: 1;
+    pointer-events: none;
     
     &.visible {
         opacity: 100;
-        transition: all .25s ease;
+        transition: opacity .25s ease;
+        pointer-events: unset;
     }
 `;
 
@@ -39,6 +42,11 @@ export const CartWrapper = styled.div`
     width: 100vw;
     background-color: rgba(128, 128, 128, 0.49);  
     position: fixed;
+    /* width: 0;
+
+    .visible {
+        width: 100%;
+    } */
 `;
 
 const CartModalMargin = styled.div`
@@ -67,6 +75,7 @@ const Quantity = styled.div`
     justify-self: end;
     gap: 25%;
 `;
+
 
 const IncrementQTY = styled.p`
     :hover {
@@ -182,14 +191,15 @@ export default function Cart({ visible }) {
                     <CartModal>
                         <TitleLine>
                         </TitleLine>
-
                         {
                             // !isLoading && 
                             cartArray.map((item, i) => {
                                 const current = item[1]
                                 return (
 
-                                    < ProductWrapper >
+                                    < ProductWrapper
+                                        key={"cartItem" + i}
+                                    >
 
                                         <CheckoutProdIMG src="/media/placeholderIMG.png"
                                             width={25}

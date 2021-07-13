@@ -15,13 +15,7 @@ export default async function products(req, res) {
     switch (call) {
         case "test2":
             try {
-
-
-                // return res.json(<div>yooooetst!!!</div>)
-
-                // const item = await new Item(testData2).save();
-                const createProducts = Item.insertMany(prodList);
-                // return res.status(200);
+                const createProducts = Item.insertMany(productList);
                 return res.json(createProducts);
             } catch (err) {
                 console.log("Error creating products " + err);
@@ -29,21 +23,15 @@ export default async function products(req, res) {
             }
         case "all":
             try {
-
                 if (not) {
                     const item = await Item.find({ productId: { $ne: not } });
-                    // console.log({ "item!!!!!": item[0].productId })
                     return res.json(item);
                 } else {
                     const item = await Item.find();
-                    // console.log({ "item!!!!!": item[0].productId })
                     return res.json(item);
                 }
-
-
             } catch (err) {
                 console.log("Error aggregating products " + err);
-                // return "error@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
                 return res.status(500);
             }
         case "productId":
