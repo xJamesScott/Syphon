@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Image from 'next/image';
+import Loader from '../components/Loader'
 import {
     ProductWrapper,
     Cost,
@@ -15,6 +16,21 @@ export const ModalContainer = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    .total-summary {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > * {
+            padding: 2rem;
+        }
+    }
+
+    .items-box {
+        * {
+            margin: 0;
+        }
+    }
 `;
 
 export const CheckIcon = styled.div`
@@ -38,8 +54,13 @@ export const BG = styled.div`
 
 export default function ThankYouModal({
     items,
-    setModal // TODO - REMOVE; FOR TESTING ONLY
+    setModal, // TODO - REMOVE; FOR TESTING ONLY
+    cart,
+    total
 }) {
+
+    const itemCount = cart.length
+    // cart && console.log({ "modal cart": cart[0].name })
     return (
         <>
             <BG >
@@ -55,40 +76,63 @@ export default function ThankYouModal({
                     <p>You will receive an email confirmation shortly.</p>
                     <div className="total-summary">
                         <div className="items-box">
-                            <ProductWrapper>
-                                <h3>
-                                    {/* first item name */}
-                                </h3>
-                                <h4>
-                                    {/* first item price */}
-                                </h4>
-                                <p>
-                                    {/* first item quanitity */}
-                                </p>
-                                {
-                                    // if more than one item in state display below
+                            {
+                                cart ? cart.map((item, i) => {
+                                    if (i = 1) {
+                                        return (
+                                            <ProductWrapper
+                                                className="confirmation"
+                                            >
+                                                <div
+                                                    className="name-quantity"
+                                                >
+                                                    <h3>
+                                                        {item.name}
+                                                    </h3>
+                                                    <p>
+                                                        x {item.quantity}
+                                                    </p>
+                                                </div>
+                                                <h4>
+                                                    ${item.price.toLocaleString('en')}
+                                                </h4>
+
+
+                                            </ProductWrapper>
+                                        )
+                                    }
+
+                                })
+                                    : <Loader />
+                            }
+                            {
+                                // itemCount - 1 > 1 ? // TODO: ENABLE AFTER TESTING
+                                itemCount - 1 > -1 ? // TODO: DISABLE AFTER TESTING
                                     <>
                                         <hr />
-                                        <p> and {/* number of items from cart*/} other item(s)</p>
+                                        <p> and {itemCount - 1} other item{itemCount - 1 > 1 ? "s" : null}</p>
                                     </>
-                                }
-                            </ProductWrapper>
+                                    : null
+                            }
+
                         </div>
+
                         <div className="total-box">
                             <SummaryTotals>TOTAL</SummaryTotals>
                             <Cost>
-                                {/* total cost */}
+                                {`$ ${parseFloat(total.toFixed(2)).toLocaleString('en')}`}
                             </Cost>
                         </div>
                         {/* TODO - ENABLE A TAG TO REDIRECT 'BACK TO HOME' */}
                         {/* <a href="/"> */}
-                        <PayButton
-                            onClick={() => setModal(false)} // TODO REMOVE; FOR TESTING ONLY
-                        >
-                            BACK TO HOME
-                        </PayButton>
+
                         {/* </a> */}
                     </div>
+                    <PayButton
+                        onClick={() => setModal(false)} // TODO REMOVE; FOR TESTING ONLY
+                    >
+                        BACK TO HOME
+                    </PayButton>
                 </ModalContainer>
             </BG>
         </>

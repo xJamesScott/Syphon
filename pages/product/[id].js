@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { cartActions } from '../../store/cart'
 import { useDispatch } from 'react-redux';
+import DOMPurify from 'dompurify';
 import Cookie from 'js-cookie';
 import { Loader } from '../../components/Loader';
 import {
@@ -125,7 +126,8 @@ const ProductInfo = ({ product }) => {
         dispatch(cartActions.setCartCurrent(currentProduct))
     };
 
-    console.log({ cartCookie: Cookie.getJSON("cart") })
+    const features = DOMPurify.sanitize(product.features);
+
     return (
         <ProductPage
             className="section-margin"
@@ -193,7 +195,7 @@ const ProductInfo = ({ product }) => {
 
                     <Info>
                         <div
-                            dangerouslySetInnerHTML={{ __html: product.features }}
+                            dangerouslySetInnerHTML={{ __html: features }}
                         // TODO: PROOFREAD
                         >
                         </div>

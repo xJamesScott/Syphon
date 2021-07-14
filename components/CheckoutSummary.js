@@ -34,6 +34,10 @@ export const ProductWrapper = styled.div`
     width: 100%;
     gap: 5%;
 
+    &.confirmation {
+        flex-direction: column;
+    }
+
     h3 {
 
     }
@@ -58,6 +62,13 @@ export const ProductWrapper = styled.div`
       flex-direction: column;
     }
 
+    .name-quantity {
+        display: flex;
+        justify-content: space-between;
+     * {
+            margin: 0;
+        }
+    }
 `;
 
 

@@ -39,6 +39,7 @@ import ThankYouModal from '../components/ThankYouModal';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectCart } from '../store/cart';
+import axios from 'axios';
 
 const someVal = "null" // TODO - REPLACE AND REMOVE PLACEHOLDER
 
@@ -50,24 +51,25 @@ const chargeObj = { // TODO - REMOVE PLACEHOLDER
 }
 
 const checkout = ({ }) => {
-    const [showTYModal, setTYModal] = useState(false);
+    const [showTYModal, setTYModal] = useState(true); // TODO: SET TO FALSE AFTER TESTING
     const [cartItems, setCartItems] = useState([]);
 
     const cart = useSelector(selectCart);
 
     useEffect(() => {
         setCartItems(Object.values(cart.items));
-    }, [])
+    }, [cart.items])
 
 
-    const { register, handleSubmit, formState: { errors }
+    const { register, handleSubmit, formState: { errors }, getValues
     } = useForm({
         mode: "onSubmit",
         reValidateMode: "onSubmit"
     });
 
     const onSubmit = async () => {
-
+        const values = getValues();
+        console.log(values)
     };
 
     // const testObj = { // TODO - REMOVE PLACEHOLDER
@@ -93,6 +95,10 @@ const checkout = ({ }) => {
     // cartItems.map((item, i) => {
     //     console.log({ "cartItems Map": item })
     // });
+
+    const sendEmail = () => {
+        axios.post('https://api.sendgrid.com/v3/mail/send');
+    }
 
     return (
         // <div className="section-margin">
@@ -145,7 +151,8 @@ const checkout = ({ }) => {
                         <CheckoutInput
                             name="email"
                             id="email"
-                            defaultValue={someVal ? "yooo" : null}
+                            // defaultValue={someVal ? "yooo" : null} // TODO: ENABLE WHEN NOT TESTING
+                            defaultValue={"email@gmail.com"}
                             placeholder={"email@email.com"}
                             {...register('email',
                                 {
@@ -180,7 +187,7 @@ const checkout = ({ }) => {
                             name="address"
                             id="address"
                             defaultValue={someVal ? "yooo" : null}
-                            placeholder={"+1 555-555-5555"}
+                            placeholder={"Enter Street Address"}
                             {...register('address',
                                 {
                                     required: { value: true, message: "Required Field" },
@@ -235,13 +242,13 @@ const checkout = ({ }) => {
                         <FormSelect
                             name="Country"
                             id="Country"
-                            defaultValue={someVal ? "yooo" : null}
                             placeholder={"Select Country"}
                             {...register('Country',
                                 {
                                     required: { value: true, message: "Required Field" },
                                 })}
                         >
+                            <option disabled defaultValue>Select Country</option>
                             {countries.map((location, i) => { return <option key={i}>{location}</option> })}
                         </FormSelect>
                     </InputWrapper>
@@ -347,36 +354,26 @@ const checkout = ({ }) => {
                         )
                     })}
 
-
-
                     <TotalWrapper>
                         <SummaryTotals>TOTAL</SummaryTotals>
-                        <Cost>{`$ ${parseFloat(subtotal).toFixed(2)}`}</Cost>
+                        <Cost>{`$ ${parseFloat(subtotal.toFixed(2)).toLocaleString('en')}`}</Cost>
                     </TotalWrapper>
 
                     <PayButton
-                        onClick={handleSubmit()}
+                        onClick={handleSubmit(onSubmit)}
                     >CONTINUE & PAY</PayButton>
 
                 </CheckoutSummary>
-                {/* </div> */}
-
-
-                {/* <Button
-                onClick={() => setTYModal(true)}
-
-                >SHOW MODAL</Button> */}
-
                 {
                     showTYModal &&
                     <>
                         <ThankYouModal
                             // items={items}
                             setModal={(e) => setTYModal(e)} // TODO - REMOVE; FOR TESTING ONLY
+                            cart={cartItems}
+                            total={subtotal}
                         />
-
                     </>
-
                 }
             </CheckoutForm >
             {/* </div > */}
