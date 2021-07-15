@@ -29,7 +29,7 @@ export default async function sendEmail(req, res) {
             data: email,
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer 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`
+                Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`
             },
         });
         // return res.json(sendGridRequest);
