@@ -1,37 +1,42 @@
 import axios from 'axios';
+import { email as emailBody } from '/public/email/orderConfirmation';
 
 export default async function sendEmail(req, res) {
-    
-    const emailBody = () => {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
-    
-    const email = {"personalizations": [
-        {
-            "to": [{"email": "jscizzle22@gmail.com"}]}],
-            "from": {"email": "support@jamscott.com"},
-            "subject": "Sending with SendGrid is Fun",
-            "content": [{"type": "text/html", 
-            "value": "<h2>yoooo</h2>and easy to do anywhere, even with cURL"
-            }
+
+    // console.log({"yoooooo!": emailBody})
+
+    // return res.json(emailBody);
+
+
+    const email = {
+        "personalizations": [
+            {
+                "to": [{ "email": "jscizzle22@gmail.com" }]
+            }],
+        "from": { "email": "support@jamscott.com" },
+        "subject": "Order Confirmed!",
+        "content": [{
+            "type": "text/html",
+            "value": emailBody
+        }
         ]
     }
 
     try {
-        const res = axios.post('https://api.sendgrid.com/v3/mail/send', {
-            headers: { 
-                "Content-Type": "applicant/json",
-                Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`
+        const sendGridRequest = await axios({
+            method: 'post',
+            url: 'https://api.sendgrid.com/v3/mail/send',
+            data: email,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer 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`
             },
-            data: "test"
         });
-
-        return res.status(200);
+        // return res.json(sendGridRequest);
+        return res.json("Confirmation Email Sent.");
     } catch (error) {
+        // console.log("Send Grid Error! " + error);
         console.log(error);
+        return res.status(500);
     }
 }

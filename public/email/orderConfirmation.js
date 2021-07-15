@@ -1,14 +1,16 @@
+export const email =`
 <!DOCTYPE html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-<body style="font-family: 'Roboto', sans-serif;">
+<body style="font-family: 'Roboto', sans-serif; background: magenta;">
     <table 
     style="
     width: 100%;
-    font-family: 'Roboto', sans-serif;"
+    font-family: 'Roboto', sans-serif; 
+    background: green;" 
     align="center">
         <table style=" width: 100%; ">
             <tr align="center">
@@ -57,3 +59,5 @@
 
 
 </html>
+`
+
