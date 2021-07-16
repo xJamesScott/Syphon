@@ -3,105 +3,77 @@ import { email as emailBody } from '/public/email/orderConfirmation';
 
 export default async function sendEmail(req, res) {
 
-    const { query: { } } = req
+    // const { body: {numItems, address, total } } = req // TODO: REPLACE PLACEHOLDERS
 
-    // console.log({"yoooooo!": emailBody})
-
-    // return res.json(emailBody);
-
+    // TODO: JOIN ADDRESS VALUES OF CHILDREN (street, city, etc.)
+    // TODO: ITERATE THROUGH ITEM TOTALS AND CREATE COMBINED TOTAL
 
 
-    // const htmlFile = () => {
 
-    //     let htmlData = "bro"
+    try {
 
-    //     fetch("http://localhost:3000/email/orderConfirmation.html")
-    //         .then(data => htmlData = data.text())
-    //         .catch(error => console.log(error));
+        const endpoint = "http://localhost:3000/email/orderConfirmation.html";
 
-    //         return htmlData
-    // }
-
-    const endpoint = "http://localhost:3000/email/orderConfirmation.html"
-
-    async function postData(url = '', data = {}) {
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        return response.text();
-
-        // return emailWithData; // TODO: pass email with data to "value" in "personalizations" array
-    }
-
-    // postData(endpoint)
-    const emailBody = postData(endpoint)
-        .then(data => {
-            const numItems = "888888"
-            const address = "777777777777"
-            const total = "1111111111111"
-            const emailTagMap = {
-                "{{numItems}}": numItems,
-                "{{address}}": address,
-                "{{total}}": total
-            };
-            const mapKeysToString = Object.keys(emailTagMap).join("|");
-            const mapRegEx = new RegExp(mapKeysToString, "gi"); // creates regex of keys to be replaced
-            const emailWithData = data.replace(mapRegEx, (match) => { // replaces tags in email with customer's data 
-                return emailTagMap[match];
-            });
-            
-            return res.json(emailWithData);  // TODO: pass email with data to "value" in "personalizations" array
-            // TODO: return only emailData. use res.status(200) in sendGrid API request.
-        })
-
-        .catch(err => console.log("Email Error!: " + err));
-
-    return
-
-
-    const email = {
-        "personalizations": [
-            {
-                "to": [{ "email": "jscizzle22@gmail.com" }]
-            }],
-        "from": { "email": "support@jamscott.com" },
-        "subject": "Order Confirmed!",
-        "content": [{
-            "type": "text/html",
-            "value": emailBody // email with data goes here
-        }
-        ]
-    };
-
-    // res.json(htmlFile());
-
-    // console.log({"ressss!!!!!": res.json(emailBody)})
-    // res.json(emailBody);
-
-        try {
-            const sendGridRequest = await axios({
-                method: 'post',
-                url: 'https://api.sendgrid.com/v3/mail/send',
-                data: email,
+        async function postData(url = '') {
+            const response = await fetch(url, {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
                 headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`
-                },
+                    'Content-Type': 'application/json'
+                }
             });
-            // return res.json(sendGridRequest);
-            return res.json("Confirmation Email Sent.");
-        } catch (error) {
-            // console.log("Send Grid Error! " + error);
-            console.log(error);
-            return res.status(500);
+            return response.text();
         }
+
+        const emailBody = postData(endpoint) // TODO: pass email with data to "value" in "personalizations" array
+            .then(data => {
+                const numItems = "888888" // PLACEHOLDER USE BODY VALS
+                const address = "777777777777" // PLACEHOLDER USE BODY VALS
+                const total = "1111111111111" // PLACEHOLDER USE BODY VALS
+                const emailTagMap = {
+                    "{{numItems}}": numItems,
+                    "{{address}}": address,
+                    "{{total}}": total
+                };
+                const mapKeysToString = Object.keys(emailTagMap).join("|");
+                const mapRegEx = new RegExp(mapKeysToString, "gi"); // creates regex of keys to be replaced
+                console.log({ "emailBody data": data })
+                const emailWithData = data.replace(mapRegEx, (match) => { // replaces tags in email with customer's data 
+                    return emailTagMap[match];
+                });
+                return emailWithData;
+            })
+            .then(async emailWithData =>{
+                const email = {
+                    "personalizations": [
+                        {
+                            "to": [{ "email": "jscizzle22@gmail.com" }]
+                        }],
+                    "from": { "email": "support@jamscott.com" },
+                    "subject": "Order Confirmed!",
+                    "content": [{
+                        "type": "text/html",
+                        "value": emailWithData
+                    }
+                    ]
+                };
+                await axios({
+                    method: 'post',
+                    url: 'https://api.sendgrid.com/v3/mail/send',
+                    data: email,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`
+                    },
+                });
+                return res.json("content");
+            })
+            .catch(err => console.log("Email Error!: " + err));
+    } catch (error) {
+        console.log("SEND GRID ERROR!: " + error);
+        return res.status(500);
+    }
 
 };

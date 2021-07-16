@@ -7,12 +7,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&display=swap"
     rel="stylesheet">
-    {{numItems}}
-    {{address}}
-    {{total}}
 
-<body style="font-family: 'Manrope', sans-serif; background: #f9f9f9; line-height: 30px;">
-    <table style="width: 100%; font-family: 'Roboto', sans-serif; padding-top: 100px;" align="center">
+<body style="font-family: 'Manrope', sans-serif; background: #F2F2F2; line-height: 30px;">
+    <table style="width: 100%; font-family: 'Manrope', sans-serif; padding-top: 100px;" align="center">
         <table align="center" style=" min-width: 400px; max-width: 600px; background: #ffffff">
             <tr>
                 <td height="0" style="padding: 0 40px; padding-top: 40px;">
@@ -21,7 +18,7 @@
             </tr>
             <table align="center" style=" min-width: 400px; max-width: 600px; background: #ffffff; padding:0 20px; ">
                 <tr>
-                    <td style="border-bottom: 1px solid; color: #dddddd; padding-left: 40px; padding-bottom: 15px;">
+                    <td style="border-bottom: 1px solid; color: #dddddd; padding-bottom: 15px;">
                     </td>
                 </tr>
             </table>
@@ -33,17 +30,14 @@
                     <tr height="0">
                         <td height="0">We are processing your order :)</td>
                     </tr>
-
-                    <table align="center"
-                        style=" min-width: 400px; max-width: 600px; background: #ffffff; padding:0 20px; ">
-                        <tr>
-                            <td
-                                style="border-bottom: 1px solid; color: #dddddd; padding-left: 40px; padding-bottom: 15px;">
-                            </td>
-                        </tr>
-                    </table>
-
                 </td>
+            </table>
+
+            <table align="center" style=" min-width: 400px; max-width: 600px; background: #ffffff; padding:0 20px; ">
+                <tr>
+                    <td style="border-bottom: 1px solid; color: #dddddd; padding-bottom: 15px;">
+                    </td>
+                </tr>
             </table>
 
             <table align="center" style=" min-width: 400px; max-width: 600px; background: #ffffff;  padding: 0 40px;">
@@ -54,11 +48,11 @@
                 </tr>
                 <tr align="left">
                     <td text-align="left">
-                        Items: {# of items}
+                        Items: {{numItems}}
                         <br />
-                        Shipping to: {123 ABC ST City, ST 55555}
+                        Shipping to: {{address}}
                         <br />
-                        Total: {total}
+                        Total: {{total}}
                     </td>
                 </tr>
             </table>
@@ -66,7 +60,7 @@
             <table align="center"
                 style=" min-width: 400px; max-width: 600px; background: #ffffff; padding:0 20px; padding-top: 75px; ">
                 <tr>
-                    <td style="border-bottom: 1px solid; color: #dddddd; padding-left: 40px; padding-bottom: 15px;">
+                    <td style="border-bottom: 1px solid; color: #dddddd; padding-bottom: 15px;">
                     </td>
                 </tr>
 

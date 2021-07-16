@@ -58,7 +58,7 @@ const checkout = ({ }) => {
 
     useEffect(() => {
         setCartItems(Object.values(cart.items));
-    }, [cart.items])
+    }, [cart.items]);
 
 
     const { register, handleSubmit, formState: { errors }, getValues
@@ -67,9 +67,24 @@ const checkout = ({ }) => {
         reValidateMode: "onSubmit"
     });
 
+    const address = getValues(["address", "city", "state", "zip"]);
+    const { address, city, state, zip } = address;
+    const fullAddress = `${address} ${city}, ${state} ${zip}`;
+
+    const emailData = {
+        numItems: cartItems.length,
+        address: fullAddress,
+        total: subtotal
+    };
+       
     const onSubmit = async () => {
-        const values = getValues();
-        console.log(values)
+        setTYModal(true);
+        sendEmail();
+    };
+
+    const sendEmail = async () => {
+        // axios.post('https://api.sendgrid.com/v3/mail/send');
+        axios.post('/api/sendEmail', emailData);
     };
 
     // const testObj = { // TODO - REMOVE PLACEHOLDER
@@ -82,7 +97,7 @@ const checkout = ({ }) => {
 
     const subtotal = cartItems.reduce((sum, item) => {
         return sum += item.price * item.quantity // TODO - PLUGIN PROPER VARIABLES
-    }, 0)
+    }, 0);
 
     // TODO - if isAuthenticated fetch user info and pass to checkout
 
@@ -90,15 +105,9 @@ const checkout = ({ }) => {
     //     console.log({ "for item": item });
     // }
 
-
-
     // cartItems.map((item, i) => {
     //     console.log({ "cartItems Map": item })
     // });
-
-    const sendEmail = () => {
-        axios.post('https://api.sendgrid.com/v3/mail/send');
-    }
 
     return (
         // <div className="section-margin">
