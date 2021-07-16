@@ -117,10 +117,90 @@ export default function Home(test2, test3, test4) {
 
 
 
-  const { count, increment, decrement, reset } = useCounter()
+  const { count, increment, decrement, reset } = useCounter();
+
+  const [htmlData, setHtmlData] = useState("yo")
+
+
+  const endpoint = "http://localhost:3000/email/orderConfirmation.html"
+
+  async function postData(url = '', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    });
+    return response.text(); // parses JSON response into native JavaScript objects
+  }
+
+  // postData(endpoint)
+  //   .then(data => {
+  //     console.log({ "data!!!!": data }); // JSON data parsed by `data.json()` call
+  //   });
+
+  // TESTING
+
+  var str = "I have a cat, a dog, and a goat.";
+
+  var mapObj = {
+    cat: "dog",
+    dog: "goat2",
+    goat2: "cat"
+  };
+
+  const catName = "cat"
+  const dogName = "dog"
+  const goatName = "goat"
+
+  // const newObj = Object.keys(mapObj).reduce((acc, curr, i) => {
+  // const newObj = Object.keys(mapObj).map((curr, i) => {
+  //   // acc = `${curr}|`
+
+  //   let sum = ""
+
+  //   sum = curr
+  //   return sum
+  // }, "")
+
+  const newObj = Object.keys(mapObj).join( "|" )
+
+  console.log({ newObj: newObj })
+
+  // const re = new RegExp(`${catName}|${dogName}|${goatName}`,`gi` );
+  // const re = new RegExp("cat|dog|goat",`gi` );
+  // const re = new RegExp(JSON.stringify(newObj), "gi");
+  // // console.log(JSON.stringify(re))
+
+
+  // // /cat|dog|goat/gi
+  // str = str.replace(re, function (matched) {
+  //   return mapObj[matched];
+  // });
+
+  // console.log(str)
+
+
+  // TESTING
+
+
+
+
   return (
     <>
-    Home
+      Home
+      <div>DATA: {htmlData}</div>
+      <div>DATA: {htmlData}</div>
+      <div>DATA: {htmlData}</div>
+      <div>DATA: {htmlData}</div>
+      <div>DATA: {htmlData}</div>
     </>
   )
 }
