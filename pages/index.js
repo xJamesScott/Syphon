@@ -12,7 +12,14 @@ import Cookie from 'js-cookie';
 import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
 import { Spinner } from '@chakra-ui/react';
 import { Loader } from '../components/Loader';
+import styled from 'styled-components';
+import { motion } from "framer-motion";
+import { AnimateSharedLayout } from "framer-motion";
 
+
+const TestComponent = styled.div`
+
+`;
 
 
 export default function Home(test2, test3, test4) {
@@ -67,6 +74,8 @@ export default function Home(test2, test3, test4) {
     bro: "yo"
   })
 
+  const [visible, setVisible] = useState(false);
+
   const router = useRouter();
   const createTest = async () => {
     try {
@@ -84,6 +93,7 @@ export default function Home(test2, test3, test4) {
   }
 
   useEffect(() => {
+    setVisible(true);
   }, [])
 
   const dispatch = useDispatch()
@@ -170,7 +180,7 @@ export default function Home(test2, test3, test4) {
   //   return sum
   // }, "")
 
-  const newObj = Object.keys(mapObj).join( "|" )
+  const newObj = Object.keys(mapObj).join("|")
 
   console.log({ newObj: newObj })
 
@@ -194,22 +204,30 @@ export default function Home(test2, test3, test4) {
 
 
   return (
-    <>
+    visible &&
+    (<motion.div
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
+    >
       Home
-      <div>DATA: {htmlData}</div>
-      <div>DATA: {htmlData}</div>
-      <div>DATA: {htmlData}</div>
-      <div>DATA: {htmlData}</div>
-      <div>DATA: {htmlData}</div>
-    </>
+      <div>yooooo!</div>
+      <div>yooooo!</div>
+      <div>yooooo!</div>
+      <div>yooooo!</div>
+      <div>yooooo!</div>
+      {/* <div >DATA: {htmlData}</div> */}
+    </motion.div >)
+
+
   )
 }
 
-export async function getServerSideProps() {
-  return {
-    props: {
-      hideNav: false,
-      isLoginRequired: true
-    }
-  }
-}
+// export async function getServerSideProps() {
+//   return {
+//     props: {
+//       hideNav: false,
+//       isLoginRequired: true
+//     }
+//   }
+// }

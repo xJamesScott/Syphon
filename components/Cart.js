@@ -26,13 +26,13 @@ const CartWindow = styled.div`
     top: 0;
     left: 0;
     opacity: 0;
-    transition: opacity .25s ease;
+    transition: opacity .3s ease;
     z-index: 1;
     pointer-events: none;
     
     &.visible {
         opacity: 100;
-        transition: opacity .25s ease;
+        transition: opacity .3s ease;
         pointer-events: unset;
     }
 `;
