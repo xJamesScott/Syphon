@@ -44,7 +44,7 @@ export default async function products(req, res) {
             }
 
         case "create":
-            if (pin == "***REMOVED***") {
+            if (pin == "0376") {
                 body.map((product) => {
                     async () => {
                         try {

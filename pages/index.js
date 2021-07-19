@@ -14,7 +14,7 @@ import { Spinner } from '@chakra-ui/react';
 import { Loader } from '../components/Loader';
 import styled from 'styled-components';
 import { motion } from "framer-motion";
-import { AnimateSharedLayout } from "framer-motion";
+  
 
 
 const TestComponent = styled.div`

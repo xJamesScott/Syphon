@@ -85,8 +85,8 @@ export const authenticate = async (grantType, payload) => {
   // const body = {
   //   // TODO - AUTH0 UPDATE PARAMS
   //   audience: `https://jamscott.us.auth0.com/api/v2/`,
-  //   client_id: "***REMOVED***",
-  //   client_secret: "***REMOVED***ET",
+  //   client_id: "skjbFUQUpGnNQIyVKL5LbUdIsj07iIw5",
+  //   client_secret: "Ms5zW8UwqgGrHyYavFjLfvt017SqF_undJB3Qcth-C-QdkuHgKr2-UuKOFy3G-y2ET",
   //   grant_type: "password",
   //   ...payload,
   // };
