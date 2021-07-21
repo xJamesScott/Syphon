@@ -69,10 +69,10 @@ export default function Home(test2, test3, test4) {
 
   const cookie2 = Cookie.getJSON("test2")
 
-  Cookie.set("testMulti", {
-    bro: "yo",
-    bro: "yo"
-  })
+  // Cookie.set("testMulti", {
+  //   bro: "yo",
+  //   bro: "yo"
+  // })
 
   const [visible, setVisible] = useState(false);
 

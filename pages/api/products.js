@@ -15,7 +15,7 @@ export default async function products(req, res) {
     switch (call) {
         case "test2":
             try {
-                const createProducts = Item.insertMany(productList);
+                const createProducts = Item.insertMany(prodList);
                 return res.json(createProducts);
             } catch (err) {
                 console.log("Error creating products " + err);

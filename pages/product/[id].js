@@ -100,7 +100,7 @@ const ProductInfo = ({ product }) => {
 
     const getProducts = async () => {
         try {
-            const res = await axios.get(`/api/products?call=all&not=${product.productId}`);
+            const res = await axios.get(`http://localhost:3000/api/products?call=all&not=${product.productId}`);
             setAlsoProducts(res.data);
 
         } catch (error) {
@@ -110,7 +110,7 @@ const ProductInfo = ({ product }) => {
 
     useEffect(() => {
         getProducts();
-    }, [])
+    }, []);
 
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
@@ -126,7 +126,8 @@ const ProductInfo = ({ product }) => {
         dispatch(cartActions.setCartCurrent(currentProduct))
     };
 
-    const features = DOMPurify.sanitize(product.features);
+    // const features = DOMPurify.sanitize(product.features);
+    const features = product.features;
 
     return (
         <ProductPage
@@ -206,10 +207,10 @@ const ProductInfo = ({ product }) => {
                         IN THE BOX
                     </SubSectionTitle>
                     {
-                        product.inTheBox.map(items => {
+                        product.inTheBox.map((items, i) => {
                             return (
                                 <>
-                                    <InfoWrapper>
+                                    <InfoWrapper key={"in-box" + i}>
                                         <BoxItemCount>
                                             {Object.keys(items)}
                                         </BoxItemCount>

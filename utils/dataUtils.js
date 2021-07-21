@@ -48,7 +48,7 @@ export const directCartEdit = (product, removeId) => { // for given productId, d
     newCart.push(product); // adds new product index
     Cookie.set("cart", newCart);
 
-    const updatedCart = Cookie.getJSON("cart")
+    const updatedCart = Cookie.getJSON("cart");
     // console.log({ "directCartEdit cart": newCart });
     // console.log({ "directCartEdit updatedcart": updatedCart });
 
@@ -57,6 +57,7 @@ export const directCartEdit = (product, removeId) => { // for given productId, d
 }
 
 const groupedBy = (array, key) => { // creates cart object of product groups from cart cookie array
+    console.log({ array: array })
     return array.reduce((result, obj, i) => {
 
         (result[obj[key]] = result[obj[key]] || []).push(obj);
@@ -90,8 +91,9 @@ export const splitGroups = (cart, groupBy) => { // converts cart cookie array in
 
     if (!cart) {
         Cookie.set("cart", []);
-        Cookie.set("cart", cart);
+        // Cookie.set("cart", "cart");
         // cartCookie = Cookie.getJSON("cart");
+        return [];
     } else if (cart) {
         cartCookie = cart
     }

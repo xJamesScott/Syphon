@@ -48,7 +48,8 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                items: splitGroups(cartCookie, "productId")
+                // items: splitGroups(cartCookie, "productId")
+                items: cart
             }
         }
 
@@ -66,6 +67,7 @@ const cartReducer = (state = initialState, action) => {
                 }
             }
             Cookie.set('cart', newCart(cartCookie));
+
 
             const postEditCookie = Cookie.getJSON("cart"); // new cookie
             return {

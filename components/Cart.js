@@ -83,7 +83,7 @@ const IncrementQTY = styled.p`
     }
 `;
 
-export default function Cart({ visible }) {
+export default function Cart({ visible, cartArray }) {
     const cartState = useSelector((state) => state.cart);
     const {
         isLoading,
@@ -101,11 +101,11 @@ export default function Cart({ visible }) {
     })
 
     const cartArrayObj = Object.entries(cart)
-    const [cartArray, setCartArray] = useState([]);
+    // const [cartArray, setCartArray] = useState([]);
 
-    useEffect(() => {
-        setCartArray(cartArrayObj)
-    }, [isLoading, cart])
+    // useEffect(() => {
+    //     setCartArray(cartArrayObj)
+    // }, [isLoading, cart])
 
     const subtotal = cartArray.reduce((sum, item) => {
         return sum += item[1].price * item[1].quantity
@@ -172,7 +172,7 @@ export default function Cart({ visible }) {
     //     </form>
     // )
 
-    const setItemTest = Cookie.set("itemTest", 0)
+    // const setItemTest = Cookie.set("itemTest", 0)
 
     return (
         !isLoading && <CartWindow
