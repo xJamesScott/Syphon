@@ -6,7 +6,7 @@ export default async function products(req, res) {
 
     const {
         body,
-        query: { call, productId, create, pin, not }
+        query: { call, productId, create, pin, not, productType }
     } = req
 
     dbConnect("global");
@@ -20,7 +20,7 @@ export default async function products(req, res) {
             } catch (err) {
                 console.log("Error creating products " + err);
                 return res.status(500);
-            }
+            };
         case "all":
             try {
                 if (not) {
@@ -33,13 +33,23 @@ export default async function products(req, res) {
             } catch (err) {
                 console.log("Error aggregating products " + err);
                 return res.status(500);
-            }
+            };
         case "productId":
             try {
                 const item = await Item.findOne({ productId: productId });
                 return res.json(item);
             } catch (err) {
                 console.log("Error aggregating products!: " + err);
+                return res.status(500);
+            };
+
+        case "productType":
+            try {
+                const models = await Item.find({ productType: productType });
+                console.log({ models: models });
+                return res.json(models);
+            } catch (err) {
+                console.log("Error fetching model types!: " + err);
                 return res.status(500);
             }
 
@@ -74,6 +84,6 @@ export default async function products(req, res) {
             };
         default:
             return res.status(200);
-    }
+    };
 
-}
+};

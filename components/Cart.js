@@ -19,6 +19,7 @@ import { useForm, useFormState } from 'react-hook-form';
 import { directCartEdit } from '../utils/dataUtils';
 import { cartActions } from '../store/cart';
 import Cookie from 'js-cookie';
+import { motion } from "framer-motion";
 
 const CartWindow = styled.div`
     position: absolute;
@@ -83,7 +84,11 @@ const IncrementQTY = styled.p`
     }
 `;
 
-export default function Cart({ visible, cartArray }) {
+export default function Cart({
+    visible,
+    // cartArray,
+    // isLoading
+}) {
     const cartState = useSelector((state) => state.cart);
     const {
         isLoading,
@@ -98,17 +103,18 @@ export default function Cart({ visible, cartArray }) {
             price: 100,
             quantity: 1
         }
-    })
+    });
 
-    const cartArrayObj = Object.entries(cart)
-    // const [cartArray, setCartArray] = useState([]);
+    const cartArrayObj = Object.entries(cart);
 
-    // useEffect(() => {
-    //     setCartArray(cartArrayObj)
-    // }, [isLoading, cart])
+    const [cartArray, setCartArray] = useState([]);
+
+    useEffect(() => {
+        setCartArray(cartArrayObj)
+    }, [isLoading, cart])
 
     const subtotal = cartArray.reduce((sum, item) => {
-        return sum += item[1].price * item[1].quantity
+        return sum += item[1].price * item[1].quantity;
     }, 0)
 
     const { register, handleSubmit, control, formState: { errors }
@@ -175,97 +181,104 @@ export default function Cart({ visible, cartArray }) {
     // const setItemTest = Cookie.set("itemTest", 0)
 
     return (
-        !isLoading && <CartWindow
-            className={visible ? "visible" : ""}
+        !isLoading &&
+        <CartWindow
+        className={visible ? "visible" : ""}
         >
+
             <CartWrapper>
-                <CartModalMargin
-                    className="section-margin"
+                <motion.div
+                    animate={{ scale: visible ? 1 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    style={{ originX: .9 }}
                 >
-                    {/* <form form onSubmit={handleSubmit(onSubmit)}>
+                    <CartModalMargin
+                        className="section-margin"
+                    >
+                        {/* <form form onSubmit={handleSubmit(onSubmit)}>
                         <input
                             {...register("test")}
                         />
                     </form> */}
-                    {/* <form onSubmit={handleSubmit(onSubmit)} > */}
-                    <CartModal>
-                        <TitleLine>
-                        </TitleLine>
-                        {
-                            // !isLoading && 
-                            cartArray.map((item, i) => {
-                                const current = item[1]
-                                return (
+                        {/* <form onSubmit={handleSubmit(onSubmit)} > */}
+                        <CartModal>
+                            <TitleLine>
+                            </TitleLine>
+                            {
+                                // !isLoading && 
+                                cartArray.map((item, i) => {
+                                    const current = item[1]
+                                    return (
 
-                                    < ProductWrapper
-                                        key={"cartItem" + i}
-                                    >
+                                        < ProductWrapper
+                                            key={"cartItem" + i}
+                                        >
 
-                                        <CheckoutProdIMG src="/media/placeholderIMG.png"
-                                            width={25}
-                                            height={25}
-                                            fill="magenta"
-                                        />
-                                        <TextWrapper>
-                                            <h3>
-                                                {item[1].name}
-                                            </h3>
-                                            <h4>
-                                                {`$ ${item[1].price}`}
-                                            </h4>
-                                        </TextWrapper>
-                                        <Quantity>
-                                            {/* INCREMENT - 1 */}
-                                            <IncrementQTY
-                                                onClick={() => {
-                                                    dispatch(cartActions.directCartEdit({
-                                                        product: {
-                                                            name: current.name,
-                                                            productId: current.productId,
-                                                            type: current.type,
-                                                            price: current.price,
-                                                            quantity: current.quantity
-                                                        }, inc: "sub"
-                                                    }
-                                                    ));
-                                                    dispatch(cartActions.setCartFinishLoading({}));
+                                            <CheckoutProdIMG src="/media/placeholderIMG.png"
+                                                width={25}
+                                                height={25}
+                                                fill="magenta"
+                                            />
+                                            <TextWrapper>
+                                                <h3>
+                                                    {item[1].name}
+                                                </h3>
+                                                <h4>
+                                                    {`$ ${item[1].price}`}
+                                                </h4>
+                                            </TextWrapper>
+                                            <Quantity>
+                                                {/* INCREMENT - 1 */}
+                                                <IncrementQTY
+                                                    onClick={() => {
+                                                        dispatch(cartActions.directCartEdit({
+                                                            product: {
+                                                                name: current.name,
+                                                                productId: current.productId,
+                                                                type: current.type,
+                                                                price: current.price,
+                                                                quantity: current.quantity
+                                                            }, inc: "sub"
+                                                        }
+                                                        ));
+                                                        dispatch(cartActions.setCartFinishLoading({}));
 
-                                                }}
-                                            >
-                                                -
-                                            </IncrementQTY>
-                                            <p
-                                                key={item[1].productId}
-                                                id={item[1].productId}
-                                            >
-                                                {item[1].quantity}
-                                            </p>
-                                            {/* INCREMENT + 1 */}
-                                            <IncrementQTY
-                                                onClick={() => {
-                                                    dispatch(cartActions.directCartEdit({
-                                                        product: {
-                                                            name: current.name,
-                                                            productId: current.productId,
-                                                            type: current.type,
-                                                            price: current.price,
-                                                            quantity: current.quantity
-                                                        }, inc: "add"
-                                                    }
-                                                    ));
-                                                    dispatch(cartActions.setCartFinishLoading({}));
+                                                    }}
+                                                >
+                                                    -
+                                                </IncrementQTY>
+                                                <p
+                                                    key={item[1].productId}
+                                                    id={item[1].productId}
+                                                >
+                                                    {item[1].quantity}
+                                                </p>
+                                                {/* INCREMENT + 1 */}
+                                                <IncrementQTY
+                                                    onClick={() => {
+                                                        dispatch(cartActions.directCartEdit({
+                                                            product: {
+                                                                name: current.name,
+                                                                productId: current.productId,
+                                                                type: current.type,
+                                                                price: current.price,
+                                                                quantity: current.quantity
+                                                            }, inc: "add"
+                                                        }
+                                                        ));
+                                                        dispatch(cartActions.setCartFinishLoading({}));
 
-                                                }}
-                                            >
-                                                +
-                                            </IncrementQTY>
-                                        </Quantity>
-                                    </ProductWrapper>
-                                )
-                            })
-                        }
+                                                    }}
+                                                >
+                                                    +
+                                                </IncrementQTY>
+                                            </Quantity>
+                                        </ProductWrapper>
+                                    )
+                                })
+                            }
 
-                        {/* {() => {
+                            {/* {() => {
                             for (const [productId, item] of cartArray) { // iterates through unique items TODO: select cart from state
                                 console.log("cart items")
                                 // return (
@@ -293,24 +306,26 @@ export default function Cart({ visible, cartArray }) {
                                 // )
                             }
                         }} */}
-                        {
-                            !isLoading &&
-                            <TotalWrapper>
-                                <SummaryTotals>TOTAL</SummaryTotals>
-                                <Cost>{`$ ${parseFloat(subtotal).toFixed(2)}`}</Cost>
-                            </TotalWrapper>
-                        }
-                        <a href="/checkout">
-                            <PayButton
-                            // onClick={handleSubmit(onSubmit)}
-                            >
-                                CHECKOUT
-                            </PayButton>
-                        </a>
-                    </CartModal>
-                    {/* </form> */}
-                </CartModalMargin>
+                            {
+                                !isLoading &&
+                                <TotalWrapper>
+                                    <SummaryTotals>TOTAL</SummaryTotals>
+                                    <Cost>{`$ ${parseFloat(subtotal).toFixed(2)}`}</Cost>
+                                </TotalWrapper>
+                            }
+                            <a href="/checkout">
+                                <PayButton
+                                // onClick={handleSubmit(onSubmit)}
+                                >
+                                    CHECKOUT
+                                </PayButton>
+                            </a>
+                        </CartModal>
+                        {/* </form> */}
+                    </CartModalMargin>
+                </motion.div>
             </CartWrapper>
+
         </CartWindow >
     )
 };
