@@ -1,7 +1,7 @@
 
 import { CART_ACTIONS } from "./actions";
 import Cookie from 'js-cookie';
-import { generateUUID } from '../../utils/utils';
+// import { generateUUID } from '../../utils/utils';
 import { splitGroups, deleteItems, testData, directCartEdit } from '../../utils/dataUtils'
 
 

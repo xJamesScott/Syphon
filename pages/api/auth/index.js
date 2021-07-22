@@ -19,9 +19,9 @@
 // import { users, authenticate, createUser, getAccountsWithSameEmail } from "./AuthCalls"
 import { useRouter } from 'next/router';
 import axios from "axios";
-import dbConnect from '../../utils/dbConnect';
-import User from '../../models/User';
-import Item from '../../models/Item';
+import dbConnect from '../../../utils/dbConnect';
+import User from '../../../models/User';
+import Item from '../../../models/Item';
 
 export default async function cart(req, res) {
     

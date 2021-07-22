@@ -68,15 +68,19 @@ const checkout = ({ }) => {
     });
 
     const address = getValues(["address", "city", "state", "zip"]);
-    const { address, city, state, zip } = address;
-    const fullAddress = `${address} ${city}, ${state} ${zip}`;
+    const { street, city, state, zip } = address;
+    const fullAddress = `${street} ${city}, ${state} ${zip}`;
+
+    const subtotal = cartItems.reduce((sum, item) => {
+        return sum += item.price * item.quantity // TODO - PLUGIN PROPER VARIABLES
+    }, 0);
 
     const emailData = {
         numItems: cartItems.length,
         address: fullAddress,
         total: subtotal
     };
-       
+
     const onSubmit = async () => {
         setTYModal(true);
         sendEmail();
@@ -95,9 +99,7 @@ const checkout = ({ }) => {
 
     // const testObj2 = Object.entries(testObj) // TODO - PLUGIN PROPER VARIABLES
 
-    const subtotal = cartItems.reduce((sum, item) => {
-        return sum += item.price * item.quantity // TODO - PLUGIN PROPER VARIABLES
-    }, 0);
+
 
     // TODO - if isAuthenticated fetch user info and pass to checkout
 
