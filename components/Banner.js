@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useSelector, useDispatch } from 'react-redux';
 import { Loader } from './Loader';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { cartActions } from '../store/cart'
 import Cart from './Cart';
 import Image from 'next/image';
@@ -208,22 +208,19 @@ export async function getStaticProps() {
     }
 };
 
-function Banner({
-    // isAuthenticated, // TODO: ADD AUTHENTICATION LOGIC
-    products
-}) {
+function Banner() {
 
+    useEffect(() => {
+        typeof window !== "undefined" && getCart();
+    }, []);
 
     const router = useRouter();
-
 
     // console.log({ products: products })
     // useEffect(() => {
     //     console.log({ router: router.domainLocales })
     //     console.log({ products: products })
     // })
-
-
 
     const dispatch = useDispatch();
 
@@ -232,14 +229,10 @@ function Banner({
         dispatch(cartActions.setCartFinishLoading({}));
 
     };
-
-    useEffect(() => {
-        typeof window !== "undefined" && getCart();
-    }, [])
-
-
-
+    const ref = useRef();
     const [cartVisible, setCartVisible] = useState(false); // TODO: UNSET FROM TRUE, ONLY FOR TESTING
+
+
 
     const cartState = useSelector((state) => state.cart);
     const {
@@ -254,15 +247,15 @@ function Banner({
         return sum += item.quantity
     }, 0);
 
-    // console.log({ totalItems: totalItems })
 
     useEffect(() => {
         setCartArray(cartArrayObj);
     }, [isLoading, cart]);
 
-    console.log({ cartArrayObj: cartArrayObj });
 
     const [showHeadphones, setShowHeadphones] = useState(true); // make an object for each product type
+
+    const hideCart = () => setCartVisible(false);
 
     return (
         !isLoading ?
@@ -270,12 +263,14 @@ function Banner({
                 <BannerWrapper >
                     <NavContainer className="section-margin">
                         <NavWrapper>
-                            <div className="nav-logo"></div>
+                            <div
+                                ref={ref}
+                                className="nav-logo">LOGO</div>
                             <Nav className="nav-group">
                                 <NavLink
                                     href="/"
                                 >
-                                    <a className="menu-group-links">HOME</a>
+                                    <a ref={ref["menu"]} className="menu-group-links">HOME</a>
                                 </NavLink>
                                 {/* HEADPHONES */}
                                 <LinksContainer className="nav-links">
@@ -299,7 +294,7 @@ function Banner({
                                                     scaleY: showHeadphones ? 1 : 0,
                                                     opacity: showHeadphones ? 1 : 0
                                                 }}
-                                                transition={{ duration: 0.32 }}
+                                                transition={{ duration: 0.25 }}
                                                 // style={{ originX: 0, originY: 0 }}
                                                 className="menu-bar"
                                             >
@@ -320,8 +315,8 @@ function Banner({
                                                     scaleY: showHeadphones ? 1 : 0,
                                                     opacity: showHeadphones ? 1 : 0
                                                 }}
-                                                transition={{ duration: 0.32 }}
-                                                style={{ originY: 0 }}
+                                                transition={{ duration: 0.25 }}
+                                                style={{ originY: 0, originX: 0 }}
                                                 className="link-group-motion"
                                             >
                                                 <LinkGroup
@@ -356,7 +351,11 @@ function Banner({
                                         <p>{totalItems}</p>
                                     </CartCount>
                                     <CartButton
+
                                         onClick={() => setCartVisible(() => !cartVisible)}
+                                       
+
+                                    // ref={ref}
                                     >
                                         Cart
                                     </CartButton>
@@ -376,6 +375,7 @@ function Banner({
                     onClick={(e) => e.preventDefault}
                     // cartArray={cartArray}
                     isLoading={isLoading}
+                    hideCart={hideCart}
                 />
                 {/* </motion.div> */}
             </CartWindow >

@@ -1,4 +1,5 @@
 import { Provider } from 'react-redux';
+import { useEffect, useState } from 'react';
 import Banner from '../components/Banner';
 import { useStore } from '../store/store';
 import '../styles/globals.css';
@@ -41,9 +42,7 @@ export const ComponentWrapper = styled.div`
 }
 `;
 
-
 function WrappedApp({ Component, pageProps }) {
-
   const store = useStore(pageProps.initialReduxState);
   const { hideNav, isLoginRequired } = pageProps;
 
@@ -58,17 +57,12 @@ function WrappedApp({ Component, pageProps }) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
       >
-
         {
           !hideNav &&
           <Banner /> // nav bar
         }
         <AnimateSharedLayout>
-          <Component
-            {...pageProps} cart={"cart"}
-          // initial={false}
-          // animate={{ opacity: 0 }}
-          />
+          <Component {...pageProps} cart={"cart"} />
         </AnimateSharedLayout>
         <Footer />
       </motion.div>

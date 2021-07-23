@@ -29,12 +29,12 @@ const CartWindow = styled.div`
     opacity: 0;
     transition: opacity .3s ease;
     z-index: 1;
-    pointer-events: none;
+    /* pointer-events: none; */
     
     &.visible {
         opacity: 100;
         transition: opacity .3s ease;
-        pointer-events: unset;
+        /* pointer-events: unset; */
     }
 `;
 
@@ -84,11 +84,18 @@ const IncrementQTY = styled.p`
     }
 `;
 
-export default function Cart({
+const Close = styled.div`
+
+`;
+
+export default function Cart( 
+    {
     visible,
+    hideCart
     // cartArray,
     // isLoading
-}) {
+}
+) {
     const cartState = useSelector((state) => state.cart);
     const {
         isLoading,
@@ -180,13 +187,31 @@ export default function Cart({
 
     // const setItemTest = Cookie.set("itemTest", 0)
 
+    useEffect(() => {
+        const handleClick = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                hideCart()
+                window.removeEventListener('click', handleClick);
+            }
+        };
+
+        if (visible) {
+            window.addEventListener("click", handleClick);
+        }
+    }, [visible]);
+
+    const ref = useRef();
+
     return (
         !isLoading &&
         <CartWindow
-        className={visible ? "visible" : ""}
+            className={visible ? "visible" : ""}
         >
+           
 
-            <CartWrapper>
+            <CartWrapper
+                className="modal"
+            >
                 <motion.div
                     animate={{ scale: visible ? 1 : 0 }}
                     transition={{ duration: 0.25 }}
@@ -201,7 +226,11 @@ export default function Cart({
                         />
                     </form> */}
                         {/* <form onSubmit={handleSubmit(onSubmit)} > */}
-                        <CartModal>
+                        <CartModal
+                            className="modal"
+                            ref={ref}
+                        >
+                            <Close>X (close)</Close>
                             <TitleLine>
                             </TitleLine>
                             {
