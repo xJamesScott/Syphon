@@ -43,6 +43,7 @@ export const CartWrapper = styled.div`
     width: 100vw;
     background-color: rgba(128, 128, 128, 0.49);  
     position: fixed;
+    pointer-events: none;
     /* width: 0;
 
     .visible {

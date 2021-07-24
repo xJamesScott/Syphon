@@ -117,8 +117,6 @@ const NavWrapper = styled.div`
       justify-content: center;
       align-items: center;
       height: 100%;
-      /* flex: 1 1 0px; */
-
       > * {
         text-align: center;  
       }
@@ -148,12 +146,13 @@ const NavWrapper = styled.div`
     }
 
     .link-group { // submenu links
-        position: absolute;
-        top: 100%; 
+        /* position: absolute;
+        top: 100%;  */
         display: flex;
-        justify-content: flex-start;
-        align-items: start;
-        background: ${colors.opaque1}; 
+        /* justify-content: flex-start;
+        align-items: start; */
+        /* background: ${colors.opaque1};  */
+       
         /* font */
         font-size: 1.3rem;
         letter-spacing: .2rem;
@@ -200,7 +199,7 @@ export const NavLink = styled(Link)`
     a { 
         width: 100%;
         text-align: left;
-        flex: 0 1;
+        /* flex: 0 1; */
         font-size: 1.3rem;
     }
 `;
@@ -208,17 +207,17 @@ export const NavLink = styled(Link)`
 const NavLinksContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 1rem 1.25rem; // matches NavLinkWrapper
+    /* padding: 1rem 1.25rem; // matches NavLinkWrapper */
     align-items: start;
     gap: .75rem;
-    background: ${colors.opaque1};
+    /* background: ${colors.opaque1}; */
 `;
 
 export const NavLinkWrapper = styled.div`
     display: flex;
     height: 100% !important;
     position: relative;
-    padding: 0 1.25rem; // matches NavLinksContainer
+    /* padding: 0 2rem; // matches NavLinksContainer */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -258,6 +257,9 @@ export const LinksContainer = styled.div`
         top: 100%;
         left: 0;
         background: ${colors.opaque1};
+        width: 100%;
+        height: 100%;
+        padding: 0 1.2rem;
         /* background: magenta !important; */
         /* display: flex;
         justify-content: center;
@@ -272,11 +274,12 @@ export const LinkGroupWrapper = styled.div`
     position: relative;
     height: 100% !important;
     width: 100%;
+    padding: 0 2rem;
 `;
 
 export const LinkGroup = styled.div`
     position: relative;
-    background: ${colors.opaque1};
+    /* background: ${colors.opaque1}; */
     display: flex;   
     flex-direction: column;
     align-items: center;

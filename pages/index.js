@@ -101,7 +101,18 @@ export default function Home(test2, test3, test4) {
     (<motion.div
     >
       Home
-      <div> <a>yooooo!</a></div>
+      <div>
+        <Link
+          href="/"
+        >
+          <a
+            className="menu-group-links"
+          >
+            HOME
+          </a>
+        </Link>
+      </div>
+      <a href="/">Broooo</a>
       {/* </Link> */}
 
 
