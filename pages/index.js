@@ -32,22 +32,6 @@ export default function Home(test2, test3, test4) {
     }
   };
 
-  // postTest();
-
-  // useEffect(() => {
-  //   const cartCookie = Cookie.getJSON("cart");
-  //   const groupedCart =  splitGroups(cartCookie, "productId");
-
-  //   console.log({ "cart cookie!": cartCookie });
-  //   // console.log({ "testData": testData });
-  //   console.log({ "groupedCart redux": groupedCart });
-  // }, [])
-
-
-  // const cartCookie = Cookie.getJSON("cart")
-  // const groupedCart = splitGroups(cartCookie, "productId")
-  // console.log({groupedCart: groupedCart})
-
   const arr = [
     { a1: { productId: "a1", name: "prod1", type: "aaa", price: 20 } },
     { a2: { productId: "a2", name: "prod1", type: "bbb", price: 20 } },
@@ -64,13 +48,6 @@ export default function Home(test2, test3, test4) {
     }
     return combined;
   }, {});
-
-  const cookie2 = Cookie.getJSON("test2")
-
-  // Cookie.set("testMulti", {
-  //   bro: "yo",
-  //   bro: "yo"
-  // })
 
   const [visible, setVisible] = useState(false);
 
@@ -92,7 +69,7 @@ export default function Home(test2, test3, test4) {
 
   useEffect(() => {
     setVisible(true);
-  }, [])
+  }, []);
 
   const dispatch = useDispatch()
 
@@ -119,80 +96,16 @@ export default function Home(test2, test3, test4) {
     dispatch(cartActions.setCartCurrent({ price: "too much!" }))
   }
 
-  const testAPI = async () => {
-    await axios.post("/api/auth?call=signup", {})
-  }
-
-
-
-  const { count, increment, decrement, reset } = useCounter();
-
-  const [htmlData, setHtmlData] = useState("yo")
-
-
-  const endpoint = "http://localhost:3000/email/orderConfirmation.html"
-
-  async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    });
-    return response.text(); // parses JSON response into native JavaScript objects
-  }
-
-  // postData(endpoint)
-  //   .then(data => {
-  //     console.log({ "data!!!!": data }); // JSON data parsed by `data.json()` call
-  //   });
-
-  // TESTING
-
-
-
-  // TESTING
-
-
-
-
   return (
     visible &&
     (<motion.div
-    // initial={{ opacity: 0 }}
-    // animate={{ opacity: 1 }}
-    // exit={{ opacity: 0 }}
     >
       Home
-      {/* <Link
-        href={{
-          pathname: '/product/[id]'
-          query: {}
-        }}
-      > */}
       <div> <a>yooooo!</a></div>
       {/* </Link> */}
 
 
       {/* <div >DATA: {htmlData}</div> */}
     </motion.div >)
-
-
   )
 }
-
-// export async function getServerSideProps() {
-//   return {
-//     props: {
-//       hideNav: false,
-//       isLoginRequired: true
-//     }
-//   }
-// }
