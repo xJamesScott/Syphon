@@ -5,3 +5,4 @@ export const ACCENT2 = "#FAFAFA";
 export const ACCENT3 = "#F1F1F1";
 export const ACCENT4 = "#fbaf85";
 export const ACCENT5 = "#000000";
+export const OPAQUE1 = "rgba(99, 99, 99, 0.8)";
