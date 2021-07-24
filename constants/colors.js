@@ -1,6 +1,7 @@
-export const MAIN = "#D52047";
-export const MAIN_TEXT = "#000000";
-export const ACCENT1 = "#EE3D1B";
-export const ACCENT2 = "#FFFFFF";
-export const ACCENT3 = "#ED4C5C";
-export const ACCENT4 = "#FAFAFA";
+export const MAIN = "#D87D4A";
+export const MAIN_TEXT = "#101010";
+export const ACCENT1 = "#FFFFFF";
+export const ACCENT2 = "#FAFAFA";
+export const ACCENT3 = "#F1F1F1";
+export const ACCENT4 = "#fbaf85";
+export const ACCENT5 = "#000000";

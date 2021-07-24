@@ -10,13 +10,18 @@ import { useRouter } from "next/router";
 import { get } from "lodash";
 import axios from 'axios';
 import Link from 'next/link';
+import { theme, mq } from '../constants/theme';
+import { ButtonOrange, ButtonWhite } from '../components/Buttons';
+import ButtonHollow from '../components/ButtonHollow';
+
+const { colors } = theme;
 
 
 const CartWindow = styled.div`
     z-index: 10; 
 `;
 const BannerWrapper = styled.div`
-    background-color: black;
+    background-color: ${colors.accent5};
     height: 9.7rem;
     color: white;
     position: fixed;
@@ -80,6 +85,7 @@ const NavWrapper = styled.div`
       justify-content: center;
       align-items: center;
       height: 100%;
+      /* flex: 1 1 0px; */
 
       > * {
         text-align: center;  
@@ -124,20 +130,30 @@ const Nav = styled.div`
    gap: 3.4rem;
 
    .menu-group-links {
-        height: 100%;
+        /* height: 100%; */
         display: flex;
         align-items: center;
+        margin: auto;
+        padding: 0 2px;
+        /* width: 100%; */
+        border-bottom: 0 solid white;
+       
     }
 `;
 
 export const NavLink = styled(Link)`
+    display: flex;
     height: 100% !important;
-    a {
+    /* a {
         height: 100% !important;
+    } */
+    a { 
+        width: 100%;
     }
 `;
 
 export const NavLinkWrapper = styled.div`
+    display: flex;
     height: 100% !important;
     position: relative;
 
@@ -149,6 +165,14 @@ export const NavLinkWrapper = styled.div`
         align-items: center;
         width: 100%;
 
+    }
+
+    .link-line {
+        background: white;
+        height: .1rem;
+        /* height: 20rem; */
+        width: 4rem;
+        transform: translateY(-1rem)
     }
 `;
 
@@ -253,7 +277,15 @@ function Banner() {
     }, [isLoading, cart]);
 
 
-    const [showHeadphones, setShowHeadphones] = useState(true); // make an object for each product type
+    const activateNavInit = {
+        home: true,
+        headphones: true,
+        speakers: false,
+        earphones: false
+    }
+
+
+    const [activateNavLink, setActivateNavLink] = useState(activateNavInit); // make an object for each product type
 
     const hideCart = () => setCartVisible(false);
 
@@ -261,59 +293,96 @@ function Banner() {
         !isLoading ?
             <CartWindow >
                 <BannerWrapper >
+                    <ButtonWhite>Yoooo</ButtonWhite>
+                    <ButtonOrange>Yoooo</ButtonOrange>
+                    <ButtonHollow
+                        value="Broooooo"
+                    />
                     <NavContainer className="section-margin">
                         <NavWrapper>
                             <div
                                 ref={ref}
                                 className="nav-logo">LOGO</div>
                             <Nav className="nav-group">
-                                <NavLink
-                                    href="/"
-                                >
-                                    <a ref={ref["menu"]} className="menu-group-links">HOME</a>
-                                </NavLink>
+
+                                {/* HOME */}
+
+                                <LinksContainer className="nav-links">
+                                    <LinkGroupWrapper>
+                                        <NavLinkWrapper>
+                                            <NavLink
+                                                href="/"
+                                                onMouseLeave={() => setActivateNavLink({ home: false })} // TODO: ENABLE AFTER TESTING
+                                            >
+                                                <a
+                                                    onMouseEnter={() => setActivateNavLink({ home: true })}
+                                                    ref={ref["menu"]}
+                                                    className="menu-group-links"
+                                                >
+                                                    HOME
+                                                </a>
+                                            </NavLink>
+                                            {/* MENU BAR */}
+                                            <motion.div
+                                                key="menu-bar"
+                                                animate={{
+                                                    opacity: activateNavLink.home ? 1 : 0
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                                className="menu-bar"
+                                            >
+                                                <div className="link-line"></div>
+
+                                            </motion.div>
+                                        </NavLinkWrapper>
+                                    </LinkGroupWrapper>
+                                </LinksContainer>
+
                                 {/* HEADPHONES */}
+
                                 <LinksContainer className="nav-links">
                                     <LinkGroupWrapper
-                                        onMouseLeave={() => setShowHeadphones(false)} // TODO: ENABLE AFTER TESTING
+                                        onMouseLeave={() => setActivateNavLink({ headphones: false })} // TODO: ENABLE AFTER TESTING
                                     >
                                         {/* GROUP LINK */}
                                         <NavLinkWrapper>
+
                                             <NavLink
                                                 href="/product/headphones"
                                             >
                                                 <a
                                                     className="menu-group-links"
-                                                    onMouseEnter={() => setShowHeadphones(true)}
+                                                    onMouseEnter={() => setActivateNavLink({ headphones: true })}
+
                                                 >HEADPHONES</a>
                                             </NavLink>
-
+                                            {/* MENU BAR */}
                                             <motion.div
-                                                key="menu-bar123"
+                                                key="menu-bar"
                                                 animate={{
-                                                    scaleY: showHeadphones ? 1 : 0,
-                                                    opacity: showHeadphones ? 1 : 0
+                                                    opacity: activateNavLink.headphones ? 1 : 0
                                                 }}
                                                 transition={{ duration: 0.25 }}
-                                                // style={{ originX: 0, originY: 0 }}
                                                 className="menu-bar"
                                             >
+                                                <div className="link-line"></div>
                                                 <MenuActiveBar
                                                     className="nav-group-active menu-bar" width="108" height="9" viewBox="0 0 108 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <line y1="2.5" x2="108" y2="2.5" stroke="white" strokeWidth="3" />
+                                                    {/* <line y1="2.5" x2="108" y2="2.5" stroke="white" strokeWidth="1" /> */}
                                                     <path d="M54 9L49.6699 2.25L58.3301 2.25L54 9Z" fill="white" />
                                                 </MenuActiveBar>
+
                                             </motion.div>
 
                                         </NavLinkWrapper>
 
-                                        {/* PROUDUCT LINKS */}
+                                        {/* HEADPHONES PROUDUCT LINKS */}
                                         {
                                             <motion.div
                                                 key="link-group"
                                                 animate={{
-                                                    scaleY: showHeadphones ? 1 : 0,
-                                                    opacity: showHeadphones ? 1 : 0
+                                                    scaleY: activateNavLink.headphones ? 1 : 0,
+                                                    opacity: activateNavLink.headphones ? 1 : 0
                                                 }}
                                                 transition={{ duration: 0.25 }}
                                                 style={{ originY: 0, originX: 0 }}
@@ -343,6 +412,158 @@ function Banner() {
                                         }
                                     </LinkGroupWrapper>
                                 </LinksContainer>
+
+                                {/* SPEAKERS */}
+
+                                <LinksContainer className="nav-links">
+                                    <LinkGroupWrapper
+                                        onMouseLeave={() => setActivateNavLink({ speakers: false })} // TODO: ENABLE AFTER TESTING
+                                    >
+                                        {/* GROUP LINK */}
+                                        <NavLinkWrapper>
+
+                                            <NavLink
+                                                href="/product/speakers"
+                                            >
+                                                <a
+                                                    className="menu-group-links"
+                                                    onMouseEnter={() => setActivateNavLink({ speakers: true })}
+
+                                                >SPEAKERS</a>
+                                            </NavLink>
+                                            {/* MENU BAR */}
+                                            <motion.div
+                                                key="menu-bar"
+                                                animate={{
+                                                    opacity: activateNavLink.speakers ? 1 : 0
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                                className="menu-bar"
+                                            >
+                                                <div className="link-line"></div>
+                                                <MenuActiveBar
+                                                    className="nav-group-active menu-bar" width="108" height="9" viewBox="0 0 108 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    {/* <line y1="2.5" x2="108" y2="2.5" stroke="white" strokeWidth="1" /> */}
+                                                    <path d="M54 9L49.6699 2.25L58.3301 2.25L54 9Z" fill="white" />
+                                                </MenuActiveBar>
+
+                                            </motion.div>
+
+                                        </NavLinkWrapper>
+
+                                        {/* SPEAKERS PROUDUCT LINKS */}
+                                        {
+                                            <motion.div
+                                                key="link-group"
+                                                animate={{
+                                                    scaleY: activateNavLink.speakers ? 1 : 0,
+                                                    opacity: activateNavLink.speakers ? 1 : 0
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                                style={{ originY: 0, originX: 0 }}
+                                                className="link-group-motion"
+                                            >
+                                                <LinkGroup
+                                                    className="link-group"
+                                                >
+
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>RocketEar&nbsp;GT</a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Rocket&nbsp;Ear </a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Dyno</a>
+                                                    </NavLink>
+                                                </LinkGroup>
+                                            </motion.div>
+                                        }
+                                    </LinkGroupWrapper>
+                                </LinksContainer>
+
+                                {/* EARPHONES */}
+
+                                <LinksContainer className="nav-links">
+                                    <LinkGroupWrapper
+                                        onMouseLeave={() => setActivateNavLink({ earphones: false })} // TODO: ENABLE AFTER TESTING
+                                    >
+                                        {/* GROUP LINK */}
+                                        <NavLinkWrapper>
+
+                                            <NavLink
+                                                href="/product/earphones"
+                                            >
+                                                <a
+                                                    className="menu-group-links"
+                                                    onMouseEnter={() => setActivateNavLink({ earphones: true })}
+
+                                                >EARPHONES</a>
+                                            </NavLink>
+                                            {/* MENU BAR */}
+                                            <motion.div
+                                                key="menu-bar"
+                                                animate={{
+                                                    opacity: activateNavLink.earphones ? 1 : 0
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                                className="menu-bar"
+                                            >
+                                                <div className="link-line"></div>
+                                                <MenuActiveBar
+                                                    className="nav-group-active menu-bar" width="108" height="9" viewBox="0 0 108 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    {/* <line y1="2.5" x2="108" y2="2.5" stroke="white" strokeWidth="1" /> */}
+                                                    <path d="M54 9L49.6699 2.25L58.3301 2.25L54 9Z" fill="white" />
+                                                </MenuActiveBar>
+
+                                            </motion.div>
+
+                                        </NavLinkWrapper>
+
+                                        {/* EARPHONES PROUDUCT LINKS */}
+                                        {
+                                            <motion.div
+                                                key="link-group"
+                                                animate={{
+                                                    scaleY: activateNavLink.earphones ? 1 : 0,
+                                                    opacity: activateNavLink.earphones ? 1 : 0
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                                style={{ originY: 0, originX: 0 }}
+                                                className="link-group-motion"
+                                            >
+                                                <LinkGroup
+                                                    className="link-group"
+                                                >
+
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>RocketEar&nbsp;GT</a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Rocket&nbsp;Ear </a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Dyno</a>
+                                                    </NavLink>
+                                                </LinkGroup>
+                                            </motion.div>
+                                        }
+                                    </LinkGroupWrapper>
+                                </LinksContainer>
+
+
                             </Nav>
                             <div className="nav-icons">
                                 <ButtonContainer>
@@ -353,7 +574,7 @@ function Banner() {
                                     <CartButton
 
                                         onClick={() => setCartVisible(() => !cartVisible)}
-                                       
+
 
                                     // ref={ref}
                                     >

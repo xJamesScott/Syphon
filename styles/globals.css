@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+* {
+  font-family: 'Manrope', sans-serif;
 }
 
 a {
@@ -13,4 +20,57 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-size: 5.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 5.8rem;
+  letter-spacing: .2rem;
+}
+
+h2 {
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 4.4rem;
+  letter-spacing: .15rem;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 3.2rem;
+  font-weight: bold;
+  line-height: 3.6rem;
+  letter-spacing: .2rem;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-size: 2.4rem;
+  font-weight: bold;
+  line-height: 3.3rem;
+  letter-spacing: .17rem;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: 2.4rem;
+  letter-spacing: .13rem;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: 2.4rem;
+  letter-spacing: .13rem;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
 }
