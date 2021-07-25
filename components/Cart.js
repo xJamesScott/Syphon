@@ -96,11 +96,13 @@ export const Quantity = styled.div`
     height: 3.2rem;
     font-weight: bold;
     position: relative;
+    z-index: 2;
 `;
 
 export const IncrementQTY = styled.p`
     /* color: ${colors.mainText}; */
     opacity: 50%;
+    z-index: 2;
 
     :hover {
         cursor: pointer;
@@ -125,6 +127,7 @@ const DeleteItemWrapper = styled.div`
     top: -50%;
     bottom: -50%;
     right: 0;
+    z-index: 0;
 `;
 
 const DeleteItem = styled.svg`

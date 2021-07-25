@@ -14,9 +14,7 @@ import { theme, mq } from '../constants/theme';
 import { ButtonOrange, ButtonWhite } from '../components/Buttons';
 import ButtonHollow from '../components/ButtonHollow';
 
-
 const { colors } = theme;
-
 
 const CartWindow = styled.div`
     z-index: 10; 
@@ -32,14 +30,13 @@ const BannerWrapper = styled.div`
     z-index: 10;
     position: relative;
     display: flex;
+
     &.sub-menus {
         background: transparent;
     }
 `;
 
-
 const CartCount = styled.div`
-    /* position: absolute; */
     background: white;
     height: 2.25rem;
     width: 2.25rem;
@@ -47,37 +44,13 @@ const CartCount = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    /* top: -60%;
-    right: -60%; */
-    /* color: ${colors.main};
-    position: absolute;
-    height: 2rem;
-    width: 2rem;
-    border-radius: 50%;
-    top: -60%;
-    right: -60%;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    p { 
-        font-size: 2rem;
-        font-weight: 700;
-        line-height: 1rem;
-    } */
 `;
 
 const CartCountWrapper = styled.div`
     color: ${colors.main};
     position: absolute;
-    /* height: 2rem;
-    width: 2rem;
-    border-radius: 50%; */
     top: -67%;
     right: -67%;
-    /* background: white; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,6 +82,7 @@ const NavWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     .nav-logo {
     }
     
@@ -117,6 +91,7 @@ const NavWrapper = styled.div`
       justify-content: center;
       align-items: center;
       height: 100%;
+
       > * {
         text-align: center;  
       }
@@ -138,25 +113,17 @@ const NavWrapper = styled.div`
 
     .link-group-motion {
         position: relative;
-        /* position: absolute; */
         display: flex;
         justify-content: center;
         align-items: center;
-       
     }
 
     .link-group { // submenu links
-        /* position: absolute;
-        top: 100%;  */
         display: flex;
-        /* justify-content: flex-start;
-        align-items: start; */
-        /* background: ${colors.opaque1};  */
-       
+
         /* font */
         font-size: 1.3rem;
         letter-spacing: .2rem;
-       
     }
 
     .nav-icons {
@@ -192,14 +159,10 @@ export const NavLink = styled(Link)`
     justify-content: flex-start;
     align-items: start;
     text-align: left;
-    
-    /* a {
-        height: 100% !important;
-    } */
+
     a { 
         width: 100%;
         text-align: left;
-        /* flex: 0 1; */
         font-size: 1.3rem;
     }
 `;
@@ -207,21 +170,26 @@ export const NavLink = styled(Link)`
 const NavLinksContainer = styled.div`
     display: flex;
     flex-direction: column;
-    /* padding: 1rem 1.25rem; // matches NavLinkWrapper */
     align-items: start;
     gap: .75rem;
-    /* background: ${colors.opaque1}; */
+    transition: all .25s ease;
+
+    a { 
+        :hover { 
+            text-decoration: underline;
+            color: ${colors.mainText};
+            transition: all .25s ease;
+        }
+    }
 `;
 
 export const NavLinkWrapper = styled.div`
     display: flex;
     height: 100% !important;
     position: relative;
-    /* padding: 0 2rem; // matches NavLinksContainer */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 
     .menu-bar {
        position: absolute; 
@@ -247,8 +215,11 @@ export const MenuActiveBar = styled.svg`
 export const LinksContainer = styled.div`
     height: 100%;
     padding: 0 1rem ;
+    transition: all .25s ease;
+    
     a { 
         text-align: center !important;
+        transition: all .25s ease;
     }
 
     .link-group-motion {
@@ -260,11 +231,6 @@ export const LinksContainer = styled.div`
         width: 100%;
         height: 100%;
         padding: 0 1.2rem;
-        /* background: magenta !important; */
-        /* display: flex;
-        justify-content: center;
-        align-items: center; */
-       
     }
 `;
 
@@ -275,26 +241,24 @@ export const LinkGroupWrapper = styled.div`
     height: 100% !important;
     width: 100%;
     padding: 0 2rem;
+    transition: all .25s ease;
 `;
 
 export const LinkGroup = styled.div`
     position: relative;
-    /* background: ${colors.opaque1}; */
     display: flex;   
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* text-align: left; */
     width: 100%;
-
     font-size: 1.3rem;
-
 `;
 
 const CartIcon = styled.img`
         transition: all .27s ease;
         cursor: pointer;
-        :hover {
+        
+        &.cart-hover {
             filter: drop-shadow(0 0 3px rgb(225, 225, 225, 1));
             transition: all .27s ease;
         }
@@ -313,12 +277,6 @@ function Banner() {
 
     const router = useRouter();
 
-    // console.log({ products: products })
-    // useEffect(() => {
-    //     console.log({ router: router.domainLocales })
-    //     console.log({ products: products })
-    // })
-
     const dispatch = useDispatch();
 
     const getCart = () => {
@@ -328,8 +286,6 @@ function Banner() {
     };
     const ref = useRef();
     const [cartVisible, setCartVisible] = useState(false); // TODO: UNSET FROM TRUE, ONLY FOR TESTING
-
-
 
     const cartState = useSelector((state) => state.cart);
     const {
@@ -343,7 +299,6 @@ function Banner() {
     const totalItems = cartArrayObj.reduce((sum, item) => {
         return sum += item.quantity
     }, 0);
-
 
     useEffect(() => {
         setCartArray(cartArrayObj);
@@ -361,12 +316,15 @@ function Banner() {
 
     const hideCart = () => setCartVisible(false);
 
+    const [cartHover, setCartHover] = useState(false);
+
     return (
         !isLoading ?
             <CartWindow >
                 <BannerWrapper >
                     <NavContainer className="section-margin">
                         <NavWrapper>
+                            {/* LOGO */}
                             <a href="/">
                                 <svg width="106" height="30" viewBox="0 0 106 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.4302 22.45C9.5502 22.45 11.2102 21.975 12.4102 21.025C13.6102 20.075 14.2102 18.77 14.2102 17.11C14.2102 15.85 13.8202 14.855 13.0402 14.125C12.2702 13.395 10.9602 12.79 9.1102 12.31C7.8502 11.99 6.9102 11.73 6.2902 11.53C5.6802 11.33 5.2752 11.135 5.0752 10.945C4.8852 10.755 4.7902 10.52 4.7902 10.24C4.7902 9.77002 5.0152 9.41002 5.4652 9.16002C5.9252 8.91002 6.5302 8.81002 7.2802 8.86002C8.8702 8.98002 9.7402 9.66003 9.8902 10.9L14.0602 10.15C13.8502 8.68003 13.1302 7.51503 11.9002 6.65503C10.6702 5.78503 9.1002 5.35003 7.1902 5.35003C5.2302 5.35003 3.6652 5.81003 2.4952 6.73003C1.3252 7.65002 0.740195 8.89002 0.740195 10.45C0.740195 11.69 1.1452 12.67 1.9552 13.39C2.7652 14.1 4.1602 14.71 6.1402 15.22C7.3102 15.53 8.1702 15.78 8.72019 15.97C9.2802 16.16 9.6402 16.355 9.8002 16.555C9.9602 16.745 10.0402 17 10.0402 17.32C10.0402 17.83 9.8402 18.23 9.4402 18.52C9.0402 18.8 8.4702 18.94 7.7302 18.94C6.8302 18.94 6.0852 18.725 5.4952 18.295C4.9152 17.865 4.5402 17.27 4.3702 16.51L0.200195 17.14C0.470195 18.83 1.2302 20.14 2.4802 21.07C3.7402 21.99 5.3902 22.45 7.4302 22.45Z" fill="white" />
@@ -397,6 +355,7 @@ function Banner() {
                                                     HOME
                                                 </a>
                                             </NavLink>
+
                                             {/* MENU BAR */}
                                             <motion.div // ENABLE AFTER TESTING
                                                 key="menu-bar"
@@ -429,8 +388,9 @@ function Banner() {
                                                 <a
                                                     className="menu-group-links"
                                                     onMouseEnter={() => setActivateNavLink({ headphones: true })}
-
-                                                >HEADPHONES</a>
+                                                >
+                                                    HEADPHONES
+                                                </a>
                                             </NavLink>
                                             {/* MENU BAR */}
                                             <motion.div // ENABLE AFTER TESTING
@@ -506,7 +466,9 @@ function Banner() {
                                                     className="menu-group-links"
                                                     onMouseEnter={() => setActivateNavLink({ speakers: true })}
 
-                                                >SPEAKERS</a>
+                                                >
+                                                    SPEAKERS
+                                                </a>
                                             </NavLink>
                                             {/* MENU BAR */}
                                             <motion.div // ENABLE AFTER TESTING
@@ -524,10 +486,10 @@ function Banner() {
                                                 </MenuActiveBar>
 
                                             </motion.div>
-
                                         </NavLinkWrapper>
 
                                         {/* SPEAKERS PROUDUCT LINKS */}
+
                                         {
                                             <motion.div // ENABLE AFTER TESTING
                                                 key="link-group"
@@ -565,7 +527,6 @@ function Banner() {
                                     </LinkGroupWrapper>
                                 </LinksContainer>
 
-
                                 {/* EARPHONES */}
 
                                 <LinksContainer className="nav-links">
@@ -574,7 +535,6 @@ function Banner() {
                                     >
                                         {/* GROUP LINK */}
                                         <NavLinkWrapper>
-
                                             <NavLink
                                                 href="/product/earphones"
                                             >
@@ -582,8 +542,11 @@ function Banner() {
                                                     className="menu-group-links"
                                                     onMouseEnter={() => setActivateNavLink({ earphones: true })}
 
-                                                >EARPHONES</a>
+                                                >
+                                                    EARPHONES
+                                                </a>
                                             </NavLink>
+
                                             {/* MENU BAR */}
                                             <motion.div // ENABLE AFTER TESTING
                                                 key="menu-bar"
@@ -641,14 +604,13 @@ function Banner() {
                                     </LinkGroupWrapper>
                                 </LinksContainer>
 
-
-
-
                             </Nav>
+                            {/* CART AND ACCOUNT ICONS (TODO: ADD ACCOUNT ICON WITH AUTH/ACCOUNT FEATURE)*/}
                             <div className="nav-icons">
-
-                                <ButtonContainer>
-
+                                <ButtonContainer
+                                    onMouseEnter={() => setCartHover(true)}
+                                    onMouseLeave={() => setCartHover(false)}
+                                >
                                     <CartCountWrapper>
                                         <motion.div
                                             animate={{ scale: totalItems > 0 ? [.1, 1.5, 1] : 0 }}
@@ -660,12 +622,11 @@ function Banner() {
                                             </CartCount>
                                         </motion.div>
                                     </CartCountWrapper>
-
-
                                     <CartIcon
                                         width="24"
                                         height="20"
                                         onClick={() => setCartVisible(() => !cartVisible)}
+                                        className={cartHover ? "cart-hover" : ""}
                                         src="/media/icons/cart.svg"
                                     />
                                 </ButtonContainer>
@@ -691,7 +652,5 @@ function Banner() {
             : <Loader />
     )
 };
-
-
 
 export default Banner;
