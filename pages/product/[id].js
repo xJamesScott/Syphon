@@ -46,6 +46,8 @@ import {
     AboutIMG
 } from '../../components/ProductPage';
 
+
+
 export const getStaticPaths = async () => {
     const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=all`);
     const paths = res.data.map((product) => {
@@ -153,7 +155,7 @@ const ProductInfo = ({ product }) => {
                         {product.name}
                     </ProductTitle>
                     <Info>
-                        {product.description}
+                        <p>{product.description}</p>
                     </Info>
                     <ProductPrice>
                         $ {product.price.toLocaleString('en')}
@@ -195,11 +197,11 @@ const ProductInfo = ({ product }) => {
                     </SubSectionTitle>
 
                     <Info>
-                        <div
+                        <p
                             dangerouslySetInnerHTML={{ __html: features }}
                         // TODO: PROOFREAD
                         >
-                        </div>
+                        </p>
                     </Info>
                 </SubSectionWrapper>
                 <SubSectionWrapper>

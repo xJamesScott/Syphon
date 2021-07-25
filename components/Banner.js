@@ -41,8 +41,8 @@ const BannerWrapper = styled.div`
 const CartCount = styled.div`
     /* position: absolute; */
     background: white;
-    height: 2rem;
-    width: 2rem;
+    height: 2.25rem;
+    width: 2.25rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -75,8 +75,8 @@ const CartCountWrapper = styled.div`
     /* height: 2rem;
     width: 2rem;
     border-radius: 50%; */
-    top: -60%;
-    right: -60%;
+    top: -67%;
+    right: -67%;
     /* background: white; */
     display: flex;
     justify-content: center;
@@ -351,12 +351,11 @@ function Banner() {
 
 
     const activateNavInit = {
-        home: true,
-        headphones: true,
+        home: false,
+        headphones: false,
         speakers: false,
         earphones: false
     }
-
 
     const [activateNavLink, setActivateNavLink] = useState(activateNavInit); // make an object for each product type
 
@@ -387,7 +386,8 @@ function Banner() {
                                         <NavLinkWrapper>
                                             <NavLink
                                                 href="/"
-                                            onMouseLeave={() => setActivateNavLink({ home: false })} // TODO: ENABLE AFTER TESTING
+                                                onMouseLeave={() => setActivateNavLink({ home: false })} // TODO: ENABLE AFTER TESTING
+                                                onClick={() => setActivateNavLink({ home: false })} // TODO: ENABLE AFTER TESTING
                                             >
                                                 <a
                                                     onMouseEnter={() => setActivateNavLink({ home: true })}
@@ -417,7 +417,8 @@ function Banner() {
 
                                 <LinksContainer className="nav-links">
                                     <LinkGroupWrapper
-                                    onMouseLeave={() => setActivateNavLink({ headphones: false })} // TODO: ENABLE AFTER TESTING
+                                        onMouseLeave={() => setActivateNavLink({ headphones: false })} // TODO: ENABLE AFTER TESTING
+                                        onClick={() => setActivateNavLink({ home: false })} // TODO: ENABLE AFTER TESTING
                                     >
                                         {/* GROUP LINK */}
                                         <NavLinkWrapper>
@@ -452,38 +453,38 @@ function Banner() {
 
                                         {/* HEADPHONES PROUDUCT LINKS */}
                                         {
-                                                <motion.div // ENABLE AFTER TESTING
-                                                    key="link-group"
-                                                    animate={{
-                                                        scaleY: activateNavLink.headphones ? 1 : 0,
-                                                        opacity: activateNavLink.headphones ? 1 : 0
-                                                    }}
-                                                    transition={{ duration: 0.25 }}
-                                                    style={{ originY: 0, originX: 0 }}
-                                                    className="link-group-motion "
+                                            <motion.div // ENABLE AFTER TESTING
+                                                key="link-group"
+                                                animate={{
+                                                    scaleY: activateNavLink.headphones ? 1 : 0,
+                                                    opacity: activateNavLink.headphones ? 1 : 0
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                                style={{ originY: 0, originX: 0 }}
+                                                className="link-group-motion "
+                                            >
+                                                <LinkGroup
+                                                    className="link-group"
                                                 >
-                                                    <LinkGroup
-                                                        className="link-group"
-                                                    >
-                                                        <NavLinksContainer>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>RocketEar&nbsp;GT</a>
-                                                            </NavLink>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>Rocket&nbsp;Ear </a>
-                                                            </NavLink>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>Dyno</a>
-                                                            </NavLink>
-                                                        </NavLinksContainer>
-                                                    </LinkGroup>
-                                                </motion.div>
+                                                    <NavLinksContainer>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>RocketEar&nbsp;GT</a>
+                                                        </NavLink>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>Rocket&nbsp;Ear </a>
+                                                        </NavLink>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>Dyno</a>
+                                                        </NavLink>
+                                                    </NavLinksContainer>
+                                                </LinkGroup>
+                                            </motion.div>
                                         }
                                     </LinkGroupWrapper>
                                 </LinksContainer>
@@ -493,7 +494,7 @@ function Banner() {
 
                                 <LinksContainer className="nav-links">
                                     <LinkGroupWrapper
-                                    onMouseLeave={() => setActivateNavLink({ speakers: false })} // TODO: ENABLE AFTER TESTING
+                                        onMouseLeave={() => setActivateNavLink({ speakers: false })} // TODO: ENABLE AFTER TESTING
                                     >
                                         {/* GROUP LINK */}
                                         <NavLinkWrapper>
@@ -528,48 +529,48 @@ function Banner() {
 
                                         {/* SPEAKERS PROUDUCT LINKS */}
                                         {
-                                                <motion.div // ENABLE AFTER TESTING
-                                                    key="link-group"
-                                                    animate={{
-                                                        scaleY: activateNavLink.speakers ? 1 : 0,
-                                                        opacity: activateNavLink.speakers ? 1 : 0
-                                                    }}
-                                                    transition={{ duration: 0.25 }}
-                                                    style={{ originY: 0, originX: 0 }}
-                                                    className="link-group-motion "
+                                            <motion.div // ENABLE AFTER TESTING
+                                                key="link-group"
+                                                animate={{
+                                                    scaleY: activateNavLink.speakers ? 1 : 0,
+                                                    opacity: activateNavLink.speakers ? 1 : 0
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                                style={{ originY: 0, originX: 0 }}
+                                                className="link-group-motion "
+                                            >
+                                                <LinkGroup
+                                                    className="link-group"
                                                 >
-                                                    <LinkGroup
-                                                        className="link-group"
-                                                    >
-                                                        <NavLinksContainer>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>RocketEar&nbsp;GT</a>
-                                                            </NavLink>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>Rocket&nbsp;Ear </a>
-                                                            </NavLink>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>Dyno</a>
-                                                            </NavLink>
-                                                        </NavLinksContainer>
-                                                    </LinkGroup>
-                                                </motion.div>
+                                                    <NavLinksContainer>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>RocketEar&nbsp;GT</a>
+                                                        </NavLink>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>Rocket&nbsp;Ear </a>
+                                                        </NavLink>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>Dyno</a>
+                                                        </NavLink>
+                                                    </NavLinksContainer>
+                                                </LinkGroup>
+                                            </motion.div>
                                         }
                                     </LinkGroupWrapper>
                                 </LinksContainer>
 
-                               
+
                                 {/* EARPHONES */}
 
                                 <LinksContainer className="nav-links">
                                     <LinkGroupWrapper
-                                    onMouseLeave={() => setActivateNavLink({ earphones: false })} // TODO: ENABLE AFTER TESTING
+                                        onMouseLeave={() => setActivateNavLink({ earphones: false })} // TODO: ENABLE AFTER TESTING
                                     >
                                         {/* GROUP LINK */}
                                         <NavLinkWrapper>
@@ -604,43 +605,43 @@ function Banner() {
 
                                         {/* EARPHONES PROUDUCT LINKS */}
                                         {
-                                                <motion.div // ENABLE AFTER TESTING
-                                                    key="link-group"
-                                                    animate={{
-                                                        scaleY: activateNavLink.earphones ? 1 : 0,
-                                                        opacity: activateNavLink.earphones ? 1 : 0
-                                                    }}
-                                                    transition={{ duration: 0.25 }}
-                                                    style={{ originY: 0, originX: 0 }}
-                                                    className="link-group-motion "
+                                            <motion.div // ENABLE AFTER TESTING
+                                                key="link-group"
+                                                animate={{
+                                                    scaleY: activateNavLink.earphones ? 1 : 0,
+                                                    opacity: activateNavLink.earphones ? 1 : 0
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                                style={{ originY: 0, originX: 0 }}
+                                                className="link-group-motion "
+                                            >
+                                                <LinkGroup
+                                                    className="link-group"
                                                 >
-                                                    <LinkGroup
-                                                        className="link-group"
-                                                    >
-                                                        <NavLinksContainer>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>RocketEar&nbsp;GT</a>
-                                                            </NavLink>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>Rocket&nbsp;Ear </a>
-                                                            </NavLink>
-                                                            <NavLink
-                                                                href="/product/REGT200"
-                                                            >
-                                                                <a>Dyno</a>
-                                                            </NavLink>
-                                                        </NavLinksContainer>
-                                                    </LinkGroup>
-                                                </motion.div>
+                                                    <NavLinksContainer>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>RocketEar&nbsp;GT</a>
+                                                        </NavLink>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>Rocket&nbsp;Ear </a>
+                                                        </NavLink>
+                                                        <NavLink
+                                                            href="/product/REGT200"
+                                                        >
+                                                            <a>Dyno</a>
+                                                        </NavLink>
+                                                    </NavLinksContainer>
+                                                </LinkGroup>
+                                            </motion.div>
                                         }
                                     </LinkGroupWrapper>
                                 </LinksContainer>
 
-                               
+
 
 
                             </Nav>
@@ -683,6 +684,7 @@ function Banner() {
                     // cartArray={cartArray}
                     isLoading={isLoading}
                     hideCart={hideCart}
+                    totalItems={totalItems}
                 />
                 {/* </motion.div> */}
             </CartWindow >

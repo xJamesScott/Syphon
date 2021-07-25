@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Image from 'next/image';
+import { PopText } from './Text';
 
 export const ProductPage = styled.div`
     display: flex;
@@ -39,7 +40,7 @@ export const ProductInfoWrapper = styled.div`
     height: 100%;
 `;
 
-export const NewTag = styled.p`
+export const NewTag = styled(PopText)`
 
 `;
 

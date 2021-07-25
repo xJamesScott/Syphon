@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import { Button } from './Buttons'
+import { Button, ButtonOrange } from './Buttons'
 
 
 export const CheckoutSummary = styled.div`
@@ -30,7 +30,7 @@ export const CheckoutProdIMG = styled(Image)`
 
 export const ProductWrapper = styled.div`
     display: flex;
-    justify-content: center;
+    /* justify-content: space-between; */
     width: 100%;
     gap: 5%;
 
@@ -71,21 +71,31 @@ export const ProductWrapper = styled.div`
     }
 `;
 
-
 export const TotalWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `;
 
-export const SummaryTotals = styled.h5`
+export const SummaryTotals = styled.p`
     cursor: pointer;
 `;
 
-export const Cost = styled.h3`
+export const Cost = styled.h5`
     text-align: right;
 `;
 
 export const TextWrapper = styled.div`
+    justify-self: start;
+    flex: 1 1 30%;
+    p { 
+        font-weight: bold;
+        margin: 0;
+    }
+    .price {
+        opacity: 50%;
+    }
 `;
 
 export const ProductTitle = styled.h4`
@@ -96,8 +106,15 @@ export const ProductPrice = styled.p`
 
 `;
 
-export const PayButton = styled(Button)`
-
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    a { 
+        width: 100%;
+    }
+`;
+export const PayButton = styled(ButtonOrange)`
+     width: 100%;
 `;
 
 
