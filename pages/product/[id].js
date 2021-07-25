@@ -17,7 +17,7 @@ import {
     ProductPrice,
     CartRow,
     QuantityWrapper,
-    Quantity,
+    // Quantity,
     AddCart,
     SubSectionTitle,
     SubSectionWrapper,
@@ -45,6 +45,8 @@ import {
     AboutTitle,
     AboutIMG
 } from '../../components/ProductPage';
+
+import ButtonHollow from '../../components/ButtonHollow';
 
 
 
@@ -167,9 +169,9 @@ const ProductInfo = ({ product }) => {
                             >
                                 -
                             </Increment>
-                            <Quantity>
+                            <p>
                                 {productCount}
-                            </Quantity>
+                            </p>
                             <Increment
                                 onClick={() => setProductCount(productCount + 1)}
                             >
@@ -196,13 +198,9 @@ const ProductInfo = ({ product }) => {
                         FEATURES
                     </SubSectionTitle>
 
-                    <Info>
-                        <p
-                            dangerouslySetInnerHTML={{ __html: features }}
-                        // TODO: PROOFREAD
-                        >
-                        </p>
-                    </Info>
+                    <Info
+                        dangerouslySetInnerHTML={{ __html: features }}
+                    />
                 </SubSectionWrapper>
                 <SubSectionWrapper>
                     <SubSectionTitle>
@@ -230,7 +228,9 @@ const ProductInfo = ({ product }) => {
 
             {/* IMAGES SECTION */}
 
-            <ProductSection>
+            <ProductSection
+                class="product-images"
+            >
                 <IMGWrapper>
                     <IMGSmallContainer>
                         <ProductIMG
@@ -263,11 +263,15 @@ const ProductInfo = ({ product }) => {
                     YOU MAY ALSO LIKE
                 </SubSectionTitle>
                 <ProductGallery>
-                    <ProductsContainer>
+                    <ProductsContainer
+                        className="product-gallery"
+                    >
                         {
-                            alsoProducts.filter((item, i) => i < 3).map((item) => {
+                            alsoProducts.filter((item, i) => i < 3).map((item, j) => {
                                 return (
-                                    <ProductWrapper>
+                                    <ProductWrapper
+                                        id={item.name + j}
+                                    >
                                         <ProductThumbnail
                                             src="/media/placeholderIMG.png" // product.thumbnailIMG
                                             width={350}
@@ -276,7 +280,9 @@ const ProductInfo = ({ product }) => {
                                         <ProductName>
                                             {item.name}
                                         </ProductName>
-                                        <AddCart>
+                                        <AddCart 
+                                            className="also-products"
+                                        >
                                             SEE PRODUCT
                                         </AddCart>
                                     </ProductWrapper>
@@ -288,6 +294,7 @@ const ProductInfo = ({ product }) => {
                     <ProductTypesContainer>
                         {/* HEADPHONES */}
                         <ProductTypeWrapper>
+                            <div className="type-bg" />
                             <TypeIMG
                                 src="/media/placeholderIMG.png" // get from server link
                                 width={123}
@@ -296,18 +303,27 @@ const ProductInfo = ({ product }) => {
                             <TypeTitle>
                                 HEADPHONES
                             </TypeTitle>
-                            <ShopWrapper>
+                            <ShopWrapper
+                                value="SHOP"
+                                className="prod-types"
+                            />
+
+                            {/* 
+                             <ShopWrapper>
                                 <ShopText>
                                     SHOP
                                 </ShopText>
                                 <ShopArrow>
                                     {">"}
-                                    {/* use icon-arrow-right.svg */}
+                                    // use icon-arrow-right.svg
                                 </ShopArrow>
-                            </ShopWrapper>
+                            </ShopWrapper> 
+                             */}
+
                         </ProductTypeWrapper>
                         {/* SPEAKERS */}
                         <ProductTypeWrapper>
+                            <div className="type-bg" />
                             <TypeIMG
                                 src="/media/placeholderIMG.png" // get from server link
                                 width={123}
@@ -316,18 +332,26 @@ const ProductInfo = ({ product }) => {
                             <TypeTitle>
                                 SPEAKERS
                             </TypeTitle>
-                            <ShopWrapper>
+                            <ShopWrapper
+                                value="SHOP"
+                                className="prod-types"
+                            />
+
+                            {/* 
+                             <ShopWrapper>
                                 <ShopText>
                                     SHOP
                                 </ShopText>
                                 <ShopArrow>
                                     {">"}
-                                    {/* TODO: use source from server */}
+                                    // use icon-arrow-right.svg
                                 </ShopArrow>
-                            </ShopWrapper>
+                            </ShopWrapper> 
+                             */}
                         </ProductTypeWrapper>
                         {/* EARPHONES */}
                         <ProductTypeWrapper>
+                            <div className="type-bg" />
                             <TypeIMG
                                 src="/media/placeholderIMG.png" // get from server link
                                 width={123}
@@ -336,29 +360,39 @@ const ProductInfo = ({ product }) => {
                             <TypeTitle>
                                 EARPHONES
                             </TypeTitle>
-                            <ShopWrapper>
+                            <ShopWrapper
+                                value="SHOP"
+                                className="prod-types"
+                            />
+
+                            {/* 
+                             <ShopWrapper>
                                 <ShopText>
                                     SHOP
                                 </ShopText>
                                 <ShopArrow>
                                     {">"}
+                                    // use icon-arrow-right.svg
                                 </ShopArrow>
-                            </ShopWrapper>
+                            </ShopWrapper> 
+                             */}
                         </ProductTypeWrapper>
                     </ProductTypesContainer>
                 </ProductGallery>
-            </ProductSection>
+            </ProductSection >
 
-            <ProductSection>
+            <ProductSection
+                className="about-product"
+            >
                 <AboutText>
                     <AboutTitle>
-                        BRINGING YOU THE
-                        <div className="pop-word">BEST</div>
-                        AUDIO GEAR
+                        BRINGING&nbsp;YOU&nbsp;THE<br />
+                        <span className="pop-word">BEST&nbsp;</span>
+                        AUDIO&nbsp;GEAR
                     </AboutTitle>
-                    <Info>
+                    <p>
                         Located at the heart of New York City, Syphon is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Syphon the best place to buy your portable audio equipment.
-                    </Info>
+                    </p>
                 </AboutText>
                 <AboutIMG
                     src="/media/placeholderIMG.png" // get from server link
@@ -366,8 +400,6 @@ const ProductInfo = ({ product }) => {
                     height={588}
                 />
             </ProductSection>
-
-
         </ProductPage >
     );
 };

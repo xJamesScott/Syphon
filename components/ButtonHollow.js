@@ -7,7 +7,8 @@ const { colors } = theme;
 
 const Button = styled.button`
     border: none;
-    background: ${colors.accent1};
+    /* background: ${colors.accent1}; */
+    background: transparent;
     height: fit-content;
 
     :hover {
@@ -35,11 +36,16 @@ const Button = styled.button`
         margin: 0;
         transition: all .25s ease;
     }
+
+    &.prod-types {
+        margin-bottom: 3rem;
+    }
 `;
 
-const ButtonHollow = ({ value }) => {
+const ButtonHollow = ({ value, className }) => {
     return (
         <Button
+            className={className}
         >
             <p>{value}</p>
             <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">

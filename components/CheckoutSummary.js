@@ -33,6 +33,18 @@ export const ProductWrapper = styled.div`
     /* justify-content: space-between; */
     width: 100%;
     gap: 5%;
+    position: relative;
+
+    .active-area {
+        position: absolute;
+        background: transparent;
+        /* pointer-events: none; */
+        width: 110%;
+        height: 110%;
+        left: 0;
+        right: 0;
+        z-index: -1 ;
+    }
 
     &.confirmation {
         flex-direction: column;

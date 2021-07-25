@@ -17,6 +17,7 @@ export const PopText = styled.p`
     line-height: 1.9rem;
     letter-spacing: 1rem;
     color: ${colors.main};
+    margin: 0;
 `;
 
 export const PopTextSmall = styled.p`

@@ -12,9 +12,11 @@ export const ButtonOrange = styled.button`
     background: ${colors.main};
     height: fit-content;
     padding: 1.5rem 3rem;
+    cursor: pointer !important;
 
     :hover {
         background: ${colors.accent4}; 
+        cursor: pointer !important;
         transition: all .25s ease; 
     }
     transition: all .25s ease;

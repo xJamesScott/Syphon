@@ -82,7 +82,7 @@ const CartTitle = styled.h2`
 
 `;
 
-const Quantity = styled.div`
+export const Quantity = styled.div`
     justify-self: end;
     flex: 0 1 25%;
     display: flex;
@@ -98,10 +98,8 @@ const Quantity = styled.div`
     position: relative;
 `;
 
-const IncrementQTY = styled.p`
-    
+export const IncrementQTY = styled.p`
     /* color: ${colors.mainText}; */
-    
     opacity: 50%;
 
     :hover {
@@ -109,14 +107,31 @@ const IncrementQTY = styled.p`
     }
 `;
 
-const DeleteItem = styled.svg`
+
+const DeleteItemContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    /* height: 150%; */
     position: absolute;
-    /* top: 0; */
     right: -25%;
-    /* height: min-content; */
+`;
+
+const DeleteItemWrapper = styled.div`
+    background-color: transparent;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    top: -50%;
+    bottom: -50%;
+    right: 0;
+`;
+
+const DeleteItem = styled.svg`
     opacity: 0;
     transition: all .25s ease;
-    /* width: min-content; */
+    height: 15px;
+    width: 15px;
 
     &.prod-hovered {
         opacity: 40%;
@@ -262,6 +277,8 @@ export default function Cart(
 
     const [prodHover, setProdHover] = useState({});
 
+    console.log({ prodHover: prodHover });
+
     return (
         !isLoading &&
         <CartWindow
@@ -302,13 +319,21 @@ export default function Cart(
                                         </TitleLine>
                                         {
                                             cartArray.map((item, i) => {
-                                                const current = item[1]
+                                                const current = item[1];
+                                                const name = JSON.stringify(current.name);
                                                 return (
                                                     < ProductWrapper
                                                         key={"cartItem" + i}
-                                                        onMouseEnter={() => setProdHover(true)}
-                                                        onMouseLeave={() => setProdHover(false)} // TODO: SET TO FALSE AFTER TESTING
+                                                        onMouseEnter={() => setProdHover({ name: true })}
+                                                        onMouseLeave={() => setProdHover({ name: false })} // TODO: SET TO FALSE AFTER TESTING
                                                     >
+                                                        {/* <div
+                                                            className="active-area"
+                                                            // onMouseEnter={() => setProdHover({ name: true })}
+                                                            // onMouseLeave={() => setProdHover({ name: false })}
+                                                            // onClick={(e) => { e.preventDefault() }}
+                                                        /> */}
+
                                                         <CheckoutProdIMG src="/media/placeholderIMG.png"
                                                             width={64}
                                                             height={64}
@@ -368,36 +393,42 @@ export default function Cart(
                                                             >
                                                                 +
                                                             </IncrementQTY>
-                                                            <DeleteItem
-                                                                className={prodHover ? "prod-hovered" : ""}
-                                                                onClick={() => {
-                                                                    dispatch(cartActions.directCartEdit({
-                                                                        product: {
-                                                                            name: current.name,
-                                                                            productId: current.productId,
-                                                                            type: current.type,
-                                                                            price: current.price,
-                                                                            quantity: current.quantity
-                                                                        }, inc: "delete"
-                                                                    }
-                                                                    ));
-                                                                    dispatch(cartActions.setCartFinishLoading({}));
-                                                                }}
-                                                                width={15} height={15} viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                            >
-                                                                <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x={0} y={0} width={15} height={15}>
-                                                                    <rect width={15} height={15} fill="url(#pattern0)" />
-                                                                </mask>
-                                                                <g mask="url(#mask0)">
-                                                                    <rect class="delete-can" x={-1} y={1} width={18} height={18} fill="blue" />
-                                                                </g>
-                                                                <defs>
-                                                                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width={1} height={1}>
-                                                                        <use xlinkHref="#image0" transform="scale(0.0416667)" />
-                                                                    </pattern>
-                                                                    <image id="image0" width={24} height={24} xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAZUlEQVRIiWNgGCmggYGB4T8a7iBGIyMWsf8UOgbFTCYKDSMbwIKBYvU09wGxFqC7kGgfDhofjFowasGoBRQAFiLVoRfr2Ip5rGDAgugplEavxXBhZD1EAT8GBoYnJFjwBKpnGAIAUcAmPA1WYN0AAAAASUVORK5CYII=" />
-                                                                </defs>
-                                                            </DeleteItem>
+
+                                                            <DeleteItemContainer>
+                                                                <DeleteItemWrapper
+                                                                />
+                                                                <DeleteItem
+                                                                    className={prodHover.name ? "prod-hovered" : ""}
+                                                                    onMouseEnter={() => { console.log(prodHover) }}
+                                                                    onClick={() => {
+                                                                        dispatch(cartActions.directCartEdit({
+                                                                            product: {
+                                                                                name: current.name,
+                                                                                productId: current.productId,
+                                                                                type: current.type,
+                                                                                price: current.price,
+                                                                                quantity: current.quantity
+                                                                            }, inc: "delete"
+                                                                        }
+                                                                        ));
+                                                                        dispatch(cartActions.setCartFinishLoading({}));
+                                                                    }}
+                                                                    width={15} height={15} viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                                >
+                                                                    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x={0} y={0} width={15} height={15}>
+                                                                        <rect width={15} height={15} fill="url(#pattern0)" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0)">
+                                                                        <rect class="delete-can" x={-1} y={1} width={18} height={18} fill="blue" />
+                                                                    </g>
+                                                                    <defs>
+                                                                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width={1} height={1}>
+                                                                            <use xlinkHref="#image0" transform="scale(0.0416667)" />
+                                                                        </pattern>
+                                                                        <image id="image0" width={24} height={24} xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAZUlEQVRIiWNgGCmggYGB4T8a7iBGIyMWsf8UOgbFTCYKDSMbwIKBYvU09wGxFqC7kGgfDhofjFowasGoBRQAFiLVoRfr2Ip5rGDAgugplEavxXBhZD1EAT8GBoYnJFjwBKpnGAIAUcAmPA1WYN0AAAAASUVORK5CYII=" />
+                                                                    </defs>
+                                                                </DeleteItem>
+                                                            </DeleteItemContainer>
                                                         </Quantity>
                                                     </ProductWrapper>
                                                 )
