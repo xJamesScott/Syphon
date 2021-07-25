@@ -101,6 +101,16 @@ const cartReducer = (state = initialState, action) => {
                 }, product.productId);
             }
 
+            if (inc == "delete") {
+                directCartEdit({
+                    name: product.name,
+                    productId: product.productId,
+                    type: product.type,
+                    price: product.price,
+                    quantity: 0
+                }, product.productId);
+            }
+
             const cartCookie = Cookie.getJSON("cart") // new cookie
 
             return {
