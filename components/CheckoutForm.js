@@ -6,10 +6,11 @@ import {
     FormLabel,
     FormSectionTitle
 } from './FormStyles';
-
 import Image from 'next/image';
-
 import styled from 'styled-components';
+import { theme, mq } from '../constants/theme';
+
+const { colors } = theme;
 
 export const CheckoutWrapper = styled.div`
     display: flex;
@@ -19,9 +20,35 @@ export const CheckoutWrapper = styled.div`
     gap: 1.6rem;
     padding: 4.8rem;
     padding-top: 0;
+
+
     h3, h4, h5 {
         margin: 0 0;
         flex: 1 1 100%;
+    }
+
+    h3 { 
+        letter-spacing: .114rem;
+        margin-bottom: 4.1rem;
+    }
+
+    h4 { 
+        font-size: 1.3rem;
+        line-height: 2.5rem;
+        letter-spacing: .093rem;
+        color: ${colors.main};
+    }
+
+    .section-title {
+        margin-bottom: 1.6rem;
+    }
+
+    .payment-details {
+        margin-top: 6.1rem;
+    }
+
+    .payment-method {
+        margin-bottom: 3.2rem;
     }
 `;
 
@@ -33,6 +60,24 @@ export const CheckoutForm = styled(Form)`
     display: flex;
     gap: 2.4rem;
     justify-content: space-between;
+    /* margin-bottom: 27.4rem; */
+
+    .panel-container {
+        margin-top: 14.5rem;
+        background: ${colors.accent1};
+        border-radius: .5rem;
+        height: min-content;
+        margin-bottom: 27.4rem;
+    }
+
+    .checkout-panel {
+        flex: 1 1 70%;
+    }
+    .summary {
+         flex: 1 1 30%;
+         position: sticky;
+         top: 15%;
+    }
 
 /* 
     * {
@@ -42,6 +87,17 @@ export const CheckoutForm = styled(Form)`
 
 export const CheckoutInput = styled(Input)`
     width: 100%;
+    border: 1px solid rgba(207, 207, 207, .4);
+    border-radius: .5rem;
+    padding: 2.4rem 1.8rem;
+
+    /* font */
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: -.025rem;
+    line-height: auto;
+    color: rgba(0, 0, 0, .4);
+
     
     &#card-number {
 
@@ -94,9 +150,14 @@ export const CardInfo = styled.div`
 export const InputWrapper = styled.div`
     flex: 1 2 40%;
     justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
    
     .label-error {
         display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         gap: 10%;
     }
 
@@ -107,6 +168,20 @@ export const InputWrapper = styled.div`
     &.quarter {
         flex: 1 1 25%;
     }
+`;
+
+export const NoItems = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 10rem 0;
+
+    a { 
+        width: 50%;
+    }
+
 `;
 
 

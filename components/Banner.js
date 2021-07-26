@@ -14,10 +14,13 @@ import { theme, mq } from '../constants/theme';
 import { ButtonOrange, ButtonWhite } from '../components/Buttons';
 import ButtonHollow from '../components/ButtonHollow';
 
+
 const { colors } = theme;
 
 const CartWindow = styled.div`
     z-index: 10; 
+    position: sticky;
+    top: 0;
 `;
 const BannerWrapper = styled.div`
     background-color: ${colors.accent5};
@@ -175,9 +178,12 @@ const NavLinksContainer = styled.div`
     transition: all .25s ease;
 
     a { 
+        display: flex;
+        flex-direction: column;
+        font-size: 1.5rem;
+       
         :hover { 
-            text-decoration: underline;
-            color: ${colors.mainText};
+            filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 1));
             transition: all .25s ease;
         }
     }
@@ -252,6 +258,18 @@ export const LinkGroup = styled.div`
     justify-content: center;
     width: 100%;
     font-size: 1.3rem;
+    transform: scaleY(0);
+    transform-origin: 0 0;
+    opacity: 0;
+    transition: all .4s ease;
+
+
+    &.show-menu {
+        transition: all .4s ease;
+        opacity: 1;
+        transform-origin: 0 0;
+        transform: scaleY(1);
+    }
 `;
 
 const CartIcon = styled.img`
@@ -270,6 +288,7 @@ const Logo = styled(Image)`
 `;
 
 function Banner() {
+
 
     useEffect(() => {
         typeof window !== "undefined" && getCart();
@@ -305,6 +324,8 @@ function Banner() {
     }, [isLoading, cart]);
 
 
+
+
     const activateNavInit = {
         home: false,
         headphones: false,
@@ -313,6 +334,16 @@ function Banner() {
     }
 
     const [activateNavLink, setActivateNavLink] = useState(activateNavInit); // make an object for each product type
+    console.log({ activateNavLink: activateNavLink })
+
+    // useEffect(() => {
+    //     setActivateNavLink({
+    //         home: false,
+    //         headphones: false,
+    //         speakers: false,
+    //         earphones: false
+    //     })
+    // })
 
     const hideCart = () => setCartVisible(false);
 
@@ -413,38 +444,40 @@ function Banner() {
 
                                         {/* HEADPHONES PROUDUCT LINKS */}
                                         {
-                                            <motion.div // ENABLE AFTER TESTING
+                                            // <motion.div // ENABLE AFTER TESTING
+                                            //     key="link-group"
+                                            //     animate={{
+                                            //         // scaleY: activateNavLink.headphones ? 1 : 0,
+                                            //         opacity: activateNavLink.headphones ? 1 : 0
+                                            //     }}
+                                            //     transition={{ duration: 0.25 }}
+                                            //     style={{ originY: 0, originX: 0 }}
+                                            //     className="link-group-motion "
+                                            // >
+                                            <LinkGroup
+                                                className="link-group"
                                                 key="link-group"
-                                                animate={{
-                                                    scaleY: activateNavLink.headphones ? 1 : 0,
-                                                    opacity: activateNavLink.headphones ? 1 : 0
-                                                }}
-                                                transition={{ duration: 0.25 }}
-                                                style={{ originY: 0, originX: 0 }}
-                                                className="link-group-motion "
+                                                className={activateNavLink.headphones ? "show-menu link-group-motion" : "link-group-motion"}
                                             >
-                                                <LinkGroup
-                                                    className="link-group"
-                                                >
-                                                    <NavLinksContainer>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>RocketEar&nbsp;GT</a>
-                                                        </NavLink>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>Rocket&nbsp;Ear </a>
-                                                        </NavLink>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>Dyno</a>
-                                                        </NavLink>
-                                                    </NavLinksContainer>
-                                                </LinkGroup>
-                                            </motion.div>
+                                                <NavLinksContainer>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>RocketEar&nbsp;GT</a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Rocket&nbsp;Ear </a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Dyno</a>
+                                                    </NavLink>
+                                                </NavLinksContainer>
+                                            </LinkGroup>
+                                            // </motion.div>
                                         }
                                     </LinkGroupWrapper>
                                 </LinksContainer>
@@ -491,38 +524,40 @@ function Banner() {
                                         {/* SPEAKERS PROUDUCT LINKS */}
 
                                         {
-                                            <motion.div // ENABLE AFTER TESTING
+                                            // <motion.div // ENABLE AFTER TESTING
+                                            //     key="link-group"
+                                            //     animate={{
+                                            //         scaleY: activateNavLink.speakers ? 1 : 0,
+                                            //         opacity: activateNavLink.speakers ? 1 : 0
+                                            //     }}
+                                            //     transition={{ duration: 0.25 }}
+                                            //     style={{ originY: 0, originX: 0 }}
+                                            //     className="link-group-motion "
+                                            // >
+                                            <LinkGroup
+                                                className="link-group"
                                                 key="link-group"
-                                                animate={{
-                                                    scaleY: activateNavLink.speakers ? 1 : 0,
-                                                    opacity: activateNavLink.speakers ? 1 : 0
-                                                }}
-                                                transition={{ duration: 0.25 }}
-                                                style={{ originY: 0, originX: 0 }}
-                                                className="link-group-motion "
+                                                className={activateNavLink.speakers ? "show-menu link-group-motion" : "link-group-motion"}
                                             >
-                                                <LinkGroup
-                                                    className="link-group"
-                                                >
-                                                    <NavLinksContainer>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>RocketEar&nbsp;GT</a>
-                                                        </NavLink>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>Rocket&nbsp;Ear </a>
-                                                        </NavLink>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>Dyno</a>
-                                                        </NavLink>
-                                                    </NavLinksContainer>
-                                                </LinkGroup>
-                                            </motion.div>
+                                                <NavLinksContainer>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>RocketEar&nbsp;GT</a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Rocket&nbsp;Ear </a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Dyno</a>
+                                                    </NavLink>
+                                                </NavLinksContainer>
+                                            </LinkGroup>
+                                            // </motion.div>
                                         }
                                     </LinkGroupWrapper>
                                 </LinksContainer>
@@ -568,38 +603,30 @@ function Banner() {
 
                                         {/* EARPHONES PROUDUCT LINKS */}
                                         {
-                                            <motion.div // ENABLE AFTER TESTING
-                                                key="link-group"
-                                                animate={{
-                                                    scaleY: activateNavLink.earphones ? 1 : 0,
-                                                    opacity: activateNavLink.earphones ? 1 : 0
-                                                }}
-                                                transition={{ duration: 0.25 }}
-                                                style={{ originY: 0, originX: 0 }}
-                                                className="link-group-motion "
+                                           
+                                            <LinkGroup
+                                            className="link-group"
+                                            key="link-group"
+                                            className={activateNavLink.earphones ? "show-menu link-group-motion" : "link-group-motion"}
                                             >
-                                                <LinkGroup
-                                                    className="link-group"
-                                                >
-                                                    <NavLinksContainer>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>RocketEar&nbsp;GT</a>
-                                                        </NavLink>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>Rocket&nbsp;Ear </a>
-                                                        </NavLink>
-                                                        <NavLink
-                                                            href="/product/REGT200"
-                                                        >
-                                                            <a>Dyno</a>
-                                                        </NavLink>
-                                                    </NavLinksContainer>
-                                                </LinkGroup>
-                                            </motion.div>
+                                                <NavLinksContainer>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>RocketEar&nbsp;GT</a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Rocket&nbsp;Ear </a>
+                                                    </NavLink>
+                                                    <NavLink
+                                                        href="/product/REGT200"
+                                                    >
+                                                        <a>Dyno</a>
+                                                    </NavLink>
+                                                </NavLinksContainer>
+                                            </LinkGroup>
                                         }
                                     </LinkGroupWrapper>
                                 </LinksContainer>

@@ -16,6 +16,10 @@ import styled from 'styled-components';
 import { motion } from "framer-motion";
 
 
+const SickTest = styled(motion.div)`
+
+`;
+
 
 const TestComponent = styled.div`
 
@@ -102,6 +106,8 @@ export default function Home(test2, test3, test4) {
     >
       Home
       <div>
+        <SickTest>Brooooo!</SickTest>
+
         <Link
           href="/"
         >

@@ -53,6 +53,10 @@ export const CartWrapper = styled.div`
     .visible {
         width: 100%;
     } */
+
+    .modal-motion {
+        position: relative;
+    }
 `;
 
 const CartModalMargin = styled.div`
@@ -293,7 +297,9 @@ export default function Cart(
                 <motion.div
                     animate={{ scale: visible ? 1 : 0 }}
                     transition={{ duration: 0.25 }}
-                    style={{ originX: .9 }}
+                    style={{ originX: .99 }}
+                    className="modal-motion"
+
                 >
                     <CartModalMargin
                         className="section-margin"

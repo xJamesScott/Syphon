@@ -143,7 +143,8 @@ export const BoxItem = styled.p`
 
 export const IMGWrapper = styled.div`
       display: flex;
-      justify-content: center;
+      /* justify-content: center; */
+      justify-content: space-between;
       gap: 2rem;
     .prod-img-small {
     }

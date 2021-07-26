@@ -7,6 +7,10 @@
 // TODO - MAKE 'SUMMARY' STICKY ON SIDE WHILE SCROLLING
 
 import { useState, useEffect } from 'react';
+import { cartActions } from '../store/cart'
+import { selectCart } from '../store/cart';
+import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from "next/router";
 import {
     CheckoutForm,
     CheckoutWrapper,
@@ -18,7 +22,8 @@ import {
     PaymentButton,
     PaymentIcon,
     CardInfo,
-    InputWrapper
+    InputWrapper,
+    NoItems
 } from '../components/CheckoutForm';
 import { FormSelect } from '../components/FormStyles'
 import { useForm } from 'react-hook-form';
@@ -36,10 +41,9 @@ import {
     PayButton
 } from '../components/CheckoutSummary';
 import ThankYouModal from '../components/ThankYouModal';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { selectCart } from '../store/cart';
 import axios from 'axios';
+
+
 
 const someVal = "null" // TODO - REPLACE AND REMOVE PLACEHOLDER
 
@@ -51,14 +55,28 @@ const chargeObj = { // TODO - REMOVE PLACEHOLDER
 }
 
 const checkout = ({ }) => {
+    const dispatch = useDispatch();
     const [showTYModal, setTYModal] = useState(true); // TODO: SET TO FALSE AFTER TESTING
     const [cartItems, setCartItems] = useState([]);
+    const [cartStatus, setCartStatus] = useState({});
+    const [counting, setCounting] = useState(true);
+    const [itemCount, setItemCount] = useState();
+
+    const {
+        isLoading = true
+    } = cartStatus;
 
     const cart = useSelector(selectCart);
 
     useEffect(() => {
+        dispatch(cartActions.setCartLoading({}));
         setCartItems(Object.values(cart.items));
+        setCartStatus(cart);
+        dispatch(cartActions.setCartFinishLoading({}));
+
     }, [cart.items]);
+
+    console.log({ cartStatus: cartStatus })
 
 
     const { register, handleSubmit, formState: { errors }, getValues
@@ -75,6 +93,23 @@ const checkout = ({ }) => {
         return sum += item.price * item.quantity // TODO - PLUGIN PROPER VARIABLES
     }, 0);
 
+    const rawItemCount = cartItems.reduce((sum, item) => {
+        return sum += item.quantity // TODO - PLUGIN PROPER VARIABLES
+    }, 0);
+
+    useEffect(() => {
+        setItemCount(rawItemCount);
+        setCounting(false);
+    }, [rawItemCount, cartItems]);
+
+    // () => {
+    //     setCounting(false);
+    // }
+
+    console.log({ itemCount: itemCount })
+
+
+
     const emailData = {
         numItems: cartItems.length,
         address: fullAddress,
@@ -90,6 +125,8 @@ const checkout = ({ }) => {
         // axios.post('https://api.sendgrid.com/v3/mail/send');
         axios.post('/api/sendEmail', emailData);
     };
+
+    const router = useRouter();
 
     // const testObj = { // TODO - REMOVE PLACEHOLDER
     //     item1: { price: 4, quantity: 4 },
@@ -111,284 +148,328 @@ const checkout = ({ }) => {
     //     console.log({ "cartItems Map": item })
     // });
 
+    // useEffect(() => {
+    //     if (typeof window !== undefined && itemCount < 1 && !isLoading && !counting) {
+    //         router.push("/");
+    //     }
+    // }, [isLoading, itemCount]);
+
+    // console.log({ isLoading: isLoading, itemCount: itemCount, counting: counting })
+
+
     return (
         // <div className="section-margin">
-        <div
-            className="checkout-page"
-        >
-            <CheckoutForm
-                className="section-margin"
-                id="checkout"
-            >
 
-                <CheckoutWrapper
-                    className="checkout-panels"
+        itemCount < 1 ?
+            <NoItems>
+                <h3>CART EMPTY.</h3>
+                <a href="/">
+                    <PayButton>SHOP</PayButton>
+                </a>
+                
+
+            </NoItems>
+            :
+            <div
+                className="checkout-page"
+            >
+                <CheckoutForm
+                    className="section-margin"
+                    id="checkout"
                 >
-                    <h3>CHECKOUT</h3>
-                    <h4>BILLING DETAILS</h4>
-                    <InputWrapper>
-                        <InputWrapper className="label-error">
-                            <CheckoutInputLabel htmlForm="fname"> First Name </CheckoutInputLabel>
-                            {<CheckoutFormError>Errors go here{errors.fname && errors.fname.message}</CheckoutFormError>}
-                        </InputWrapper>
-                        <CheckoutInput
-                            name="fname"
-                            id="fname"
-                            defaultValue={someVal ? "yooo" : null}
-                            placeholder={"Enter First Name"}
-                            {...register('fname',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                })}
-                        />
-                    </InputWrapper>
-                    <InputWrapper>
-                        <CheckoutInputLabel htmlForm="lname"> Last Name </CheckoutInputLabel>
-                        {<CheckoutFormError>{errors.lname && errors.lname.message}</CheckoutFormError>}
-                        <CheckoutInput
-                            name="lname"
-                            id="lname"
-                            defaultValue={someVal ? "yooo" : null}
-                            placeholder={"Enter Last Name"}
-                            {...register('lname',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                })}
-                        />
-                    </InputWrapper>
-                    <InputWrapper>
-                        <CheckoutInputLabel htmlForm="email"> Email Address </CheckoutInputLabel>
-                        {<CheckoutFormError>{errors.email && errors.email.message}</CheckoutFormError>}
-                        <CheckoutInput
-                            name="email"
-                            id="email"
-                            // defaultValue={someVal ? "yooo" : null} // TODO: ENABLE WHEN NOT TESTING
-                            defaultValue={"email@gmail.com"}
-                            placeholder={"email@email.com"}
-                            {...register('email',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                    pattern: {
-                                        value: /\S+@\S+\.\S+/,
-                                        message: "Please enter a valid email."
-                                    }
-                                })}
-                        />
-                    </InputWrapper>
-                    <InputWrapper>
-                        <CheckoutInputLabel htmlForm="phone"> Phone Number </CheckoutInputLabel>
-                        {<CheckoutFormError>{errors.phone && errors.phone.message}</CheckoutFormError>}
-                        <CheckoutInput
-                            name="phone"
-                            id="phone"
-                            defaultValue={someVal ? "yooo" : null}
-                            placeholder={"+1 555-555-5555"}
-                            {...register('phone',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                })}
-                        />
-                    </InputWrapper>
-                    <h4>SHIPPING INFO</h4>
-                    {/* TODO - Add Google Maps Address Validation / Search */}
-                    <InputWrapper>
-                        <CheckoutInputLabel htmlForm="address"> Address </CheckoutInputLabel>
-                        {<CheckoutFormError>{errors.address && errors.address.message}</CheckoutFormError>}
-                        <CheckoutInput
-                            name="address"
-                            id="address"
-                            defaultValue={someVal ? "yooo" : null}
-                            placeholder={"Enter Street Address"}
-                            {...register('address',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                })}
-                        />
-                    </InputWrapper>
-                    <InputWrapper>
-                        <CheckoutInputLabel htmlForm="zip"> Zip Code </CheckoutInputLabel>
-                        {<CheckoutFormError>{errors.zip && errors.zip.message}</CheckoutFormError>}
-                        <CheckoutInput
-                            name="zip"
-                            id="zip"
-                            defaultValue={someVal ? "yooo" : null}
-                            placeholder={"10001"}
-                            {...register('zip',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                })}
-                        />
-                    </InputWrapper>
-                    <InputWrapper>
-                        <CheckoutInputLabel htmlForm="city"> City </CheckoutInputLabel>
-                        {<CheckoutFormError>{errors.city && errors.city.message}</CheckoutFormError>}
-                        <CheckoutInput
-                            name="city"
-                            id="city"
-                            defaultValue={someVal ? "yooo" : null}
-                            placeholder={"10001"}
-                            {...register('city',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                })}
-                        />
-                    </InputWrapper>
-                    <InputWrapper>
-                        <CheckoutInputLabel htmlForm="state"> State </CheckoutInputLabel>
-                        {<CheckoutFormError>{errors.state && errors.state.message}</CheckoutFormError>}
-                        <CheckoutInput
-                            name="state"
-                            id="state"
-                            defaultValue={someVal ? "yooo" : null}
-                            placeholder={"Enter State"}
-                            {...register('state',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                })}
-                        />
-                    </InputWrapper>
-                    <InputWrapper>
-                        <CheckoutInputLabel htmlForm="Country"> Country </CheckoutInputLabel>
-                        {<CheckoutFormError>{errors.Country && errors.Country.message}</CheckoutFormError>}
-                        <FormSelect
-                            name="Country"
-                            id="Country"
-                            placeholder={"Select Country"}
-                            {...register('Country',
-                                {
-                                    required: { value: true, message: "Required Field" },
-                                })}
+
+                    <div className="panel-container checkout-panel">
+                        <CheckoutWrapper
+                            className="checkout-panels"
                         >
-                            <option disabled defaultValue>Select Country</option>
-                            {countries.map((location, i) => { return <option key={i}>{location}</option> })}
-                        </FormSelect>
-                    </InputWrapper>
-                    <h4>PAYMENT DETAILS</h4>
-                    <h5>Payment Method</h5>
-                    {/* <div className="section-wrapper"> */}
-                    {/* PAYMENT TYPES */}
-                    {/*
-                        {TODO - INTEGRATE GOOGLE PAY}
-                        <PaymentButton onClick={null} htmlForm="gpay">
-                            <CheckoutInput type="radio" id="gpay" name="payment" value="gpay" />
-                            <PaymentIcon
-                                src="/media/placeholderIMG.png"
-                                height={50}
-                                width={50}
-                            />
-                        </PaymentButton>
-                       // TODO - INTEGRATE APPLE PAY
-                        <PaymentButton onClick={null} htmlForm="applepay">
-                            <CheckoutInput type="radio" id="applepay" name="payment" value="applepay" />
+                            <h3>CHECKOUT</h3>
+                            <h4 className="section-title">BILLING DETAILS</h4>
+                            <InputWrapper>
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="fname"> First Name </CheckoutInputLabel>
+                                    {<CheckoutFormError>Errors go here{errors.fname && errors.fname.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <CheckoutInput
+                                    name="fname"
+                                    id="fname"
+                                    defaultValue={someVal ? "yooo" : null}
+                                    placeholder={"Enter First Name"}
+                                    {...register('fname',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                        })}
+                                />
+                            </InputWrapper>
+                            <InputWrapper >
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="lname"> Last Name </CheckoutInputLabel>
+                                    {<CheckoutFormError>{errors.lname && errors.lname.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <CheckoutInput
+                                    name="lname"
+                                    id="lname"
+                                    defaultValue={someVal ? "yooo" : null}
+                                    placeholder={"Enter Last Name"}
+                                    {...register('lname',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                        })}
+                                />
+                            </InputWrapper>
+                            <InputWrapper>
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="email"> Email Address </CheckoutInputLabel>
+                                    {<CheckoutFormError>{errors.email && errors.email.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <CheckoutInput
+                                    name="email"
+                                    id="email"
+                                    // defaultValue={someVal ? "yooo" : null} // TODO: ENABLE WHEN NOT TESTING
+                                    defaultValue={"email@gmail.com"}
+                                    placeholder={"email@email.com"}
+                                    {...register('email',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                            pattern: {
+                                                value: /\S+@\S+\.\S+/,
+                                                message: "Please enter a valid email."
+                                            }
+                                        })}
+                                />
+                            </InputWrapper>
+                            <InputWrapper>
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="phone"> Phone Number </CheckoutInputLabel>
+                                    {<CheckoutFormError>{errors.phone && errors.phone.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <CheckoutInput
+                                    name="phone"
+                                    id="phone"
+                                    defaultValue={someVal ? "yooo" : null}
+                                    placeholder={"+1 555-555-5555"}
+                                    {...register('phone',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                        })}
+                                />
+                            </InputWrapper>
+                            <h4 className="section-title">SHIPPING INFO</h4>
+                            {/* TODO - Add Google Maps Address Validation / Search */}
+                            <InputWrapper>
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="address"> Address </CheckoutInputLabel>
+                                    {<CheckoutFormError>{errors.address && errors.address.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <CheckoutInput
+                                    name="address"
+                                    id="address"
+                                    defaultValue={someVal ? "yooo" : null}
+                                    placeholder={"Enter Street Address"}
+                                    {...register('address',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                        })}
+                                />
+                            </InputWrapper>
+                            <InputWrapper>
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="zip"> Zip Code </CheckoutInputLabel>
+                                    {<CheckoutFormError>{errors.zip && errors.zip.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <CheckoutInput
+                                    name="zip"
+                                    id="zip"
+                                    defaultValue={someVal ? "yooo" : null}
+                                    placeholder={"10001"}
+                                    {...register('zip',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                        })}
+                                />
+                            </InputWrapper>
+                            <InputWrapper>
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="city"> City </CheckoutInputLabel>
+                                    {<CheckoutFormError>{errors.city && errors.city.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <CheckoutInput
+                                    name="city"
+                                    id="city"
+                                    defaultValue={someVal ? "yooo" : null}
+                                    placeholder={"10001"}
+                                    {...register('city',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                        })}
+                                />
+                            </InputWrapper>
+                            <InputWrapper>
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="state"> State </CheckoutInputLabel>
+                                    {<CheckoutFormError>{errors.state && errors.state.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <CheckoutInput
+                                    name="state"
+                                    id="state"
+                                    defaultValue={someVal ? "yooo" : null}
+                                    placeholder={"Enter State"}
+                                    {...register('state',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                        })}
+                                />
+                            </InputWrapper>
+                            <InputWrapper>
+                                <InputWrapper className="label-error">
+                                    <CheckoutInputLabel htmlForm="Country"> Country </CheckoutInputLabel>
+                                    {<CheckoutFormError>{errors.Country && errors.Country.message}</CheckoutFormError>}
+                                </InputWrapper>
+                                <FormSelect
+                                    name="Country"
+                                    id="Country"
+                                    placeholder={"Select Country"}
+                                    {...register('Country',
+                                        {
+                                            required: { value: true, message: "Required Field" },
+                                        })}
+                                >
+                                    <option className="option" defaultValue disable="true">Select Country</option>
+                                    {countries.map((location, i) => { return <option key={i}>{location}</option> })}
+                                </FormSelect>
+                            </InputWrapper>
+                            <h4 className="section-title payment-details">PAYMENT DETAILS</h4>
+                            <h5 className="payment-method">Payment Method</h5>
+                            {/* <div className="section-wrapper"> */}
+                            {/* PAYMENT TYPES */}
+                            {/*
+                            {TODO - INTEGRATE GOOGLE PAY}
+                            <PaymentButton onClick={null} htmlForm="gpay">
+                                <CheckoutInput type="radio" id="gpay" name="payment" value="gpay" />
+                                <PaymentIcon
+                                    src="/media/placeholderIMG.png"
+                                    height={50}
+                                    width={50}
+                                />
+                            </PaymentButton>
+                           // TODO - INTEGRATE APPLE PAY
+                            <PaymentButton onClick={null} htmlForm="applepay">
+                                <CheckoutInput type="radio" id="applepay" name="payment" value="applepay" />
+                                <PaymentIcon
+                                    src="/media/placeholderIMG.png"
+                                    height={50}
+                                    width={50}
+                                />
+                            </PaymentButton> */}
+                            {/* <PaymentButton onClick={null} htmlForm="credit">
+                            <CheckoutInput type="radio" id="credit" name="payment" value="credit" />
+                            <CheckoutInputLabel htmlForm="credit"> Credit or Debit </CheckoutInputLabel>
                             <PaymentIcon
                                 src="/media/placeholderIMG.png"
                                 height={50}
                                 width={50}
                             />
                         </PaymentButton> */}
+                            {/* if Credit selected, show card inputs below*/}
+                            <CardInfo>
+                                <InputWrapper
+                                    className="card-details"
+                                >
 
-                    {/* <PaymentButton onClick={null} htmlForm="credit">
-                        <CheckoutInput type="radio" id="credit" name="payment" value="credit" />
-                        <CheckoutInputLabel htmlForm="credit"> Credit or Debit </CheckoutInputLabel>
-                        <PaymentIcon
-                            src="/media/placeholderIMG.png"
-                            height={50}
-                            width={50}
-                        />
-                    </PaymentButton> */}
-                    {/* if Credit selected, show card inputs below*/}
-                    <CardInfo>
-                        <InputWrapper
-                            className="card-details"
+                                    <CheckoutInputLabel htmlForm="number"> Card Number </CheckoutInputLabel>
+                                    <CheckoutInput
+                                        id="number"
+                                        name="number"
+                                        placeholder="0000 0000 0000 0000"
+                                    />
+                                </InputWrapper>
+                                <InputWrapper
+                                    className="card-details quarter"
+                                >
+                                    <CheckoutInputLabel htmlForm="expiration"> Expiration </CheckoutInputLabel>
+                                    <CheckoutInput
+                                        id="expiration"
+                                        name="expiration"
+                                        placeholder="MM / YY"
+                                    />
+                                </InputWrapper>
+                                <InputWrapper
+                                    className="card-details quarter"
+                                >
+                                    <CheckoutInputLabel htmlForm="number"> Security Code </CheckoutInputLabel>
+                                    <CheckoutInput
+                                        id="security-code"
+                                        name="security-code"
+                                        placeholder="CVC"
+                                    />
+                                </InputWrapper>
+                            </CardInfo>
+                            {/* </div> */}
+                        </CheckoutWrapper>
+                    </div>
+
+                    {/* <div> */}
+
+                    <div className="panel-container summary">
+                        <CheckoutSummary
+                            className="checkout-panels"
                         >
-                            <CheckoutInputLabel htmlForm="number"> Card Number </CheckoutInputLabel>
-                            <CheckoutInput
-                                id="number"
-                                name="number"
-                                placeholder="0000 0000 0000 0000"
+                            <h4>SUMMARY</h4>
+                            {cartItems.map((item, i) => { // iterates through unique items TODO: CHANGE 'countries' to cart (state)
+                                if (item.quantity > 0) {
+                                    return (
+                                        <ProductWrapper
+                                            key={"checkoutItem" + i}
+                                        >
+                                            <CheckoutProdIMG
+                                                className="item-photo"
+                                                src="/media/placeholderIMG.png"
+                                                width={64}
+                                                height={64}
+                                            />
+                                            <div className="item-info">
+                                                <h3>
+                                                    {item.name}
+                                                </h3>
+                                                <h4>
+                                                    {`$ ${item.price}`}
+                                                </h4>
+                                            </div>
+
+                                            <p>
+                                                {`x${item.quantity}`}
+                                            </p>
+                                        </ProductWrapper>
+                                    )
+                                } else {
+                                    return null
+                                }
+                            })};
+
+                            <TotalWrapper>
+                                <SummaryTotals className="checkout-summary">TOTAL</SummaryTotals>
+                                <Cost>{`$ ${parseFloat(subtotal.toFixed(2)).toLocaleString('en')}`}</Cost>
+                            </TotalWrapper>
+
+                            <PayButton
+                                onClick={handleSubmit(onSubmit)}
+                            >CONTINUE & PAY</PayButton>
+
+                        </CheckoutSummary>
+                    </div>
+                    {
+                        showTYModal &&
+                        <>
+                            <ThankYouModal
+                                // items={items}
+                                setModal={(e) => setTYModal(e)} // TODO - REMOVE; FOR TESTING ONLY
+                                cart={cartItems}
+                                total={subtotal}
                             />
-                        </InputWrapper>
-                        <InputWrapper
-                            className="card-details quarter"
-                        >
-                            <CheckoutInputLabel htmlForm="expiration"> Expiration </CheckoutInputLabel>
-                            <CheckoutInput
-                                id="expiration"
-                                name="expiration"
-                                placeholder="MM / YY"
-                            />
-                        </InputWrapper>
-                        <InputWrapper
-                            className="card-details quarter"
-                        >
-                            <CheckoutInputLabel htmlForm="number"> Security Code </CheckoutInputLabel>
-                            <CheckoutInput
-                                id="security-code"
-                                name="security-code"
-                                placeholder="CVC"
-                            />
-                        </InputWrapper>
-                    </CardInfo>
-                    {/* </div> */}
-                </CheckoutWrapper>
-
-                {/* <div> */}
-
-                <CheckoutSummary
-                    className="checkout-panels"
-                >
-                    <h4>SUMMARY</h4>
-                    {cartItems.map((item, i) => { // iterates through unique items TODO: CHANGE 'countries' to cart (state)
-                        return (
-                            <ProductWrapper
-                                key={"checkoutItem" + i}
-                            >
-                                <CheckoutProdIMG
-                                    className="item-photo"
-                                    src="/media/placeholderIMG.png"
-                                    width={64}
-                                    height={64}
-                                />
-                                <div className="item-info">
-                                    <h3>
-                                        {item.name}
-                                    </h3>
-                                    <h4>
-                                        {`$ ${item.price}`}
-                                    </h4>
-                                </div>
-
-                                <p>
-                                    {`x${item.quantity}`}
-                                </p>
-                            </ProductWrapper>
-                        )
-                    })}
-
-                    <TotalWrapper>
-                        <SummaryTotals>TOTAL</SummaryTotals>
-                        <Cost>{`$ ${parseFloat(subtotal.toFixed(2)).toLocaleString('en')}`}</Cost>
-                    </TotalWrapper>
-
-                    <PayButton
-                        onClick={handleSubmit(onSubmit)}
-                    >CONTINUE & PAY</PayButton>
-
-                </CheckoutSummary>
-                {
-                    showTYModal &&
-                    <>
-                        <ThankYouModal
-                            // items={items}
-                            setModal={(e) => setTYModal(e)} // TODO - REMOVE; FOR TESTING ONLY
-                            cart={cartItems}
-                            total={subtotal}
-                        />
-                    </>
-                }
-            </CheckoutForm >
-            {/* </div > */}
-        </div>
+                        </>
+                    }
+                </CheckoutForm >
+                {/* </div > */}
+            </div>
     )
 }
 

@@ -11,11 +11,39 @@ export const CheckoutSummary = styled.div`
     align-items: center;
     height: min-content;
     gap: 1.6rem;
+
+    margin: 2rem 3.3rem;
+    
     
     h3, h4, h5 {
         margin: 0 0;
         flex: 1 1 100%;
     }
+
+    h3 { 
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+        letter-spacing: 0;
+    }
+
+    .item-info {
+        h4 { 
+            font-size: 1.4rem;
+            line-height: 2.5rem;
+            letter-spacing: 0;
+            opacity: 50%;
+        }
+    }
+
+    p { 
+            font-size: 1.5rem;
+            font-weight: bold;
+            line-height: 2.5rem;
+            letter-spacing: 0;
+            opacity: 50%;
+            margin: 0;
+        }
+
 
     > * {
         width: 100%;
@@ -47,7 +75,41 @@ export const ProductWrapper = styled.div`
     }
 
     &.confirmation {
-        flex-direction: column;
+        /* flex-direction: column; */
+        gap: 1.rem;
+        > * {
+            flex: 1 1 33%;
+            
+        }
+        h3 { 
+            font-size: 1.3rem;
+            line-height: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 0;
+        }
+        
+        h4 { 
+            font-size: 1.4rem;
+            line-height: 2.5rem;
+            letter-spacing: 0;
+            opacity: 50%;
+        }
+
+        p { 
+            font-size: 1.5rem;
+            font-weight: bold;
+            opacity: 50%;
+            text-align: right;
+            flex: 2 1 10%;
+        }
+    }
+
+    .prod-img-ty {
+        /* display: flex; */
+        /* height: 32px; */
+        align-self: center;
+        width: 50px;
+        flex: 0 0 50px;
     }
 
     h3 {
@@ -77,6 +139,9 @@ export const ProductWrapper = styled.div`
     .name-quantity {
         display: flex;
         justify-content: space-between;
+        flex-direction: column;
+        flex: 2 1 45%;
+        /* margin-right: 2rem; */
      * {
             margin: 0;
         }
@@ -92,10 +157,25 @@ export const TotalWrapper = styled.div`
 
 export const SummaryTotals = styled.p`
     cursor: pointer;
+
+    &.checkout-summary {
+        cursor: auto;
+        font-size: 1.5rem;
+
+    }
+
+    &.ty-cost {
+        opacity: 50%;
+    }
 `;
 
 export const Cost = styled.h5`
     text-align: right;
+    font-size: 1.8rem;
+    &.ty-cost {
+        font-size: 1.8rem;
+        letter-spacing: 0;
+    }
 `;
 
 export const TextWrapper = styled.div`
