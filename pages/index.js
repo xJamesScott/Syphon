@@ -14,6 +14,28 @@ import { Spinner } from '@chakra-ui/react';
 import { Loader } from '../components/Loader';
 import styled from 'styled-components';
 import { motion } from "framer-motion";
+import {
+  HomeBanner,
+  FeatureProd,
+  HighLightProd,
+  MiniProdContainer,
+} from '../components/Home';
+import { ButtonOrange, ButtonBlack } from '../components/Buttons';
+import ButtonHollow from '../components/ButtonHollow';
+import {
+  ProductSection,
+  AboutText,
+  AboutTitle,
+  AboutIMG,
+  ProductTypesContainer,
+  ProductTypeWrapper,
+  TypeIMG,
+  TypeTitle,
+  ShopWrapper
+} from '../components/ProductPage';
+
+
+
 
 
 const SickTest = styled(motion.div)`
@@ -101,28 +123,173 @@ export default function Home(test2, test3, test4) {
   }
 
   return (
-    visible &&
-    (<motion.div
-    >
-      Home
-      <div>
-        <SickTest>Brooooo!</SickTest>
+    <div>
+      <HomeBanner>
+        <div
+          className="section-margin banner-divider"
+        />
+        <div className="section-margin home-banner-wrap">
+          <div className="home-text">
+            <h4 className="home-new">NEW PRODUCT</h4>
+            <h3 className="home-title">RocketEar GT</h3>
+            <p>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
+            <ButtonOrange>SEE PRODUCT</ButtonOrange>
+          </div>
+          <div className="home-bnr-img">
 
-        <Link
-          href="/"
+            <div>
+              <Image
+                width={708}
+                height={886}
+                src="/media/placeholderIMG.png"
+                layout="intrinsic"
+              />
+            </div>
+
+            {/* <img
+              src="/media/placeholderIMG.png"
+            /> */}
+          </div>
+        </div>
+      </HomeBanner>
+
+      <ProductSection
+        // className="section-margin"
+        className="section-margin"
+      >
+        <ProductTypesContainer>
+          {/* HEADPHONES */}
+          <ProductTypeWrapper>
+            <div className="type-bg" />
+            <TypeIMG
+              src="/media/placeholderIMG.png" // get from server link
+              width={123}
+              height={160}
+            />
+            <TypeTitle>
+              HEADPHONES
+            </TypeTitle>
+            <ShopWrapper
+              value="SHOP"
+              className="prod-types"
+            />
+
+            {/* 
+                             <ShopWrapper>
+                                <ShopText>
+                                    SHOP
+                                </ShopText>
+                                <ShopArrow>
+                                    {">"}
+                                    // use icon-arrow-right.svg
+                                </ShopArrow>
+                            </ShopWrapper> 
+                             */}
+
+          </ProductTypeWrapper>
+          {/* SPEAKERS */}
+          <ProductTypeWrapper>
+            <div className="type-bg" />
+            <TypeIMG
+              src="/media/placeholderIMG.png" // get from server link
+              width={123}
+              height={160}
+            />
+            <TypeTitle>
+              SPEAKERS
+            </TypeTitle>
+            <ShopWrapper
+              value="SHOP"
+              className="prod-types"
+            />
+
+            {/* 
+                             <ShopWrapper>
+                                <ShopText>
+                                    SHOP
+                                </ShopText>
+                                <ShopArrow>
+                                    {">"}
+                                    // use icon-arrow-right.svg
+                                </ShopArrow>
+                            </ShopWrapper> 
+                             */}
+          </ProductTypeWrapper>
+          {/* EARPHONES */}
+          <ProductTypeWrapper>
+            <div className="type-bg" />
+            <TypeIMG
+              src="/media/placeholderIMG.png" // get from server link
+              width={123}
+              height={160}
+            />
+            <TypeTitle>
+              EARPHONES
+            </TypeTitle>
+            <ShopWrapper
+              value="SHOP"
+              className="prod-types"
+            />
+
+            {/* 
+                             <ShopWrapper>
+                                <ShopText>
+                                    SHOP
+                                </ShopText>
+                                <ShopArrow>
+                                    {">"}
+                                    // use icon-arrow-right.svg
+                                </ShopArrow>
+                            </ShopWrapper> 
+                             */}
+          </ProductTypeWrapper>
+        </ProductTypesContainer>
+      </ProductSection>
+
+      <FeatureProd
+        className="section-margin"
+      >
+
+        <div className="fprod-image">
+          <div className="fprod-img-bg" />
+          <Image
+          width={493}
+          height={410}
+          />
+        </div>
+        <div className="fprod-text">
+          <ButtonBlack className="fprod-button">
+            SEE PRODUCT
+          </ButtonBlack>
+        </div>
+
+      </FeatureProd>
+
+      {/* About Products */}
+
+      <div
+        className="section-margin"
+      >
+        <ProductSection
+          className="about-product"
         >
-          <a
-            className="menu-group-links"
-          >
-            HOME
-          </a>
-        </Link>
+          <AboutText>
+            <AboutTitle>
+              BRINGING&nbsp;YOU&nbsp;THE<br />
+              <span className="pop-word">BEST&nbsp;</span>
+              AUDIO&nbsp;GEAR
+            </AboutTitle>
+            <p>
+              Located at the heart of New York City, Syphon is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Syphon the best place to buy your portable audio equipment.
+            </p>
+          </AboutText>
+          <AboutIMG
+            src="/media/placeholderIMG.png" // get from server link
+            width={540}
+            height={588}
+          />
+        </ProductSection>
       </div>
-      <a href="/">Broooo</a>
-      {/* </Link> */}
-
-
-      {/* <div >DATA: {htmlData}</div> */}
-    </motion.div >)
+    </div>
   )
 }

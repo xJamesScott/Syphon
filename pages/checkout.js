@@ -56,7 +56,7 @@ const chargeObj = { // TODO - REMOVE PLACEHOLDER
 
 const checkout = ({ }) => {
     const dispatch = useDispatch();
-    const [showTYModal, setTYModal] = useState(true); // TODO: SET TO FALSE AFTER TESTING
+    const [showTYModal, setTYModal] = useState(false); // TODO: SET TO FALSE AFTER TESTING
     const [cartItems, setCartItems] = useState([]);
     const [cartStatus, setCartStatus] = useState({});
     const [counting, setCounting] = useState(true);
@@ -73,11 +73,7 @@ const checkout = ({ }) => {
         setCartItems(Object.values(cart.items));
         setCartStatus(cart);
         dispatch(cartActions.setCartFinishLoading({}));
-
     }, [cart.items]);
-
-    console.log({ cartStatus: cartStatus })
-
 
     const { register, handleSubmit, formState: { errors }, getValues
     } = useForm({

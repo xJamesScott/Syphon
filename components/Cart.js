@@ -294,13 +294,13 @@ export default function Cart(
             <CartWrapper
                 className="modal"
             >
-                <motion.div
+                {/* <motion.div
                     animate={{ scale: visible ? 1 : 0 }}
                     transition={{ duration: 0.25 }}
                     style={{ originX: .99 }}
                     className="modal-motion"
 
-                >
+                > */}
                     <CartModalMargin
                         className="section-margin"
                     >
@@ -495,7 +495,7 @@ export default function Cart(
                         </CartModal>
                         {/* </form> */}
                     </CartModalMargin>
-                </motion.div>
+                {/* </motion.div> */}
             </CartWrapper>
 
         </CartWindow >

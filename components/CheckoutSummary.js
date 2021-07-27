@@ -58,7 +58,6 @@ export const CheckoutProdIMG = styled(Image)`
 
 export const ProductWrapper = styled.div`
     display: flex;
-    /* justify-content: space-between; */
     width: 100%;
     gap: 5%;
     position: relative;
@@ -66,7 +65,6 @@ export const ProductWrapper = styled.div`
     .active-area {
         position: absolute;
         background: transparent;
-        /* pointer-events: none; */
         width: 110%;
         height: 110%;
         left: 0;
@@ -75,7 +73,6 @@ export const ProductWrapper = styled.div`
     }
 
     &.confirmation {
-        /* flex-direction: column; */
         gap: 1.rem;
         > * {
             flex: 1 1 33%;
@@ -105,8 +102,6 @@ export const ProductWrapper = styled.div`
     }
 
     .prod-img-ty {
-        /* display: flex; */
-        /* height: 32px; */
         align-self: center;
         width: 50px;
         flex: 0 0 50px;
@@ -141,7 +136,6 @@ export const ProductWrapper = styled.div`
         justify-content: space-between;
         flex-direction: column;
         flex: 2 1 45%;
-        /* margin-right: 2rem; */
      * {
             margin: 0;
         }

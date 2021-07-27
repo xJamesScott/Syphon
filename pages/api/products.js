@@ -13,6 +13,7 @@ export default async function products(req, res) {
     // dbConnect();
 
     switch (call) {
+
         case "test2":
             try {
                 const createProducts = Item.insertMany(prodList);
@@ -20,6 +21,13 @@ export default async function products(req, res) {
             } catch (err) {
                 console.log("Error creating products " + err);
                 return res.status(500);
+            };
+        case "types":
+            try {
+                const types = await Item.distinct("productType");
+                return res.json(types);
+            } catch (err) {
+                console.log("Error fetching product types: " + err)
             };
         case "all":
             try {
@@ -46,7 +54,7 @@ export default async function products(req, res) {
         case "productType":
             try {
                 const models = await Item.find({ productType: productType });
-                console.log({ models: models });
+                // console.log({ models: models });
                 return res.json(models);
             } catch (err) {
                 console.log("Error fetching model types!: " + err);

@@ -39,8 +39,6 @@ export const ModalContainer = styled.div`
         height: 140px;
         > * {
         }
-
-        
     }
 
     .summary-wrap {
@@ -60,7 +58,6 @@ export const ModalContainer = styled.div`
         padding: 2.4rem;
 
         .divider {
-            /* transform: rotate(90deg); */
             margin: 1.2rem 0;
             flex: 0 0 1px;
             width: 100%;
@@ -75,7 +72,6 @@ export const ModalContainer = styled.div`
             opacity: 50%;
         }
         
-        
         > * {
             margin: auto;
             flex: 1 1 100%;
@@ -89,14 +85,11 @@ export const ModalContainer = styled.div`
         background: ${colors.accent5};
         height: 100%;
         padding: 2.4rem;
-        /* display: flex;
-        flex-direction: column; */
 
         .total-wrapper {
         flex: 1 1 40%;
         height: 100%;
         color: ${colors.accent1};
-        /* background: ${colors.accent5}; */
         text-align: center;
         display: flex;
         flex-direction: column; 
@@ -105,11 +98,9 @@ export const ModalContainer = styled.div`
         }
        
     }
-        /* margin: auto; */
 
        > * {
             margin: 0;
-            /* display: flex; */
             flex: 1 1 100%;
         }
     
@@ -140,11 +131,6 @@ export const ModalContainer = styled.div`
 `;
 
 export const ProductImage = styled(Image)`
-    /* &.prod-img-ty {
-        display: none;
-    } */
-
-    /* flex-grow: 0 !important; */
 `;
 
 export const CheckIcon = styled.div`
@@ -178,7 +164,6 @@ export default function ThankYouModal({
 }) {
 
     const itemCount = cart.length
-    // cart && console.log({ "modal cart": cart[0].name })
     return (
         <>
             <BG >
@@ -188,7 +173,7 @@ export default function ThankYouModal({
                             <Image
                                 height={64}
                                 width={64}
-                                src="/media/placeholderIMG.png"
+                                src="/media/placeholderIMG.png" // TODO: UPDATE SOURCE
                             />
                         </CheckIcon>
                         <h2>THANK YOU<br />FOR YOUR ORDER</h2>

@@ -30,7 +30,7 @@ const BannerWrapper = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    z-index: 10;
+    z-index: 5;
     position: relative;
     display: flex;
 
@@ -334,7 +334,7 @@ function Banner() {
     }
 
     const [activateNavLink, setActivateNavLink] = useState(activateNavInit); // make an object for each product type
-    console.log({ activateNavLink: activateNavLink })
+    // console.log({ activateNavLink: activateNavLink })
 
     // useEffect(() => {
     //     setActivateNavLink({
@@ -414,7 +414,7 @@ function Banner() {
                                         <NavLinkWrapper>
 
                                             <NavLink
-                                                href="/product/headphones"
+                                                href="/headphones"
                                             >
                                                 <a
                                                     className="menu-group-links"
@@ -493,7 +493,7 @@ function Banner() {
                                         <NavLinkWrapper>
 
                                             <NavLink
-                                                href="/product/speakers"
+                                                href="/speakers"
                                             >
                                                 <a
                                                     className="menu-group-links"
@@ -571,12 +571,11 @@ function Banner() {
                                         {/* GROUP LINK */}
                                         <NavLinkWrapper>
                                             <NavLink
-                                                href="/product/earphones"
+                                                href="/earphones"
                                             >
                                                 <a
                                                     className="menu-group-links"
                                                     onMouseEnter={() => setActivateNavLink({ earphones: true })}
-
                                                 >
                                                     EARPHONES
                                                 </a>

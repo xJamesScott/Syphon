@@ -28,6 +28,10 @@ export const ButtonOrange = styled.button`
     text-transform: uppercase;
 `;
 
+export const ButtonBlack = styled(ButtonOrange)`
+    background: ${colors.accent5};
+`;
+
 export const ButtonWhite = styled.button`
     border: none;
     background: ${colors.accent1};

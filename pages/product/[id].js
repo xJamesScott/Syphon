@@ -280,7 +280,7 @@ const ProductInfo = ({ product }) => {
                                         <ProductName>
                                             {item.name}
                                         </ProductName>
-                                        <AddCart 
+                                        <AddCart
                                             className="also-products"
                                         >
                                             SEE PRODUCT

@@ -54,6 +54,10 @@ export const ProductSection = styled.div`
         }
 
     }
+
+    &.tm-right {
+        flex-direction: row-reverse;
+    }
    
 `;
 
