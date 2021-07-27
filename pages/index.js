@@ -20,7 +20,7 @@ import {
   HighLightProd,
   MiniProdContainer,
 } from '../components/Home';
-import { ButtonOrange, ButtonBlack } from '../components/Buttons';
+import { ButtonOrange, ButtonBlack, ButtonBorder } from '../components/Buttons';
 import ButtonHollow from '../components/ButtonHollow';
 import {
   ProductSection,
@@ -249,21 +249,74 @@ export default function Home(test2, test3, test4) {
       <FeatureProd
         className="section-margin"
       >
-
         <div className="fprod-image">
-          <div className="fprod-img-bg" />
+          <div className="fprod-img-bg">
+            <Image
+              width={944}
+              height={944}
+              layout="intrinsic"
+              src="/media/placeholderIMG.png"
+              className="fprod-img-main"
+            />
+          </div>
           <Image
-          width={493}
-          height={410}
+            width={410}
+            height={493}
+            src="/media/placeholderIMG.png"
           />
         </div>
         <div className="fprod-text">
+          <h1 className="fprod-title">
+            ZOOKA GT<br />
+            SPEAKER
+          </h1>
+          <p className="fprod-description">
+            Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
+          </p>
+
           <ButtonBlack className="fprod-button">
             SEE PRODUCT
           </ButtonBlack>
         </div>
-
       </FeatureProd>
+
+      <HighLightProd
+        className="section-margin"
+      >
+        <Image
+          // height={320}
+          // width={1120}
+          layout="fill"
+          src="/media/placeholderIMG.png"
+          className="hprod-img"
+        />
+        <div className="hprod-text">
+          <h4>ZOOKA SPEAKER</h4>
+          <ButtonBorder>SEE PRODUCT</ButtonBorder>
+        </div>
+      </HighLightProd>
+
+      <MiniProdContainer
+        className="section-margin"
+      >
+        <div
+          className="mprod-img-wrap"
+        >
+          <div className="mprod-img">
+            <Image
+              // height={320}
+              // width={1120}
+              layout="fill"
+              src="/media/placeholderIMG.png"
+              className="hprod-img"
+            />
+          </div>
+        </div>
+        <div className="mprod-text-wrap">
+          <h4>YX1 EARPHONES</h4>
+          <ButtonBorder>SEE PRODUCT</ButtonBorder>
+        </div>
+      </MiniProdContainer>
 
       {/* About Products */}
 
@@ -271,7 +324,7 @@ export default function Home(test2, test3, test4) {
         className="section-margin"
       >
         <ProductSection
-          className="about-product"
+          className="about-product main-about"
         >
           <AboutText>
             <AboutTitle>

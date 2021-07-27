@@ -53,6 +53,12 @@ export const ButtonWhite = styled.button`
     text-transform: uppercase;
 `;
 
+export const ButtonBorder = styled(ButtonBlack)`
+    background: transparent;
+    color: ${colors.mainText};
+    border: 1px solid ${colors.mainText};
+`;
+
 export const ButtonHollow2 = styled.div`
       border: none;
     background: ${colors.accent1};

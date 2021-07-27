@@ -77,23 +77,61 @@ export const HomeBanner = styled.div`
 export const FeatureProd = styled.div`
     position: relative;
     background: ${colors.main};
+    color: ${colors.accent1};
+    border-radius: .5rem;
+    margin-top: 16.8rem;
+    overflow: hidden;
     
 
-
-    
+    > * { 
+        flex: 1 1 50%;
+        margin-top: 6.6rem;
+    }
     
     .fprod-image { 
         position: relative;
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
     .fprod-img-bg { 
         position: absolute;
+        width: 150%;
+        height: 150%;
+        /* left: -50%; */
+        /* height: 100%; */
+        /* width: 700px; */
+        background: magenta;
+        
     }
 
-    .fprod-text { 
+    .fprod-img-main { 
+        /* z-index: 11; */
+        /* width: 100%; */
+        /* height: 100%; */
+        z-index: 0;
+    }
+    
 
+    /* TEXT */
+    
+    .fprod-text { 
+        padding: 0 6rem;
+        > * { 
+            margin: 0;
+        }
+        z-index: 1;
+        
+    }
+
+    .fprod-title { 
+        color: ${colors.accent1}
+    }
+
+    .fprod-description { 
+        line-height: 2.5rem;
+        margin: 4.4rem 0;
     }
 
     .fprod-button { 
@@ -101,9 +139,17 @@ export const FeatureProd = styled.div`
     }
 `;
 
-export const HightLightProd = styled.div`
-    .hprod-text { 
+export const HighLightProd = styled.div`
+    position: relative;
+    margin-top: 4.8rem;
+    height: 320px;
 
+    .hprod-img {
+        z-index:-1;
+    }
+    .hprod-text { 
+        margin: auto 0;
+        margin-left: 10%;
     }
 
     .hprod-button { 
@@ -113,13 +159,35 @@ export const HightLightProd = styled.div`
 `;
 
 export const MiniProdContainer = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-top: 4.8rem;
+    
+
+    height: 320px;
+
+    > * {
+        flex: 1 1 50%;
+    }
+    
+    .mpro-img-wrap {
+        position: relative;
+    }
 
     .mprod-img{
-
+        position: relative;
+        width: 100%;
+        height: 100%;
     }
 
     .mprod-text-wrap {
-
+        background: ${colors.accent3};
+       height: 100%;
+       padding: 0 10rem;
+        /* padding: 10rem; */
+        /* margin: auto 10rem; */
     }
 
     .mprod-button {

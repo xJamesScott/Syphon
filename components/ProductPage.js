@@ -45,14 +45,19 @@ export const ProductSection = styled.div`
         margin-top: 16rem;
     }
 
+    
+
     &.about-product {
         margin: 16rem 0;
 
-        gap: ;
+        /* gap: ; */
         > * {
             flex: 1 1 50%;
         }
+    }
 
+    &.main-about { 
+        margin-top: 20rem;
     }
 
     &.tm-right {
