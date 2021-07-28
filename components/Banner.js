@@ -18,12 +18,12 @@ import ButtonHollow from '../components/ButtonHollow';
 const { colors } = theme;
 
 const CartWindow = styled.div`
-    z-index: 10; 
+    z-index: 11; 
     position: sticky;
     top: 0;
 `;
 const BannerWrapper = styled.div`
-    background-color: ${colors.accent5};
+    background-color: ${colors.accent7};
     height: 9.7rem;
     color: white;
     position: fixed;
@@ -234,6 +234,9 @@ export const LinksContainer = styled.div`
         top: 100%;
         left: 0;
         background: ${colors.opaque1};
+        /* color: black;
+        background: white; */
+        font-weight: bold;
         width: 100%;
         height: 100%;
         padding: 0 1.2rem;
@@ -543,17 +546,12 @@ function Banner() {
                                                     <NavLink
                                                         href="/product/REGT200"
                                                     >
-                                                        <a>RocketEar&nbsp;GT</a>
+                                                        <a>Zooka&nbsp;GT</a>
                                                     </NavLink>
                                                     <NavLink
                                                         href="/product/REGT200"
                                                     >
-                                                        <a>Rocket&nbsp;Ear </a>
-                                                    </NavLink>
-                                                    <NavLink
-                                                        href="/product/REGT200"
-                                                    >
-                                                        <a>Dyno</a>
+                                                        <a>Zooka</a>
                                                     </NavLink>
                                                 </NavLinksContainer>
                                             </LinkGroup>
@@ -602,28 +600,19 @@ function Banner() {
 
                                         {/* EARPHONES PROUDUCT LINKS */}
                                         {
-                                           
+
                                             <LinkGroup
-                                            className="link-group"
-                                            key="link-group"
-                                            className={activateNavLink.earphones ? "show-menu link-group-motion" : "link-group-motion"}
+                                                className="link-group"
+                                                key="link-group"
+                                                className={activateNavLink.earphones ? "show-menu link-group-motion" : "link-group-motion"}
                                             >
                                                 <NavLinksContainer>
                                                     <NavLink
                                                         href="/product/REGT200"
                                                     >
-                                                        <a>RocketEar&nbsp;GT</a>
+                                                        <a>Jamz</a>
                                                     </NavLink>
-                                                    <NavLink
-                                                        href="/product/REGT200"
-                                                    >
-                                                        <a>Rocket&nbsp;Ear </a>
-                                                    </NavLink>
-                                                    <NavLink
-                                                        href="/product/REGT200"
-                                                    >
-                                                        <a>Dyno</a>
-                                                    </NavLink>
+                                                    
                                                 </NavLinksContainer>
                                             </LinkGroup>
                                         }

@@ -4,20 +4,40 @@ import { theme, mq } from '../constants/theme';
 const { colors } = theme;
 
 export const HomeBanner = styled.div`
-    background: ${colors.accent5};
+    /* background: ${colors.accent5}; */
+    /* background: #0E0E0E; */
+    justify-self: center;
+    align-self: center;
+    background: ${colors.accent7};
+    /* background: #141414; */
     color: ${colors.accent1};
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 650px;
+    height: 700px;
     overflow: hidden;
-    /* z-index: 100; */
+    position: relative;
+    
+
+
+    > * {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin: 0 auto;
+    }
 
     .banner-divider {
         border-top: 1px solid ${colors.accent1};
+        width: 100%;
         opacity: 30%;
         margin: 0; 
-        /* z-index: -100; */
+        z-index: 10;
+    }
+
+    .home-img {
+        position: absolute;
     }
     
     .home-banner-wrap {
@@ -25,33 +45,50 @@ export const HomeBanner = styled.div`
         /* z-index: 10; */
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        width: 100%;
     }
 
     .home-text { 
         /* z-index: -100; */
         flex: 1 1 35%;
+        display: flex;
+        flex-direction: column;
+        gap: 2.4rem;
+
+        > * {
+            margin: 0;
+        }
+
+        button { 
+            margin: 0 auto;
+            margin-left: 0;
+        }
     }
 
     .home-new {
-        /* z-index: -100; */
+        font-size: 1.4rem;
+        letter-spacing: 1rem;
+        font-weight: 400;
+        opacity: 50%;
     }
 
     .home-title { 
         /* z-index: -100; */
+        font-size: 5.6rem;
+        line-height: 5.8rem;
     }
 
     p { 
         /* z-index: -100; */
+        opacity: 50%;
     }
 
     .home-bnr-img { 
         position: relative;
-        flex: 1 1 50%;
-        /* height: auto; */
-        /* width: 632px;  */
-        /* height: 100%;
-        width: 100%; */
-        border: 1px solid magenta;
+        flex: 1 1 70%;
+        /* border: 1px solid magenta; // testing for image container */
         display: flex;
         justify-content: flex-end;
         align-items: center; 

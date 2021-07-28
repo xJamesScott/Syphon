@@ -63,7 +63,8 @@ const ProdTypeInfo = ({ products, prodType }) => {
         flex-direction: column;
         align-items: center;
         height: 16.5rem;
-        background: ${colors.accent5};
+        /* background: ${colors.accent5}; */
+        background: ${colors.accent7};
         color: white;
         .banner-divider{
             /* width: 100%; */
@@ -94,7 +95,9 @@ const ProdTypeInfo = ({ products, prodType }) => {
     if (router.isFallback) return <Loader speed=".65s" thickness=".2rem" /> // only runs if fallback is set to true
 
     return (
-        <div>
+        <div
+        className="page"
+        >
             <TypeBanner>
                 <div
                     className="section-margin banner-divider"

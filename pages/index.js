@@ -122,33 +122,33 @@ export default function Home(test2, test3, test4) {
     dispatch(cartActions.setCartCurrent({ price: "too much!" }))
   }
 
+
   return (
-    <div>
+    <div
+      className="page"
+    >
       <HomeBanner>
-        <div
-          className="section-margin banner-divider"
-        />
-        <div className="section-margin home-banner-wrap">
-          <div className="home-text">
-            <h4 className="home-new">NEW PRODUCT</h4>
-            <h3 className="home-title">RocketEar GT</h3>
-            <p>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
-            <ButtonOrange>SEE PRODUCT</ButtonOrange>
-          </div>
-          <div className="home-bnr-img">
-
-            <div>
-              <Image
-                width={708}
-                height={886}
-                src="/media/placeholderIMG.png"
-                layout="intrinsic"
-              />
+        <div className="section-margin">
+          <div
+            className="banner-divider"
+          />
+          <div className="home-banner-wrap">
+            <div className="home-text">
+              <h4 className="home-new">NEW PRODUCT</h4>
+              <h3 className="home-title">RocketEar&nbsp;GT <br /> HEADPHONES</h3>
+              <p>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
+              <ButtonOrange>SEE PRODUCT</ButtonOrange>
             </div>
-
-            {/* <img
-              src="/media/placeholderIMG.png"
-            /> */}
+            <div className="home-bnr-img">
+              <div>
+                <Image
+                  width={708.8}
+                  height={886}
+                  src="/media/home/banner.png"
+                  layout="intrinsic"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </HomeBanner>
@@ -346,3 +346,7 @@ export default function Home(test2, test3, test4) {
     </div>
   )
 }
+
+// export const getServerSideProps = async () => {
+
+// };

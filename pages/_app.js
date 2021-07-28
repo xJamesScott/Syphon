@@ -55,14 +55,20 @@ function WrappedApp({ Component, pageProps }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.4 }}
       >
         {
           !hideNav &&
-          <Banner /> // nav bar
+          <Banner 
+            className="page"
+          /> // nav bar
         }
         <AnimateSharedLayout>
-          <Component {...pageProps} cart={"cart"} />
+          <Component 
+          {...pageProps} 
+          cart={"cart"} 
+          className="page"
+          />
         </AnimateSharedLayout>
         <Footer />
       </motion.div>

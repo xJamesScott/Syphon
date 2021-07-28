@@ -135,7 +135,7 @@ const ProductInfo = ({ product }) => {
 
     return (
         <ProductPage
-            className="section-margin"
+            className="section-margin page"
         >
             {/* SECTION - MAIN */}
 
