@@ -30,6 +30,11 @@ export const ButtonOrange = styled.button`
 
 export const ButtonBlack = styled(ButtonOrange)`
     background: ${colors.accent5};
+    cursor: pointer;
+    :hover {
+        color: ${colors.accent5};
+        background: ${colors.accent1};
+    }
 `;
 
 export const ButtonWhite = styled.button`
@@ -57,6 +62,11 @@ export const ButtonBorder = styled(ButtonBlack)`
     background: transparent;
     color: ${colors.mainText};
     border: 1px solid ${colors.mainText};
+
+    :hover {
+        color: ${colors.accent1};
+        background: ${colors.accent5};
+    }
 `;
 
 export const ButtonHollow2 = styled.div`

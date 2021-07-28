@@ -17,6 +17,7 @@ import {
     AddCart,
     ProductTypesContainer,
     ProductTypeWrapper,
+    TypeIMGWrapper,
     TypeIMG,
     TypeTitle,
     ShopWrapper,
@@ -96,7 +97,7 @@ const ProdTypeInfo = ({ products, prodType }) => {
 
     return (
         <div
-        className="page"
+            className="page"
         >
             <TypeBanner>
                 <div
@@ -143,17 +144,21 @@ const ProdTypeInfo = ({ products, prodType }) => {
                     {/* HEADPHONES */}
                     <ProductTypeWrapper>
                         <div className="type-bg" />
-                        <TypeIMG
-                            src="/media/placeholderIMG.png" // get from server link
-                            width={123}
-                            height={160}
-                        />
+                        <TypeIMGWrapper>
+                            <TypeIMG
+                                src="/media/prod-types/headphones.png" // get from server link
+                                width={123}
+                                height={160}
+                                className="img"
+                            />
+                        </TypeIMGWrapper>
                         <TypeTitle>
                             HEADPHONES
                         </TypeTitle>
                         <ShopWrapper
                             value="SHOP"
                             className="prod-types"
+                            href="/headphones"
                         />
 
                         {/* 
@@ -172,17 +177,20 @@ const ProdTypeInfo = ({ products, prodType }) => {
                     {/* SPEAKERS */}
                     <ProductTypeWrapper>
                         <div className="type-bg" />
-                        <TypeIMG
-                            src="/media/placeholderIMG.png" // get from server link
-                            width={123}
-                            height={160}
-                        />
+                        <TypeIMGWrapper>
+                            <TypeIMG
+                                src="/media/prod-types/speakers.png" // get from server link
+                                width={123}
+                                height={160}
+                            />
+                        </TypeIMGWrapper>
                         <TypeTitle>
                             SPEAKERS
                         </TypeTitle>
                         <ShopWrapper
                             value="SHOP"
                             className="prod-types"
+                            href="/speakers"
                         />
 
                         {/* 
@@ -200,17 +208,21 @@ const ProdTypeInfo = ({ products, prodType }) => {
                     {/* EARPHONES */}
                     <ProductTypeWrapper>
                         <div className="type-bg" />
-                        <TypeIMG
-                            src="/media/placeholderIMG.png" // get from server link
-                            width={123}
-                            height={160}
-                        />
+                        <TypeIMGWrapper>
+                            <TypeIMG
+                                src="/media/prod-types/earphones.png" // get from server link
+                                width={178}
+                                height={161}
+                                fill="intrinsic"
+                            />
+                        </TypeIMGWrapper>
                         <TypeTitle>
                             EARPHONES
                         </TypeTitle>
                         <ShopWrapper
                             value="SHOP"
                             className="prod-types"
+                            href="/earphones"
                         />
 
                         {/* 
@@ -249,7 +261,6 @@ const ProdTypeInfo = ({ products, prodType }) => {
             </ProductPage>
         </div>
     );
-
 };
 
 export default ProdTypeInfo;

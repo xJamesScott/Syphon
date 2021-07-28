@@ -30,6 +30,7 @@ import {
   ProductTypesContainer,
   ProductTypeWrapper,
   TypeIMG,
+  TypeIMGWrapper,
   TypeTitle,
   ShopWrapper
 } from '../components/ProductPage';
@@ -154,24 +155,27 @@ export default function Home(test2, test3, test4) {
       </HomeBanner>
 
       <ProductSection
-        // className="section-margin"
-        className="section-margin"
+        className="section-margin home"
       >
         <ProductTypesContainer>
           {/* HEADPHONES */}
           <ProductTypeWrapper>
             <div className="type-bg" />
-            <TypeIMG
-              src="/media/placeholderIMG.png" // get from server link
-              width={123}
-              height={160}
-            />
+            <TypeIMGWrapper>
+              <TypeIMG
+                src="/media/prod-types/headphones.png" // get from server link
+                width={123}
+                height={160}
+                className="img"
+              />
+            </TypeIMGWrapper>
             <TypeTitle>
               HEADPHONES
             </TypeTitle>
             <ShopWrapper
               value="SHOP"
               className="prod-types"
+              href="/headphones"
             />
 
             {/* 
@@ -190,17 +194,20 @@ export default function Home(test2, test3, test4) {
           {/* SPEAKERS */}
           <ProductTypeWrapper>
             <div className="type-bg" />
-            <TypeIMG
-              src="/media/placeholderIMG.png" // get from server link
-              width={123}
-              height={160}
-            />
+            <TypeIMGWrapper>
+              <TypeIMG
+                src="/media/prod-types/speakers.png" // get from server link
+                width={123}
+                height={160}
+              />
+            </TypeIMGWrapper>
             <TypeTitle>
               SPEAKERS
             </TypeTitle>
             <ShopWrapper
               value="SHOP"
               className="prod-types"
+              href="/speakers"
             />
 
             {/* 
@@ -218,17 +225,21 @@ export default function Home(test2, test3, test4) {
           {/* EARPHONES */}
           <ProductTypeWrapper>
             <div className="type-bg" />
-            <TypeIMG
-              src="/media/placeholderIMG.png" // get from server link
-              width={123}
-              height={160}
-            />
+            <TypeIMGWrapper>
+              <TypeIMG
+                src="/media/prod-types/earphones.png" // get from server link
+                width={178}
+                height={161}
+                fill="intrinsic"
+              />
+            </TypeIMGWrapper>
             <TypeTitle>
               EARPHONES
             </TypeTitle>
             <ShopWrapper
               value="SHOP"
               className="prod-types"
+              href="/earphones"
             />
 
             {/* 
@@ -247,7 +258,7 @@ export default function Home(test2, test3, test4) {
       </ProductSection>
 
       <FeatureProd
-        className="section-margin"
+        className="section-margin home"
       >
         <div className="fprod-image">
           <div className="fprod-img-bg">
@@ -255,15 +266,17 @@ export default function Home(test2, test3, test4) {
               width={944}
               height={944}
               layout="intrinsic"
-              src="/media/placeholderIMG.png"
+              src="/media/home/circles.png"
               className="fprod-img-main"
             />
           </div>
           <Image
             width={410}
             height={493}
-            src="/media/placeholderIMG.png"
+            src="/media/home/zookaGT.png"
+            className="fprod-speaker-img"
           />
+
         </div>
         <div className="fprod-text">
           <h1 className="fprod-title">
@@ -281,13 +294,13 @@ export default function Home(test2, test3, test4) {
       </FeatureProd>
 
       <HighLightProd
-        className="section-margin"
+        className="section-margin home"
       >
         <Image
           // height={320}
           // width={1120}
           layout="fill"
-          src="/media/placeholderIMG.png"
+          src="/media/home/zooka-speaker.jpg"
           className="hprod-img"
         />
         <div className="hprod-text">
@@ -297,7 +310,7 @@ export default function Home(test2, test3, test4) {
       </HighLightProd>
 
       <MiniProdContainer
-        className="section-margin"
+        className="section-margin mini"
       >
         <div
           className="mprod-img-wrap"
@@ -307,14 +320,17 @@ export default function Home(test2, test3, test4) {
               // height={320}
               // width={1120}
               layout="fill"
-              src="/media/placeholderIMG.png"
+              src="/media/home/jamz.jpg"
               className="hprod-img"
             />
           </div>
         </div>
+
         <div className="mprod-text-wrap">
-          <h4>YX1 EARPHONES</h4>
-          <ButtonBorder>SEE PRODUCT</ButtonBorder>
+          <div className="mprod-text">
+            <h4>JAMZ EARPHONES</h4>
+            <ButtonBorder>SEE PRODUCT</ButtonBorder>
+          </div>
         </div>
       </MiniProdContainer>
 
@@ -337,9 +353,10 @@ export default function Home(test2, test3, test4) {
             </p>
           </AboutText>
           <AboutIMG
-            src="/media/placeholderIMG.png" // get from server link
+            src="/media/about/about-val.jpg" // get from server link
             width={540}
             height={588}
+            layout="responsive"
           />
         </ProductSection>
       </div>

@@ -14,7 +14,6 @@ import { theme, mq } from '../constants/theme';
 import { ButtonOrange, ButtonWhite } from '../components/Buttons';
 import ButtonHollow from '../components/ButtonHollow';
 
-
 const { colors } = theme;
 
 const CartWindow = styled.div`
@@ -285,14 +284,7 @@ const CartIcon = styled.img`
         }
 `;
 
-
-const Logo = styled(Image)`
-
-`;
-
 function Banner() {
-
-
     useEffect(() => {
         typeof window !== "undefined" && getCart();
     }, []);
@@ -326,9 +318,6 @@ function Banner() {
         setCartArray(cartArrayObj);
     }, [isLoading, cart]);
 
-
-
-
     const activateNavInit = {
         home: false,
         headphones: false,
@@ -337,16 +326,6 @@ function Banner() {
     }
 
     const [activateNavLink, setActivateNavLink] = useState(activateNavInit); // make an object for each product type
-    // console.log({ activateNavLink: activateNavLink })
-
-    // useEffect(() => {
-    //     setActivateNavLink({
-    //         home: false,
-    //         headphones: false,
-    //         speakers: false,
-    //         earphones: false
-    //     })
-    // })
 
     const hideCart = () => setCartVisible(false);
 
@@ -447,16 +426,6 @@ function Banner() {
 
                                         {/* HEADPHONES PROUDUCT LINKS */}
                                         {
-                                            // <motion.div // ENABLE AFTER TESTING
-                                            //     key="link-group"
-                                            //     animate={{
-                                            //         // scaleY: activateNavLink.headphones ? 1 : 0,
-                                            //         opacity: activateNavLink.headphones ? 1 : 0
-                                            //     }}
-                                            //     transition={{ duration: 0.25 }}
-                                            //     style={{ originY: 0, originX: 0 }}
-                                            //     className="link-group-motion "
-                                            // >
                                             <LinkGroup
                                                 className="link-group"
                                                 key="link-group"
@@ -480,7 +449,6 @@ function Banner() {
                                                     </NavLink>
                                                 </NavLinksContainer>
                                             </LinkGroup>
-                                            // </motion.div>
                                         }
                                     </LinkGroupWrapper>
                                 </LinksContainer>
@@ -649,20 +617,14 @@ function Banner() {
                         </NavWrapper>
                     </NavContainer>
                 </BannerWrapper>
-                {/* <motion.div
-                    animate={{ scale: cartVisible ? 1 : 0 }}
-                    transition={{ duration: 0.5 }}
-                > */}
+                
                 <Cart
-                    // className="visible"
                     visible={cartVisible}
                     onClick={(e) => e.preventDefault}
-                    // cartArray={cartArray}
                     isLoading={isLoading}
                     hideCart={hideCart}
                     totalItems={totalItems}
                 />
-                {/* </motion.div> */}
             </CartWindow >
             : <Loader />
     )

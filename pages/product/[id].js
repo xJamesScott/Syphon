@@ -295,17 +295,21 @@ const ProductInfo = ({ product }) => {
                         {/* HEADPHONES */}
                         <ProductTypeWrapper>
                             <div className="type-bg" />
-                            <TypeIMG
-                                src="/media/placeholderIMG.png" // get from server link
-                                width={123}
-                                height={160}
-                            />
+                            <TypeIMGWrapper>
+                                <TypeIMG
+                                    src="/media/prod-types/headphones.png" // get from server link
+                                    width={123}
+                                    height={160}
+                                    className="img"
+                                />
+                            </TypeIMGWrapper>
                             <TypeTitle>
                                 HEADPHONES
                             </TypeTitle>
                             <ShopWrapper
                                 value="SHOP"
                                 className="prod-types"
+                                href="/headphones"
                             />
 
                             {/* 
@@ -324,17 +328,20 @@ const ProductInfo = ({ product }) => {
                         {/* SPEAKERS */}
                         <ProductTypeWrapper>
                             <div className="type-bg" />
-                            <TypeIMG
-                                src="/media/placeholderIMG.png" // get from server link
-                                width={123}
-                                height={160}
-                            />
+                            <TypeIMGWrapper>
+                                <TypeIMG
+                                    src="/media/prod-types/speakers.png" // get from server link
+                                    width={123}
+                                    height={160}
+                                />
+                            </TypeIMGWrapper>
                             <TypeTitle>
                                 SPEAKERS
                             </TypeTitle>
                             <ShopWrapper
                                 value="SHOP"
                                 className="prod-types"
+                                href="/speakers"
                             />
 
                             {/* 
@@ -352,17 +359,21 @@ const ProductInfo = ({ product }) => {
                         {/* EARPHONES */}
                         <ProductTypeWrapper>
                             <div className="type-bg" />
-                            <TypeIMG
-                                src="/media/placeholderIMG.png" // get from server link
-                                width={123}
-                                height={160}
-                            />
+                            <TypeIMGWrapper>
+                                <TypeIMG
+                                    src="/media/prod-types/earphones.png" // get from server link
+                                    width={178}
+                                    height={161}
+                                    fill="intrinsic"
+                                />
+                            </TypeIMGWrapper>
                             <TypeTitle>
                                 EARPHONES
                             </TypeTitle>
                             <ShopWrapper
                                 value="SHOP"
                                 className="prod-types"
+                                href="/earphones"
                             />
 
                             {/* 

@@ -15,10 +15,14 @@ export const ProductPage = styled.div`
 
 export const ProductSection = styled.div`
     display: flex;
-
     margin-top: 25rem;
+
     > * {
         flex-basis: 100%;
+    }
+
+    &.home {
+        margin-top: 0;
     }
 
     &.main-product {
@@ -216,6 +220,8 @@ export const ProductTypesContainer = styled.div`
     /* > * {
         flex: 1 1 min-content;
     } */
+
+    
 `;
 
 export const ProductTypeWrapper = styled.div`
@@ -235,19 +241,41 @@ export const ProductTypeWrapper = styled.div`
         width: 100%;
         z-index: -1;
     }
+
+    .img::before {
+        content: " sadfas";
+  
+    } 
+    .img {
+        /* display: none; */
+  
+    }
 `;
 
 export const TypeIMGWrapper = styled.div`
-    
+    position: relative;
+    display: flex;
+    justify-content: center;
+    ::before {
+        content: "";
+        position: absolute;
+        background: transparent;
+        z-index: -1;
+        bottom: 0;
+        width: 75%;
+        box-shadow: 0px 2px 25px 10px #000000;
+        opacity: 30%;
+    }
+   
 `;
 
 export const TypeIMG = styled(Image)`
-  
+
 `;
 
 export const TypeTitle = styled.h5`
 
-`;
+    `;
 
 export const ShopWrapper = styled(ButtonHollow)` // link
     display: flex;
@@ -256,15 +284,15 @@ export const ShopWrapper = styled(ButtonHollow)` // link
 
 export const ShopText = styled.p`
 
-`;
+    `;
 
 export const ShopArrow = styled.div`
 
-`;
+    `;
 
 export const AboutText = styled.div`
-    padding-right: 12.5rem;
-    margin: auto 0;
+padding-right: 12.5rem;
+margin: auto 0;
 `;
 
 export const AboutTitle = styled.h3`
@@ -273,11 +301,11 @@ export const AboutTitle = styled.h3`
     line-height: 4.4rem;
     
     .pop-word { // used for orange word "BEST"
-        color: ${colors.main}
+        color: ${ colors.main }
     }
 
 `;
 
 export const AboutIMG = styled(Image)`
-
+    border-radius: .5rem;
 `;
