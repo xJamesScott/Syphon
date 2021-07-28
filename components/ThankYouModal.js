@@ -219,7 +219,7 @@ export default function ThankYouModal({
                                         // itemCount - 1 > 1 ? // TODO: ENABLE AFTER TESTING
                                         itemCount - 1 > -1 ? // TODO: DISABLE AFTER TESTING
                                             <>
-                                                <div class="divider" />
+                                                <div className="divider" />
                                                 <p className="other-items"> and {itemCount - 1} other item{itemCount - 1 > 1 ? "s" : null}</p>
                                             </>
                                             : null

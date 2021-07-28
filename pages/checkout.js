@@ -78,8 +78,10 @@ const checkout = ({ }) => {
     const { register, handleSubmit, formState: { errors }, getValues
     } = useForm({
         mode: "onSubmit",
-        reValidateMode: "onSubmit"
+        reValidateMode: "onChange"
     });
+
+    console.log({ formErrors: errors })
 
     const address = getValues(["address", "city", "state", "zip"]);
     const { street, city, state, zip } = address;
@@ -102,20 +104,27 @@ const checkout = ({ }) => {
     //     setCounting(false);
     // }
 
-    console.log({ itemCount: itemCount })
-
-
-
     const emailData = {
         numItems: cartItems.length,
         address: fullAddress,
         total: subtotal
     };
 
-    const onSubmit = async () => {
-        setTYModal(true);
-        sendEmail();
-    };
+    // const onSubmit = async (e) => {
+    //     // e.preventDefault();
+    //     alert("yoooo!")
+    //     // setTYModal(true);
+    //     // sendEmail();
+    // };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        handleSubmit(() => {
+            alert("yo!!!!!!!!!!!!!")
+            setTYModal(true);
+            // sendEmail();
+        })(e)
+    }
 
     const sendEmail = async () => {
         // axios.post('https://api.sendgrid.com/v3/mail/send');
@@ -123,6 +132,8 @@ const checkout = ({ }) => {
     };
 
     const router = useRouter();
+
+    
 
     // const testObj = { // TODO - REMOVE PLACEHOLDER
     //     item1: { price: 4, quantity: 4 },
@@ -153,6 +164,7 @@ const checkout = ({ }) => {
     // console.log({ isLoading: isLoading, itemCount: itemCount, counting: counting })
 
 
+
     return (
         // <div className="section-margin">
 
@@ -162,7 +174,7 @@ const checkout = ({ }) => {
                 <a href="/">
                     <PayButton>SHOP</PayButton>
                 </a>
-                
+
 
             </NoItems>
             :
@@ -172,6 +184,8 @@ const checkout = ({ }) => {
                 <CheckoutForm
                     className="section-margin"
                     id="checkout"
+                // onSubmit={() => handleSubmit(onSubmit)(e)}
+                // onSubmit={mySubmit}
                 >
 
                     <div className="panel-container checkout-panel">
@@ -183,13 +197,14 @@ const checkout = ({ }) => {
                             <InputWrapper>
                                 <InputWrapper className="label-error">
                                     <CheckoutInputLabel htmlForm="fname"> First Name </CheckoutInputLabel>
-                                    {<CheckoutFormError>Errors go here{errors.fname && errors.fname.message}</CheckoutFormError>}
+                                    {<CheckoutFormError>{errors.fname && errors.fname.message}</CheckoutFormError>}
                                 </InputWrapper>
                                 <CheckoutInput
                                     name="fname"
                                     id="fname"
                                     defaultValue={someVal ? "yooo" : null}
-                                    placeholder={"Enter First Name"}
+                                    placeholder={"First"}
+                                    className={errors.fname ? "error" : null}
                                     {...register('fname',
                                         {
                                             required: { value: true, message: "Required Field" },
@@ -205,7 +220,8 @@ const checkout = ({ }) => {
                                     name="lname"
                                     id="lname"
                                     defaultValue={someVal ? "yooo" : null}
-                                    placeholder={"Enter Last Name"}
+                                    placeholder={"Last"}
+                                    className={errors.lname ? "error" : null}
                                     {...register('lname',
                                         {
                                             required: { value: true, message: "Required Field" },
@@ -221,8 +237,9 @@ const checkout = ({ }) => {
                                     name="email"
                                     id="email"
                                     // defaultValue={someVal ? "yooo" : null} // TODO: ENABLE WHEN NOT TESTING
-                                    defaultValue={"email@gmail.com"}
+                                    defaultValue={someVal ? "email@gmail.com" : null}
                                     placeholder={"email@email.com"}
+                                    className={errors.email ? "error" : null}
                                     {...register('email',
                                         {
                                             required: { value: true, message: "Required Field" },
@@ -243,6 +260,7 @@ const checkout = ({ }) => {
                                     id="phone"
                                     defaultValue={someVal ? "yooo" : null}
                                     placeholder={"+1 555-555-5555"}
+                                    className={errors.phone ? "error" : null}
                                     {...register('phone',
                                         {
                                             required: { value: true, message: "Required Field" },
@@ -261,6 +279,7 @@ const checkout = ({ }) => {
                                     id="address"
                                     defaultValue={someVal ? "yooo" : null}
                                     placeholder={"Enter Street Address"}
+                                    className={errors.address ? "error" : null}
                                     {...register('address',
                                         {
                                             required: { value: true, message: "Required Field" },
@@ -277,6 +296,7 @@ const checkout = ({ }) => {
                                     id="zip"
                                     defaultValue={someVal ? "yooo" : null}
                                     placeholder={"10001"}
+                                    className={errors.zip ? "error" : null}
                                     {...register('zip',
                                         {
                                             required: { value: true, message: "Required Field" },
@@ -293,6 +313,7 @@ const checkout = ({ }) => {
                                     id="city"
                                     defaultValue={someVal ? "yooo" : null}
                                     placeholder={"10001"}
+                                    className={errors.city ? "error" : null}
                                     {...register('city',
                                         {
                                             required: { value: true, message: "Required Field" },
@@ -309,6 +330,7 @@ const checkout = ({ }) => {
                                     id="state"
                                     defaultValue={someVal ? "yooo" : null}
                                     placeholder={"Enter State"}
+                                    className={errors.state ? "error" : null}
                                     {...register('state',
                                         {
                                             required: { value: true, message: "Required Field" },
@@ -323,13 +345,14 @@ const checkout = ({ }) => {
                                 <FormSelect
                                     name="Country"
                                     id="Country"
-                                    placeholder={"Select Country"}
+                                    defaultValue=""
+                                    className={errors.Country ? "error" : null}
                                     {...register('Country',
                                         {
                                             required: { value: true, message: "Required Field" },
                                         })}
                                 >
-                                    <option className="option" defaultValue disable="true">Select Country</option>
+                                    <option hidden className="option" >Select Country</option>
                                     {countries.map((location, i) => { return <option key={i}>{location}</option> })}
                                 </FormSelect>
                             </InputWrapper>
@@ -447,16 +470,25 @@ const checkout = ({ }) => {
                             </TotalWrapper>
 
                             <PayButton
-                                onClick={handleSubmit(onSubmit)}
-                            >CONTINUE & PAY</PayButton>
+                                // type="submit"
+                                // onClick={(e) => e.preventDefault(handleSubmit(onSubmit))}
+                                // onClick={(e) => mySubmit(e)}
+                                // onClick={mySubmit}
 
+                                id="focus-button"
+
+                            // onClick={onSubmit}
+
+                            >
+                                CONTINUE & PAY
+                            </PayButton>
+                            
                         </CheckoutSummary>
                     </div>
                     {
                         showTYModal &&
                         <>
                             <ThankYouModal
-                                // items={items}
                                 setModal={(e) => setTYModal(e)} // TODO - REMOVE; FOR TESTING ONLY
                                 cart={cartItems}
                                 total={subtotal}

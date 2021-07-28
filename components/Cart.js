@@ -33,11 +33,12 @@ const CartWindow = styled.div`
     opacity: 0;
     transition: opacity .3s ease;
     z-index: 1;
-    /* pointer-events: none; */
+    visibility: hidden;
     
     &.visible {
         opacity: 100;
         transition: opacity .3s ease;
+        visibility: visible;
         /* pointer-events: unset; */
     }
 `;
@@ -101,15 +102,19 @@ export const Quantity = styled.div`
     font-weight: bold;
     position: relative;
     z-index: 2;
+
+   
 `;
 
 export const IncrementQTY = styled.p`
     /* color: ${colors.mainText}; */
+    cursor: pointer;
     opacity: 50%;
     z-index: 2;
 
     :hover {
-        cursor: pointer;
+        
+        color: ${colors.main};
     }
 `;
 
@@ -139,11 +144,13 @@ const DeleteItem = styled.svg`
     transition: all .25s ease;
     height: 15px;
     width: 15px;
+    cursor: pointer;
 
     &.prod-hovered {
         opacity: 40%;
         transition: all .25s ease;
         pointer-events: all;
+        
 
         .delete-can { 
             fill: ${colors.mainText};
@@ -301,66 +308,114 @@ export default function Cart(
                     className="modal-motion"
 
                 > */}
-                    <CartModalMargin
-                        className="section-margin"
-                    >
-                        {/* <form form onSubmit={handleSubmit(onSubmit)}>
+                <CartModalMargin
+                    className="section-margin"
+                >
+                    {/* <form form onSubmit={handleSubmit(onSubmit)}>
                         <input
                             {...register("test")}
                         />
                     </form> */}
-                        {/* <form onSubmit={handleSubmit(onSubmit)} > */}
-                        <CartModal
-                            className="modal"
-                            ref={ref}
-                        >
-                            {
-                                totalItems < 1 ? // TODO: CHANGE AFTER TESTING - totalItems < 1 ? 
-                                    <NoItems>
-                                        <div>
-                                            NO ITEMS IN CART
-                                        </div>
-                                    </NoItems>
-                                    :
-                                    <>
-                                        <TitleLine>
-                                            CART ({totalItems})
-                                        </TitleLine>
-                                        {
-                                            cartArray.map((item, i) => {
-                                                const current = item[1];
-                                                const name = JSON.stringify(current.name);
-                                                return (
-                                                    < ProductWrapper
-                                                        key={"cartItem" + i}
-                                                        onMouseEnter={() => setProdHover({ name: true })}
-                                                        onMouseLeave={() => setProdHover({ name: false })} // TODO: SET TO FALSE AFTER TESTING
-                                                    >
-                                                        {/* <div
+                    {/* <form onSubmit={handleSubmit(onSubmit)} > */}
+                    <CartModal
+                        className="modal"
+                        ref={ref}
+                    >
+                        {
+                            totalItems < 1 ? // TODO: CHANGE AFTER TESTING - totalItems < 1 ? 
+                                <NoItems>
+                                    <div>
+                                        NO ITEMS IN CART
+                                    </div>
+                                </NoItems>
+                                :
+                                <>
+                                    <TitleLine>
+                                        CART ({totalItems})
+                                    </TitleLine>
+                                    {
+                                        cartArray.map((item, i) => {
+                                            const current = item[1];
+                                            const name = JSON.stringify(current.name);
+                                            return (
+                                                < ProductWrapper
+                                                    key={"cartItem" + i}
+                                                    onMouseEnter={() => setProdHover({ name: true })}
+                                                    onMouseLeave={() => setProdHover({ name: false })} // TODO: SET TO FALSE AFTER TESTING
+                                                >
+                                                    {/* <div
                                                             className="active-area"
                                                             // onMouseEnter={() => setProdHover({ name: true })}
                                                             // onMouseLeave={() => setProdHover({ name: false })}
                                                             // onClick={(e) => { e.preventDefault() }}
                                                         /> */}
 
-                                                        <CheckoutProdIMG src="/media/placeholderIMG.png"
-                                                            width={64}
-                                                            height={64}
-                                                            fill="magenta"
+                                                    <CheckoutProdIMG src="/media/placeholderIMG.png"
+                                                        width={64}
+                                                        height={64}
+                                                        fill="magenta"
 
-                                                        />
-                                                        <TextWrapper
+                                                    />
+                                                    <TextWrapper
+                                                    >
+                                                        <p>
+                                                            {item[1].name}
+                                                        </p>
+                                                        <p className="price">
+                                                            {`$ ${item[1].price}`}
+                                                        </p>
+                                                    </TextWrapper>
+                                                    <Quantity>
+                                                        {/* INCREMENT - 1 */}
+                                                        <IncrementQTY
+                                                            onClick={() => {
+                                                                dispatch(cartActions.directCartEdit({
+                                                                    product: {
+                                                                        name: current.name,
+                                                                        productId: current.productId,
+                                                                        type: current.type,
+                                                                        price: current.price,
+                                                                        quantity: current.quantity
+                                                                    }, inc: "sub"
+                                                                }
+                                                                ));
+                                                                dispatch(cartActions.setCartFinishLoading({}));
+                                                            }}
                                                         >
-                                                            <p>
-                                                                {item[1].name}
-                                                            </p>
-                                                            <p className="price">
-                                                                {`$ ${item[1].price}`}
-                                                            </p>
-                                                        </TextWrapper>
-                                                        <Quantity>
-                                                            {/* INCREMENT - 1 */}
-                                                            <IncrementQTY
+                                                            -
+                                                        </IncrementQTY>
+                                                        <p
+                                                            key={item[1].productId}
+                                                            id={item[1].productId}
+                                                        >
+                                                            {item[1].quantity}
+                                                        </p>
+                                                        {/* INCREMENT + 1 */}
+                                                        <IncrementQTY
+                                                            onClick={() => {
+                                                                dispatch(cartActions.directCartEdit({
+                                                                    product: {
+                                                                        name: current.name,
+                                                                        productId: current.productId,
+                                                                        type: current.type,
+                                                                        price: current.price,
+                                                                        quantity: current.quantity
+                                                                    }, inc: "add"
+                                                                }
+                                                                ));
+                                                                dispatch(cartActions.setCartFinishLoading({}));
+
+                                                            }}
+                                                        >
+                                                            +
+                                                        </IncrementQTY>
+
+                                                        <DeleteItemContainer>
+                                                            <DeleteItemWrapper
+                                                            />
+                                                            <DeleteItem
+                                                                className={prodHover.name ? "prod-hovered" : ""}
+                                                                onMouseEnter={() => { console.log(prodHover) }}
                                                                 onClick={() => {
                                                                     dispatch(cartActions.directCartEdit({
                                                                         product: {
@@ -369,83 +424,35 @@ export default function Cart(
                                                                             type: current.type,
                                                                             price: current.price,
                                                                             quantity: current.quantity
-                                                                        }, inc: "sub"
+                                                                        }, inc: "delete"
                                                                     }
                                                                     ));
                                                                     dispatch(cartActions.setCartFinishLoading({}));
                                                                 }}
+                                                                width={15} height={15} viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                                                             >
-                                                                -
-                                                            </IncrementQTY>
-                                                            <p
-                                                                key={item[1].productId}
-                                                                id={item[1].productId}
-                                                            >
-                                                                {item[1].quantity}
-                                                            </p>
-                                                            {/* INCREMENT + 1 */}
-                                                            <IncrementQTY
-                                                                onClick={() => {
-                                                                    dispatch(cartActions.directCartEdit({
-                                                                        product: {
-                                                                            name: current.name,
-                                                                            productId: current.productId,
-                                                                            type: current.type,
-                                                                            price: current.price,
-                                                                            quantity: current.quantity
-                                                                        }, inc: "add"
-                                                                    }
-                                                                    ));
-                                                                    dispatch(cartActions.setCartFinishLoading({}));
-
-                                                                }}
-                                                            >
-                                                                +
-                                                            </IncrementQTY>
-
-                                                            <DeleteItemContainer>
-                                                                <DeleteItemWrapper
-                                                                />
-                                                                <DeleteItem
-                                                                    className={prodHover.name ? "prod-hovered" : ""}
-                                                                    onMouseEnter={() => { console.log(prodHover) }}
-                                                                    onClick={() => {
-                                                                        dispatch(cartActions.directCartEdit({
-                                                                            product: {
-                                                                                name: current.name,
-                                                                                productId: current.productId,
-                                                                                type: current.type,
-                                                                                price: current.price,
-                                                                                quantity: current.quantity
-                                                                            }, inc: "delete"
-                                                                        }
-                                                                        ));
-                                                                        dispatch(cartActions.setCartFinishLoading({}));
-                                                                    }}
-                                                                    width={15} height={15} viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                                >
-                                                                    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x={0} y={0} width={15} height={15}>
-                                                                        <rect width={15} height={15} fill="url(#pattern0)" />
-                                                                    </mask>
-                                                                    <g mask="url(#mask0)">
-                                                                        <rect class="delete-can" x={-1} y={1} width={18} height={18} fill="blue" />
-                                                                    </g>
-                                                                    <defs>
-                                                                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width={1} height={1}>
-                                                                            <use xlinkHref="#image0" transform="scale(0.0416667)" />
-                                                                        </pattern>
-                                                                        <image id="image0" width={24} height={24} xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAZUlEQVRIiWNgGCmggYGB4T8a7iBGIyMWsf8UOgbFTCYKDSMbwIKBYvU09wGxFqC7kGgfDhofjFowasGoBRQAFiLVoRfr2Ip5rGDAgugplEavxXBhZD1EAT8GBoYnJFjwBKpnGAIAUcAmPA1WYN0AAAAASUVORK5CYII=" />
-                                                                    </defs>
-                                                                </DeleteItem>
-                                                            </DeleteItemContainer>
-                                                        </Quantity>
-                                                    </ProductWrapper>
-                                                )
-                                            })}
+                                                                <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x={0} y={0} width={15} height={15}>
+                                                                    <rect width={15} height={15} fill="url(#pattern0)" />
+                                                                </mask>
+                                                                <g mask="url(#mask0)">
+                                                                    <rect className="delete-can" x={-1} y={1} width={18} height={18} fill="blue" />
+                                                                </g>
+                                                                <defs>
+                                                                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width={1} height={1}>
+                                                                        <use xlinkHref="#image0" transform="scale(0.0416667)" />
+                                                                    </pattern>
+                                                                    <image id="image0" width={24} height={24} xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAZUlEQVRIiWNgGCmggYGB4T8a7iBGIyMWsf8UOgbFTCYKDSMbwIKBYvU09wGxFqC7kGgfDhofjFowasGoBRQAFiLVoRfr2Ip5rGDAgugplEavxXBhZD1EAT8GBoYnJFjwBKpnGAIAUcAmPA1WYN0AAAAASUVORK5CYII=" />
+                                                                </defs>
+                                                            </DeleteItem>
+                                                        </DeleteItemContainer>
+                                                    </Quantity>
+                                                </ProductWrapper>
+                                            )
+                                        })}
 
 
 
-                                        {/* {() => {
+                                    {/* {() => {
                             for (const [productId, item] of cartArray) { // iterates through unique items TODO: select cart from state
                                 console.log("cart items")
                                 // return (
@@ -473,28 +480,30 @@ export default function Cart(
                                 // )
                             }
                         }} */}
-                                        {
-                                            !isLoading &&
-                                            <TotalWrapper>
-                                                <SummaryTotals>TOTAL</SummaryTotals>
-                                                <Cost>{`$ ${parseFloat(subtotal).toFixed(2)}`}</Cost>
-                                            </TotalWrapper>
-                                        }
+                                    {
+                                        !isLoading &&
+                                        <TotalWrapper>
+                                            <SummaryTotals>TOTAL</SummaryTotals>
+                                            <Cost>{`$ ${parseFloat(subtotal).toFixed(2)}`}</Cost>
+                                        </TotalWrapper>
+                                    }
 
-                                        <ButtonContainer>
-                                            <a href="/checkout">
-                                                <PayButton
-                                                // onClick={handleSubmit(onSubmit)}
-                                                >
-                                                    CHECKOUT
-                                                </PayButton>
-                                            </a>
-                                        </ButtonContainer>
-                                    </>
-                            }
-                        </CartModal>
-                        {/* </form> */}
-                    </CartModalMargin>
+                                    <ButtonContainer
+                                        id="cart-button"
+                                    >
+                                        <a href="/checkout">
+                                            <PayButton
+                                                onClick={handleSubmit(onSubmit)}
+                                            >
+                                                CHECKOUT
+                                            </PayButton>
+                                        </a>
+                                    </ButtonContainer>
+                                </>
+                        }
+                    </CartModal>
+                    {/* </form> */}
+                </CartModalMargin>
                 {/* </motion.div> */}
             </CartWrapper>
 

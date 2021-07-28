@@ -90,6 +90,7 @@ export const CheckoutInput = styled(Input)`
     border: 1px solid rgba(207, 207, 207, .4);
     border-radius: .5rem;
     padding: 2.4rem 1.8rem;
+    outline: none;
 
     /* font */
     font-size: 1.4rem;
@@ -97,6 +98,14 @@ export const CheckoutInput = styled(Input)`
     letter-spacing: -.025rem;
     line-height: auto;
     color: rgba(0, 0, 0, .4);
+
+    ::placeholder {
+        opacity: 50%;
+    }
+
+    &.error {
+        border: 1.5px solid red;
+    }
 
     
     &#card-number {
