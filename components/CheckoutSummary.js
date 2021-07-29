@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { Button, ButtonOrange } from './Buttons'
+import { theme, mq } from '../constants/theme';
 
+const { colors } = theme;
 
 export const CheckoutSummary = styled.div`
     flex: 1 1 30%;
@@ -73,9 +75,13 @@ export const ProductWrapper = styled.div`
     }
 
     &.confirmation {
-        gap: 1.rem;
+        gap: 1rem;
+        
         > * {
             flex: 1 1 33%;
+            /* display: flex;
+            justify-content: flex-start;
+            align-items: flex-start; */
             
         }
         h3 { 
@@ -102,7 +108,8 @@ export const ProductWrapper = styled.div`
     }
 
     .prod-img-ty {
-        align-self: center;
+        /* align-self: center; */
+        align-self: flex-start;
         width: 50px;
         flex: 0 0 50px;
     }
@@ -136,6 +143,8 @@ export const ProductWrapper = styled.div`
         justify-content: space-between;
         flex-direction: column;
         flex: 2 1 45%;
+        gap: 0;
+        margin-bottom: auto;
      * {
             margin: 0;
         }
@@ -201,6 +210,18 @@ export const ButtonContainer = styled.div`
 `;
 export const PayButton = styled(ButtonOrange)`
      width: 100%;
+
+     &.processing {
+        background: ${colors.accent4}; 
+        pointer-events: none;
+        cursor: not-allowed;
+     }
+     span { 
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 1rem;
+     }
 `;
 
 

@@ -275,12 +275,12 @@ export const LinkGroup = styled.div`
 `;
 
 const CartIcon = styled.img`
-        transition: all .27s ease;
+        transition: filter .27s ease;
         cursor: pointer;
         
         &.cart-hover {
             filter: drop-shadow(0 0 3px rgb(225, 225, 225, 1));
-            transition: all .27s ease;
+            transition: filter .27s ease;
         }
 `;
 
@@ -331,9 +331,13 @@ function Banner() {
 
     const [cartHover, setCartHover] = useState(false);
 
+    console.log({ cartHover: cartHover })
+
     return (
         !isLoading ?
-            <CartWindow >
+            <CartWindow 
+                className="nav-banner"
+            >
                 <BannerWrapper >
                     <NavContainer className="section-margin">
                         <NavWrapper>
@@ -580,7 +584,7 @@ function Banner() {
                                                     >
                                                         <a>Jamz</a>
                                                     </NavLink>
-                                                    
+
                                                 </NavLinksContainer>
                                             </LinkGroup>
                                         }
@@ -610,17 +614,18 @@ function Banner() {
                                         height="20"
                                         onClick={() => setCartVisible(() => !cartVisible)}
                                         className={cartHover ? "cart-hover" : ""}
-                                        src="/media/icons/cart.svg"
+                                        // src="/media/icons/cart.svg"
+                                        src="/media/icons/cart.png"
                                     />
                                 </ButtonContainer>
                             </div>
                         </NavWrapper>
                     </NavContainer>
                 </BannerWrapper>
-                
+
                 <Cart
                     visible={cartVisible}
-                    onClick={(e) => e.preventDefault}
+                    // onClick={(e) => e.preventDefault}
                     isLoading={isLoading}
                     hideCart={hideCart}
                     totalItems={totalItems}

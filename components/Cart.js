@@ -26,29 +26,43 @@ import { motion } from "framer-motion";
 const { colors } = theme;
 
 const CartWindow = styled.div`
-    position: absolute;
     position: relative;
+
+    &.nav-banner {
+    position: fixed;
     top: 0;
     left: 0;
-    opacity: 0;
-    transition: opacity .3s ease;
-    z-index: 1;
-    visibility: hidden;
+    z-index: 20;
+    }
     
-    &.visible {
-        opacity: 100;
-        transition: opacity .3s ease;
+    &.cart-modal {
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        opacity: 0;
+        height: 100%; 
+        width: 100%;
+        transition: opacity .25s ease;
+    }
+
+    &.visible.cart-modal {
         visibility: visible;
-        /* pointer-events: unset; */
+        opacity: 1;
+        /* transition: visibility 0s 2s linear, opacity .3s ease; */
     }
 `;
 
 export const CartWrapper = styled.div`
     height: 100vh;
     width: 100vw;
+    /* height: 100%; 
+    width: 100%; */
     background-color: rgba(128, 128, 128, 0.49);  
-    position: fixed;
-    pointer-events: none;
+    /* position: fixed; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* pointer-events: none; */
     /* width: 0;
 
     .visible {
@@ -96,7 +110,6 @@ export const Quantity = styled.div`
     gap: 25%;
     background: ${colors.accent3};
     padding: 0;
-    /* background: magenta; */
     width: 9.6rem;
     height: 3.2rem;
     font-weight: bold;
@@ -113,7 +126,6 @@ export const IncrementQTY = styled.p`
     z-index: 2;
 
     :hover {
-        
         color: ${colors.main};
     }
 `;
@@ -277,7 +289,7 @@ export default function Cart(
     useEffect(() => {
         const handleClick = (e) => {
             if (ref.current && !ref.current.contains(e.target)) {
-                hideCart()
+                hideCart();
                 window.removeEventListener('click', handleClick);
             }
         };
@@ -291,12 +303,12 @@ export default function Cart(
 
     const [prodHover, setProdHover] = useState({});
 
-    console.log({ prodHover: prodHover });
+    console.log({ visible: visible })
 
     return (
         !isLoading &&
         <CartWindow
-            className={visible ? "visible" : ""}
+            className={visible ? "visible cart-modal" : "cart-modal"}
         >
             <CartWrapper
                 className="modal"
@@ -493,7 +505,7 @@ export default function Cart(
                                     >
                                         <a href="/checkout">
                                             <PayButton
-                                                onClick={handleSubmit(onSubmit)}
+                                            // TODO: track clicks
                                             >
                                                 CHECKOUT
                                             </PayButton>

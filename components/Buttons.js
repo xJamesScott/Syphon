@@ -17,9 +17,9 @@ export const ButtonOrange = styled.button`
     :hover {
         background: ${colors.accent4}; 
         cursor: pointer !important;
-        transition: all .25s ease; 
+        transition: color .25s ease; 
     }
-    transition: all .25s ease;
+    transition: color .25s ease;
     /* font */
     font-size: 1.3rem;
     font-weight: bold;

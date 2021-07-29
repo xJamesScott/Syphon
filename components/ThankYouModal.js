@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { Loader } from '../components/Loader'
@@ -37,7 +38,12 @@ export const ModalContainer = styled.div`
         justify-content: center;
         align-items: center;
         height: 140px;
-        > * {
+
+        &.no-others {
+            height: 115px;
+            > * {
+            
+        }
         }
     }
 
@@ -45,6 +51,7 @@ export const ModalContainer = styled.div`
         border-radius: .5rem;
         overflow: hidden;
         margin-bottom: 4.6rem;
+        
     }
 
     .items-box {
@@ -163,7 +170,13 @@ export default function ThankYouModal({
     total
 }) {
 
-    const itemCount = cart.length
+    const [itemCount, setItemCount] = useState();
+
+    useEffect(() => {
+        cart && console.log({ "cart - 1": cart.length - 1 })
+        cart && setItemCount(cart.length);
+    }, [cart])
+    // setItemCount(cart.length);
     return (
         <>
             <BG >
@@ -178,8 +191,12 @@ export default function ThankYouModal({
                         </CheckIcon>
                         <h2>THANK YOU<br />FOR YOUR ORDER</h2>
                         <p className="confirmation-msg">You will receive an email confirmation shortly.</p>
-                        <div className="summary-wrap">
-                            <div className="total-summary">
+                        <div
+                            className="summary-wrap"
+                        >
+                            <div
+                                className={cart && itemCount - 1 > 0 ? "total-summary" : "total-summary no-others"}
+                            >
 
                                 <div className="items-box">
                                     {
@@ -216,8 +233,8 @@ export default function ThankYouModal({
                                             : <Loader />
                                     }
                                     {
-                                        // itemCount - 1 > 1 ? // TODO: ENABLE AFTER TESTING
-                                        itemCount - 1 > -1 ? // TODO: DISABLE AFTER TESTING
+                                        itemCount - 1 > 0
+                                            ?
                                             <>
                                                 <div className="divider" />
                                                 <p className="other-items"> and {itemCount - 1} other item{itemCount - 1 > 1 ? "s" : null}</p>
@@ -240,11 +257,13 @@ export default function ThankYouModal({
 
                             </div>
                         </div>
-                        <PayButton
-                            onClick={() => setModal(false)} // TODO REMOVE; FOR TESTING ONLY
-                        >
-                            BACK TO HOME
-                        </PayButton>
+                        <a href="/">
+                            <PayButton
+                            // onClick={() => setModal(false)} // TODO REMOVE; FOR TESTING ONLY
+                            >
+                                BACK TO HOME
+                            </PayButton>
+                        </a>
                     </div>
                 </ModalContainer>
             </BG>

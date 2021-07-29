@@ -3,7 +3,7 @@ import { email as emailBody } from '/public/email/orderConfirmation';
 
 export default async function sendEmail(req, res) {
 
-    // const { body: {numItems, address, total } } = req // TODO: REPLACE PLACEHOLDERS
+    const { body: { numItems, address, total } } = req // TODO: REPLACE PLACEHOLDERS
 
     // TODO: JOIN ADDRESS VALUES OF CHILDREN (street, city, etc.)
     // TODO: ITERATE THROUGH ITEM TOTALS AND CREATE COMBINED TOTAL
@@ -29,9 +29,9 @@ export default async function sendEmail(req, res) {
 
         const emailBody = postData(endpoint) // TODO: pass email with data to "value" in "personalizations" array
             .then(data => {
-                const numItems = "888888" // PLACEHOLDER USE BODY VALS
-                const address = "777777777777" // PLACEHOLDER USE BODY VALS
-                const total = "1111111111111" // PLACEHOLDER USE BODY VALS
+                // const numItems = "888888" // PLACEHOLDER USE BODY VALS
+                // const address = "777777777777" // PLACEHOLDER USE BODY VALS
+                // const total = "1111111111111" // PLACEHOLDER USE BODY VALS
                 const emailTagMap = {
                     "{{numItems}}": numItems,
                     "{{address}}": address,
@@ -45,7 +45,7 @@ export default async function sendEmail(req, res) {
                 });
                 return emailWithData;
             })
-            .then(async emailWithData =>{
+            .then(async emailWithData => {
                 const email = {
                     "personalizations": [
                         {

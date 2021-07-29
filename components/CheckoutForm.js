@@ -12,6 +12,18 @@ import { theme, mq } from '../constants/theme';
 
 const { colors } = theme;
 
+// export const CheckoutPage = styled.div`
+//     visibility: visible;
+//     opacity: 1;
+//     transition: opacity .3s ease;
+    
+//     &.processing {
+//         visibility: hidden;
+//         opacity: 0;
+//         transition: opacity .3s ease;
+//     }
+// `;
+
 export const CheckoutWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -50,6 +62,8 @@ export const CheckoutWrapper = styled.div`
     .payment-method {
         margin-bottom: 3.2rem;
     }
+
+    
 `;
 
 export const CheckoutFormWrapper = styled.div`
@@ -60,6 +74,7 @@ export const CheckoutForm = styled(Form)`
     display: flex;
     gap: 2.4rem;
     justify-content: space-between;
+    position: relative;
     /* margin-bottom: 27.4rem; */
 
     .panel-container {
@@ -77,6 +92,14 @@ export const CheckoutForm = styled(Form)`
          flex: 1 1 30%;
          position: sticky;
          top: 15%;
+    }
+    
+    .submit-error {
+        font-size: 1.8rem;
+        position: absolute; 
+        width: 50%;
+        color: rgba(255, 71, 71, 1);
+        
     }
 
 /* 

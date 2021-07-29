@@ -40,8 +40,13 @@ import {
     ProductWrapper,
     PayButton
 } from '../components/CheckoutSummary';
+import { LoaderContainer, Loader } from '../components/Loader';
 import ThankYouModal from '../components/ThankYouModal';
+import { theme, mq } from '../constants/theme';
 import axios from 'axios';
+import Cookie from 'js-cookie';
+
+const { colors } = theme;
 
 
 
@@ -81,11 +86,11 @@ const checkout = ({ }) => {
         reValidateMode: "onChange"
     });
 
-    console.log({ formErrors: errors })
+    // const addressFields = getValues(["address", "city", "state", "zip"]);
+    // const { address, city, state, zip } = addressFields;
+    const fullAddress = `${getValues("address")} ${getValues("city")}, ${getValues("state")} ${getValues("zip")}`;
 
-    const address = getValues(["address", "city", "state", "zip"]);
-    const { street, city, state, zip } = address;
-    const fullAddress = `${street} ${city}, ${state} ${zip}`;
+    // console.log(fullAddress)
 
     const subtotal = cartItems.reduce((sum, item) => {
         return sum += item.price * item.quantity // TODO - PLUGIN PROPER VARIABLES
@@ -100,6 +105,8 @@ const checkout = ({ }) => {
         setCounting(false);
     }, [rawItemCount, cartItems]);
 
+
+
     // () => {
     //     setCounting(false);
     // }
@@ -110,6 +117,10 @@ const checkout = ({ }) => {
         total: subtotal
     };
 
+
+
+    // console.log({ fullAddress: getValues(["address", "city", "state", "zip"]) })
+
     // const onSubmit = async (e) => {
     //     // e.preventDefault();
     //     alert("yoooo!")
@@ -117,14 +128,25 @@ const checkout = ({ }) => {
     //     // sendEmail();
     // };
 
+    const [emailProcessing, setEmailProcessing] = useState(false);
+    const [submissionError, setSubmissionError] = useState(false);
+
     const onSubmit = async (e) => {
         e.preventDefault();
-        handleSubmit(() => {
-            alert("yo!!!!!!!!!!!!!")
-            setTYModal(true);
-            // sendEmail();
-        })(e)
-    }
+        handleSubmit(async () => {
+            setEmailProcessing(true);
+            try {
+                await sendEmail();
+                dispatch(cartActions.directCartEdit({ inc: "clear" }));
+                dispatch(cartActions.setCartFinishLoading({}));
+                setEmailProcessing(false);
+                setTYModal(true);
+            } catch (error) {
+                setEmailProcessing(false);
+                setSubmissionError(true);
+            }
+        })(e);
+    };
 
     const sendEmail = async () => {
         // axios.post('https://api.sendgrid.com/v3/mail/send');
@@ -133,7 +155,7 @@ const checkout = ({ }) => {
 
     const router = useRouter();
 
-    
+
 
     // const testObj = { // TODO - REMOVE PLACEHOLDER
     //     item1: { price: 4, quantity: 4 },
@@ -166,34 +188,53 @@ const checkout = ({ }) => {
 
 
     return (
-        // <div className="section-margin">
 
-        itemCount < 1 ?
+        itemCount < 1 ? // if cart empty
             <NoItems>
                 <h3>CART EMPTY.</h3>
                 <a href="/">
                     <PayButton>SHOP</PayButton>
                 </a>
-
-
             </NoItems>
             :
+            // emailProcessing // if processing (form submitted)
+            //     ?
+            //     <LoaderContainer>
+            //         <div>
+            //             <Loader
+            //                 speed=".75s"
+            //                 emptyColor={colors.main}
+            //             />
+            //             <h3 className="load-text">Processing Your Order...</h3>
+            //         </div>
+
+            //     </LoaderContainer>
+            //     :
             <div
                 className="checkout-page"
             >
                 <CheckoutForm
                     className="section-margin"
                     id="checkout"
-                // onSubmit={() => handleSubmit(onSubmit)(e)}
-                // onSubmit={mySubmit}
                 >
-
+                    {submissionError ?
+                        <h3
+                            className="submit-error"
+                        >
+                            Error processing your order :(
+                            <br />
+                            Please try again shortly, or contact support</h3>
+                        : null
+                    }
                     <div className="panel-container checkout-panel">
                         <CheckoutWrapper
                             className="checkout-panels"
                         >
+
                             <h3>CHECKOUT</h3>
                             <h4 className="section-title">BILLING DETAILS</h4>
+
+
                             <InputWrapper>
                                 <InputWrapper className="label-error">
                                     <CheckoutInputLabel htmlForm="fname"> First Name </CheckoutInputLabel>
@@ -470,19 +511,25 @@ const checkout = ({ }) => {
                             </TotalWrapper>
 
                             <PayButton
-                                // type="submit"
-                                // onClick={(e) => e.preventDefault(handleSubmit(onSubmit))}
-                                // onClick={(e) => mySubmit(e)}
-                                // onClick={mySubmit}
-
-                                id="focus-button"
-
-                            // onClick={onSubmit}
-
+                                onClick={onSubmit}
+                                className={emailProcessing ? "processing" : ""}
                             >
-                                CONTINUE & PAY
+                                {
+                                    !emailProcessing ?
+                                        "CONTINUE & PAY"
+                                        :
+                                        <span>
+                                            <Loader
+                                                className="button"
+                                                speed=".6s"
+                                            />
+                                            Processing
+                                        </span>
+
+                                }
+
                             </PayButton>
-                            
+
                         </CheckoutSummary>
                     </div>
                     {

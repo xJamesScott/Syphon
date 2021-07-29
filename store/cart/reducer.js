@@ -111,6 +111,10 @@ const cartReducer = (state = initialState, action) => {
                 }, product.productId);
             }
 
+            if ( inc == "clear") {
+                Cookie.set("cart",[]);
+            }
+
             const cartCookie = Cookie.getJSON("cart") // new cookie
 
             return {
