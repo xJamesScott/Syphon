@@ -70,8 +70,14 @@ export const ProductSection = styled.div`
    
 `;
 
+export const MainIMGContainer = styled.div`
+
+   
+`;
 export const MainIMG = styled(Image)`
    /* width: 800px; */
+
+   
 `;
 
 export const ProductInfoWrapper = styled.div`
@@ -210,18 +216,32 @@ export const ProductTypesContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
     gap: 3rem;
     margin-top: 16rem;
+
     > * {
         flex: 1 1 284px;
     }
-    /* margin: auto; */
-
-    /* > * {
-        flex: 1 1 min-content;
-    } */
+    
+    @media ${mq.tablet.narrow.max} { 
+        gap: 1rem;
+        
+        > * {
+            flex: 1 1 223px;
+        }
+    }
 
     
+
+    @media ${mq.phone.wide.max} { 
+        flex-wrap: wrap;
+        
+        > * {
+            flex: 1 0 100%;
+        }
+    }
+
 `;
 
 export const ProductTypeWrapper = styled.div`
@@ -229,6 +249,18 @@ export const ProductTypeWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    margin-top: auto;
+    
+
+    > * {
+        /* display: flex;
+
+        align-items: flex-end;
+        margin-top: auto; */
+    }
+    /* max-height: 165px; */
     
     /* padding-bottom: 3rem; */
     
@@ -238,17 +270,24 @@ export const ProductTypeWrapper = styled.div`
         bottom: 0;
         background: ${colors.accent3};
         height: 75%;
+        max-height: 204px;
         width: 100%;
         z-index: -1;
+        * {
+             height: 100%;
+        }
     }
 
-    .img::before {
-        content: " sadfas";
-  
-    } 
     .img {
         /* display: none; */
   
+    }
+
+    @media ${mq.tablet.narrow.max} { 
+        .type-bg {
+            max-height: 165px;
+            /* display: none; */
+        }
     }
 `;
 
@@ -256,6 +295,8 @@ export const TypeIMGWrapper = styled.div`
     position: relative;
     display: flex;
     justify-content: center;
+    /* height: 160px; */
+
     ::before {
         content: "";
         position: absolute;
@@ -266,16 +307,21 @@ export const TypeIMGWrapper = styled.div`
         box-shadow: 0px 2px 25px 10px #000000;
         opacity: 30%;
     }
+
+    &.desktop-img.earphones {
+        height: 125%;
+        margin-bottom: 2rem;
+    }
    
 `;
 
 export const TypeIMG = styled(Image)`
-
+    
 `;
 
 export const TypeTitle = styled.h5`
-
-    `;
+    
+`;
 
 export const ShopWrapper = styled(ButtonHollow)` // link
     display: flex;
@@ -301,7 +347,7 @@ export const AboutTitle = styled.h3`
     line-height: 4.4rem;
     
     .pop-word { // used for orange word "BEST"
-        color: ${ colors.main }
+        color: ${colors.main}
     }
 
 `;

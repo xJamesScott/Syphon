@@ -9,6 +9,7 @@ import { theme, mq } from '../constants/theme';
 import {
     ProductPage,
     ProductSection,
+    MainIMGContainer,
     MainIMG,
     ProductInfoWrapper,
     NewTag,
@@ -115,11 +116,43 @@ const ProdTypeInfo = ({ products, prodType }) => {
                             <ProductSection
                                 className={i % 2 === 0 ? "main-product type-main tm-left" : "main-product type-main tm-right"}
                             >
-                                <MainIMG
-                                    src="/media/placeholderIMG.png" // product.thumbnailIMG - (smaller version is used on other pages (diff component))
-                                    width={540}
-                                    height={560}
-                                />
+
+                                {/* desktop image */}
+
+                                <div
+                                    className="desktop-img"
+                                >
+                                    <MainIMG
+                                        src={product.thumbnailIMG.desktop}
+                                        width={540}
+                                        height={560}
+
+                                    />
+                                </div>
+
+                                {/* tablet image */}
+
+                                <div
+                                    className="tablet-img"
+                                >
+                                    <MainIMG
+                                        src={product.thumbnailIMG.tablet}
+                                        width={689}
+                                        height={352}
+                                    />
+                                </div>
+
+                                {/* mobile image */}
+
+                                <div
+                                    className="mobile-img"
+                                >
+                                    <MainIMG
+                                        src={product.thumbnailIMG.mobile}
+                                        width={327}
+                                        height={352}
+                                    />
+                                </div>
                                 <ProductInfoWrapper>
                                     {
                                         product.newProduct &&
@@ -144,11 +177,36 @@ const ProdTypeInfo = ({ products, prodType }) => {
                     {/* HEADPHONES */}
                     <ProductTypeWrapper>
                         <div className="type-bg" />
-                        <TypeIMGWrapper>
+                        {/* headphones desktop */}
+                        <TypeIMGWrapper
+                            className="desktop-img"
+                        >
                             <TypeIMG
-                                src="/media/prod-types/headphones.png" // get from server link
+                                src="/media/prod-types/desktop/headphones.png" // get from server link
                                 width={123}
                                 height={160}
+                                className="img"
+                            />
+                        </TypeIMGWrapper>
+                        {/* headphones tablet */}
+                        <TypeIMGWrapper
+                            className="tablet-img"
+                        >
+                            <TypeIMG
+                                src="/media/prod-types/tablet/headphones.png" // get from server link
+                                width={81}
+                                height={104}
+                                className="img"
+                            />
+                        </TypeIMGWrapper>
+                        {/* headphones mobile */}
+                        <TypeIMGWrapper
+                            className="mobile-img"
+                        >
+                            <TypeIMG
+                                src="/media/prod-types/mobile/headphones.png" // get from server link
+                                width={80}
+                                height={104}
                                 className="img"
                             />
                         </TypeIMGWrapper>
@@ -160,28 +218,41 @@ const ProdTypeInfo = ({ products, prodType }) => {
                             className="prod-types"
                             href="/headphones"
                         />
-
-                        {/* 
-                             <ShopWrapper>
-                                <ShopText>
-                                    SHOP
-                                </ShopText>
-                                <ShopArrow>
-                                    {">"}
-                                    // use icon-arrow-right.svg
-                                </ShopArrow>
-                            </ShopWrapper> 
-                             */}
-
                     </ProductTypeWrapper>
                     {/* SPEAKERS */}
                     <ProductTypeWrapper>
                         <div className="type-bg" />
-                        <TypeIMGWrapper>
+                        {/* speakers desktop */}
+                        <TypeIMGWrapper
+                            className="desktop-img"
+                        >
                             <TypeIMG
-                                src="/media/prod-types/speakers.png" // get from server link
+                                src="/media/prod-types/desktop/speakers.png" // get from server link
                                 width={123}
-                                height={160}
+                                height={147}
+                                className="img"
+                            />
+                        </TypeIMGWrapper>
+                        {/* speakers tablet */}
+                        <TypeIMGWrapper
+                            className="tablet-img"
+                        >
+                            <TypeIMG
+                                src="/media/prod-types/tablet/speakers.png" // get from server link
+                                width={85}
+                                height={102}
+                                className="img"
+                            />
+                        </TypeIMGWrapper>
+                        {/* speakers mobile */}
+                        <TypeIMGWrapper
+                            className="mobile-img"
+                        >
+                            <TypeIMG
+                                src="/media/prod-types/mobile/speakers.png" // get from server link
+                                width={84}
+                                height={101}
+                                className="img"
                             />
                         </TypeIMGWrapper>
                         <TypeTitle>
@@ -192,28 +263,41 @@ const ProdTypeInfo = ({ products, prodType }) => {
                             className="prod-types"
                             href="/speakers"
                         />
-
-                        {/* 
-                             <ShopWrapper>
-                                <ShopText>
-                                    SHOP
-                                </ShopText>
-                                <ShopArrow>
-                                    {">"}
-                                    // use icon-arrow-right.svg
-                                </ShopArrow>
-                            </ShopWrapper> 
-                             */}
                     </ProductTypeWrapper>
                     {/* EARPHONES */}
                     <ProductTypeWrapper>
                         <div className="type-bg" />
-                        <TypeIMGWrapper>
+                        {/* earphones desktop */}
+                        <TypeIMGWrapper
+                            className="desktop-img earphones"
+                        >
                             <TypeIMG
-                                src="/media/prod-types/earphones.png" // get from server link
-                                width={178}
-                                height={161}
-                                fill="intrinsic"
+                                src="/media/prod-types/tablet/earphones.png" // get from server link
+                                width={125}
+                                height={126}
+                                className="img"
+                            />
+                        </TypeIMGWrapper>
+                        {/* earphones tablet */}
+                        <TypeIMGWrapper
+                            className="tablet-img"
+                        >
+                            <TypeIMG
+                                src="/media/prod-types/tablet/earphones.png" // get from server link
+                                width={103}
+                                height={104}
+                                className="img"
+                            />
+                        </TypeIMGWrapper>
+                        {/* earphones mobile */}
+                        <TypeIMGWrapper
+                            className="mobile-img"
+                        >
+                            <TypeIMG
+                                src="/media/prod-types/mobile/earphones.png" // get from server link
+                                width={103}
+                                height={104}
+                                className="img"
                             />
                         </TypeIMGWrapper>
                         <TypeTitle>
@@ -224,18 +308,6 @@ const ProdTypeInfo = ({ products, prodType }) => {
                             className="prod-types"
                             href="/earphones"
                         />
-
-                        {/* 
-                             <ShopWrapper>
-                                <ShopText>
-                                    SHOP
-                                </ShopText>
-                                <ShopArrow>
-                                    {">"}
-                                    // use icon-arrow-right.svg
-                                </ShopArrow>
-                            </ShopWrapper> 
-                             */}
                     </ProductTypeWrapper>
                 </ProductTypesContainer>
 

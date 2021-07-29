@@ -19,10 +19,10 @@ const Item = mongoose.Schema({
     newProduct: Boolean,
     features: String,
     inTheBox: Array,
-    featureIMG: String,
-    supportIMG1: String,
-    suportIMG2: String,
-    thumbnailIMG: String,
+    featureIMG: Object,
+    supportIMG1: Object,
+    suportIMG2: Object,
+    thumbnailIMG: Object,
     type: Map
 },
     schemaOptions

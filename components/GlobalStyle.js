@@ -32,10 +32,53 @@ const GlobalStyle = createGlobalStyle`
    }
 
    option:hover {
-   background-color: yellow !important;
+      background-color: yellow !important;
+   }
 
-  
-}
+   // IMAGE MEDIA QUERIES
+   
+   .tablet-img {
+      display: none !important;
+   }
+
+   .mobile-img {
+      display: none !important;
+   }
+   
+   @media ${mq.tablet.narrow.max} {
+      
+      .desktop-img {
+         display: none !important;
+      }
+      
+      .tablet-img {
+         display: unset !important;
+      }
+   }
+
+   @media ${mq.phone.narrow.max} {
+
+      .tablet-img {
+         display: none !important;
+      }
+      .mobile-img {
+         display: block !important;
+      }
+
+   }
+
+   // global media queries
+
+   @media ${mq.tablet.narrow.max} { 
+
+   }
+
+   @media ${mq.phone.narrow.max} { 
+
+   }
+
+   
+   
 `;
 
 export default GlobalStyle

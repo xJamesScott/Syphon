@@ -52,12 +52,17 @@ const mq = {
         wide: {
             minWidth: "1024px",
             maxWidth: "1279px",
+            min: "(min-width: 1024px)",
+            max: "(max-width: 1279px)"
         },
     },
     desktop: {
         small: {
             minWidth: "1280px",
             maxWidth: "1439px",
+            min: "(min-width: 1280px)",
+            max: "(max-width: 1439px)",
+
         },
         medium: {
             minWidth: "1440px",
