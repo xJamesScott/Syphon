@@ -39,6 +39,11 @@ export const products = [
             tablet: "/products/REGT200/tablet/thumbnail.jpg",
             mobile: "/products/REGT200/mobile/thumbnail.jpg",
         },
+        "alsoIMG": {
+            desktop: "",
+            tablet: "",
+            mobile: "/products/REGT200/mobile/also.jpg",
+        }
     },
     {
         // TODO: UPDATE DATA
@@ -76,6 +81,11 @@ export const products = [
             tablet: "/products/REXX100/tablet/thumbnail.jpg",
             mobile: "/products/REXX100/mobile/thumbnail.jpg",
         },
+        "alsoIMG": {
+            desktop: "",
+            tablet: "",
+            mobile: "/products/REXX100/mobile/also.jpg",
+        }
     },
     {
         // TODO: UPDATE DATA
@@ -113,6 +123,11 @@ export const products = [
             tablet: "/products/DYNO100/tablet/thumbnail.jpg",
             mobile: "/products/DYNO100/mobile/thumbnail.jpg",
         },
+        "alsoIMG": {
+            desktop: "",
+            tablet: "",
+            mobile: "/products/DYNO100/mobile/also.jpg",
+        }
     },
     {
         // TODO: UPDATE DATA
@@ -150,6 +165,11 @@ export const products = [
             desktop: "/products/ZKAG200/desktop/thumbnail.jpg",
             tablet: "/products/ZKAG200/tablet/thumbnail.jpg",
             mobile: "/products/ZKAG200/mobile/thumbnail.jpg",
+        },
+        "alsoIMG": {
+            desktop: "",
+            tablet: "",
+            mobile: "/products/ZKAG200/mobile/also.jpg",
         }
     },
     {
@@ -189,6 +209,11 @@ export const products = [
             tablet: "/products/ZKAX100/tablet/thumbnail.jpg",
             mobile: "/products/ZKAX100/mobile/thumbnail.jpg",
         },
+        "alsoIMG": {
+            desktop: "",
+            tablet: "",
+            mobile: "/products/ZKAX100/mobile/also.jpg",
+        }
     },
     {
         // TODO: UPDATE DATA
@@ -227,5 +252,10 @@ export const products = [
             tablet: "/products/JAMZ100/tablet/thumbnail.jpg",
             mobile: "/products/JAMZ100/mobile/thumbnail.jpg",
         },
+        "alsoIMG": {
+            desktop: "",
+            tablet: "",
+            mobile: "/products/JAMZ100/mobile/also.jpg",
+        }
     }
 ]

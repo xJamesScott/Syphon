@@ -140,21 +140,23 @@ const ProductInfo = ({ product }) => {
             {/* SECTION - MAIN */}
 
             <ProductSection className="main-product">
-                <div className="desktop-img">
+                <div className="desktop-img round-border">
                     <MainIMG
                         src={product.thumbnailIMG.desktop}
                         width={540}
                         height={560}
                     />
                 </div>
-                <div className="tablet-img">
+                <div className="tablet-img round-border">
                     <MainIMG
                         src={product.thumbnailIMG.tablet}
-                        width={689}
-                        height={352}
+                        // width={689}
+                        // height={352}
+                        width={281}
+                        height={480}
                     />
                 </div>
-                <div className="mobile-img">
+                <div className="mobile-img round-border">
                     <MainIMG
                         src={product.thumbnailIMG.mobile}
                         width={327}
@@ -178,7 +180,9 @@ const ProductInfo = ({ product }) => {
                     <ProductPrice>
                         $ {product.price.toLocaleString('en')}
                     </ProductPrice>
-                    <CartRow>
+                    <CartRow
+                        className="cart-row"
+                    >
                         <QuantityWrapper>
                             <Increment
                                 onClick={productCount > 1 ? () => setProductCount(productCount - 1) : null}
@@ -196,6 +200,7 @@ const ProductInfo = ({ product }) => {
                         </QuantityWrapper>
                         <AddCart
                             onClick={addItem}
+                            className="add-cart"
                         >
                             {/* sends cart action via redux with quantity from useState */}
                             ADD TO CART
@@ -209,7 +214,7 @@ const ProductInfo = ({ product }) => {
             <ProductSection
                 className="features"
             >
-                <SubSectionWrapper className="features">
+                <SubSectionWrapper className="features sub-section">
                     <SubSectionTitle>
                         FEATURES
                     </SubSectionTitle>
@@ -218,26 +223,30 @@ const ProductInfo = ({ product }) => {
                         dangerouslySetInnerHTML={{ __html: features }}
                     />
                 </SubSectionWrapper>
-                <SubSectionWrapper>
-                    <SubSectionTitle>
+                <SubSectionWrapper
+                    className="in-the-box"
+                >
+                    <SubSectionTitle
+                    >
                         IN THE BOX
                     </SubSectionTitle>
                     {
-                        product.inTheBox.map((items, i) => {
-                            return (
-                                <>
-                                    <InfoWrapper key={"in-box" + i}>
-                                        <BoxItemCount>
-                                            {Object.keys(items)}
-                                        </BoxItemCount>
-                                        <BoxItem>
-                                            {Object.values(items)}
-                                        </BoxItem>
-                                    </InfoWrapper>
-                                </>
-                            )
-                        })
-
+                        <div className="box-items">
+                            {product.inTheBox.map((items, i) => {
+                                return (
+                                    <>
+                                        <InfoWrapper key={"in-box" + i}>
+                                            <BoxItemCount>
+                                                {Object.keys(items)}
+                                            </BoxItemCount>
+                                            <BoxItem>
+                                                {Object.values(items)}
+                                            </BoxItem>
+                                        </InfoWrapper>
+                                    </>
+                                );
+                            })}
+                        </div>
                     }
                 </SubSectionWrapper>
             </ProductSection>
@@ -245,14 +254,18 @@ const ProductInfo = ({ product }) => {
             {/* IMAGES SECTION */}
 
             <ProductSection
-                class="product-images"
+                className="product-images"
             >
-                <IMGWrapper>
-                    <IMGSmallContainer>
+                <IMGWrapper
+                    className="img-wrapper"
+                >
+                    <IMGSmallContainer
+                        className="img-small-container"
+                    >
 
                         {/* support image 1 */}
 
-                        <div className="desktop-img">
+                        <div className="desktop-img round-border">
                             <ProductIMG
                                 className="prod-img-small"
                                 src={product.supportIMG1.desktop}
@@ -260,26 +273,27 @@ const ProductInfo = ({ product }) => {
                                 height={280}
                             />
                         </div>
-                        <div className="tablet-img">
+                        <div className="tablet-img round-border">
                             <ProductIMG
                                 className="prod-img-small"
                                 src={product.supportIMG1.tablet}
                                 width={277}
-                                height={144}
+                                height={174}
+                                layout="intrinsic"
                             />
                         </div>
-                        <div className="mobile-img">
+                        <div className="mobile-img round-border">
                             <ProductIMG
                                 className="prod-img-small"
                                 src={product.supportIMG1.mobile}
-                                width={445}
-                                height={280}
+                                width={327 * 1.25}
+                                height={174 * 1.25}
                             />
                         </div>
 
                         {/* support image 2 */}
 
-                        <div className="desktop-img">
+                        <div className="desktop-img round-border">
                             <ProductIMG
                                 className="prod-img-small"
                                 src={product.supportIMG2.desktop}
@@ -287,32 +301,32 @@ const ProductInfo = ({ product }) => {
                                 height={280}
                             />
                         </div>
-                        <div className="tablet-img">
+                        <div className="tablet-img round-border">
                             <ProductIMG
                                 className="prod-img-small"
                                 src={product.supportIMG2.tablet}
                                 width={277}
-                                height={144}
+                                height={174}
                             />
                         </div>
-                        <div className="mobile-img">
+                        <div className="mobile-img round-border">
                             <ProductIMG
                                 className="prod-img-small"
                                 src={product.supportIMG2.mobile}
-                                width={445}
-                                height={280}
+                                width={327 * 1.25}
+                                height={174 * 1.25}
                             />
                         </div>
                     </IMGSmallContainer>
-                    <div className="desktop-img">
+                    <div className="desktop-img round-border">
                         <ProductIMG
-                            className="prod-img-small"
+                            // className="prod-img-small"
                             src={product.featureIMG.desktop}
                             width={635}
                             height={592}
                         />
                     </div>
-                    <div className="tablet-img">
+                    <div className="tablet-img round-border">
                         <ProductIMG
                             className="prod-img-small"
                             src={product.featureIMG.tablet}
@@ -320,12 +334,12 @@ const ProductInfo = ({ product }) => {
                             height={368}
                         />
                     </div>
-                    <div className="mobile-img">
+                    <div className="mobile-img round-border">
                         <ProductIMG
                             className="prod-img-small"
                             src={product.featureIMG.mobile}
-                            width={327}
-                            height={368}
+                            width={327 * 1.25}
+                            height={368 * 1.25}
                         />
                     </div>
                 </IMGWrapper>
@@ -333,9 +347,9 @@ const ProductInfo = ({ product }) => {
 
             {/* SECTION - YOU MAY ALSO LIKE */}
 
-            <ProductSection className="also-products">
+            <ProductSection className="also-products ">
                 <SubSectionTitle
-                    className="also-products"
+                    className="also-products also-title"
                 >
                     YOU MAY ALSO LIKE
                 </SubSectionTitle>
@@ -343,29 +357,32 @@ const ProductInfo = ({ product }) => {
                     <ProductsContainer
                         className="product-gallery"
                     >
+
                         {
                             alsoProducts.filter((item, i) => i < 3).map((item, j) => {
                                 return (
                                     <ProductWrapper
                                         id={item.name + j}
+                                        key={item.name + j}
+                                        className="gallery-products"
                                     >
-                                        <div className="desktop-img">
+                                        <div className="desktop-img round-border">
                                             <ProductThumbnail
                                                 src={item.thumbnailIMG.desktop}
                                                 width={350}
                                                 height={318}
                                             />
                                         </div>
-                                        <div className="tablet-img">
+                                        <div className="tablet-img round-border">
                                             <ProductThumbnail
                                                 src={item.thumbnailIMG.tablet}
                                                 width={223}
                                                 height={318}
                                             />
                                         </div>
-                                        <div className="mobile-img">
+                                        <div className="mobile-img round-border">
                                             <ProductThumbnail
-                                                src={item.thumbnailIMG.mobile}
+                                                src={item.alsoIMG.mobile}
                                                 width={327}
                                                 height={120}
                                             />
@@ -526,27 +543,60 @@ const ProductInfo = ({ product }) => {
             </ProductSection >
 
             <div
-                // className="section-margin"
+            // className="section-margin"
             >
                 <ProductSection
                     className="about-product main-about"
                 >
-                    <AboutText>
-                        <AboutTitle>
-                            BRINGING&nbsp;YOU&nbsp;THE<br />
+                    <AboutText
+                        className="about-text"
+                    >
+                        <AboutTitle
+                            className="hide-tablet show-mobile"
+                        >
+                            BRINGING&nbsp;YOU&nbsp;THE
+                            <br />
                             <span className="pop-word">BEST&nbsp;</span>
+                            AUDIO&nbsp;GEAR
+                        </AboutTitle>
+                        <AboutTitle
+                            className="show-tablet hide-mobile hide-desktop"
+                        >
+                            BRINGING&nbsp;YOU&nbsp;THE&nbsp;
+                            <span className="pop-word">BEST</span>
+                            <br />
                             AUDIO&nbsp;GEAR
                         </AboutTitle>
                         <p>
                             Located at the heart of New York City, Syphon is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Syphon the best place to buy your portable audio equipment.
                         </p>
                     </AboutText>
-                    <AboutIMG
-                        src="/media/about/about-val.jpg" // get from server link
-                        width={540}
-                        height={588}
-                        layout="responsive"
-                    />
+                    <div
+                        className="desktop-img round-border"
+                    >
+                        <AboutIMG
+                            src="/media/about/about-dt.jpg" // get from server link
+                            width={540}
+                            height={588}
+                            layout="responsive"
+                        />
+                    </div>
+                    <div className="tablet-img round-border">
+                        <AboutIMG
+                            src="/media/about/about-tb.jpg" // get from server link
+                            width={689}
+                            height={300}
+                            layout="responsive"
+                        />
+                    </div>
+                    <div className="mobile-img round-border">
+                        <AboutIMG
+                            src="/media/about/about-m.jpg" // get from server link
+                            width={327}
+                            height={300}
+                            layout="responsive"
+                        />
+                    </div>
                 </ProductSection>
             </div>
         </ProductPage >

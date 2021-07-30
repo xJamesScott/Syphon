@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
 
-/* #__next{
-  overflow: hidden;
-} */
-
 html,
 body {
   padding: 0;
@@ -11,6 +7,10 @@ body {
   font-family: 'Manrope', sans-serif;
   font-size: 10px;
   scroll-behavior: smooth;
+}
+
+.page-container {
+  overflow: hidden;
 }
 
 .page,

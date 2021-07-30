@@ -392,7 +392,7 @@ export default function Home(test2, test3, test4) {
             </p>
           </AboutText>
           <AboutIMG
-            src="/media/about/about-val.jpg" // get from server link
+            src="/media/about/about-dt.jpg" // get from server link
             width={540}
             height={588}
             layout="responsive"

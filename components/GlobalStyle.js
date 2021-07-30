@@ -35,8 +35,18 @@ const GlobalStyle = createGlobalStyle`
       border-radius: .8rem !important;
       display: flex;
       align-items: center;
-      overflow: hidden;
+      justify-content: center;
+      > * {
+         flex: 1 1 100%;
+      }
+      /* overflow: hidden; */
    }
+
+   .hide-desktop {
+      display: none;
+   }
+
+  
 
    // IMAGE MEDIA QUERIES
    
@@ -55,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
       }
       
       .tablet-img {
-         display: unset !important;
+         display: flex !important;
       }
    }
 
@@ -65,7 +75,7 @@ const GlobalStyle = createGlobalStyle`
          display: none !important;
       }
       .mobile-img {
-         display: block !important;
+         display: flex !important;
       }
 
    }
@@ -73,7 +83,13 @@ const GlobalStyle = createGlobalStyle`
    // global media queries
 
    @media ${mq.tablet.narrow.max} { 
+      .hide-tablet {
+         display: none;
+      }
 
+      .show-tablet {
+         display: unset;
+      }
    }
    
    @media ${mq.desktop.small.max} { 
@@ -83,7 +99,13 @@ const GlobalStyle = createGlobalStyle`
    }
 
    @media ${mq.phone.narrow.max} { 
+      .hide-mobile {
+         display: none;
+      }
 
+      .show-mobile {
+         display: unset;
+      }
    }
 
    

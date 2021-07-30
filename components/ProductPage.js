@@ -42,13 +42,13 @@ export const ProductSection = styled.div`
         margin: auto;
         margin-top: 16rem;
         justify-content: space-between;
+        
     }
 
     &.also-products {
         flex-direction: column;
         margin-top: 16rem;
     }
-
     
 
     &.about-product {
@@ -68,6 +68,178 @@ export const ProductSection = styled.div`
         flex-direction: row-reverse;
     }
    
+    /* responive including all children */
+
+    /* tablet */
+
+    @media ${mq.tablet.narrow.max} { 
+         
+        /* features section */
+
+        &.features {
+            flex-direction: column;
+            gap: 12rem;
+            margin-top: 12rem;
+
+            .in-the-box {
+                display: flex;
+                justify-content: space-between;
+                > * {
+                    margin: 0;
+                    flex: 1 1 50%;
+                }
+
+                .box-items {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.8rem;
+                    * {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        /* product images section */
+
+        &.product-images{
+            margin-top: 12rem !important;
+            .img-small-container{
+                gap: 2rem;
+                
+            }
+        }
+
+        /* also products */
+
+        &.also-products {
+            width: 100%;
+            .product-gallery {
+                height: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1.1rem;
+                width: 100%;
+                > * {
+                    display: flex;
+                    margin: 0;
+                    flex: 1 1 33%;
+                }
+            }
+        }
+
+        &.main-about {
+            flex-direction: column-reverse;
+            text-align: center;
+            margin-bottom: 12rem;
+
+            .about-text {
+                margin-top: 6.3rem;
+                padding: 0 3vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            h3 {
+                font-size: 5vw;
+                margin-top: 0;
+                margin-bottom: 2rem;
+            }
+        }
+    }
+    
+    /* mobile */
+
+    @media ${mq.phone.narrow.max} {
+        flex-direction: column;
+
+        /* Main section */
+
+        &.main-product {
+            margin-top: 6.5rem;
+            gap: 3.2rem;
+            
+            * {
+                margin: 0;
+                gap: 3.2rem;
+            }
+            
+            .cart-row{
+                gap: 1.6rem;
+                flex-wrap: wrap;
+                > * {
+                    flex: 1 0 45%;
+                }
+
+                .add-cart {
+                    height: 100%;
+                    margin: auto;
+                    padding: 1rem;
+                }
+            }
+        }
+
+        /* features section */
+
+        &.features {
+            gap: 8.8rem;
+            .in-the-box { 
+                flex-direction: column;
+                gap: 2.4rem;
+            }
+        }
+
+        &.product-images {
+            
+            .img-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* also like */
+
+        &.also-products {
+            width: 100%;
+            .also-title {
+                margin: 0;
+                margin-bottom: 4rem;
+
+            }
+            .product-gallery {
+                display: flex;
+                gap: 5.6rem;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                button {
+                    /* margin: auto; */
+                    * {
+                        margin: auto;
+                    }
+                }
+                > * {
+                    width: 100%;
+                }
+                
+            }
+            
+        }
+        
+        /* about section */
+
+        &.main-about {
+            .about-text {
+                padding: 0;
+            }
+            h3 {
+                font-size: 2.8rem;
+            }
+        }
+
+    }
+
 `;
 
 export const MainIMGContainer = styled.div`
@@ -164,7 +336,9 @@ export const IMGWrapper = styled.div`
       display: flex;
       /* justify-content: center; */
       justify-content: space-between;
+      justify-content: center;
       gap: 2rem;
+
     .prod-img-small {
     }
 `;

@@ -23,6 +23,7 @@ const Item = mongoose.Schema({
     supportIMG1: Object,
     supportIMG2: Object,
     thumbnailIMG: Object,
+    alsoIMG: Object,
     type: Map
 },
     schemaOptions

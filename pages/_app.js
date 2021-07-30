@@ -25,6 +25,7 @@ function WrappedApp({ Component, pageProps }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4 }}
+        className="page-container"
       >
         {
           !hideNav &&
@@ -42,9 +43,6 @@ function WrappedApp({ Component, pageProps }) {
         <Footer />
       </motion.div>
     </Provider>
-
-
-
   )
 };
 
