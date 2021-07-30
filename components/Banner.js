@@ -41,9 +41,16 @@ const CartWindow = styled.div`
     position: sticky;
     top: 0;
 
-    .mobile-window {
+    &.mobile-window {
         display: flex;
         justify-content: center;
+        opacity: 0;
+        transition: all .25s ease;
+
+        &.visible {
+            opacity: 1;
+            transition: all .25s ease;
+        }
     }
 `;
 const BannerWrapper = styled.div`
@@ -391,7 +398,7 @@ function Banner() {
                             className="section-margin"
                         >
                             <MenuButton
-                                onClick={()=> setMobileVisible(!mobileVisibile)}
+                                onClick={() => setMobileVisible(!mobileVisibile)}
                                 width={16} height={15} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg"
                             >
                                 <rect width={16} height={3} fill="white" />
@@ -739,169 +746,163 @@ function Banner() {
 
                 {/* MOBILE MENU MODAL */}
 
-                {
 
-                    mobileVisibile ?
-                        <CartWindow
-                            className="mobile-window"
-                        >
-                            <MobileMenu
-                                className=""
+                <CartWindow
+                    className={mobileVisibile ? "mobile-window visible" : "mobile-window"}
+                >
+                    <MobileMenu
+                        className=""
+                    >
+                        <div className="mobile-menu-container">
+                            <ProductTypesContainer
+                                className="mobile-types mobile section-margin"
                             >
-                                <div className="mobile-menu-container">
-                                    <ProductTypesContainer
-                                        className="mobile-types section-margin"
+                                {/* HEADPHONES */}
+                                <ProductTypeWrapper
+                                    className="mobile-menu mobile"
+                                >
+                                    <div className="type-bg" />
+                                    {/* headphones desktop */}
+                                    <TypeIMGWrapper
+                                        className="desktop-img"
                                     >
-                                        {/* HEADPHONES */}
-                                        <ProductTypeWrapper
-                                            className="mobile-menu"
-                                        >
-                                            <div className="type-bg" />
-                                            {/* headphones desktop */}
-                                            <TypeIMGWrapper
-                                                className="desktop-img"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/desktop/headphones.png" // get from server link
-                                                    width={123}
-                                                    height={160}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            {/* headphones tablet */}
-                                            <TypeIMGWrapper
-                                                className="tablet-img"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/tablet/headphones.png" // get from server link
-                                                    width={81}
-                                                    height={104}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            {/* headphones mobile */}
-                                            <TypeIMGWrapper
-                                                className="mobile-img"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/mobile/headphones.png" // get from server link
-                                                    width={80}
-                                                    height={104}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            <TypeTitle>
-                                                HEADPHONES
-                                            </TypeTitle>
-                                            <ShopWrapper
-                                                value="SHOP"
-                                                className="prod-types"
-                                                href="/headphones"
-                                            />
-                                        </ProductTypeWrapper>
-                                        {/* SPEAKERS */}
-                                        <ProductTypeWrapper
-                                            className="mobile-menu"
-                                        >
-                                            <div className="type-bg" />
-                                            {/* speakers desktop */}
-                                            <TypeIMGWrapper
-                                                className="desktop-img"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/desktop/speakers.png" // get from server link
-                                                    width={123}
-                                                    height={147}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            {/* speakers tablet */}
-                                            <TypeIMGWrapper
-                                                className="tablet-img"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/tablet/speakers.png" // get from server link
-                                                    width={85}
-                                                    height={102}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            {/* speakers mobile */}
-                                            <TypeIMGWrapper
-                                                className="mobile-img"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/mobile/speakers.png" // get from server link
-                                                    width={84}
-                                                    height={101}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            <TypeTitle>
-                                                SPEAKERS
-                                            </TypeTitle>
-                                            <ShopWrapper
-                                                value="SHOP"
-                                                className="prod-types"
-                                                href="/speakers"
-                                            />
-                                        </ProductTypeWrapper>
-                                        {/* EARPHONES */}
-                                        <ProductTypeWrapper
-                                            className="mobile-menu"
-                                        >
-                                            <div className="type-bg" />
-                                            {/* earphones desktop */}
-                                            <TypeIMGWrapper
-                                                className="desktop-img earphones"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/tablet/earphones.png" // get from server link
-                                                    width={125}
-                                                    height={126}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            {/* earphones tablet */}
-                                            <TypeIMGWrapper
-                                                className="tablet-img"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/tablet/earphones.png" // get from server link
-                                                    width={103}
-                                                    height={104}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            {/* earphones mobile */}
-                                            <TypeIMGWrapper
-                                                className="mobile-img"
-                                            >
-                                                <TypeIMG
-                                                    src="/media/prod-types/mobile/earphones.png" // get from server link
-                                                    width={103}
-                                                    height={104}
-                                                    className="img"
-                                                />
-                                            </TypeIMGWrapper>
-                                            <TypeTitle>
-                                                EARPHONES
-                                            </TypeTitle>
-                                            <ShopWrapper
-                                                value="SHOP"
-                                                className="prod-types"
-                                                href="/earphones"
-                                            />
-                                        </ProductTypeWrapper>
+                                        <TypeIMG
+                                            src="/media/prod-types/desktop/headphones.png" // get from server link
+                                            width={123}
+                                            height={160}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    {/* headphones tablet */}
+                                    <TypeIMGWrapper
+                                        className="tablet-img"
+                                    >
+                                        <TypeIMG
+                                            src="/media/prod-types/tablet/headphones.png" // get from server link
+                                            width={81}
+                                            height={104}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    {/* headphones mobile */}
+                                    <TypeIMGWrapper
+                                        className="mobile-img"
+                                    >
+                                        <TypeIMG
+                                            src="/media/prod-types/mobile/headphones.png" // get from server link
+                                            width={80}
+                                            height={104}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    <TypeTitle>
+                                        HEADPHONES
+                                    </TypeTitle>
+                                    <ShopWrapper
+                                        value="SHOP"
+                                        className="prod-types"
+                                        href="/headphones"
+                                    />
+                                </ProductTypeWrapper>
+                                {/* SPEAKERS */}
+                                <ProductTypeWrapper
+                                    className="mobile-menu"
+                                >
+                                    <div className="type-bg" />
+                                    {/* speakers desktop */}
+                                    <TypeIMGWrapper
+                                        className="desktop-img"
+                                    >
+                                        <TypeIMG
+                                            src="/media/prod-types/desktop/speakers.png" // get from server link
+                                            width={123}
+                                            height={147}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    {/* speakers tablet */}
+                                    <TypeIMGWrapper
+                                        className="tablet-img"
+                                    >
+                                        <TypeIMG
+                                            src="/media/prod-types/tablet/speakers.png" // get from server link
+                                            width={85}
+                                            height={102}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    {/* speakers mobile */}
+                                    <TypeIMGWrapper
+                                        className="mobile-img"
+                                    >
+                                        <TypeIMG
+                                            src="/media/prod-types/mobile/speakers.png" // get from server link
+                                            width={84}
+                                            height={101}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    <TypeTitle>
+                                        SPEAKERS
+                                    </TypeTitle>
+                                    <ShopWrapper
+                                        value="SHOP"
+                                        className="prod-types"
+                                        href="/speakers"
+                                    />
+                                </ProductTypeWrapper>
+                                {/* EARPHONES */}
+                                <ProductTypeWrapper
+                                    className="mobile-menu"
+                                >
+                                    <div className="type-bg" />
+                                    {/* earphones desktop */}
+                                    <TypeIMGWrapper
+                                        className="desktop-img earphones"
+                                    >
+                                        <TypeIMG
+                                            src="/media/prod-types/tablet/earphones.png" // get from server link
+                                            width={125}
+                                            height={126}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    {/* earphones tablet */}
+                                    <TypeIMGWrapper
+                                        className="tablet-img"
+                                    >
+                                        <TypeIMG
+                                            src="/media/prod-types/tablet/earphones.png" // get from server link
+                                            width={103}
+                                            height={104}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    {/* earphones mobile */}
+                                    <TypeIMGWrapper
+                                        className="mobile-img"
+                                    >
+                                        <TypeIMG
+                                            src="/media/prod-types/mobile/earphones.png" // get from server link
+                                            width={103}
+                                            height={104}
+                                            className="img"
+                                        />
+                                    </TypeIMGWrapper>
+                                    <TypeTitle>
+                                        EARPHONES
+                                    </TypeTitle>
+                                    <ShopWrapper
+                                        value="SHOP"
+                                        className="prod-types"
+                                        href="/earphones"
+                                    />
+                                </ProductTypeWrapper>
 
-                                    </ProductTypesContainer>
-                                </div>
-                            </MobileMenu>
-                        </CartWindow>
-
-                        :
-                        null
-                }
+                            </ProductTypesContainer>
+                        </div>
+                    </MobileMenu>
+                </CartWindow>
             </CartWindow >
             : <Loader />
     )
