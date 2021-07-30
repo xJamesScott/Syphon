@@ -25,9 +25,9 @@ export const products = [
             ],
         "newProduct": true,
         "supportIMG1": {
-            desktop: "/products/REGT200/desktop/suport-image-1.jpg",
-            tablet: "/products/REGT200/tablet/suport-image-1.jpg",
-            mobile: "/products/REGT200/mobile/suport-image-1.jpg"
+            desktop: "/products/REGT200/desktop/support-image-1.jpg",
+            tablet: "/products/REGT200/tablet/support-image-1.jpg",
+            mobile: "/products/REGT200/mobile/support-image-1.jpg"
         },
         "supportIMG2": {
             desktop: "/products/REGT200/desktop/support-image-2.jpg",
@@ -62,9 +62,9 @@ export const products = [
             ],
         "newProduct": false,
         "supportIMG1": {
-            desktop: "/products/REXX100/desktop/suport-image-1.jpg",
-            tablet: "/products/REXX100/tablet/suport-image-1.jpg",
-            mobile: "/products/REXX100/mobile/suport-image-1.jpg",
+            desktop: "/products/REXX100/desktop/support-image-1.jpg",
+            tablet: "/products/REXX100/tablet/support-image-1.jpg",
+            mobile: "/products/REXX100/mobile/support-image-1.jpg",
         },
         "supportIMG2": {
             desktop: "/products/REXX100/desktop/support-image-2.jpg",
@@ -99,9 +99,9 @@ export const products = [
             ],
         "newProduct": false,
         "supportIMG1": {
-            desktop: "/products/DYNO100/desktop/suport-image-1.jpg",
-            tablet: "/products/DYNO100/tablet/suport-image-1.jpg",
-            mobile: "/products/DYNO100/mobile/suport-image-1.jpg",
+            desktop: "/products/DYNO100/desktop/support-image-1.jpg",
+            tablet: "/products/DYNO100/tablet/support-image-1.jpg",
+            mobile: "/products/DYNO100/mobile/support-image-1.jpg",
         },
         "supportIMG2": {
             desktop: "/products/DYNO100/desktop/support-image-2.jpg",
@@ -137,9 +137,9 @@ export const products = [
             ],
         "newProduct": false,
         "supportIMG1": {
-            desktop: "/products/ZKAG200/desktop/suport-image-1.jpg",
-            tablet: "/products/ZKAG200/tablet/suport-image-1.jpg",
-            mobile: "/products/ZKAG200/mobile/suport-image-1.jpg",
+            desktop: "/products/ZKAG200/desktop/support-image-1.jpg",
+            tablet: "/products/ZKAG200/tablet/support-image-1.jpg",
+            mobile: "/products/ZKAG200/mobile/support-image-1.jpg",
         },
         "supportIMG2": {
             desktop: "/products/ZKAG200/desktop/support-image-2.jpg",
@@ -175,9 +175,9 @@ export const products = [
             ],
         "newProduct": false,
         "supportIMG1": {
-            desktop: "/products/ZKAX100/desktop/suport-image-1.jpg",
-            tablet: "/products/ZKAX100/tablet/suport-image-1.jpg",
-            mobile: "/products/ZKAX100/mobile/suport-image-1.jpg",
+            desktop: "/products/ZKAX100/desktop/support-image-1.jpg",
+            tablet: "/products/ZKAX100/tablet/support-image-1.jpg",
+            mobile: "/products/ZKAX100/mobile/support-image-1.jpg",
         },
         "supportIMG2": {
             desktop: "/products/ZKAX100/desktop/support-image-2.jpg",
@@ -213,9 +213,9 @@ export const products = [
             ],
         "newProduct": false,
         "supportIMG1": {
-            desktop: "/products/JAMZ100/desktop/suport-image-1.jpg",
-            tablet: "/products/JAMZ100/tablet/suport-image-1.jpg",
-            mobile: "/products/JAMZ100/mobile/suport-image-1.jpg",
+            desktop: "/products/JAMZ100/desktop/support-image-1.jpg",
+            tablet: "/products/JAMZ100/tablet/support-image-1.jpg",
+            mobile: "/products/JAMZ100/mobile/support-image-1.jpg",
         },
         "supportIMG2": {
             desktop: "/products/JAMZ100/desktop/support-image-2.jpg",

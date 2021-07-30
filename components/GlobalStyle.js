@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
       margin-top: 5.5rem;
       
       /* padding-top: 2rem; */
-      border-radius: .5rem;
+      border-radius: .8rem;
    }
 
    .section-wrapper {
@@ -31,8 +31,11 @@ const GlobalStyle = createGlobalStyle`
       
    }
 
-   option:hover {
-      background-color: yellow !important;
+   .round-border {
+      border-radius: .8rem !important;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
    }
 
    // IMAGE MEDIA QUERIES
@@ -70,7 +73,7 @@ const GlobalStyle = createGlobalStyle`
    // global media queries
 
    @media ${mq.tablet.narrow.max} { 
-      
+
    }
    
    @media ${mq.desktop.small.max} { 

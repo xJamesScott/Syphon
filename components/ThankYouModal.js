@@ -26,7 +26,7 @@ export const ModalContainer = styled.div`
     > * {
         margin: 0;
     }
-    border-radius: .5rem;
+    border-radius: .8rem;
     overflow: hidden;
     .modal-wrap {
         padding: 4.8rem;
@@ -48,7 +48,7 @@ export const ModalContainer = styled.div`
     }
 
     .summary-wrap {
-        border-radius: .5rem;
+        border-radius: .8rem;
         overflow: hidden;
         margin-bottom: 4.6rem;
         

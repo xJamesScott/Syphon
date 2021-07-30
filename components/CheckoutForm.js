@@ -16,7 +16,7 @@ const { colors } = theme;
 //     visibility: visible;
 //     opacity: 1;
 //     transition: opacity .3s ease;
-    
+
 //     &.processing {
 //         visibility: hidden;
 //         opacity: 0;
@@ -80,7 +80,7 @@ export const CheckoutForm = styled(Form)`
     .panel-container {
         margin-top: 14.5rem;
         background: ${colors.accent1};
-        border-radius: .5rem;
+        border-radius: .8rem;
         height: min-content;
         margin-bottom: 27.4rem;
     }
@@ -111,7 +111,7 @@ export const CheckoutForm = styled(Form)`
 export const CheckoutInput = styled(Input)`
     width: 100%;
     border: 1px solid rgba(207, 207, 207, .4);
-    border-radius: .5rem;
+    border-radius: .8rem;
     padding: 2.4rem 1.8rem;
     outline: none;
 

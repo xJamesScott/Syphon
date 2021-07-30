@@ -193,6 +193,23 @@ export const ProductsContainer = styled.div`
     align-items: center;
     gap: 3rem;
     /* margin: auto; */
+
+    > * {
+        flex: 1 10 auto;
+        width: 0;
+        margin: auto;
+        > * {
+            margin: auto;
+        }
+    }
+
+    @media ${mq.tablet.narrow.max} { 
+        gap: 1rem;
+    }
+    
+    .product-gallery {
+
+    }
 `;
 
 export const ProductWrapper = styled.div`
@@ -371,5 +388,5 @@ export const AboutTitle = styled.h3`
 `;
 
 export const AboutIMG = styled(Image)`
-    border-radius: .5rem;
+    border-radius: .8rem;
 `;

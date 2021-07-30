@@ -110,7 +110,7 @@ export const FeatureProd = styled.div`
     position: relative;
     background: ${colors.main};
     color: ${colors.accent1};
-    border-radius: .5rem;
+    border-radius: .8rem;
     margin-top: 16.8rem;
     overflow: hidden;
 
@@ -186,7 +186,7 @@ export const HighLightProd = styled.div`
     position: relative;
     margin-top: 4.8rem;
     height: 320px;
-    border-radius: .5rem;
+    border-radius: .8rem;
     overflow: hidden;
 
     &.home {
@@ -222,7 +222,7 @@ export const MiniProdContainer = styled.div`
 
     > * {
         flex: 1 1 50%;
-        border-radius: .5rem;
+        border-radius: .8rem;
         overflow: hidden;
     }
     

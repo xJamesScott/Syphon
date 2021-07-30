@@ -44,10 +44,13 @@ const CartWindow = styled.div`
     &.mobile-window {
         display: flex;
         justify-content: center;
+        visibility: hidden;
         opacity: 0;
         transition: all .25s ease;
 
+
         &.visible {
+            visibility: visible;
             opacity: 1;
             transition: all .25s ease;
         }
@@ -745,7 +748,6 @@ function Banner() {
                 />
 
                 {/* MOBILE MENU MODAL */}
-
 
                 <CartWindow
                     className={mobileVisibile ? "mobile-window visible" : "mobile-window"}

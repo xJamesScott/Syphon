@@ -36,7 +36,7 @@ export const FormSectionTitle = styled.h4`
 
 export const FormSelect = styled.select`
     border: 1px solid rgba(207, 207, 207, .4);
-    border-radius: .5rem;
+    border-radius: .8rem;
     padding: 1.8rem 2rem;
     appearance: none;
 

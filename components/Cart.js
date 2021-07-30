@@ -89,7 +89,7 @@ const CartModal = styled.div`
     display: flex ;
     flex-direction: column;
     justify-content: center;
-    border-radius: .5rem;
+    border-radius: .8rem;
     margin-top: 2rem;
     /* cursor: pointer; */
 `;

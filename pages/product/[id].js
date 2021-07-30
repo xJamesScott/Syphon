@@ -140,11 +140,27 @@ const ProductInfo = ({ product }) => {
             {/* SECTION - MAIN */}
 
             <ProductSection className="main-product">
-                <MainIMG
-                    src="/media/placeholderIMG.png" // product.thumbnailIMG - (smaller version is used on other pages (diff component))
-                    width={540}
-                    height={560}
-                />
+                <div className="desktop-img">
+                    <MainIMG
+                        src={product.thumbnailIMG.desktop}
+                        width={540}
+                        height={560}
+                    />
+                </div>
+                <div className="tablet-img">
+                    <MainIMG
+                        src={product.thumbnailIMG.tablet}
+                        width={689}
+                        height={352}
+                    />
+                </div>
+                <div className="mobile-img">
+                    <MainIMG
+                        src={product.thumbnailIMG.mobile}
+                        width={327}
+                        height={352}
+                    />
+                </div>
                 <ProductInfoWrapper >
                     {
                         product.newProduct &&
@@ -233,24 +249,85 @@ const ProductInfo = ({ product }) => {
             >
                 <IMGWrapper>
                     <IMGSmallContainer>
-                        <ProductIMG
-                            className="prod-img-small"
-                            src="/media/placeholderIMG.png" // product.supportIMG1
-                            width={445}
-                            height={280}
-                        />
-                        <ProductIMG
-                            className="prod-img-small"
-                            src="/media/placeholderIMG.png" // product.supportIMG2
-                            width={445}
-                            height={280}
-                        />
+
+                        {/* support image 1 */}
+
+                        <div className="desktop-img">
+                            <ProductIMG
+                                className="prod-img-small"
+                                src={product.supportIMG1.desktop}
+                                width={445}
+                                height={280}
+                            />
+                        </div>
+                        <div className="tablet-img">
+                            <ProductIMG
+                                className="prod-img-small"
+                                src={product.supportIMG1.tablet}
+                                width={277}
+                                height={144}
+                            />
+                        </div>
+                        <div className="mobile-img">
+                            <ProductIMG
+                                className="prod-img-small"
+                                src={product.supportIMG1.mobile}
+                                width={445}
+                                height={280}
+                            />
+                        </div>
+
+                        {/* support image 2 */}
+
+                        <div className="desktop-img">
+                            <ProductIMG
+                                className="prod-img-small"
+                                src={product.supportIMG2.desktop}
+                                width={445}
+                                height={280}
+                            />
+                        </div>
+                        <div className="tablet-img">
+                            <ProductIMG
+                                className="prod-img-small"
+                                src={product.supportIMG2.tablet}
+                                width={277}
+                                height={144}
+                            />
+                        </div>
+                        <div className="mobile-img">
+                            <ProductIMG
+                                className="prod-img-small"
+                                src={product.supportIMG2.mobile}
+                                width={445}
+                                height={280}
+                            />
+                        </div>
                     </IMGSmallContainer>
-                    <ProductIMG
-                        src="/media/placeholderIMG.png" // product.featureIMG
-                        width={635}
-                        height={592}
-                    />
+                    <div className="desktop-img">
+                        <ProductIMG
+                            className="prod-img-small"
+                            src={product.featureIMG.desktop}
+                            width={635}
+                            height={592}
+                        />
+                    </div>
+                    <div className="tablet-img">
+                        <ProductIMG
+                            className="prod-img-small"
+                            src={product.featureIMG.tablet}
+                            width={395}
+                            height={368}
+                        />
+                    </div>
+                    <div className="mobile-img">
+                        <ProductIMG
+                            className="prod-img-small"
+                            src={product.featureIMG.mobile}
+                            width={327}
+                            height={368}
+                        />
+                    </div>
                 </IMGWrapper>
             </ProductSection>
 
@@ -272,11 +349,28 @@ const ProductInfo = ({ product }) => {
                                     <ProductWrapper
                                         id={item.name + j}
                                     >
-                                        <ProductThumbnail
-                                            src="/media/placeholderIMG.png" // product.thumbnailIMG
-                                            width={350}
-                                            height={318}
-                                        />
+                                        <div className="desktop-img">
+                                            <ProductThumbnail
+                                                src={item.thumbnailIMG.desktop}
+                                                width={350}
+                                                height={318}
+                                            />
+                                        </div>
+                                        <div className="tablet-img">
+                                            <ProductThumbnail
+                                                src={item.thumbnailIMG.tablet}
+                                                width={223}
+                                                height={318}
+                                            />
+                                        </div>
+                                        <div className="mobile-img">
+                                            <ProductThumbnail
+                                                src={item.thumbnailIMG.mobile}
+                                                width={327}
+                                                height={120}
+                                            />
+                                        </div>
+
                                         <ProductName>
                                             {item.name}
                                         </ProductName>
@@ -431,25 +525,30 @@ const ProductInfo = ({ product }) => {
                 </ProductGallery>
             </ProductSection >
 
-            <ProductSection
-                className="about-product"
+            <div
+                // className="section-margin"
             >
-                <AboutText>
-                    <AboutTitle>
-                        BRINGING&nbsp;YOU&nbsp;THE<br />
-                        <span className="pop-word">BEST&nbsp;</span>
-                        AUDIO&nbsp;GEAR
-                    </AboutTitle>
-                    <p>
-                        Located at the heart of New York City, Syphon is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Syphon the best place to buy your portable audio equipment.
-                    </p>
-                </AboutText>
-                <AboutIMG
-                    src="/media/placeholderIMG.png" // get from server link
-                    width={540}
-                    height={588}
-                />
-            </ProductSection>
+                <ProductSection
+                    className="about-product main-about"
+                >
+                    <AboutText>
+                        <AboutTitle>
+                            BRINGING&nbsp;YOU&nbsp;THE<br />
+                            <span className="pop-word">BEST&nbsp;</span>
+                            AUDIO&nbsp;GEAR
+                        </AboutTitle>
+                        <p>
+                            Located at the heart of New York City, Syphon is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Syphon the best place to buy your portable audio equipment.
+                        </p>
+                    </AboutText>
+                    <AboutIMG
+                        src="/media/about/about-val.jpg" // get from server link
+                        width={540}
+                        height={588}
+                        layout="responsive"
+                    />
+                </ProductSection>
+            </div>
         </ProductPage >
     );
 };

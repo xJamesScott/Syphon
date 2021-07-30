@@ -21,7 +21,7 @@ const Item = mongoose.Schema({
     inTheBox: Array,
     featureIMG: Object,
     supportIMG1: Object,
-    suportIMG2: Object,
+    supportIMG2: Object,
     thumbnailIMG: Object,
     type: Map
 },
