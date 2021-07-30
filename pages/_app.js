@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Banner from '../components/Banner';
+
 import { useStore } from '../store/store';
 import '../styles/globals.css';
 import GlobalStyle from '../components/GlobalStyle';

@@ -70,7 +70,13 @@ const GlobalStyle = createGlobalStyle`
    // global media queries
 
    @media ${mq.tablet.narrow.max} { 
-
+      
+   }
+   
+   @media ${mq.desktop.small.max} { 
+      .section-margin{
+         width: 90%;
+      }
    }
 
    @media ${mq.phone.narrow.max} { 

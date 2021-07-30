@@ -220,6 +220,13 @@ export const ProductTypesContainer = styled.div`
     gap: 3rem;
     margin-top: 16rem;
 
+    .mobile-types {
+        display: flex;
+        justify-self: center;
+        width: 100%;
+    }
+
+
     > * {
         flex: 1 1 284px;
     }
@@ -252,7 +259,13 @@ export const ProductTypeWrapper = styled.div`
     justify-content: flex-end;
     height: 100%;
     margin-top: auto;
-    
+
+    &.mobile-menu {
+        margin: auto 0;
+        height: min-content;
+        
+
+    }
 
     > * {
         /* display: flex;
@@ -272,7 +285,7 @@ export const ProductTypeWrapper = styled.div`
         height: 75%;
         max-height: 204px;
         width: 100%;
-        z-index: -1;
+        z-index: 0;
         * {
              height: 100%;
         }
@@ -286,6 +299,7 @@ export const ProductTypeWrapper = styled.div`
     @media ${mq.tablet.narrow.max} { 
         .type-bg {
             max-height: 165px;
+           
             /* display: none; */
         }
     }
@@ -296,6 +310,7 @@ export const TypeIMGWrapper = styled.div`
     display: flex;
     justify-content: center;
     /* height: 160px; */
+    z-index: 10;
 
     ::before {
         content: "";
@@ -320,11 +335,14 @@ export const TypeIMG = styled(Image)`
 `;
 
 export const TypeTitle = styled.h5`
-    
+    z-index: 10;
 `;
 
 export const ShopWrapper = styled(ButtonHollow)` // link
     display: flex;
+    * {
+        z-index: 10;
+    }
 
 `;
 
