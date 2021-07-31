@@ -3,6 +3,27 @@ import { theme, mq } from '../constants/theme';
 
 const { colors } = theme;
 
+export const HomeContainer = styled.div`
+
+    .feature-prod {
+        align-items: center;
+        justify-content: center;
+        .home-feature {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            > * {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        } 
+    }    
+    
+`;
+
 export const HomeBanner = styled.div`
     justify-self: center;
     align-self: center;
@@ -103,6 +124,47 @@ export const HomeBanner = styled.div`
             z-index: 9;
         }
     }  
+
+    /* responsive for all children */
+
+    /* tablet */
+    
+    @media ${mq.tablet.narrow.max} { 
+        .home-banner-wrap { 
+            position: relative;
+            display: flex;
+            margin: auto;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .home-text { 
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            max-width: 380px;
+            button {
+                margin: 0;
+            }
+        }
+
+        .home-bnr-img { 
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+        }
+    }
+
+    /* mobile */
+
+    @media ${mq.phone.narrow.max} { 
+
+    }
         
 `;
 

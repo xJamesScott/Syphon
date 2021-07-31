@@ -19,6 +19,7 @@ import {
   FeatureProd,
   HighLightProd,
   MiniProdContainer,
+  HomeContainer
 } from '../components/Home';
 import { ButtonOrange, ButtonBlack, ButtonBorder } from '../components/Buttons';
 import ButtonHollow from '../components/ButtonHollow';
@@ -125,10 +126,11 @@ export default function Home(test2, test3, test4) {
 
 
   return (
-    <div
+    <HomeContainer
       className="page"
     >
       <HomeBanner>
+       
         <div className="section-margin">
           <div
             className="banner-divider"
@@ -141,7 +143,9 @@ export default function Home(test2, test3, test4) {
               <ButtonOrange>SEE PRODUCT</ButtonOrange>
             </div>
             <div className="home-bnr-img">
-              <div>
+              <div
+                className="banner-img"
+              >
                 <Image
                   width={708.8}
                   height={886}
@@ -296,41 +300,41 @@ export default function Home(test2, test3, test4) {
         </ProductTypesContainer>
       </ProductSection>
 
-      <FeatureProd
-        className="section-margin home"
-      >
-        <div className="fprod-image">
-          <div className="fprod-img-bg">
+      <div className="section-margin feature-prod">
+        <FeatureProd
+          className="home home-feature"
+        >
+          <div className="fprod-image">
+            <div className="fprod-img-bg">
+              <Image
+                width={944}
+                height={944}
+                layout="intrinsic"
+                src="/media/home/circles.png"
+                className="fprod-img-main"
+              />
+            </div>
             <Image
-              width={944}
-              height={944}
-              layout="intrinsic"
-              src="/media/home/circles.png"
-              className="fprod-img-main"
+              width={410}
+              height={493}
+              src="/media/home/zookaGT.png"
+              className="fprod-speaker-img"
             />
           </div>
-          <Image
-            width={410}
-            height={493}
-            src="/media/home/zookaGT.png"
-            className="fprod-speaker-img"
-          />
-
-        </div>
-        <div className="fprod-text">
-          <h1 className="fprod-title">
-            ZOOKA GT<br />
-            SPEAKER
-          </h1>
-          <p className="fprod-description">
-            Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
-          </p>
-
-          <ButtonBlack className="fprod-button">
-            SEE PRODUCT
-          </ButtonBlack>
-        </div>
-      </FeatureProd>
+          <div className="fprod-text">
+            <h1 className="fprod-title">
+              ZOOKA GT<br />
+              SPEAKER
+            </h1>
+            <p className="fprod-description">
+              Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
+            </p>
+            <ButtonBlack className="fprod-button">
+              SEE PRODUCT
+            </ButtonBlack>
+          </div>
+        </FeatureProd>
+      </div>
 
       <HighLightProd
         className="section-margin home"
@@ -381,25 +385,58 @@ export default function Home(test2, test3, test4) {
         <ProductSection
           className="about-product main-about"
         >
-          <AboutText>
-            <AboutTitle>
-              BRINGING&nbsp;YOU&nbsp;THE<br />
+          <AboutText
+            className="about-text"
+          >
+            <AboutTitle
+              className="hide-tablet show-mobile"
+            >
+              BRINGING&nbsp;YOU&nbsp;THE
+              <br />
               <span className="pop-word">BEST&nbsp;</span>
+              AUDIO&nbsp;GEAR
+            </AboutTitle>
+            <AboutTitle
+              className="show-tablet hide-mobile hide-desktop"
+            >
+              BRINGING&nbsp;YOU&nbsp;THE&nbsp;
+              <span className="pop-word">BEST</span>
+              <br />
               AUDIO&nbsp;GEAR
             </AboutTitle>
             <p>
               Located at the heart of New York City, Syphon is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Syphon the best place to buy your portable audio equipment.
             </p>
           </AboutText>
-          <AboutIMG
-            src="/media/about/about-dt.jpg" // get from server link
-            width={540}
-            height={588}
-            layout="responsive"
-          />
+          <div
+            className="desktop-img round-border"
+          >
+            <AboutIMG
+              src="/media/about/about-dt.jpg" // get from server link
+              width={540}
+              height={588}
+              layout="responsive"
+            />
+          </div>
+          <div className="tablet-img round-border">
+            <AboutIMG
+              src="/media/about/about-tb.jpg" // get from server link
+              width={689}
+              height={300}
+              layout="responsive"
+            />
+          </div>
+          <div className="mobile-img round-border">
+            <AboutIMG
+              src="/media/about/about-m.jpg" // get from server link
+              width={327}
+              height={300}
+              layout="responsive"
+            />
+          </div>
         </ProductSection>
       </div>
-    </div>
+    </HomeContainer>
   )
 }
 

@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
       /* overflow: hidden; */
    }
 
-   .hide-desktop {
+   .hide-desktop, footer > .hide-desktop {
       display: none;
    }
 
@@ -83,27 +83,27 @@ const GlobalStyle = createGlobalStyle`
    // global media queries
 
    @media ${mq.tablet.narrow.max} { 
-      .hide-tablet {
+      .hide-tablet, footer > .hide-tablet {
          display: none;
       }
 
-      .show-tablet {
+      .show-tablet, footer > .show-tablet {
          display: unset;
       }
    }
    
    @media ${mq.desktop.small.max} { 
-      .section-margin{
+      .section-margin {
          width: 90%;
       }
    }
 
    @media ${mq.phone.narrow.max} { 
-      .hide-mobile {
-         display: none;
+      .hide-mobile, footer > .hide-mobile {
+         display: none !important;
       }
 
-      .show-mobile {
+      .show-mobile, footer > .show-mobile  {
          display: unset;
       }
    }

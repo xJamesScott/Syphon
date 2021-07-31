@@ -74,6 +74,8 @@ export const ProductSection = styled.div`
 
     @media ${mq.tablet.narrow.max} { 
          
+       
+        
         /* features section */
 
         &.features {
@@ -213,18 +215,10 @@ export const ProductSection = styled.div`
                 align-items: center;
                 justify-content: center;
                 text-align: center;
-                button {
-                    /* margin: auto; */
-                    * {
-                        margin: auto;
-                    }
-                }
                 > * {
                     width: 100%;
                 }
-                
             }
-            
         }
         
         /* about section */
@@ -237,7 +231,6 @@ export const ProductSection = styled.div`
                 font-size: 2.8rem;
             }
         }
-
     }
 
 `;

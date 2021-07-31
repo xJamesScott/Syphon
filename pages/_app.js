@@ -19,7 +19,7 @@ function WrappedApp({ Component, pageProps }) {
     <Provider store={store}>
       <GlobalStyle />
       {/* TODO: ADD HEADER use header tag ( favicon, meta, etc.) */}
-
+      
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -27,6 +27,7 @@ function WrappedApp({ Component, pageProps }) {
         transition={{ duration: 0.4 }}
         className="page-container"
       >
+        
         {
           !hideNav &&
           <Banner 
@@ -39,6 +40,7 @@ function WrappedApp({ Component, pageProps }) {
           cart={"cart"} 
           className="page"
           />
+          
         </AnimateSharedLayout>
         <Footer />
       </motion.div>

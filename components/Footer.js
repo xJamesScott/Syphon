@@ -14,23 +14,86 @@ const FooterContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* flex-direction: column; */
-   
+
+    @media ${mq.phone.narrow.max} { 
+        height: 654px;
+    }
 `;
 
 const FooterWrapper = styled.div`
-    /* display: flex;
-    align-items: center; */
-    /* flex-direction: column; */
-    /* gap: 3.5rem; */
     position: relative;
     margin-top: 0;
     margin-bottom: 0;
     height: 100%;
-    
-    
-    /* position: absolute; */
-    /* bottom: 0; */
+
+    /* responsive for all children */
+
+    /* tablet */
+
+    @media ${mq.tablet.narrow.max} { 
+        
+
+
+        .nav-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 3.2rem;
+            
+        }
+
+        .data-row {
+            margin-bottom: 0;
+        }
+
+        .copy-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 2rem;
+            opacity: 1;
+
+            p {
+                opacity: 50%;
+                margin: 0;
+            }
+
+            .social-wrap.show-tablet.hide-desktop {
+                display: flex;
+                gap: 1.6rem;
+            }
+        }
+    }
+
+    /* mobile */
+
+    @media ${mq.phone.narrow.max} { 
+
+        .footer-content {
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-links {
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        .data-row {
+            flex-direction: column;
+        }
+
+        .copy-row {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4.8rem;
+        }
+
+        .social-wrap { 
+            align-self: center;
+        }
+    }
+
 `;
 
 const FooterContent = styled.div`
@@ -128,15 +191,29 @@ export default function Footer() {
 
     return (
 
-        <FooterContainer >
+        <FooterContainer 
+            className="footer-container"
+        >
             <FooterWrapper className="section-margin">
-                <AccentRow>
-                    <svg width="101" height="4" viewBox="0 0 101 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <AccentRow
+                width="101" height="4" viewBox="0 0 101 4" fill="none" xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    {/* accent line */}
+
+                    {/* <svg width="101" height="4" viewBox="0 0 101 4" fill="none" xmlns="http://www.w3.org/2000/svg"> */}
                         <rect width="101" height="4" fill="#D87D4A" />
-                    </svg>
+                    {/* </svg> */}
                 </AccentRow>
-                <FooterContent>
-                    <NavRow>
+                <FooterContent
+                    className="footer-content"
+                >
+                    <NavRow
+                        className="nav-row"
+                    >
+
+                        {/* logo */}
+
                         <a href="/">
                             <svg width="106" height="30" viewBox="0 0 106 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.4302 22.45C9.5502 22.45 11.2102 21.975 12.4102 21.025C13.6102 20.075 14.2102 18.77 14.2102 17.11C14.2102 15.85 13.8202 14.855 13.0402 14.125C12.2702 13.395 10.9602 12.79 9.1102 12.31C7.8502 11.99 6.9102 11.73 6.2902 11.53C5.6802 11.33 5.2752 11.135 5.0752 10.945C4.8852 10.755 4.7902 10.52 4.7902 10.24C4.7902 9.77002 5.0152 9.41002 5.4652 9.16002C5.9252 8.91002 6.5302 8.81002 7.2802 8.86002C8.8702 8.98002 9.7402 9.66003 9.8902 10.9L14.0602 10.15C13.8502 8.68003 13.1302 7.51503 11.9002 6.65503C10.6702 5.78503 9.1002 5.35003 7.1902 5.35003C5.2302 5.35003 3.6652 5.81003 2.4952 6.73003C1.3252 7.65002 0.740195 8.89002 0.740195 10.45C0.740195 11.69 1.1452 12.67 1.9552 13.39C2.7652 14.1 4.1602 14.71 6.1402 15.22C7.3102 15.53 8.1702 15.78 8.72019 15.97C9.2802 16.16 9.6402 16.355 9.8002 16.555C9.9602 16.745 10.0402 17 10.0402 17.32C10.0402 17.83 9.8402 18.23 9.4402 18.52C9.0402 18.8 8.4702 18.94 7.7302 18.94C6.8302 18.94 6.0852 18.725 5.4952 18.295C4.9152 17.865 4.5402 17.27 4.3702 16.51L0.200195 17.14C0.470195 18.83 1.2302 20.14 2.4802 21.07C3.7402 21.99 5.3902 22.45 7.4302 22.45Z" fill="white" />
@@ -155,26 +232,39 @@ export default function Footer() {
                             <Link href="/earphones"><a >EARPHONES</a></Link>
                         </NavLinks>
                     </NavRow>
-                    <DataRow>
+
+                    {/* about company and social links */}
+
+                    <DataRow
+                        className="data-row"
+                    >
                         <p>
                             Syphon is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.
                         </p>
-                        <SocialWrapper>
-                            {/* facebook */}
 
+                        {/* only show on desktop */}
+
+                        <SocialWrapper
+                            className="hide-tablet hide-mobile social-wrap"
+                        >
+                            {/* facebook */}
 
                             <a href="https://facebook.com">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22.675 0H1.325C0.593 0 0 0.593 0 1.325V22.676C0 23.407 0.593 24 1.325 24H12.82V14.706H9.692V11.084H12.82V8.413C12.82 5.313 14.713 3.625 17.479 3.625C18.804 3.625 19.942 3.724 20.274 3.768V7.008L18.356 7.009C16.852 7.009 16.561 7.724 16.561 8.772V11.085H20.148L19.681 14.707H16.561V24H22.677C23.407 24 24 23.407 24 22.675V1.325C24 0.593 23.407 0 22.675 0Z" fill="white" />
                                 </svg>
                             </a>
+
                             {/* twitter */}
+
                             <a href="https://twitter.com">
                                 <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M24 2.55705C23.117 2.94905 22.168 3.21305 21.172 3.33205C22.189 2.72305 22.97 1.75805 23.337 0.608047C22.386 1.17205 21.332 1.58205 20.21 1.80305C19.313 0.846047 18.032 0.248047 16.616 0.248047C13.437 0.248047 11.101 3.21405 11.819 6.29305C7.728 6.08805 4.1 4.12805 1.671 1.14905C0.381 3.36205 1.002 6.25705 3.194 7.72305C2.388 7.69705 1.628 7.47605 0.965 7.10705C0.911 9.38805 2.546 11.522 4.914 11.997C4.221 12.185 3.462 12.229 2.69 12.081C3.316 14.037 5.134 15.46 7.29 15.5C5.22 17.123 2.612 17.848 0 17.54C2.179 18.937 4.768 19.752 7.548 19.752C16.69 19.752 21.855 12.031 21.543 5.10605C22.505 4.41105 23.34 3.54405 24 2.55705Z" fill="white" />
                                 </svg>
                             </a>
+
                             {/* instagram */}
+
                             <a href="https://instagram.com">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M12 0C8.741 0 8.333 0.014 7.053 0.072C2.695 0.272 0.273 2.69 0.073 7.052C0.014 8.333 0 8.741 0 12C0 15.259 0.014 15.668 0.072 16.948C0.272 21.306 2.69 23.728 7.052 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C21.302 23.728 23.73 21.31 23.927 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.732 2.699 21.311 0.273 16.949 0.073C15.668 0.014 15.259 0 12 0ZM12 2.163C15.204 2.163 15.584 2.175 16.85 2.233C20.102 2.381 21.621 3.924 21.769 7.152C21.827 8.417 21.838 8.797 21.838 12.001C21.838 15.206 21.826 15.585 21.769 16.85C21.62 20.075 20.105 21.621 16.85 21.769C15.584 21.827 15.206 21.839 12 21.839C8.796 21.839 8.416 21.827 7.151 21.769C3.891 21.62 2.38 20.07 2.232 16.849C2.174 15.584 2.162 15.205 2.162 12C2.162 8.796 2.175 8.417 2.232 7.151C2.381 3.924 3.896 2.38 7.151 2.232C8.417 2.175 8.796 2.163 12 2.163ZM5.838 12C5.838 8.597 8.597 5.838 12 5.838C15.403 5.838 18.162 8.597 18.162 12C18.162 15.404 15.403 18.163 12 18.163C8.597 18.163 5.838 15.403 5.838 12ZM12 16C9.791 16 8 14.21 8 12C8 9.791 9.791 8 12 8C14.209 8 16 9.791 16 12C16 14.21 14.209 16 12 16ZM16.965 5.595C16.965 4.8 17.61 4.155 18.406 4.155C19.201 4.155 19.845 4.8 19.845 5.595C19.845 6.39 19.201 7.035 18.406 7.035C17.61 7.035 16.965 6.39 16.965 5.595Z" fill="white" />
@@ -182,13 +272,48 @@ export default function Footer() {
                             </a>
                         </SocialWrapper>
                     </DataRow>
-                    <CopyRightRow>
+
+                    {/* copyright and social links */}
+
+                    <CopyRightRow
+                        className="copy-row"
+                    >
                         <p>
                             Copyright {date.getFullYear()}. All Rights Reserved
                         </p>
+
+                        {/* not shown on desktop */}
+
+                        <SocialWrapper
+                            className="hide-desktop show-tablet social-wrap"
+                        >
+                            {/* facebook */}
+
+                            <a href="https://facebook.com">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.675 0H1.325C0.593 0 0 0.593 0 1.325V22.676C0 23.407 0.593 24 1.325 24H12.82V14.706H9.692V11.084H12.82V8.413C12.82 5.313 14.713 3.625 17.479 3.625C18.804 3.625 19.942 3.724 20.274 3.768V7.008L18.356 7.009C16.852 7.009 16.561 7.724 16.561 8.772V11.085H20.148L19.681 14.707H16.561V24H22.677C23.407 24 24 23.407 24 22.675V1.325C24 0.593 23.407 0 22.675 0Z" fill="white" />
+                                </svg>
+                            </a>
+
+                            {/* twitter */}
+
+                            <a href="https://twitter.com">
+                                <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24 2.55705C23.117 2.94905 22.168 3.21305 21.172 3.33205C22.189 2.72305 22.97 1.75805 23.337 0.608047C22.386 1.17205 21.332 1.58205 20.21 1.80305C19.313 0.846047 18.032 0.248047 16.616 0.248047C13.437 0.248047 11.101 3.21405 11.819 6.29305C7.728 6.08805 4.1 4.12805 1.671 1.14905C0.381 3.36205 1.002 6.25705 3.194 7.72305C2.388 7.69705 1.628 7.47605 0.965 7.10705C0.911 9.38805 2.546 11.522 4.914 11.997C4.221 12.185 3.462 12.229 2.69 12.081C3.316 14.037 5.134 15.46 7.29 15.5C5.22 17.123 2.612 17.848 0 17.54C2.179 18.937 4.768 19.752 7.548 19.752C16.69 19.752 21.855 12.031 21.543 5.10605C22.505 4.41105 23.34 3.54405 24 2.55705Z" fill="white" />
+                                </svg>
+                            </a>
+
+                            {/* instagram */}
+
+                            <a href="https://instagram.com">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fillRule="evenodd" clipRule="evenodd" d="M12 0C8.741 0 8.333 0.014 7.053 0.072C2.695 0.272 0.273 2.69 0.073 7.052C0.014 8.333 0 8.741 0 12C0 15.259 0.014 15.668 0.072 16.948C0.272 21.306 2.69 23.728 7.052 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C21.302 23.728 23.73 21.31 23.927 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.732 2.699 21.311 0.273 16.949 0.073C15.668 0.014 15.259 0 12 0ZM12 2.163C15.204 2.163 15.584 2.175 16.85 2.233C20.102 2.381 21.621 3.924 21.769 7.152C21.827 8.417 21.838 8.797 21.838 12.001C21.838 15.206 21.826 15.585 21.769 16.85C21.62 20.075 20.105 21.621 16.85 21.769C15.584 21.827 15.206 21.839 12 21.839C8.796 21.839 8.416 21.827 7.151 21.769C3.891 21.62 2.38 20.07 2.232 16.849C2.174 15.584 2.162 15.205 2.162 12C2.162 8.796 2.175 8.417 2.232 7.151C2.381 3.924 3.896 2.38 7.151 2.232C8.417 2.175 8.796 2.163 12 2.163ZM5.838 12C5.838 8.597 8.597 5.838 12 5.838C15.403 5.838 18.162 8.597 18.162 12C18.162 15.404 15.403 18.163 12 18.163C8.597 18.163 5.838 15.403 5.838 12ZM12 16C9.791 16 8 14.21 8 12C8 9.791 9.791 8 12 8C14.209 8 16 9.791 16 12C16 14.21 14.209 16 12 16ZM16.965 5.595C16.965 4.8 17.61 4.155 18.406 4.155C19.201 4.155 19.845 4.8 19.845 5.595C19.845 6.39 19.201 7.035 18.406 7.035C17.61 7.035 16.965 6.39 16.965 5.595Z" fill="white" />
+                                </svg>
+                            </a>
+                        </SocialWrapper>
                     </CopyRightRow>
                 </FooterContent>
             </FooterWrapper>
         </FooterContainer>
-    )
-}
+    );
+};
