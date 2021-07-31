@@ -10,7 +10,9 @@ const GlobalStyle = createGlobalStyle`
   .section-margin {
       display: flex;
       margin: auto;
+      max-width: 1100px !important;
       width: 65%;
+      
    }
 
    .checkout-panels{
@@ -51,11 +53,15 @@ const GlobalStyle = createGlobalStyle`
    // IMAGE MEDIA QUERIES
    
    .tablet-img {
-      display: none !important;
+      display: none;
    }
 
    .mobile-img {
       display: none !important;
+   }
+
+   .mobile-wide-img {
+      display: none;
    }
    
    @media ${mq.tablet.narrow.max} {
@@ -65,15 +71,34 @@ const GlobalStyle = createGlobalStyle`
       }
       
       .tablet-img {
-         display: flex !important;
+         display: flex;
+      }
+
+      .show-tablet.hide-desktop {
+         display: none;
       }
    }
 
-   @media ${mq.phone.narrow.max} {
+   @media ${mq.phone.wide.max} { 
+      .tablet-img.hide-wide-m {
+         display: none;
+      }
 
+      .mobile-wide-img {
+         display: flex;
+      }
+   }
+   
+   @media ${mq.phone.narrow.max} {
+      
       .tablet-img {
+         display: none ;
+      }
+
+      .mobile-wide-img {
          display: none !important;
       }
+      
       .mobile-img {
          display: flex !important;
       }

@@ -129,7 +129,9 @@ export default function Home(test2, test3, test4) {
     <HomeContainer
       className="page"
     >
-      <HomeBanner>
+      <HomeBanner
+        className="home-banner"
+      >
        
         <div className="section-margin">
           <div
@@ -159,12 +161,16 @@ export default function Home(test2, test3, test4) {
       </HomeBanner>
 
       <ProductSection
-        className="section-margin home"
+        className="section-margin home prod-types"
       >
-        <ProductTypesContainer>
+        <ProductTypesContainer
+          className="prod-type-container"
+        >
           {/* HEADPHONES */}
-          <ProductTypeWrapper>
-            <div className="type-bg" />
+          <ProductTypeWrapper
+            className="prod-type-wrap"
+          >
+            <div className="type-bg round-border" />
             {/* headphones desktop */}
             <TypeIMGWrapper
               className="desktop-img"
@@ -208,8 +214,10 @@ export default function Home(test2, test3, test4) {
             />
           </ProductTypeWrapper>
           {/* SPEAKERS */}
-          <ProductTypeWrapper>
-            <div className="type-bg" />
+          <ProductTypeWrapper
+            className="prod-type-wrap"
+          >
+            <div className="type-bg round-border" />
             {/* speakers desktop */}
             <TypeIMGWrapper
               className="desktop-img"
@@ -253,8 +261,10 @@ export default function Home(test2, test3, test4) {
             />
           </ProductTypeWrapper>
           {/* EARPHONES */}
-          <ProductTypeWrapper>
-            <div className="type-bg" />
+          <ProductTypeWrapper
+            className="prod-type-wrap"
+          >
+            <div className="type-bg round-border" />
             {/* earphones desktop */}
             <TypeIMGWrapper
               className="desktop-img earphones"
@@ -314,18 +324,35 @@ export default function Home(test2, test3, test4) {
                 className="fprod-img-main"
               />
             </div>
-            <Image
-              width={410}
-              height={493}
-              src="/media/home/zookaGT.png"
-              className="fprod-speaker-img"
-            />
+            <div className="desktop-img">
+              <Image
+                width={410}
+                height={493}
+                src="/media/home/zookaGT-dt.png"
+                className="fprod-speaker-img"
+              />
+            </div>
+            <div className="tablet-img">
+              <Image
+                width={198}
+                height={237}
+                src="/media/home/zookaGT-tb.png"
+                // className="fprod-speaker-img"
+              />
+            </div>
+            <div className="mobile-img">
+              <Image
+                width={175}
+                height={207}
+                src="/media/home/zookaGT-tb.png"
+              />
+            </div>
           </div>
           <div className="fprod-text">
-            <h1 className="fprod-title">
-              ZOOKA GT<br />
+            <h3 className="fprod-title">
+              ZOOKA&nbsp;GT<br />
               SPEAKER
-            </h1>
+            </h3>
             <p className="fprod-description">
               Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
             </p>
@@ -337,32 +364,94 @@ export default function Home(test2, test3, test4) {
       </div>
 
       <HighLightProd
-        className="section-margin home"
+        className="section-margin home hprod"
       >
-        <Image
-          // height={320}
-          // width={1120}
-          layout="fill"
-          src="/media/home/zooka-speaker.jpg"
-          className="hprod-img"
-        />
+        <div className="desktop-img hprod-img-container">
+          <Image
+            width={1120}
+            height={320}
+            // layout="fill"
+              layout="fixed"
+            src="/media/home/zooka-speaker-dt.jpg"
+            className="hprod-img"
+          />
+        </div>
+        <div className="tablet-img hprod-img-container">
+          <Image
+            width={1110}
+            height={320}
+            layout="fixed"
+            // layout="fill"
+            src="/media/home/zooka-speaker-dt.jpg"
+            className="hprod-img"
+          />
+        </div>
+        <div className="mobile-wide-img hprod-img-container">
+          <Image
+            width={1120}
+            height={320}
+            layout="fixed"
+            // layout="fill"
+            src="/media/home/zooka-speaker-dt.jpg"
+            className="hprod-img"
+          />
+        </div>
+        <div className="mobile-img hprod-img-container">
+          <Image
+            width={529}
+            height={320}
+            layout="fixed"
+            // layout="fill"
+            src="/media/home/zooka-speaker-mb.jpg"
+            className="hprod-img"
+          />
+        </div>
         <div className="hprod-text">
           <h4>ZOOKA SPEAKER</h4>
           <ButtonBorder>SEE PRODUCT</ButtonBorder>
         </div>
       </HighLightProd>
-
+      
       <MiniProdContainer
         className="section-margin mini"
       >
         <div
           className="mprod-img-wrap"
         >
-          <div className="mprod-img">
+          <div className="mprod-img desktop-img round-border">
             <Image
-              // height={320}
-              // width={1120}
-              layout="fill"
+              width={540}
+              height={320}
+              layout="fixed"
+              src="/media/home/jamz.jpg"
+              className="hprod-img"
+            />
+          </div>
+          <div 
+          className="mprod-img tablet-img hide-wide-m round-border"
+          >
+            <Image
+              width={421 * 1.15}
+              height={578 * 1.15}
+              layout="fixed"
+              src="/media/home/jamz-tb.jpg"
+              className="hprod-img"
+            />
+          </div>
+          <div className="mprod-img mobile-wide-img round-border">
+            <Image
+              width={421 * .95}
+              height={578 * .95}
+              layout="fixed"
+              src="/media/home/jamz-tb.jpg"
+              className="hprod-img"
+            />
+          </div>
+          <div className="mprod-img mobile-img round-border">
+            <Image
+              width={540}
+              height={320}
+              layout="fixed"
               src="/media/home/jamz.jpg"
               className="hprod-img"
             />
