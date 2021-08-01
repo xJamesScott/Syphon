@@ -19,7 +19,7 @@ function WrappedApp({ Component, pageProps }) {
     <Provider store={store}>
       <GlobalStyle />
       {/* TODO: ADD HEADER use header tag ( favicon, meta, etc.) */}
-      
+     
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

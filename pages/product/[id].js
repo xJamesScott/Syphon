@@ -136,6 +136,7 @@ const ProductInfo = ({ product }) => {
     return (
         <ProductPage
             className="section-margin page"
+            key={product.productId}
         >
             {/* SECTION - MAIN */}
 
@@ -234,16 +235,14 @@ const ProductInfo = ({ product }) => {
                         <div className="box-items">
                             {product.inTheBox.map((items, i) => {
                                 return (
-                                    <>
-                                        <InfoWrapper key={"in-box" + i}>
-                                            <BoxItemCount>
-                                                {Object.keys(items)}
-                                            </BoxItemCount>
-                                            <BoxItem>
-                                                {Object.values(items)}
-                                            </BoxItem>
-                                        </InfoWrapper>
-                                    </>
+                                    <InfoWrapper key={"box-items" + i}>
+                                        <BoxItemCount>
+                                            {Object.keys(items)}
+                                        </BoxItemCount>
+                                        <BoxItem>
+                                            {Object.values(items)}
+                                        </BoxItem>
+                                    </InfoWrapper>
                                 );
                             })}
                         </div>
@@ -391,11 +390,13 @@ const ProductInfo = ({ product }) => {
                                         <ProductName>
                                             {item.name}
                                         </ProductName>
-                                        <AddCart
-                                            className="also-products"
-                                        >
-                                            SEE PRODUCT
-                                        </AddCart>
+                                        <a href={`/product/${item.productId}`}>
+                                            <AddCart
+                                                className="also-products"
+                                            >
+                                                SEE PRODUCT
+                                            </AddCart>
+                                        </a>
                                     </ProductWrapper>
                                 )
                             })
@@ -405,7 +406,7 @@ const ProductInfo = ({ product }) => {
                     <ProductTypesContainer>
                         {/* HEADPHONES */}
                         <ProductTypeWrapper>
-                            <div className="type-bg" />
+                            <div className="type-bg round-border" />
                             {/* headphones desktop */}
                             <TypeIMGWrapper
                                 className="desktop-img"
@@ -450,7 +451,7 @@ const ProductInfo = ({ product }) => {
                         </ProductTypeWrapper>
                         {/* SPEAKERS */}
                         <ProductTypeWrapper>
-                            <div className="type-bg" />
+                            <div className="type-bg round-border" />
                             {/* speakers desktop */}
                             <TypeIMGWrapper
                                 className="desktop-img"
@@ -495,7 +496,7 @@ const ProductInfo = ({ product }) => {
                         </ProductTypeWrapper>
                         {/* EARPHONES */}
                         <ProductTypeWrapper>
-                            <div className="type-bg" />
+                            <div className="type-bg round-border" />
                             {/* earphones desktop */}
                             <TypeIMGWrapper
                                 className="desktop-img earphones"

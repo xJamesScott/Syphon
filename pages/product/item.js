@@ -57,8 +57,6 @@ export default function item() {
         dispatch(cartActions.setCartCurrent(itemData3))
     };
 
-    console.log({ "cookie cart": Cookie.getJSON("cart") })
-
     return (
         <div>
             <h2>Product</h2>

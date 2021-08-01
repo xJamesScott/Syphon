@@ -58,7 +58,7 @@ const FooterWrapper = styled.div`
             }
 
             .social-wrap.show-tablet.hide-desktop {
-                display: flex;
+                display: flex !important;
                 gap: 1.6rem;
             }
         }

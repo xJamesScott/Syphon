@@ -5,6 +5,10 @@ import { theme, mq } from '../constants/theme';
 
 const { colors } = theme;
 
+export const CheckoutPage = styled.div`
+ 
+`;
+
 export const CheckoutSummary = styled.div`
     flex: 1 1 30%;
     display: flex;
@@ -150,6 +154,10 @@ export const ProductWrapper = styled.div`
      * {
             margin: 0;
         }
+    }
+
+    &.cart-prod-wrap {
+        margin-top: 2.4rem;
     }
 `;
 

@@ -30,7 +30,32 @@ const GlobalStyle = createGlobalStyle`
    .checkout-page {
       background-color: #f1f1f1; // TODO: CREATE AND USE THEME VARIABLE
       z-index: -100;
+      /* overflow: hidden; */
       
+      .ty-bg.not-complete {
+         max-height: 0;
+      }
+
+      .ty-bg.complete {
+         /* height: 100vh; */
+         /* width: 100vw; */
+         overflow: hidden;
+         img {
+            object-fit: contain;
+            overflow: hidden;
+         }
+      }
+
+      .complete {
+         opacity: 1;
+         visibility: visible;
+      }
+
+      .not-complete {
+         visibility: hidden;
+         opacity: 0;
+         display: none;
+      }
    }
 
    .round-border {
@@ -79,7 +104,7 @@ const GlobalStyle = createGlobalStyle`
       }
 
       .hide-tablet {
-         display: none;
+         display: none !important;
       }
    }
 

@@ -102,6 +102,44 @@ export const CheckoutForm = styled(Form)`
         
     }
 
+    @media ${mq.tablet.narrow.max} { 
+        flex-direction: column;
+
+        .panel-container.checkout-panel {
+            margin-top: 9.7rem;
+        }
+
+        .panel-container.checkout-panel{
+            margin-bottom: 0;
+        }
+
+        .panel-container.summary {
+            margin-top: 0;
+            margin-bottom: 11rem;
+        }
+    }
+
+    @media ${mq.phone.wide.max} { 
+        .panel-container.checkout-panel {
+            margin-top: 6.5rem;
+        }
+        .checkout-panels {
+                /* display: none; */
+            > * {
+                flex: 1 1 100% !important;
+            }
+        }  
+        .card-info {
+            flex-direction: column;
+            flex: 1 1 100%;
+            > * {
+                flex: 1 1 100% ;
+                width: 100%;
+            }
+        }
+    }
+    
+
 /* 
     * {
         display: block;

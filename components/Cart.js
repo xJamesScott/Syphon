@@ -22,6 +22,7 @@ import { directCartEdit } from '../utils/dataUtils';
 import { cartActions } from '../store/cart';
 import Cookie from 'js-cookie';
 import { motion } from "framer-motion";
+import { convertToObject } from 'typescript';
 
 const { colors } = theme;
 
@@ -30,22 +31,29 @@ const CartWindow = styled.div`
 
     &.nav-banner {
     position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     z-index: 20;
     }
+
     
     &.cart-modal {
+        /* position: absolute; */
+        position: fixed;
         top: 0;
         left: 0;
         visibility: hidden;
         opacity: 0;
         height: 100%; 
+        height: 100vh; 
         width: 100%;
         transition: opacity .25s ease;
+        /* display: none; */
     }
 
     &.visible.cart-modal {
+        /* display: flex; */
         visibility: visible;
         opacity: 1;
         /* transition: visibility 0s 2s linear, opacity .3s ease; */
@@ -54,6 +62,7 @@ const CartWindow = styled.div`
 
 export const CartWrapper = styled.div`
     height: 100vh;
+    /* height: 100%; */
     width: 100vw;
     /* height: 100%; 
     width: 100%; */
@@ -76,12 +85,18 @@ export const CartWrapper = styled.div`
 
 const CartModalMargin = styled.div`
     position: relative;
+    height: 100%;
 `;
 
 
 const CartModal = styled.div`
     position: absolute;
+    
+    
+    /* position: fixed; */
+    top: 15%;
     right: 0;
+    /* left: 0; */
     width: 38rem;
     background-color: white;
     padding: 3rem;
@@ -95,6 +110,9 @@ const CartModal = styled.div`
 `;
 
 const TitleLine = styled.h5`
+    &.cart-title {
+        margin-bottom: 1rem !important;
+    }
 `;
 
 const CartTitle = styled.h2`
@@ -303,8 +321,6 @@ export default function Cart(
 
     const [prodHover, setProdHover] = useState({});
 
-    console.log({ visible: visible })
-
     return (
         !isLoading &&
         <CartWindow
@@ -342,19 +358,24 @@ export default function Cart(
                                 </NoItems>
                                 :
                                 <>
-                                    <TitleLine>
+                                    <TitleLine
+                                        className="cart-title"
+                                    >
                                         CART ({totalItems})
                                     </TitleLine>
                                     {
                                         cartArray.map((item, i) => {
                                             const current = item[1];
                                             const name = JSON.stringify(current.name);
-                                            console.log({product: item[0]})
+                                            const nameRaw = current.name
+                                            const productId = current.productId
+                                            
                                             return (
                                                 < ProductWrapper
                                                     key={"cartItem" + i}
-                                                    onMouseEnter={() => setProdHover({ name: true })}
-                                                    onMouseLeave={() => setProdHover({ name: false })} // TODO: SET TO FALSE AFTER TESTING
+                                                    className="cart-prod-wrap"
+                                                    onMouseEnter={() => setProdHover({ [current.productId]: true })}
+                                                    onMouseLeave={() => setProdHover({ [current.productId]: false })} // TODO: SET TO FALSE AFTER TESTING
                                                 >
                                                     {/* <div
                                                             className="active-area"
@@ -363,12 +384,12 @@ export default function Cart(
                                                             // onClick={(e) => { e.preventDefault() }}
                                                         /> */}
 
-                                                        <CheckoutProdIMG
-                                                            className="round-border"
-                                                            src={`/products/${item[0]}/desktop/thumbnail.jpg`}
-                                                            width={64}
-                                                            height={64}
-                                                        />
+                                                    <CheckoutProdIMG
+                                                        className="round-border"
+                                                        src={`/products/${item[0]}/desktop/thumbnail.jpg`}
+                                                        width={64}
+                                                        height={64}
+                                                    />
                                                     <TextWrapper
                                                     >
                                                         <p>
@@ -427,8 +448,8 @@ export default function Cart(
                                                             <DeleteItemWrapper
                                                             />
                                                             <DeleteItem
-                                                                className={prodHover.name ? "prod-hovered" : ""}
-                                                                onMouseEnter={() => { console.log(prodHover) }}
+                                                                className={prodHover[productId] ? "prod-hovered" : ""}
+                                                                // onMouseEnter={() => { console.log(productId) }}
                                                                 onClick={() => {
                                                                     dispatch(cartActions.directCartEdit({
                                                                         product: {

@@ -20,7 +20,6 @@ export default async (req, res) => {
                 const test = await Test.create(req.body);
                 res.status(201).json({ success: true, data: test })
             } catch (error) {
-                console.log({ req: req.body })
                 res.status(400).json({ success: false });
             }
             break;

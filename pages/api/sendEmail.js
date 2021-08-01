@@ -39,7 +39,6 @@ export default async function sendEmail(req, res) {
                 };
                 const mapKeysToString = Object.keys(emailTagMap).join("|");
                 const mapRegEx = new RegExp(mapKeysToString, "gi"); // creates regex of keys to be replaced
-                console.log({ "emailBody data": data })
                 const emailWithData = data.replace(mapRegEx, (match) => { // replaces tags in email with customer's data 
                     return emailTagMap[match];
                 });

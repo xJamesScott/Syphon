@@ -39,7 +39,10 @@ const { colors } = theme;
 const CartWindow = styled.div`
     z-index: 11; 
     position: sticky;
+    /* position: fixed; */
     top: 0;
+    left: 0;
+    right: 0;
 
     &.mobile-window {
         display: flex;
@@ -47,6 +50,8 @@ const CartWindow = styled.div`
         visibility: hidden;
         opacity: 0;
         transition: all .25s ease;
+        /* overflow: hidden; */
+        width: 100%;
 
 
         &.visible {
@@ -309,8 +314,6 @@ export const LinksContainer = styled.div`
         top: 100%;
         left: 0;
         background: ${colors.opaque1};
-        /* color: black;
-        background: white; */
         font-weight: bold;
         width: 100%;
         height: 100%;
@@ -409,13 +412,10 @@ function Banner() {
     const [cartHover, setCartHover] = useState(false);
     const [mobileVisibile, setMobileVisible] = useState(false);
 
-    console.log({ cartHover: cartHover })
-
     return (
         !isLoading ?
-            // <Cart>
 
-            <CartWindow
+        <CartWindow
                 className="nav-banner"
             >
 

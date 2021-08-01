@@ -31,7 +31,7 @@ export const ProductPage = styled.div`
                 margin-bottom: 3.2rem;
             }
             
-            button {
+            a {
                 margin: 0 auto;
             }
             
@@ -302,6 +302,10 @@ export const ProductInfoWrapper = styled.div`
     justify-content: center;
     margin: auto 0;
     height: 100%;
+
+    a {
+        margin-right: auto;
+    }
 `;
 
 export const NewTag = styled(PopText)`
@@ -338,12 +342,14 @@ export const Increment = styled(IncrementQTY)`
 // `;
 
 export const AddCart = styled(ButtonOrange)` // button
-         cursor: pointer !important;
-         margin-right: auto;
+        cursor: pointer !important;
+        margin-right: auto;
+        margin: 0;
+        
 
-         &.also-products {
+        &.also-products {
              margin: auto;
-         }
+        }
 `;
 
 export const SubSectionWrapper = styled.div`
@@ -365,6 +371,8 @@ export const Info = styled.div`
 export const InfoWrapper = styled.div`
     display: flex;
     gap: 3%;
+
+    
 `;
 
 export const BoxItemCount = styled.p`

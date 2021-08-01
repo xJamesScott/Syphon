@@ -59,7 +59,8 @@ export const MobileMenu = styled.div`
     margin: 0;
     background: ${colors.opaque1};
     height: 100vh;
-    width: 100vw;
+    /* width: 100vw; */
+    width: 100%;
     position: absolute;
     top: 0;
     z-index: 15;
