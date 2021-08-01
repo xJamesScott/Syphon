@@ -116,6 +116,9 @@ export const HomeContainer = styled.div`
                 padding: 0 4rem;
             }
 
+            .mprod-img {
+                height: auto;
+            }
             .mprod-img-wrap {
                 position: relative;
             }
@@ -142,7 +145,7 @@ export const HomeContainer = styled.div`
         .mprod-img.mobile-wide-img {
             display: block;
             top: -40%;
-            left: -20%;
+            /* left: -20%; */
         }
         .mprod-text {
                 padding: 0 1rem;
@@ -189,7 +192,10 @@ export const HomeContainer = styled.div`
         .mini {
             .mprod-img.mobile-img {
                 display: block !important;
-                left: -40%;
+                /* left: -10%; */
+                > * {
+                    /* left: -50%; */
+                }
             }
         }
     }
@@ -367,6 +373,7 @@ export const FeatureProd = styled.div`
         justify-content: center;
         align-items: center;
         flex: 1 1 60%;
+        transform: translateY(2%);
     }
 
     .fprod-img-bg { 

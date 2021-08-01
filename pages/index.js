@@ -142,7 +142,9 @@ export default function Home(test2, test3, test4) {
               <h4 className="home-new">NEW PRODUCT</h4>
               <h3 className="home-title">RocketEar&nbsp;GT <br /> HEADPHONES</h3>
               <p>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
-              <ButtonOrange>SEE PRODUCT</ButtonOrange>
+              <a href="/product/REGT200">
+                <ButtonOrange>SEE PRODUCT</ButtonOrange>
+              </a>
             </div>
             <div className="home-bnr-img">
               <div
@@ -356,9 +358,11 @@ export default function Home(test2, test3, test4) {
             <p className="fprod-description">
               Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
             </p>
-            <ButtonBlack className="fprod-button">
-              SEE PRODUCT
-            </ButtonBlack>
+            <a href="/product/ZKAG200">
+              <ButtonBlack className="fprod-button">
+                SEE PRODUCT
+              </ButtonBlack>
+            </a>
           </div>
         </FeatureProd>
       </div>
@@ -408,7 +412,9 @@ export default function Home(test2, test3, test4) {
         </div>
         <div className="hprod-text">
           <h4>ZOOKA SPEAKER</h4>
+          <a href="/product/ZKAX100">
           <ButtonBorder>SEE PRODUCT</ButtonBorder>
+          </a>
         </div>
       </HighLightProd>
       
@@ -461,7 +467,10 @@ export default function Home(test2, test3, test4) {
         <div className="mprod-text-wrap">
           <div className="mprod-text">
             <h4>JAMZ EARPHONES</h4>
-            <ButtonBorder>SEE PRODUCT</ButtonBorder>
+            
+            <a href="/product/JAMZ100">
+              <ButtonBorder>SEE PRODUCT</ButtonBorder>
+            </a>
           </div>
         </div>
       </MiniProdContainer>

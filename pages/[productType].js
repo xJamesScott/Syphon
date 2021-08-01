@@ -120,7 +120,7 @@ const ProdTypeInfo = ({ products, prodType }) => {
                                 {/* desktop image */}
 
                                 <div
-                                    className="desktop-img"
+                                    className="desktop-img round-border"
                                 >
                                     <MainIMG
                                         src={product.thumbnailIMG.desktop}
@@ -133,10 +133,10 @@ const ProdTypeInfo = ({ products, prodType }) => {
                                 {/* tablet image */}
 
                                 <div
-                                    className="tablet-img"
+                                    className="tablet-img round-border"
                                 >
                                     <MainIMG
-                                        src={product.thumbnailIMG.tablet}
+                                        src={product.thumbnailIMG.tabletType}
                                         width={689}
                                         height={352}
                                     />
@@ -145,7 +145,7 @@ const ProdTypeInfo = ({ products, prodType }) => {
                                 {/* mobile image */}
 
                                 <div
-                                    className="mobile-img"
+                                    className="mobile-img round-border"
                                 >
                                     <MainIMG
                                         src={product.thumbnailIMG.mobile}
@@ -153,20 +153,26 @@ const ProdTypeInfo = ({ products, prodType }) => {
                                         height={352}
                                     />
                                 </div>
-                                <ProductInfoWrapper>
+                                <ProductInfoWrapper
+                                    className="product-info"
+                                >
                                     {
                                         product.newProduct &&
-                                        <NewTag>
+                                        <NewTag className="new-product">
                                             NEW PRODUCT
                                         </NewTag>
                                     }
                                     <ProductTitle>
                                         {product.name}
                                     </ProductTitle>
-                                    <Info>
+                                    <Info
+                                        className="info-desc"
+                                    >
                                         <p>{product.description}</p>
                                     </Info>
-                                    <AddCart>SEE PRODUCT</AddCart>
+                                    <a href={`/product/${product.productId}`}>
+                                        <AddCart>SEE PRODUCT</AddCart>
+                                    </a>
                                 </ProductInfoWrapper>
                             </ProductSection>
                         );
@@ -175,8 +181,10 @@ const ProdTypeInfo = ({ products, prodType }) => {
 
                 <ProductTypesContainer>
                     {/* HEADPHONES */}
-                    <ProductTypeWrapper>
-                        <div className="type-bg" />
+                    <ProductTypeWrapper
+                        className="product-info"
+                    >
+                        <div className="type-bg round-border" />
                         {/* headphones desktop */}
                         <TypeIMGWrapper
                             className="desktop-img"
@@ -221,7 +229,7 @@ const ProdTypeInfo = ({ products, prodType }) => {
                     </ProductTypeWrapper>
                     {/* SPEAKERS */}
                     <ProductTypeWrapper>
-                        <div className="type-bg" />
+                        <div className="type-bg round-border" />
                         {/* speakers desktop */}
                         <TypeIMGWrapper
                             className="desktop-img"
@@ -266,7 +274,7 @@ const ProdTypeInfo = ({ products, prodType }) => {
                     </ProductTypeWrapper>
                     {/* EARPHONES */}
                     <ProductTypeWrapper>
-                        <div className="type-bg" />
+                        <div className="type-bg round-border" />
                         {/* earphones desktop */}
                         <TypeIMGWrapper
                             className="desktop-img earphones"
@@ -312,23 +320,57 @@ const ProdTypeInfo = ({ products, prodType }) => {
                 </ProductTypesContainer>
 
                 <ProductSection
-                    className="about-product"
+                    className="about-product main-about prod-type"
                 >
-                    <AboutText>
-                        <AboutTitle>
-                            BRINGING&nbsp;YOU&nbsp;THE<br />
+                    <AboutText
+                        className="about-text"
+                    >
+                        <AboutTitle
+                            className="hide-tablet show-mobile"
+                        >
+                            BRINGING&nbsp;YOU&nbsp;THE
+                            <br />
                             <span className="pop-word">BEST&nbsp;</span>
+                            AUDIO&nbsp;GEAR
+                        </AboutTitle>
+                        <AboutTitle
+                            className="show-tablet hide-mobile hide-desktop"
+                        >
+                            BRINGING&nbsp;YOU&nbsp;THE&nbsp;
+                            <span className="pop-word">BEST</span>
+                            <br />
                             AUDIO&nbsp;GEAR
                         </AboutTitle>
                         <p>
                             Located at the heart of New York City, Syphon is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Syphon the best place to buy your portable audio equipment.
                         </p>
                     </AboutText>
-                    <AboutIMG
-                        src="/media/placeholderIMG.png" // get from server link
-                        width={540}
-                        height={588}
-                    />
+                    <div
+                        className="desktop-img round-border"
+                    >
+                        <AboutIMG
+                            src="/media/about/about-dt.jpg" // get from server link
+                            width={540}
+                            height={588}
+                            layout="responsive"
+                        />
+                    </div>
+                    <div className="tablet-img round-border">
+                        <AboutIMG
+                            src="/media/about/about-tb.jpg" // get from server link
+                            width={689}
+                            height={300}
+                            layout="responsive"
+                        />
+                    </div>
+                    <div className="mobile-img round-border">
+                        <AboutIMG
+                            src="/media/about/about-m.jpg" // get from server link
+                            width={327}
+                            height={300}
+                            layout="responsive"
+                        />
+                    </div>
                 </ProductSection>
             </ProductPage>
         </div>

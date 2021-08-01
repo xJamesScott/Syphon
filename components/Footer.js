@@ -89,7 +89,8 @@ const FooterWrapper = styled.div`
             gap: 4.8rem;
         }
 
-        .social-wrap { 
+        .social-wrap.hide-desktop { 
+            display: flex !important;
             align-self: center;
         }
     }

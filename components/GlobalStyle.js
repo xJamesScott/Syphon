@@ -41,16 +41,16 @@ const GlobalStyle = createGlobalStyle`
       > * {
          flex: 1 1 100%;
       }
-      /* overflow: hidden; */
+      overflow: hidden;
    }
 
    .hide-desktop, footer > .hide-desktop {
-      display: none;
+      display: none !important;
    }
 
   
 
-   // IMAGE MEDIA QUERIES
+   // IMAGE & DISPLAY MEDIA QUERIES
    
    .tablet-img {
       display: none;
@@ -77,6 +77,10 @@ const GlobalStyle = createGlobalStyle`
       .show-tablet.hide-desktop {
          display: none;
       }
+
+      .hide-tablet {
+         display: none;
+      }
    }
 
    @media ${mq.phone.wide.max} { 
@@ -86,6 +90,10 @@ const GlobalStyle = createGlobalStyle`
 
       .mobile-wide-img {
          display: flex;
+      }
+
+      .hide-mobile {
+         display: none;
       }
    }
    
@@ -113,7 +121,7 @@ const GlobalStyle = createGlobalStyle`
       }
 
       .show-tablet, footer > .show-tablet {
-         display: unset;
+         display: unset !important;
       }
    }
    

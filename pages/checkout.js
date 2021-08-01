@@ -481,8 +481,8 @@ const checkout = ({ }) => {
                                             key={"checkoutItem" + i}
                                         >
                                             <CheckoutProdIMG
-                                                className="item-photo"
-                                                src="/media/placeholderIMG.png"
+                                                className="round-border"
+                                                src={`/products/${item.productId}/desktop/thumbnail.jpg`}
                                                 width={64}
                                                 height={64}
                                             />

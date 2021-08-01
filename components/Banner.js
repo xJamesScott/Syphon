@@ -217,7 +217,11 @@ export const NavLink = styled(Link)`
         width: 100%;
         text-align: left;
         font-size: 1.3rem;
+        position: relative;
+
+    
     }
+
 `;
 
 const NavLinksContainer = styled.div`
@@ -231,9 +235,30 @@ const NavLinksContainer = styled.div`
         display: flex;
         flex-direction: column;
         font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        letter-spacing: .2rem;
+        font-weight: 500;
+        :after {
+            content: "";
+            height: 1px;
+            overflow: hidden;
+            width: 90%;
+            background: white;
+            opacity: 0;
+            transition: all .35s ease;
+        }
+        
+        &.hover {
+             :after {
+                opacity: 1;
+                width: 100%;
+             }   
+            }
        
         :hover { 
-            filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 1));
+            /* filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 1)); */
             transition: all .25s ease;
         }
     }
@@ -377,6 +402,7 @@ function Banner() {
     }
 
     const [activateNavLink, setActivateNavLink] = useState(activateNavInit); // make an object for each product type
+    const [activateLink, setActivateLink] = useState(activateNavInit); // make an object for each product type
 
     const hideCart = () => setCartVisible(false);
 
@@ -400,14 +426,16 @@ function Banner() {
                         <MobileBanner
                             className="section-margin"
                         >
-                            <MenuButton
-                                onClick={() => setMobileVisible(!mobileVisibile)}
-                                width={16} height={15} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <rect width={16} height={3} fill="white" />
-                                <rect y={6} width={16} height={3} fill="white" />
-                                <rect y={12} width={16} height={3} fill="white" />
-                            </MenuButton>
+                            <div className="mobile-menu-btn">
+                                <MenuButton
+                                    onClick={() => setMobileVisible(!mobileVisibile)}
+                                    width={16} height={15} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <rect width={16} height={3} fill="white" />
+                                    <rect y={6} width={16} height={3} fill="white" />
+                                    <rect y={12} width={16} height={3} fill="white" />
+                                </MenuButton>
+                            </div>
                             <a
                                 className="logo"
                                 href="/"
@@ -556,17 +584,29 @@ function Banner() {
                                                     <NavLink
                                                         href="/product/REGT200"
                                                     >
-                                                        <a>RocketEar&nbsp;GT</a>
+                                                        <a
+                                                            className={activateLink.regt ? "hover" : ""}
+                                                            onMouseEnter={() => setActivateLink({ regt: true })}
+                                                            onMouseLeave={() => setActivateLink({ regt: false })}
+                                                        >RocketEar&nbsp;GT</a>
                                                     </NavLink>
                                                     <NavLink
-                                                        href="/product/REGT200"
+                                                        href="/product/REXX100"
                                                     >
-                                                        <a>Rocket&nbsp;Ear </a>
+                                                        <a
+                                                            className={activateLink.rexx ? "hover" : ""}
+                                                            onMouseEnter={() => setActivateLink({ rexx: true })}
+                                                            onMouseLeave={() => setActivateLink({ rexx: false })}
+                                                        >Rocket&nbsp;Ear </a>
                                                     </NavLink>
                                                     <NavLink
-                                                        href="/product/REGT200"
+                                                        href="/product/DYNO100"
                                                     >
-                                                        <a>Dyno</a>
+                                                        <a
+                                                            className={activateLink.dyno ? "hover" : ""}
+                                                            onMouseEnter={() => setActivateLink({ dyno: true })}
+                                                            onMouseLeave={() => setActivateLink({ dyno: false })}
+                                                        >Dyno</a>
                                                     </NavLink>
                                                 </NavLinksContainer>
                                             </LinkGroup>
@@ -631,14 +671,22 @@ function Banner() {
                                             >
                                                 <NavLinksContainer>
                                                     <NavLink
-                                                        href="/product/REGT200"
+                                                        href="/product/ZKAG200"
                                                     >
-                                                        <a>Zooka&nbsp;GT</a>
+                                                        <a
+                                                            className={activateLink.zkag ? "hover" : ""}
+                                                            onMouseEnter={() => setActivateLink({ zkag: true })}
+                                                            onMouseLeave={() => setActivateLink({ zkag: false })}
+                                                        >Zooka&nbsp;GT</a>
                                                     </NavLink>
                                                     <NavLink
-                                                        href="/product/REGT200"
+                                                        href="/product/ZKAX100"
                                                     >
-                                                        <a>Zooka</a>
+                                                        <a
+                                                            className={activateLink.zkax ? "hover" : ""}
+                                                            onMouseEnter={() => setActivateLink({ zkax: true })}
+                                                            onMouseLeave={() => setActivateLink({ zkax: false })}
+                                                        >Zooka</a>
                                                     </NavLink>
                                                 </NavLinksContainer>
                                             </LinkGroup>
@@ -695,9 +743,14 @@ function Banner() {
                                             >
                                                 <NavLinksContainer>
                                                     <NavLink
-                                                        href="/product/REGT200"
+                                                        href="/product/JAMZ100"
+
                                                     >
-                                                        <a>Jamz</a>
+                                                        <a
+                                                            className={activateLink.jamz ? "hover" : ""}
+                                                            onMouseEnter={() => setActivateLink({ jamz: true })}
+                                                            onMouseLeave={() => setActivateLink({ jamz: false })}
+                                                        >Jamz</a>
                                                     </NavLink>
 
                                                 </NavLinksContainer>
@@ -729,7 +782,6 @@ function Banner() {
                                         height="20"
                                         onClick={() => setCartVisible(() => !cartVisible)}
                                         className={cartHover ? "cart-hover" : ""}
-                                        // src="/media/icons/cart.svg"
                                         src="/media/icons/cart.png"
                                     />
                                 </ButtonContainer>
@@ -740,7 +792,6 @@ function Banner() {
 
                 <Cart
                     visible={cartVisible}
-                    // onClick={(e) => e.preventDefault}
                     isLoading={isLoading}
                     hideCart={hideCart}
                     totalItems={totalItems}

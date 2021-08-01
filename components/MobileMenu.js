@@ -11,6 +11,11 @@ export const MobileBanner = styled.div`
     height: 9rem;
     gap: 4.2rem;
 
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+    }
+
     .nav-icons {
         justify-self: end;
         flex:1 1 100%;

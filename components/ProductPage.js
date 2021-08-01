@@ -11,6 +11,57 @@ const { colors } = theme;
 export const ProductPage = styled.div`
     display: flex;
     flex-direction: column;
+
+    @media ${mq.tablet.narrow.max} { 
+        .type-main, .type-main.tm-right, .type-main.tm-left {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            margin-top: 12rem;
+            > * {
+            
+            }
+            
+            .product-info{
+                margin-top: 5.2rem;
+            }
+            
+            h2 {
+                margin-bottom: 3.2rem;
+            }
+            
+            button {
+                margin: 0 auto;
+            }
+            
+            p {
+                width: 65%;
+                align-self: center;
+                margin: 0 auto;
+            }
+
+            .info-desc {
+                margin-top: 0;
+                margin-bottom: 2.4rem;
+            }
+
+        }
+
+        .about-product.main-about.prod-type {
+            margin-bottom: 12rem;
+
+        }
+    }
+
+    @media ${mq.phone.narrow.max} { 
+        .type-main, .type-main.tm-right, .type-main.tm-left {
+            p {
+                width: 100%;
+            }
+            
+        }
+    }
 `;
 
 export const ProductSection = styled.div`
@@ -120,7 +171,7 @@ export const ProductSection = styled.div`
                 height: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                gap: 1.1rem;
+                gap: 5rem;
                 width: 100%;
                 > * {
                     display: flex;

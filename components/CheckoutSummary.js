@@ -56,6 +56,8 @@ export const CheckoutSummary = styled.div`
 
 export const CheckoutProdIMG = styled(Image)`
     border: 1px solid black;
+    border-radius: 2rem !important;
+   
 `;
 
 export const ProductWrapper = styled.div`

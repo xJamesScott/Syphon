@@ -349,6 +349,7 @@ export default function Cart(
                                         cartArray.map((item, i) => {
                                             const current = item[1];
                                             const name = JSON.stringify(current.name);
+                                            console.log({product: item[0]})
                                             return (
                                                 < ProductWrapper
                                                     key={"cartItem" + i}
@@ -362,12 +363,12 @@ export default function Cart(
                                                             // onClick={(e) => { e.preventDefault() }}
                                                         /> */}
 
-                                                    <CheckoutProdIMG src="/media/placeholderIMG.png"
-                                                        width={64}
-                                                        height={64}
-                                                        fill="magenta"
-
-                                                    />
+                                                        <CheckoutProdIMG
+                                                            className="round-border"
+                                                            src={`/products/${item[0]}/desktop/thumbnail.jpg`}
+                                                            width={64}
+                                                            height={64}
+                                                        />
                                                     <TextWrapper
                                                     >
                                                         <p>
