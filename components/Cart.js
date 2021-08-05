@@ -22,7 +22,6 @@ import { directCartEdit } from '../utils/dataUtils';
 import { cartActions } from '../store/cart';
 import Cookie from 'js-cookie';
 import { motion } from "framer-motion";
-import { convertToObject } from 'typescript';
 
 const { colors } = theme;
 
