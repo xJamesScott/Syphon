@@ -1,4 +1,5 @@
 import axios from 'axios';
+import products from '../../backend/dbHelper';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { cartActions } from '../../store/cart'
@@ -51,8 +52,9 @@ import ButtonHollow from '../../components/ButtonHollow';
 
 
 export const getStaticPaths = async () => {
-    const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=all`);
-    const paths = res.data.map((product) => {
+    // const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=all`);
+    const res = await products("all", {});
+    const paths = res.map((product) => {
         return {
             params: {
                 id: product.productId,
@@ -68,11 +70,12 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
     try {
-        const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productId&productId=${context.params.id}`);
+        // const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productId&productId=${context.params.id}`);
+        const res = await products("productId", { productId: context.params.id });
 
         return {
             props: {
-                product: res.data,
+                product: JSON.parse(JSON.stringify(res)),
             }
         }
     } catch (error) {
@@ -105,8 +108,8 @@ const ProductInfo = ({ product }) => {
     const getProducts = async () => {
         try {
             const res = await axios.get(`http://localhost:3000/api/products?call=all&not=${product.productId}`);
+            // const res = await products("all", { not: product.productId }); // excludes by productId
             setAlsoProducts(res.data);
-
         } catch (error) {
             return error
         }

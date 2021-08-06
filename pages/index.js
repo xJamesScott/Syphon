@@ -1,4 +1,5 @@
 import Head from 'next/head'
+// import products from '../backend/dbHelper';
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
@@ -36,9 +37,16 @@ import {
   ShopWrapper
 } from '../components/ProductPage';
 
+const obj = {
+  name: "yo",
+  age: 2
+};
 
+const newObj = JSON.stringify(obj);
 
+console.log({obj: obj.name})
 
+console.log({newObj: newObj.name})
 
 const SickTest = styled(motion.div)`
 
@@ -100,28 +108,15 @@ export default function Home(test2, test3, test4) {
 
   const dispatch = useDispatch()
 
-  const useCounter = () => {
-    const count = useSelector((state) => state.count)
-    const test = useSelector((state) => state)
-
-    const increment = () =>
-      dispatch({
-        type: 'INCREMENT',
-      })
-    const decrement = () =>
-      dispatch({
-        type: 'DECREMENT',
-      })
-    const reset = () =>
-      dispatch({
-        type: 'RESET',
-      })
-    return { count, increment, decrement, reset }
-  }
 
   const addItem = async () => {
     dispatch(cartActions.setCartCurrent({ price: "too much!" }))
   }
+
+  // const testProductId = products("productId", {productId: "REGT200"});
+  
+  // console.log({products: testProductId})
+
 
 
   return (

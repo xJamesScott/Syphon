@@ -1,4 +1,5 @@
 import axios from 'axios';
+import products from '../backend/dbHelper';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { cartActions } from '../store/cart'
@@ -28,8 +29,12 @@ import {
 } from '../components/ProductPage';
 
 export const getStaticPaths = async () => {
-    const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=types`);
-    const paths = res.data.map((product) => {
+    // const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=types`);
+    const res = await products("types", {});
+
+    // const data = JSON.stringify(res);
+
+    const paths = res.map((product) => {
         return {
             params: {
                 productType: product
@@ -44,12 +49,13 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
     try {
-        const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productType&productType=${context.params.productType}`);
-
+        // const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productType&productType=${context.params.productType}`);
+        console.log("productType Try!")
+        const res = await products("productType", { productType: context.params.productType });
         return {
             props: {
-                products: res.data,
-                prodType: context.params.productType
+                products: JSON.parse(JSON.stringify(res)),
+                prodType: JSON.parse(JSON.stringify(context.params.productType))
             }
         }
     } catch (error) {
