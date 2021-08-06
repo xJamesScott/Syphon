@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import { useEffect, useState } from 'react';
+import Head from '../components/Head';
 import Banner from '../components/Banner';
 
 import { useStore } from '../store/store';
@@ -17,9 +18,10 @@ function WrappedApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
+      <Head />
       <GlobalStyle />
       {/* TODO: ADD HEADER use header tag ( favicon, meta, etc.) */}
-     
+      
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -27,20 +29,20 @@ function WrappedApp({ Component, pageProps }) {
         transition={{ duration: 0.4 }}
         className="page-container"
       >
-        
+
         {
           !hideNav &&
-          <Banner 
+          <Banner
             className="page"
           /> // nav bar
         }
         <AnimateSharedLayout>
-          <Component 
-          {...pageProps} 
-          cart={"cart"} 
-          className="page"
+          <Component
+            {...pageProps}
+            cart={"cart"}
+            className="page"
           />
-          
+
         </AnimateSharedLayout>
         <Footer />
       </motion.div>
