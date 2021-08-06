@@ -108,7 +108,6 @@ const ProductInfo = ({ product }) => {
     const getProducts = async () => {
         try {
             const res = await axios.get(`http://localhost:3000/api/products?call=all&not=${product.productId}`);
-            // const res = await products("all", { not: product.productId }); // excludes by productId
             setAlsoProducts(res.data);
         } catch (error) {
             return error

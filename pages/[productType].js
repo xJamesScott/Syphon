@@ -29,11 +29,7 @@ import {
 } from '../components/ProductPage';
 
 export const getStaticPaths = async () => {
-    // const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=types`);
     const res = await products("types", {});
-
-    // const data = JSON.stringify(res);
-
     const paths = res.map((product) => {
         return {
             params: {
@@ -49,7 +45,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
     try {
-        // const res = await axios.get(`${process.env.AUTH_APP_URL}/api/products?call=productType&productType=${context.params.productType}`);
         console.log("productType Try!")
         const res = await products("productType", { productType: context.params.productType });
         return {
@@ -71,11 +66,9 @@ const ProdTypeInfo = ({ products, prodType }) => {
         flex-direction: column;
         align-items: center;
         height: 16.5rem;
-        /* background: ${colors.accent5}; */
         background: ${colors.accent7};
         color: white;
         .banner-divider{
-            /* width: 100%; */
             border-top: 1px solid ${colors.accent1};
             opacity: 30%;
             margin: 0;
