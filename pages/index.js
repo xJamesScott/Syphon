@@ -37,17 +37,6 @@ import {
   ShopWrapper
 } from '../components/ProductPage';
 
-const obj = {
-  name: "yo",
-  age: 2
-};
-
-const newObj = JSON.stringify(obj);
-
-console.log({obj: obj.name})
-
-console.log({newObj: newObj.name})
-
 const SickTest = styled(motion.div)`
 
 `;

@@ -4,9 +4,11 @@ import { useStore } from '../store/store'
 
 
 if (!process.env.MONGO_URI) {
-  throw new Error(
-    'Please define the MONGODB_URI environment variable inside .env.local'
-  )
+
+  console.log('Please define the MONGODB_URI environment variable inside .env');
+  // throw new Error(
+  //   'Please define the MONGODB_URI environment variable inside .env'
+  // )
 };
 
 const connection = {};
