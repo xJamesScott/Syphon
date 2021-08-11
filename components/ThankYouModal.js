@@ -175,6 +175,8 @@ export default function ThankYouModal({
 
     const [itemCount, setItemCount] = useState();
 
+
+
     useEffect(() => {
         // cart && console.log({ "cart - 1": cart.length - 1 })
         cart && setItemCount(cart.length);
@@ -183,14 +185,14 @@ export default function ThankYouModal({
     const router = useRouter();
 
     const handleClick = () => {
+        // setTransaction(true);
         // dispatch(cartActions.directCartEdit({ inc: "clear" }));
         // dispatch(cartActions.setCartFinishLoading({}));
-        // setTransaction(true);
         router.push("/");
     };
 
     return (
-        <>
+        <div>
             <BG >
                 <ModalContainer>
                     <div className="modal-wrap">
@@ -213,11 +215,11 @@ export default function ThankYouModal({
                                 <div className="items-box">
                                     {
                                         cart ? cart.map((item, i) => {
-                                            console.log({ "item": item })
                                             if (i = 1) {
                                                 return (
                                                     <ProductWrapper
                                                         className="confirmation"
+                                                        key={"conf" + i}
                                                     >
                                                         <div className="prod-img-ty">
                                                             <ProductImage
@@ -273,10 +275,10 @@ export default function ThankYouModal({
                         </div>
                         <a
                             onClick={handleClick}
-                            // href="/"
-                            >
+                        // href="/"
+                        >
                             <PayButton
-                            
+
                             // onClick={() => setModal(false)} // TODO REMOVE; FOR TESTING ONLY
                             >
                                 BACK TO HOME
@@ -285,6 +287,6 @@ export default function ThankYouModal({
                     </div>
                 </ModalContainer>
             </BG>
-        </>
+        </div>
     )
 }

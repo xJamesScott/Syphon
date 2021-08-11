@@ -1,14 +1,10 @@
 import axios from 'axios';
+import { getDomainLocale } from 'next/dist/next-server/lib/router/router';
 import { email as emailBody } from '/public/email/orderConfirmation';
 
 export default async function sendEmail(req, res) {
 
-    const { body: { numItems, address, total } } = req // TODO: REPLACE PLACEHOLDERS
-
-    // TODO: JOIN ADDRESS VALUES OF CHILDREN (street, city, etc.)
-    // TODO: ITERATE THROUGH ITEM TOTALS AND CREATE COMBINED TOTAL
-
-
+    const { body: { numItems, address, total, customerEmail } } = req // TODO: REPLACE PLACEHOLDERS
 
     try {
 
@@ -29,9 +25,6 @@ export default async function sendEmail(req, res) {
 
         const emailBody = postData(endpoint) // TODO: pass email with data to "value" in "personalizations" array
             .then(data => {
-                // const numItems = "888888" // PLACEHOLDER USE BODY VALS
-                // const address = "777777777777" // PLACEHOLDER USE BODY VALS
-                // const total = "1111111111111" // PLACEHOLDER USE BODY VALS
                 const emailTagMap = {
                     "{{numItems}}": numItems,
                     "{{address}}": address,
@@ -48,7 +41,7 @@ export default async function sendEmail(req, res) {
                 const email = {
                     "personalizations": [
                         {
-                            "to": [{ "email": "jscizzle22@gmail.com" }]
+                            "to": [{ "email": customerEmail }]
                         }],
                     "from": { "email": "support@jamscott.com" },
                     "subject": "Order Confirmed!",

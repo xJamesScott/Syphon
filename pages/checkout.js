@@ -46,19 +46,17 @@ import ThankYouModal from '../components/ThankYouModal';
 import { theme, mq } from '../constants/theme';
 import axios from 'axios';
 import Cookie from 'js-cookie';
+import styled from 'styled-components';
 
 const { colors } = theme;
 
 
+const TestInput = styled.input`
 
+`;
 const someVal = "null" // TODO - REPLACE AND REMOVE PLACEHOLDER
 
 
-const chargeObj = { // TODO - REMOVE PLACEHOLDER
-    amount: 100,
-    currency: "USD",
-    receipt_email: "jscizzle22@gmail.com"
-}
 
 const checkout = ({ }) => {
     const dispatch = useDispatch();
@@ -81,17 +79,15 @@ const checkout = ({ }) => {
         dispatch(cartActions.setCartFinishLoading({}));
     }, [cart.items]);
 
-    const { register, handleSubmit, formState: { errors }, getValues
+    const { register, handleSubmit, formState: { errors }, getValues, watch
     } = useForm({
         mode: "onSubmit",
         reValidateMode: "onChange"
     });
 
-    // const addressFields = getValues(["address", "city", "state", "zip"]);
-    // const { address, city, state, zip } = addressFields;
-    const fullAddress = `${getValues("address")} ${getValues("city")}, ${getValues("state")} ${getValues("zip")}`;
+    const watchEmail = watch("email");
 
-    // console.log(fullAddress)
+    const fullAddress = `${getValues("address")} ${getValues("city")}, ${getValues("state")} ${getValues("email")}`;
 
     const subtotal = cartItems.reduce((sum, item) => {
         return sum += item.price * item.quantity // TODO - PLUGIN PROPER VARIABLES
@@ -107,31 +103,25 @@ const checkout = ({ }) => {
     }, [rawItemCount, cartItems]);
 
 
+    const [emailProcessing, setEmailProcessing] = useState(false);
+    const [submissionError, setSubmissionError] = useState(false);
+    const [completeTransaction, setCompleteTransation] = useState(false);
+    const [tyCartModalVals, setTYCartModal] = useState([]);
 
-    // () => {
-    //     setCounting(false);
-    // }
+    const getEmail = getValues("email");
+
+
 
     const emailData = {
         numItems: cartItems.length,
         address: fullAddress,
-        total: subtotal
+        total: subtotal,
+        customerEmail: getEmail
     };
 
-
-
-    // console.log({ fullAddress: getValues(["address", "city", "state", "zip"]) })
-
-    // const onSubmit = async (e) => {
-    //     // e.preventDefault();
-    //     alert("yoooo!")
-    //     // setTYModal(true);
-    //     // sendEmail();
-    // };
-
-    const [emailProcessing, setEmailProcessing] = useState(false);
-    const [submissionError, setSubmissionError] = useState(false);
-    const [completeTransaction, setCompleteTransation] = useState(false);
+    const postPayTotal = tyCartModalVals.reduce((sum, item) => {
+        return sum += item.price * item.quantity // TODO - PLUGIN PROPER VARIABLES
+    }, 0);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -140,9 +130,10 @@ const checkout = ({ }) => {
             setCompleteTransation(true);
             try {
                 await sendEmail();
-                dispatch(cartActions.directCartEdit({ inc: "clear" }));
                 dispatch(cartActions.setCartFinishLoading({}));
                 setEmailProcessing(false);
+                setTYCartModal(cartItems);
+                dispatch(cartActions.directCartEdit({ inc: "clear" }));
                 setTYModal(true);
             } catch (error) {
                 setEmailProcessing(false);
@@ -151,42 +142,14 @@ const checkout = ({ }) => {
         })(e);
     };
 
+
+
     const sendEmail = async () => {
         // axios.post('https://api.sendgrid.com/v3/mail/send');
         axios.post('/api/sendEmail', emailData);
     };
 
     const router = useRouter();
-
-
-
-    // const testObj = { // TODO - REMOVE PLACEHOLDER
-    //     item1: { price: 4, quantity: 4 },
-    //     item2: { price: 20, quantity: 1 },
-    //     item3: { price: 100, quantity: 1 }
-    // }
-
-    // const testObj2 = Object.entries(testObj) // TODO - PLUGIN PROPER VARIABLES
-
-
-
-    // TODO - if isAuthenticated fetch user info and pass to checkout
-
-    // for (const [productId, item] of cartItems) {
-    //     console.log({ "for item": item });
-    // }
-
-    // cartItems.map((item, i) => {
-    //     console.log({ "cartItems Map": item })
-    // });
-
-    // useEffect(() => {
-    //     if (typeof window !== undefined && itemCount < 1 && !isLoading && !counting) {
-    //         router.push("/");
-    //     }
-    // }, [isLoading, itemCount]);
-
-    // console.log({ isLoading: isLoading, itemCount: itemCount, counting: counting })
 
     return (
 
@@ -199,20 +162,6 @@ const checkout = ({ }) => {
                 </a>
             </NoItems>
             :
-            // emailProcessing // if processing (form submitted)
-            //     ?
-            //     <LoaderContainer>
-            //         <div>
-            //             <Loader
-            //                 speed=".75s"
-            //                 emptyColor={colors.main}
-            //             />
-            //             <h3 className="load-text">Processing Your Order...</h3>
-            //         </div>
-
-            //     </LoaderContainer>
-            //     :
-
 
             <CheckoutPage
                 className="checkout-page"
@@ -257,7 +206,7 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="fname"
                                         id="fname"
-                                        defaultValue={someVal ? "yooo" : null}
+                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"First"}
                                         className={errors.fname ? "error" : null}
                                         {...register('fname',
@@ -274,7 +223,7 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="lname"
                                         id="lname"
-                                        defaultValue={someVal ? "yooo" : null}
+                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"Last"}
                                         className={errors.lname ? "error" : null}
                                         {...register('lname',
@@ -292,7 +241,7 @@ const checkout = ({ }) => {
                                         name="email"
                                         id="email"
                                         // defaultValue={someVal ? "yooo" : null} // TODO: ENABLE WHEN NOT TESTING
-                                        defaultValue={someVal ? "email@gmail.com" : null}
+                                        // defaultValue={someVal ? "email@gmail.com" : null}
                                         placeholder={"email@email.com"}
                                         className={errors.email ? "error" : null}
                                         {...register('email',
@@ -313,7 +262,7 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="phone"
                                         id="phone"
-                                        defaultValue={someVal ? "yooo" : null}
+                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"+1 555-555-5555"}
                                         className={errors.phone ? "error" : null}
                                         {...register('phone',
@@ -332,7 +281,7 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="address"
                                         id="address"
-                                        defaultValue={someVal ? "yooo" : null}
+                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"Enter Street Address"}
                                         className={errors.address ? "error" : null}
                                         {...register('address',
@@ -349,7 +298,7 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="zip"
                                         id="zip"
-                                        defaultValue={someVal ? "yooo" : null}
+                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"10001"}
                                         className={errors.zip ? "error" : null}
                                         {...register('zip',
@@ -366,7 +315,7 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="city"
                                         id="city"
-                                        defaultValue={someVal ? "yooo" : null}
+                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"10001"}
                                         className={errors.city ? "error" : null}
                                         {...register('city',
@@ -383,7 +332,7 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="state"
                                         id="state"
-                                        defaultValue={someVal ? "yooo" : null}
+                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"Enter State"}
                                         className={errors.state ? "error" : null}
                                         {...register('state',
@@ -522,6 +471,7 @@ const checkout = ({ }) => {
                                 </TotalWrapper>
                                 <PayButton
                                     onClick={onSubmit}
+                                    // onClick={printEmail}
                                     className={emailProcessing ? "processing" : ""}
                                 >
                                     {
@@ -543,16 +493,14 @@ const checkout = ({ }) => {
 
                 </div>
 
-               
-
                 {
                     showTYModal &&
                     <>
 
                         <ThankYouModal
                             setModal={(e) => setTYModal(e)} // TODO - REMOVE; FOR TESTING ONLY
-                            cart={cartItems}
-                            total={subtotal}
+                            cart={tyCartModalVals}
+                            total={postPayTotal}
                             setTransaction={setCompleteTransation}
                         />
                     </>

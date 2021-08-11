@@ -45,7 +45,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
     try {
-        console.log("productType Try!")
         const res = await products("productType", { productType: context.params.productType });
         return {
             props: {

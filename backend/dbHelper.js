@@ -14,7 +14,6 @@ export default async function products(call, data) {
 
 
     dbConnect("global");
-    // dbConnect();
 
     switch (call) {
 
@@ -24,13 +23,10 @@ export default async function products(call, data) {
                 return res;
             } catch (err) {
                 console.log("Error creating products " + err);
-                // throw Error("Error creating products " + err);
-                // return res.status(500);
             };
         case "types":
             try {
                 const res = await Item.distinct("productType").lean();
-                console.log({ "ress!!!! types": res });
                 return res;
             } catch (err) {
                 console.log("Error fetching product types: " + err)
@@ -46,8 +42,6 @@ export default async function products(call, data) {
                 }
             } catch (err) {
                 console.log("Error aggregating products " + err);
-                // throw Error("Error aggregating products " + err);
-                // return res.status(500);
             };
         case "productId":
             try {
@@ -55,20 +49,14 @@ export default async function products(call, data) {
                 return res;
             } catch (err) {
                 console.log("Error aggregating products!: " + err);
-                // throw Error("Error aggregating products!: " + err);
-                // return res.status(500);
             };
 
         case "productType":
             try {
                 const res = await Item.find({ productType: productType }).lean();
-                console.log({ "ress!!!! productType!!": productType });
-                // console.log({ models: models });
                 return res;
             } catch (err) {
                 console.log("Error fetching model types!: " + err);
-                // throw Error("Error fetching model types!: " + err);
-                // return res.status(500);
             }
 
         case "create":

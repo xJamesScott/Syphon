@@ -146,6 +146,7 @@ export const CheckoutForm = styled(Form)`
     } */
 `;
 
+
 export const CheckoutInput = styled(Input)`
     width: 100%;
     border: 1px solid rgba(207, 207, 207, .4);
