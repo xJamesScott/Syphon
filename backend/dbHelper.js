@@ -2,16 +2,10 @@ import dbConnect from '../utils/dbConnect';
 import Item from '../models/Item';
 import { products as prodList } from '../utils/Products';
 
-// export default async function products(req, res) {
 export default async function products(call, data) {
-    // console.log({ "call!": call });
-    // console.log({ "data!!!!!": data });
-
     const {
         productId, create, pin, not, productType
     } = data
-
-
 
     dbConnect("global");
 
@@ -67,7 +61,6 @@ export default async function products(call, data) {
                             const res = await Item.findOne({ productId: product.productId });
                             if (productExist) {
                                 console.log("Product exist already: " + product.productId)
-                                // return status(200);
                             }
 
                             if (!productExist) { // potentional error based on what's returned from productExist
@@ -92,5 +85,4 @@ export default async function products(call, data) {
         default:
             return status(200);
     };
-
 };

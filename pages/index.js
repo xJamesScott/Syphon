@@ -1,112 +1,26 @@
-import Head from 'next/head'
 // import products from '../backend/dbHelper';
-import Image from 'next/image'
-import Link from 'next/link'
-import styles from '../styles/Home.module.css'
-import { useState, useEffect } from 'react';
-// import { Link } from "react-router-dom";
-import { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
-import { cartActions } from '../store/cart'
-import Cookie from 'js-cookie';
-import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
-import { Spinner } from '@chakra-ui/react';
-import { Loader } from '../components/Loader';
-import styled from 'styled-components';
-import { motion } from "framer-motion";
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { ButtonBlack, ButtonBorder, ButtonOrange } from '../components/Buttons';
 import {
-  HomeBanner,
   FeatureProd,
-  HighLightProd,
-  MiniProdContainer,
-  HomeContainer
+  HighLightProd, HomeBanner, HomeContainer, MiniProdContainer
 } from '../components/Home';
-import { ButtonOrange, ButtonBlack, ButtonBorder } from '../components/Buttons';
-import ButtonHollow from '../components/ButtonHollow';
 import {
-  ProductSection,
-  AboutText,
-  AboutTitle,
-  AboutIMG,
-  ProductTypesContainer,
-  ProductTypeWrapper,
-  TypeIMG,
+  AboutIMG, AboutText,
+  AboutTitle, ProductSection, ProductTypesContainer,
+  ProductTypeWrapper, ShopWrapper, TypeIMG,
   TypeIMGWrapper,
-  TypeTitle,
-  ShopWrapper
+  TypeTitle
 } from '../components/ProductPage';
 
-const SickTest = styled(motion.div)`
 
-`;
-
-
-const TestComponent = styled.div`
-
-`;
-
-
-export default function Home(test2, test3, test4) {
-  const postTest = async () => {
-    try {
-      axios.post("/api/products?call=test");
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
-  const arr = [
-    { a1: { productId: "a1", name: "prod1", type: "aaa", price: 20 } },
-    { a2: { productId: "a2", name: "prod1", type: "bbb", price: 20 } },
-    { a3: { productId: "a3", name: "prod1a", type: "bbb", price: 20 } },
-    { a4: { productId: "a4", name: "prod1b", type: "ccc", price: 20 } },
-  ]
-
-  const combine = arr.reduce((combined, arr) => {
-    for (const [itemId, item] of Object.entries(arr)) {
-      if (!combined[itemId]) {
-        combined[itemId] = {};
-      }
-      combined[itemId] += item
-    }
-    return combined;
-  }, {});
-
+export default function Home() {
   const [visible, setVisible] = useState(false);
-
-  const router = useRouter();
-  const createTest = async () => {
-    try {
-      const res = await fetch('http://localhost:3000/api/test', {
-        method: 'POST',
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ data: "Yoooo!" })
-      })
-      router.post("/");
-    } catch (error) {
-    }
-  }
 
   useEffect(() => {
     setVisible(true);
   }, []);
-
-  const dispatch = useDispatch()
-
-
-  const addItem = async () => {
-    dispatch(cartActions.setCartCurrent({ price: "too much!" }))
-  }
-
-  // const testProductId = products("productId", {productId: "REGT200"});
-  
-  // console.log({products: testProductId})
-
-
 
   return (
     <HomeContainer
@@ -322,7 +236,6 @@ export default function Home(test2, test3, test4) {
                 width={198}
                 height={237}
                 src="/media/home/zookaGT-tb.png"
-                // className="fprod-speaker-img"
               />
             </div>
             <div className="mobile-img">
@@ -357,7 +270,6 @@ export default function Home(test2, test3, test4) {
           <Image
             width={1120}
             height={320}
-            // layout="fill"
               layout="fixed"
             src="/media/home/zooka-speaker-dt.jpg"
             className="hprod-img"
@@ -368,7 +280,6 @@ export default function Home(test2, test3, test4) {
             width={1110}
             height={320}
             layout="fixed"
-            // layout="fill"
             src="/media/home/zooka-speaker-dt.jpg"
             className="hprod-img"
           />
@@ -378,7 +289,6 @@ export default function Home(test2, test3, test4) {
             width={1120}
             height={320}
             layout="fixed"
-            // layout="fill"
             src="/media/home/zooka-speaker-dt.jpg"
             className="hprod-img"
           />
@@ -388,7 +298,6 @@ export default function Home(test2, test3, test4) {
             width={529}
             height={320}
             layout="fixed"
-            // layout="fill"
             src="/media/home/zooka-speaker-mb.jpg"
             className="hprod-img"
           />
@@ -518,9 +427,6 @@ export default function Home(test2, test3, test4) {
         </ProductSection>
       </div>
     </HomeContainer>
-  )
-}
+  );
+};
 
-// export const getServerSideProps = async () => {
-
-// };

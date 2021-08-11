@@ -1,62 +1,21 @@
-// if isAuthenticated fill form in with info
-// if !isAuthenticated default values
-
-// if from is valid, allow continue & pay
-// // validation condtions?
-
-// TODO - MAKE 'SUMMARY' STICKY ON SIDE WHILE SCROLLING
-
-import { useState, useEffect } from 'react';
-import { cartActions } from '../store/cart'
-import { selectCart } from '../store/cart';
-import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-    CheckoutForm,
-    CheckoutWrapper,
-    CheckoutInput,
-    CheckoutSubmit,
-    CheckoutFormError,
-    CheckoutInputLabel,
-    CheckoutSectionTitle,
-    PaymentButton,
-    PaymentIcon,
-    CardInfo,
-    InputWrapper,
+    CardInfo, CheckoutForm, CheckoutFormError, CheckoutInput, CheckoutInputLabel, CheckoutWrapper, InputWrapper,
     NoItems
 } from '../components/CheckoutForm';
-import { FormSelect } from '../components/FormStyles'
-import { useForm } from 'react-hook-form';
-import { countries } from '../utils/countries';
-import { SubSectionTitle } from '../components/Text';
-import { Button } from '../components/Buttons';
 import {
-    CheckoutPage,
-    CheckoutSummary,
-    CheckoutProdIMG,
-    ProductTitle,
-    SummaryTotals,
-    TotalWrapper,
-    Cost,
-    ProductWrapper,
-    PayButton
+    CheckoutPage, CheckoutProdIMG, CheckoutSummary, Cost, PayButton, ProductWrapper, SummaryTotals,
+    TotalWrapper
 } from '../components/CheckoutSummary';
-import { LoaderContainer, Loader } from '../components/Loader';
+import { FormSelect } from '../components/FormStyles';
+import { Loader } from '../components/Loader';
 import ThankYouModal from '../components/ThankYouModal';
-import { theme, mq } from '../constants/theme';
-import axios from 'axios';
-import Cookie from 'js-cookie';
-import styled from 'styled-components';
-
-const { colors } = theme;
-
-
-const TestInput = styled.input`
-
-`;
-const someVal = "null" // TODO - REPLACE AND REMOVE PLACEHOLDER
-
-
+import { cartActions, selectCart } from '../store/cart';
+import { countries } from '../utils/countries';
 
 const checkout = ({ }) => {
     const dispatch = useDispatch();
@@ -65,10 +24,6 @@ const checkout = ({ }) => {
     const [cartStatus, setCartStatus] = useState({});
     const [counting, setCounting] = useState(true);
     const [itemCount, setItemCount] = useState();
-
-    const {
-        isLoading = true
-    } = cartStatus;
 
     const cart = useSelector(selectCart);
 
@@ -85,9 +40,11 @@ const checkout = ({ }) => {
         reValidateMode: "onChange"
     });
 
-    const watchEmail = watch("email");
+    // ** KEEP! OR FORM WILL BREAK **//
+    const watchEmail = watch(["email", "address", "state", "zip"]); 
+    // ** KEEP! OR FORM WILL BREAK **//
 
-    const fullAddress = `${getValues("address")} ${getValues("city")}, ${getValues("state")} ${getValues("email")}`;
+    const fullAddress = `${getValues("address")} ${getValues("city")}, ${getValues("state")} ${getValues("zip")}`;
 
     const subtotal = cartItems.reduce((sum, item) => {
         return sum += item.price * item.quantity // TODO - PLUGIN PROPER VARIABLES
@@ -145,7 +102,6 @@ const checkout = ({ }) => {
 
 
     const sendEmail = async () => {
-        // axios.post('https://api.sendgrid.com/v3/mail/send');
         axios.post('/api/sendEmail', emailData);
     };
 
@@ -172,7 +128,6 @@ const checkout = ({ }) => {
                     className={completeTransaction ? "ty-bg complete" : " ty-bg not-complete"}
                 >
                     <img
-                        // className="ty-bg"
                         src="/confetti.png"
                     />
                 </div>
@@ -206,7 +161,6 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="fname"
                                         id="fname"
-                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"First"}
                                         className={errors.fname ? "error" : null}
                                         {...register('fname',
@@ -223,7 +177,6 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="lname"
                                         id="lname"
-                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"Last"}
                                         className={errors.lname ? "error" : null}
                                         {...register('lname',
@@ -240,8 +193,6 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="email"
                                         id="email"
-                                        // defaultValue={someVal ? "yooo" : null} // TODO: ENABLE WHEN NOT TESTING
-                                        // defaultValue={someVal ? "email@gmail.com" : null}
                                         placeholder={"email@email.com"}
                                         className={errors.email ? "error" : null}
                                         {...register('email',
@@ -262,7 +213,6 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="phone"
                                         id="phone"
-                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"+1 555-555-5555"}
                                         className={errors.phone ? "error" : null}
                                         {...register('phone',
@@ -272,7 +222,9 @@ const checkout = ({ }) => {
                                     />
                                 </InputWrapper>
                                 <h4 className="section-title">SHIPPING INFO</h4>
+                                
                                 {/* TODO - Add Google Maps Address Validation / Search */}
+
                                 <InputWrapper>
                                     <InputWrapper className="label-error">
                                         <CheckoutInputLabel htmlForm="address"> Address </CheckoutInputLabel>
@@ -281,7 +233,6 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="address"
                                         id="address"
-                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"Enter Street Address"}
                                         className={errors.address ? "error" : null}
                                         {...register('address',
@@ -298,7 +249,6 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="zip"
                                         id="zip"
-                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"10001"}
                                         className={errors.zip ? "error" : null}
                                         {...register('zip',
@@ -315,7 +265,6 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="city"
                                         id="city"
-                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"10001"}
                                         className={errors.city ? "error" : null}
                                         {...register('city',
@@ -332,7 +281,6 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="state"
                                         id="state"
-                                        // defaultValue={someVal ? "yooo" : null}
                                         placeholder={"Enter State"}
                                         className={errors.state ? "error" : null}
                                         {...register('state',
@@ -471,7 +419,6 @@ const checkout = ({ }) => {
                                 </TotalWrapper>
                                 <PayButton
                                     onClick={onSubmit}
-                                    // onClick={printEmail}
                                     className={emailProcessing ? "processing" : ""}
                                 >
                                     {
@@ -505,11 +452,8 @@ const checkout = ({ }) => {
                         />
                     </>
                 }
-                {/* </div > */}
-
-
             </CheckoutPage>
-    )
-}
+    );
+};
 
-export default checkout
+export default checkout;
