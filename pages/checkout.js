@@ -41,7 +41,7 @@ const checkout = ({ }) => {
     });
 
     // ** KEEP! OR FORM WILL BREAK **//
-    const watchEmail = watch(["email", "address", "state", "zip"]); 
+    const watchEmail = watch(["email", "address", "state", "zip"]);
     // ** KEEP! OR FORM WILL BREAK **//
 
     const fullAddress = `${getValues("address")} ${getValues("city")}, ${getValues("state")} ${getValues("zip")}`;
@@ -222,7 +222,7 @@ const checkout = ({ }) => {
                                     />
                                 </InputWrapper>
                                 <h4 className="section-title">SHIPPING INFO</h4>
-                                
+
                                 {/* TODO - Add Google Maps Address Validation / Search */}
 
                                 <InputWrapper>

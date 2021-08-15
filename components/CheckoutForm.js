@@ -161,6 +161,11 @@ export const CheckoutInput = styled(Input)`
     line-height: auto;
     color: rgba(0, 0, 0, .4);
 
+    :focus {
+        border: 1px solid ${colors.main};
+    }
+    
+
     ::placeholder {
         opacity: 50%;
     }
