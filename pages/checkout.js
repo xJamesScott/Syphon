@@ -265,7 +265,7 @@ const checkout = ({ }) => {
                                     <CheckoutInput
                                         name="city"
                                         id="city"
-                                        placeholder={"10001"}
+                                        placeholder={"city"}
                                         className={errors.city ? "error" : null}
                                         {...register('city',
                                             {
