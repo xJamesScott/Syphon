@@ -28,7 +28,7 @@ export default async function products(req, res) {
                 return res.json(types);
             } catch (err) {
                 console.log("Error fetching product types: " + err)
-            };
+            }; 
         case "all":
             try {
                 if (not) {

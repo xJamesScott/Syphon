@@ -198,7 +198,6 @@ export const HomeContainer = styled.div`
             }
         }
     }
-    
 `;
 
 export const HomeBanner = styled.div`

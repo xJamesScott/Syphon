@@ -1,13 +1,8 @@
-import { useMemo } from 'react';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { createWrapper } from 'next-redux-wrapper';
-// import { persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-// import crosstabSync from 'redux-persist-crosstab';
+import { useMemo } from 'react';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import cart from './cart';
-import Cookie from 'js-cookie';
-import { splitGroups, deleteItems, testData } from '../utils/dataUtils'
 
 
 let store
