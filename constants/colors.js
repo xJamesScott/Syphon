@@ -6,5 +6,5 @@ export const ACCENT3 = "#F1F1F1";
 export const ACCENT4 = "#fbaf85";
 export const ACCENT5 = "#000000";
 export const ACCENT6 = "#979797";
-export const ACCENT7 = "rgb(19, 19, 19)";
+export const ACCENT7 = "rgb(20, 20, 20)";
 export const OPAQUE1 = "rgba(99, 99, 99, 0.8)";
