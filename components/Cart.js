@@ -1,27 +1,18 @@
-import styled from 'styled-components';
-import { theme, mq } from '../constants/theme';
-import {
-    CheckoutSummary,
-    CheckoutProdIMG,
-    ProductWrapper,
-    TotalWrapper,
-    SummaryTotals,
-    Cost,
-    ProductTitle,
-    ProductPrice,
-    TextWrapper,
-    PayButton,
-    ButtonContainer
-} from './CheckoutSummary';
-
 import { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectCart, yo } from '../store/cart/actions';
-import { useForm, useFormState } from 'react-hook-form';
-import { directCartEdit } from '../utils/dataUtils';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { theme } from '../constants/theme';
 import { cartActions } from '../store/cart';
-import Cookie from 'js-cookie';
-import { motion } from "framer-motion";
+import {
+    ButtonContainer,
+    CheckoutProdIMG,
+    Cost,
+    PayButton,
+    ProductWrapper,
+    SummaryTotals,
+    TextWrapper,
+    TotalWrapper
+} from './CheckoutSummary';
 
 const { colors } = theme;
 
@@ -38,7 +29,6 @@ const CartWindow = styled.div`
 
     
     &.cart-modal {
-        /* position: absolute; */
         position: fixed;
         top: 0;
         left: 0;
@@ -48,34 +38,22 @@ const CartWindow = styled.div`
         height: 100vh; 
         width: 100%;
         transition: opacity .25s ease;
-        /* display: none; */
     }
 
     &.visible.cart-modal {
-        /* display: flex; */
         visibility: visible;
         opacity: 1;
-        /* transition: visibility 0s 2s linear, opacity .3s ease; */
     }
 `;
 
 export const CartWrapper = styled.div`
     height: 100vh;
-    /* height: 100%; */
     width: 100vw;
-    /* height: 100%; 
-    width: 100%; */
     background-color: rgba(128, 128, 128, 0.49);  
-    /* position: fixed; */
     position: absolute;
     top: 0;
     left: 0;
-    /* pointer-events: none; */
-    /* width: 0;
-
-    .visible {
-        width: 100%;
-    } */
+    width: 100%;
 
     .modal-motion {
         position: relative;
@@ -90,12 +68,8 @@ const CartModalMargin = styled.div`
 
 const CartModal = styled.div`
     position: absolute;
-    
-    
-    /* position: fixed; */
     top: 15%;
     right: 0;
-    /* left: 0; */
     width: 38rem;
     background-color: white;
     padding: 3rem;
@@ -105,7 +79,6 @@ const CartModal = styled.div`
     justify-content: center;
     border-radius: .8rem;
     margin-top: 2rem;
-    /* cursor: pointer; */
 `;
 
 const TitleLine = styled.h5`
@@ -137,7 +110,6 @@ export const Quantity = styled.div`
 `;
 
 export const IncrementQTY = styled.p`
-    /* color: ${colors.mainText}; */
     cursor: pointer;
     opacity: 50%;
     z-index: 2;
@@ -209,7 +181,6 @@ export default function Cart(
         visible,
         hideCart,
         totalItems
-        // cartArray,
         // isLoading
     }
 ) {
@@ -218,16 +189,6 @@ export default function Cart(
         isLoading,
         items: cart
     } = cartState
-
-    const testitem7 = Object.entries({
-        testitem7: {
-            name: "Test items",
-            productId: "testitem7",
-            type: "headphones",
-            price: 100,
-            quantity: 1
-        }
-    });
 
     const cartArrayObj = Object.entries(cart);
 
@@ -241,67 +202,7 @@ export default function Cart(
         return sum += item[1].price * item[1].quantity;
     }, 0)
 
-    const { register, handleSubmit, control, formState: { errors }
-    } = useForm({
-        // mode: "onSubmit",
-        // reValidateMode: "onSubmit"
-        defaultValues: {
-            testitem7: "yo",
-            test: ""
-        }
-    });
-
-    const prodVals = {
-
-    }
-
-    // console.log({ "prodVals": prodVals })
-
-    const [quant, setQuant] = useState(prodVals);
-
-    // console.log({ quant: quant })
-    // const editQuantity = () => {
-
-    // }
-
     const dispatch = useDispatch();
-
-    // const ref = useRef({ bro: "bro" })
-
-    // console.log({ ref: ref })
-
-    const onSubmit = (data) => console.log(data);
-
-
-    const { touchedFields, dirtyFields } = useForm({
-        control
-    });
-
-    // console.log({ formData: formData })
-    // console.log({ touchedFields: touchedFields }, touchedFields, dirtyFields)
-    // console.log({ "quant val": quant.test })
-    // console.log({ "quant": quant })
-
-    // console.log({ "object entries cart": cartArray })
-
-    // const testItems = () => {
-    //     for (const [productId, item] of cartArray) { // iterates through unique items TODO: select cart from state
-    //         console.log("cart items")
-    //     }
-    // }
-
-
-    // return (
-    //     <form form onSubmit={handleSubmit(onSubmit)}>
-    //         <input
-    //             defaultValue="yoooo!"
-    //             // {...register("test")}
-    //             ref={ref}
-    //         />
-    //     </form>
-    // )
-
-    // const setItemTest = Cookie.set("itemTest", 0)
 
     useEffect(() => {
         const handleClick = (e) => {
@@ -328,28 +229,15 @@ export default function Cart(
             <CartWrapper
                 className="modal"
             >
-                {/* <motion.div
-                    animate={{ scale: visible ? 1 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    style={{ originX: .99 }}
-                    className="modal-motion"
-
-                > */}
                 <CartModalMargin
                     className="section-margin"
                 >
-                    {/* <form form onSubmit={handleSubmit(onSubmit)}>
-                        <input
-                            {...register("test")}
-                        />
-                    </form> */}
-                    {/* <form onSubmit={handleSubmit(onSubmit)} > */}
                     <CartModal
                         className="modal"
                         ref={ref}
                     >
                         {
-                            totalItems < 1 ? // TODO: CHANGE AFTER TESTING - totalItems < 1 ? 
+                            totalItems < 1 ?
                                 <NoItems>
                                     <div>
                                         NO ITEMS IN CART
@@ -365,24 +253,16 @@ export default function Cart(
                                     {
                                         cartArray.map((item, i) => {
                                             const current = item[1];
-                                            const name = JSON.stringify(current.name);
                                             const nameRaw = current.name
                                             const productId = current.productId
-                                            
+
                                             return (
                                                 < ProductWrapper
                                                     key={"cartItem" + i}
                                                     className="cart-prod-wrap"
                                                     onMouseEnter={() => setProdHover({ [current.productId]: true })}
-                                                    onMouseLeave={() => setProdHover({ [current.productId]: false })} // TODO: SET TO FALSE AFTER TESTING
+                                                    onMouseLeave={() => setProdHover({ [current.productId]: false })}
                                                 >
-                                                    {/* <div
-                                                            className="active-area"
-                                                            // onMouseEnter={() => setProdHover({ name: true })}
-                                                            // onMouseLeave={() => setProdHover({ name: false })}
-                                                            // onClick={(e) => { e.preventDefault() }}
-                                                        /> */}
-
                                                     <CheckoutProdIMG
                                                         className="round-border"
                                                         src={`/products/${item[0]}/desktop/thumbnail.jpg`}
@@ -448,7 +328,6 @@ export default function Cart(
                                                             />
                                                             <DeleteItem
                                                                 className={prodHover[productId] ? "prod-hovered" : ""}
-                                                                // onMouseEnter={() => { console.log(productId) }}
                                                                 onClick={() => {
                                                                     dispatch(cartActions.directCartEdit({
                                                                         product: {
@@ -483,36 +362,6 @@ export default function Cart(
                                             )
                                         })}
 
-
-
-                                    {/* {() => {
-                            for (const [productId, item] of cartArray) { // iterates through unique items TODO: select cart from state
-                                console.log("cart items")
-                                // return (
-                                //     <ProductWrapper>
-                                //         <CheckoutProdIMG src="/media/placeholderIMG.png"
-                                //             width={400}
-                                //             height={400}
-                                //             style={{ border: "1px solid black" }}
-                                //             fill="magenta"
-                                //         />
-                                //         <h3>
-                                //             {item.name}
-                                //         </h3>
-                                //         <h4>
-                                //             {`$ ${item.price}`}
-                                //         </h4>
-                                //         <Quantity>
-                                //             <IncrementQTY>-</IncrementQTY>
-                                //             <p>
-                                //                 {`x${item.quantity}`}
-                                //             </p>
-                                //             <IncrementQTY>+</IncrementQTY>
-                                //         </Quantity>
-                                //     </ProductWrapper>
-                                // )
-                            }
-                        }} */}
                                     {
                                         !isLoading &&
                                         <TotalWrapper>
@@ -535,11 +384,8 @@ export default function Cart(
                                 </>
                         }
                     </CartModal>
-                    {/* </form> */}
                 </CartModalMargin>
-                {/* </motion.div> */}
             </CartWrapper>
-
         </CartWindow >
     )
 };
