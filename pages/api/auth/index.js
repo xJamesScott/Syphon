@@ -45,53 +45,12 @@ export default async function cart(req, res) {
     switch (call) {
         case "create":
             try {
-                // const response = await authenticate("password", {
-                //     password,
-                //     username: email,
-                //     scope: "openid",
-                //     redirect_uri: process.env.AUTH_DOMAIN
-                // })
                 const user = await new User(data).save();
-                // res.status(200)
-                // console.log({ "res!": res })
-                // console.log({ "response!": response })
-                // return res.send({
-                //     redirect: redirect ? redirect : "",
-                //     // data: { email  }
-                // });
-
-                // return {
-                //     ...user.toObject()
-                // }
-
                 return res.send("success!")
-
-                // AUTHENTICATE DIRECT CALL
-
-                // await fetch('https://jsonplaceholder.typicode.com/todos/1',
-                //     { method: 'GET' })
-                // // return todos
-                // // console.log() res.status(200).json({ message: "yo!" })
-                // // return "success"
-                // // return "sucess"
             } catch (err) {
                 console.log({ "err!!!": err })
-
-                // if (err.response.status == 429) {
-                //     return res.status(500).send("Whoops! Too many login attempts, please wait a while before attempting again");
-                // }
-                // const token = await authenticate("client_credentials");
-                // const accountExist = await getAccountsWithSameEmail(token, email);
-                // if (!accountExist) {
-                //     return res.status(500).send("Email not found: please click 'SignUp'")
-                // }
-
                 return res.status(400).send({ "err!!!!": err });
             }
-
-
-
-
         default:
             return
     }

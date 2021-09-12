@@ -105,7 +105,6 @@ export const ProductSection = styled.div`
     &.about-product {
         margin: 16rem 0;
 
-        /* gap: ; */
         > * {
             flex: 1 1 50%;
         }
@@ -291,9 +290,7 @@ export const MainIMGContainer = styled.div`
    
 `;
 export const MainIMG = styled(Image)`
-   /* width: 800px; */
 
-   
 `;
 
 export const ProductInfoWrapper = styled.div`
@@ -386,7 +383,6 @@ export const BoxItem = styled.p`
 
 export const IMGWrapper = styled.div`
       display: flex;
-      /* justify-content: center; */
       justify-content: space-between;
       justify-content: center;
       gap: 2rem;
@@ -418,7 +414,6 @@ export const ProductsContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 3rem;
-    /* margin: auto; */
 
     > * {
         flex: 1 10 auto;
@@ -510,16 +505,6 @@ export const ProductTypeWrapper = styled.div`
 
     }
 
-    > * {
-        /* display: flex;
-
-        align-items: flex-end;
-        margin-top: auto; */
-    }
-    /* max-height: 165px; */
-    
-    /* padding-bottom: 3rem; */
-    
 
     .type-bg {
         position: absolute;
@@ -534,16 +519,11 @@ export const ProductTypeWrapper = styled.div`
         }
     }
 
-    .img {
-        /* display: none; */
-  
-    }
+    
 
     @media ${mq.tablet.narrow.max} { 
         .type-bg {
             max-height: 165px;
-           
-            /* display: none; */
         }
     }
 `;
@@ -552,7 +532,6 @@ export const TypeIMGWrapper = styled.div`
     position: relative;
     display: flex;
     justify-content: center;
-    /* height: 160px; */
     z-index: 10;
 
     ::before {

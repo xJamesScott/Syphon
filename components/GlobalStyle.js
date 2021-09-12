@@ -5,8 +5,6 @@ const { colors } = theme;
 
 const GlobalStyle = createGlobalStyle`
   
-  /* background-color: transparent; */
-  
   .section-margin {
       display: flex;
       margin: auto;
@@ -19,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
       background-color: #ffffff; // TODO: CREATE AND USE THEME VARIABLE
       margin-top: 5.5rem;
       
-      /* padding-top: 2rem; */
       border-radius: .8rem;
    }
 
@@ -30,15 +27,12 @@ const GlobalStyle = createGlobalStyle`
    .checkout-page {
       background-color: #f1f1f1; // TODO: CREATE AND USE THEME VARIABLE
       z-index: -100;
-      /* overflow: hidden; */
       
       .ty-bg.not-complete {
          max-height: 0;
       }
 
       .ty-bg.complete {
-         /* height: 100vh; */
-         /* width: 100vw; */
          overflow: hidden;
          img {
             object-fit: contain;

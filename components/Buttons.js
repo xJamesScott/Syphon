@@ -73,7 +73,6 @@ export const ButtonHollow2 = styled.div`
       border: none;
     background: ${colors.accent1};
     height: fit-content;
-    /* padding: 1.5rem 3rem; */
     border: .1rem solid ${colors.mainText};
 
     :hover {

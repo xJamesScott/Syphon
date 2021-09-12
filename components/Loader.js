@@ -28,7 +28,6 @@ export const LoaderContainer = styled.div`
     .load-text {
         text-align: center;
         background: rgba(255, 255, 255, 0.5);
-        /* margin: auto; */
         animation: opacity 1.8s ease-in-out infinite;
         opacity: 1;
     }
@@ -58,18 +57,8 @@ export const LoaderContainer = styled.div`
 `;
 
 export const Loader = styled(Spinner)`
-    /* position: fixed;
-    right: 0;
-    left: 0;
-    top: 50%;
-    margin-right: auto;
-    margin-left: auto; */
     height: 20rem;
     width: 20rem;
-    /* z-index: 20; */
-    /* /* min-height: 10em;
-    width: 90%; */
-    /* width: 30%; */
 
     &.button {
         height: 20px;

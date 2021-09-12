@@ -199,12 +199,10 @@ export default function Footer() {
                 <AccentRow
                 width="101" height="4" viewBox="0 0 101 4" fill="none" xmlns="http://www.w3.org/2000/svg"
                 >
-
+               
                     {/* accent line */}
-
-                    {/* <svg width="101" height="4" viewBox="0 0 101 4" fill="none" xmlns="http://www.w3.org/2000/svg"> */}
+               
                         <rect width="101" height="4" fill="#D87D4A" />
-                    {/* </svg> */}
                 </AccentRow>
                 <FooterContent
                     className="footer-content"

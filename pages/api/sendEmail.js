@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { getDomainLocale } from 'next/dist/next-server/lib/router/router';
-import { email as emailBody } from '/public/email/orderConfirmation';
 
 export default async function sendEmail(req, res) {
 
