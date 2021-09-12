@@ -153,7 +153,6 @@ export const BG = styled.div`
     left: 0;
     top: 0;
     width: 100vw;
-    /* height: 100vh; */
     height: 100%;
     display: flex;
     text-align: left;
@@ -166,7 +165,6 @@ export const BG = styled.div`
 
 
 export default function ThankYouModal({
-    items,
     setModal, // TODO - REMOVE; FOR TESTING ONLY
     cart,
     total,
@@ -178,16 +176,11 @@ export default function ThankYouModal({
 
 
     useEffect(() => {
-        // cart && console.log({ "cart - 1": cart.length - 1 })
         cart && setItemCount(cart.length);
     }, [cart]);
-    // setItemCount(cart.length);
     const router = useRouter();
 
     const handleClick = () => {
-        // setTransaction(true);
-        // dispatch(cartActions.directCartEdit({ inc: "clear" }));
-        // dispatch(cartActions.setCartFinishLoading({}));
         router.push("/");
     };
 
@@ -200,7 +193,7 @@ export default function ThankYouModal({
                             <Image
                                 height={64}
                                 width={64}
-                                src="/media/icons/check.png" // TODO: UPDATE SOURCE
+                                src="/media/icons/check.png"
                             />
                         </CheckIcon>
                         <h2>THANK YOU<br />FOR YOUR ORDER</h2>
@@ -258,7 +251,7 @@ export default function ThankYouModal({
                                             : null
                                     }
                                 </div>
-                                {/* <div className="total-box"></div> */}
+                                
                                 <div className="total-box">
                                     <div className="total-wrapper">
                                         <SummaryTotals className="ty-cost">TOTAL</SummaryTotals>
@@ -267,19 +260,12 @@ export default function ThankYouModal({
                                         </Cost>
                                     </div>
                                 </div>
-                                {/* TODO - ENABLE A TAG TO REDIRECT 'BACK TO HOME' */}
-                                {/* <a href="/"> */}
-                                {/* </a> */}
-
                             </div>
                         </div>
                         <a
                             onClick={handleClick}
-                        // href="/"
                         >
                             <PayButton
-
-                            // onClick={() => setModal(false)} // TODO REMOVE; FOR TESTING ONLY
                             >
                                 BACK TO HOME
                             </PayButton>

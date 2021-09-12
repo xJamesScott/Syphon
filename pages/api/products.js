@@ -54,7 +54,6 @@ export default async function products(req, res) {
         case "productType":
             try {
                 const models = await Item.find({ productType: productType });
-                // console.log({ models: models });
                 return res.json(models);
             } catch (err) {
                 console.log("Error fetching model types!: " + err);

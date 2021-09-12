@@ -36,14 +36,8 @@ const forgotPassword = ({ hideNav, domain }) => {
 
     const onSubmit = async (formData) => {
 
-        // **ACTUAL API CALL**
-
         try {
-            // console.log({
-            //     email: formData.email,
-            //     password: formData.password,
-            //     redirect: referrer // replace with redux state
-            // })
+          
             const res = await axios.post("/api/auth?call=change-password",
                 {
                     email: formData.email,
@@ -63,26 +57,6 @@ const forgotPassword = ({ hideNav, domain }) => {
             setAuthError(err.response.data)
         }
     };
-
-
-    // **PLACE HOLDER API CALL**
-
-    // try {
-    //     const res = await axios.post("/api/redirect", {
-
-    //     })
-    //     const {
-    //         data: { data,
-    //             handler: { redirect }
-    //         } } = res
-    //     if (redirect) {
-    //         setRedirect(redirect)
-    //     }
-    // } catch (err) {
-    //     console.log(err)
-
-    // }
-    // };
 
     return (
         <div>
