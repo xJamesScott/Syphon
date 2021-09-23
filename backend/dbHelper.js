@@ -2,6 +2,7 @@ import dbConnect from '../utils/dbConnect';
 import Item from '../models/Item';
 import { products as prodList } from '../utils/Products';
 
+
 export default async function products(call, data) {
     const {
         productId, create, pin, not, productType
@@ -19,7 +20,9 @@ export default async function products(call, data) {
                 console.log("Error creating products " + err);
             };
         case "types":
-            try {
+           
+        
+        try {
                 const res = await Item.distinct("productType").lean();
                 return res;
             } catch (err) {

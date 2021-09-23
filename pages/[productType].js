@@ -29,6 +29,8 @@ import {
 } from '../components/ProductPage';
 
 export const getStaticPaths = async () => {
+    
+    
     const res = await products("types", {});
     const paths = res.map((product) => {
         return {

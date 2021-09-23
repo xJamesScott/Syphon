@@ -10,7 +10,6 @@ export default async function products(req, res) {
     } = req
 
     dbConnect("global");
-    // dbConnect();
 
     switch (call) {
 
@@ -68,7 +67,7 @@ export default async function products(req, res) {
                             const productExist = await Item.findOne({ productId: product.productId });
                             if (productExist) {
                                 console.log("Product exist already: " + product.productId)
-                                return status(200);
+                                return res.status(200);
                             }
 
                             if (!productExist) { // potentional error based on what's returned from productExist

@@ -14,9 +14,32 @@ import {
   TypeTitle
 } from '../components/ProductPage';
 
+import { useQuery, gql } from '@apollo/client';
+import { initializeApollo } from '../apollo/client'
+
+
+const ViewerQuery = gql`
+  query ViewerQuery {
+    viewer {
+      id
+      name
+      status
+    }
+  }
+`
 
 export default function Home() {
   const [visible, setVisible] = useState(false);
+
+  const {
+    data
+  } = useQuery(ViewerQuery)
+
+
+  useEffect(() => {
+    console.log({ "data gql": data })
+  })
+  
 
   useEffect(() => {
     setVisible(true);
@@ -430,3 +453,16 @@ export default function Home() {
   );
 };
 
+export async function getStaticProps() {
+  const apolloClient = initializeApollo()
+
+  await apolloClient.query({
+    query: ViewerQuery,
+  })
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  }
+}
