@@ -28,13 +28,11 @@ const resolvers = {
 // const apolloServer = new ApolloServer({ schema });
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
-const handler = apolloServer.createHandler({ path: '/api/graphql' });
+const handler = apolloServer.createHandler({ path: "/api/graphql" });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const config = { api: { bodyParser: false } };
+
+export default handler;
 
 // module.exports = apolloServer.start().then(() => {
 //   return handler;
@@ -48,8 +46,8 @@ export const config = {
 
 // export default apolloServer.createHandler({ path: '/api/graphql' });
 
-module.exports = apolloServer.start().then(() => {
-  return apolloServer.createHandler({ path: '/api/graphql' });
-});
+// module.exports = apolloServer.start().then(() => {
+//   return apolloServer.createHandler({ path: '/api/graphql' });
+// });
 
 

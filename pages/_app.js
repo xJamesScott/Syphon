@@ -1,6 +1,6 @@
 import { AnimateSharedLayout, motion } from "framer-motion";
 import { Provider } from 'react-redux';
-import { ApolloProvider } from '@apollo/client'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 // import client from "../apollo/client";
 import { useApollo } from '../apollo/client'
 import Banner from '../components/Banner';
@@ -12,7 +12,13 @@ import '../styles/globals.css';
 
 
 function WrappedApp({ Component, pageProps }) {
-  const client = useApollo(pageProps)
+  // const client = useApollo(pageProps)
+
+  const client = new ApolloClient({
+    uri: "http://localhost:3000/api/graphql",
+    cache: new InMemoryCache(),
+  });
+
   const store = useStore(pageProps.initialReduxState);
   const { hideNav, isLoginRequired } = pageProps;
 
