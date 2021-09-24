@@ -1,6 +1,7 @@
 import { AnimateSharedLayout, motion } from "framer-motion";
 import { Provider } from 'react-redux';
 import { ApolloProvider } from '@apollo/client'
+// import client from "../apollo/client";
 import { useApollo } from '../apollo/client'
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
@@ -11,12 +12,12 @@ import '../styles/globals.css';
 
 
 function WrappedApp({ Component, pageProps }) {
-  const apolloClient = useApollo(pageProps)
+  const client = useApollo(pageProps)
   const store = useStore(pageProps.initialReduxState);
   const { hideNav, isLoginRequired } = pageProps;
 
   return (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
       <Provider store={store}>
         <Head />
         <GlobalStyle />

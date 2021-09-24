@@ -15,7 +15,7 @@ import {
 } from '../components/ProductPage';
 
 import { useQuery, gql } from '@apollo/client';
-import { initializeApollo } from '../apollo/client'
+// import { initializeApollo } from '../apollo/client'
 
 
 const ViewerQuery = gql`
@@ -28,8 +28,22 @@ const ViewerQuery = gql`
   }
 `
 
+const QUERY = gql`
+  query Countries {
+    countries {
+      code
+      name
+      emoji
+    }
+  }
+`;
+
 export default function Home() {
   const [visible, setVisible] = useState(false);
+
+  // const { data, loading, error } = useQuery(QUERY);
+
+
 
   const {
     data
@@ -453,16 +467,16 @@ export default function Home() {
   );
 };
 
-export async function getStaticProps() {
-  const apolloClient = initializeApollo()
+// export async function getStaticProps() {
+//   const apolloClient = initializeApollo()
 
-  await apolloClient.query({
-    query: ViewerQuery,
-  })
+//   await apolloClient.query({
+//     query: ViewerQuery,
+//   })
 
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-  }
-}
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   }
+// }
