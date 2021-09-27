@@ -1,15 +1,6 @@
 import { gql } from '@apollo/client'
 
-
-
-
 export const typeDefs = gql`
-  type User {
-    id: ID!
-    name: String!
-    status: String!
-  }
-
   enum ProductType {
     earphones
     headphones
@@ -19,30 +10,53 @@ export const typeDefs = gql`
   type Cart {
     productId: String
     name: String
-    price: Number
+    price: Int
     productType: ProductType
-    quantity: Number
+    quantity: Int
+  }
+
+
+  type ImageDevices {
+    desktop: String
+    tablet: String
+    mobile: String
   }
 
   type Item {
     name: String
     productId: String
     description: String
-    price: Number
-    quantity: Number
+    price: Int
+    quantity: Int
     productType: ProductType
     newProduct: Boolean
-    features: String
-    inTheBox: Array
-    featureIMG: Object
-    supportIMG1: Object
-    supportIMG2: Object
-    thumbnailIMG: Object
-    alsoIMG: Object
-    type: Object
+    features: String,
+    inTheBox:  ImageDevices
+    featureIMG: ImageDevices
+    supportIMG1: ImageDevices
+    supportIMG2: ImageDevices
+    thumbnailIMG: ImageDevices
+    alsoIMG: ImageDevices
+    type: ProductType
   }
 
+  type Name {
+    firstName: String
+    lastName: String
+  }
+
+  type User {
+    name: Name
+    email: String
+    phone: String
+    address: String
+    zipCode: String
+    city: String
+    country: String
+    emailVerified: Boolean
+}
+  
   type Query {
-    viewer: User
+    viewer: Item
   }
 `

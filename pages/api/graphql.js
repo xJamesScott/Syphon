@@ -1,21 +1,22 @@
 import { gql, ApolloServer } from "apollo-server-micro";
 // import { PrismaClient } from "@prisma/client";
+import {typeDefs} from '../../apollo/type-defs'
 
 // const prisma = new PrismaClient();
 
-const typeDefs = gql`
-  type BlogPost {
-    id: String
-    text: String
-  }
-   type Query {
-    blogPosts: BlogPost
-  }
-`;
+// const typeDefs = gql`
+//   type BlogPost {
+//     id: String
+//     text: String
+//   }
+//    type Query {
+//     blogPosts: BlogPost
+//   }
+// `;
 
 const resolvers = {
   Query: {
-    blogPosts: (_parent, _args, _context) => {
+    viewer: (_parent, _args, _context) => {
       return { id: "yoo", text: "brooo" }
     },
   },
