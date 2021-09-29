@@ -55,8 +55,13 @@ export const typeDefs = gql`
     country: String
     emailVerified: Boolean
 }
+
+
   
   type Query {
-    viewer: Item
+    prodtypes: [String],
+    prodType: Item,
+    productId: Item,
+    all: [Item],
   }
 `
