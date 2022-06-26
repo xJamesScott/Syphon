@@ -412,7 +412,7 @@ const checkout = ({ }) => {
                                     } else {
                                         return null
                                     }
-                                })};
+                                })}
                                 <TotalWrapper>
                                     <SummaryTotals className="checkout-summary">TOTAL</SummaryTotals>
                                     <Cost>{`$ ${parseFloat(subtotal.toFixed(2)).toLocaleString('en')}`}</Cost>
